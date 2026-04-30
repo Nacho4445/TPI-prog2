@@ -2,7 +2,7 @@
 #include <vector>
 #include "cliente.h"
 #include "equipos.h"
-#include "venta.h"
+#include "ventas.h"
 
 using namespace std;
 
@@ -19,9 +19,10 @@ int main() {
         cout << "3. Registrar Venta\n";
         cout << "0. Salir\n";
         cout << "Seleccione una opcion: ";
-        cin >> opcion;}
-        switch(opcion) {
-            case 1: { // Submenú Clientes
+        cin >> opcion;
+
+        switch (opcion) {
+            case 1: { // Submenu Clientes
                 int opcionClientes;
                 do {
                     cout << "\n--- Gestion de Clientes ---\n";
@@ -31,37 +32,37 @@ int main() {
                     cout << "Seleccione una opcion: ";
                     cin >> opcionClientes;
 
-                    switch(opcionClientes) {
+                    switch (opcionClientes) {
                         case 1: {
                             Cliente c1;
-                            //c1.guardar("clientes.dat"); // según apunte Archivos
+                            //c1.guardar("clientes.dat"); // segï¿½n apunte Archivos
                             cout << "Cliente agregado correctamente.\n";
                             break;
                         }
                         case 2: {
                             cout << "Listando clientes...\n";
-
                             break;
                         }
-                        case 0:
+                        case 0: {
                             cout << "Volviendo al menu principal...\n";
                             break;
+                        }
                         default:
                             cout << "Opcion invalida.\n";
-                        }
-                        } while(opcionClientes != 0);
-                        break;
-                            }
-            case 2: { // Submenú Equipos
+                    }
+                } while (opcionClientes != 0);
+                break;
+            }
+            case 2: { // Submenu Equipos
                 int opcionProductos;
                 do {
                     cout << "\n--- Gestion de Equipos ---\n";
                     cout << "1. Agregar Producto\n";
                     cout << "0. Volver al menu principal\n";
                     cout << "Seleccione una opcion: ";
-                    cin >> opcionEquipos;
+                    cin >> opcionProductos;
 
-                    switch(opcionEquipos) {
+                    switch (opcionProductos) {
                         case 1: {
                             int codigo, stock;
                             string descripcion, marca, tipoEquipo;
@@ -91,6 +92,20 @@ int main() {
                         default:
                             cout << "Opcion invalida.\n";
                     }
-                } while(opcionEquipos != 0);
+                } while (opcionProductos != 0);
                 break;
             }
+            case 3: { // Registrar Venta
+                // CÃ³digo para registrar venta
+                break;
+            }
+            case 0:
+                cout << "Saliendo del programa...\n";
+                break;
+            default:
+                cout << "Opcion invalida.\n";
+        }
+    } while (opcion != 0);
+
+    return 0;
+}
