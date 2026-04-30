@@ -9,7 +9,7 @@ using namespace std;
 int main() {
     vector<Cliente> clientes;
     vector<Equipos> equipos;
-    vector<Venta> ventas;
+    vector<Ventas> ventas;
 
     int opcion;
     do {
