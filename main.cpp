@@ -1,15 +1,15 @@
 #include <iostream>
 #include <vector>
-#include "cliente.h"
-#include "equipos.h"
-#include "ventas.h"
+#include "Cliente.h"
+#include "Equipo.h"
+#include "Venta.h"
 
 using namespace std;
 
 int main() {
     vector<Cliente> clientes;
-    vector<Equipos> equipos;
-    vector<Ventas> ventas;
+    vector<Equipo> equipos;
+    vector<Venta> ventas;
 
     int opcion;
     do {

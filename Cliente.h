@@ -1,5 +1,6 @@
 #ifndef CLIENTE_H_INCLUDED
 #define CLIENTE_H_INCLUDED
+
 #include <vector>
 #include <string>
 using namespace std;
@@ -13,8 +14,8 @@ private:
     string email;
     string direccion;
     int tipoCliente; // 1 = particular, 2 = empresa
-
-    string IngresarCuit();
-
+public:
+    string ingresarCuit();
+};
 
 #endif // CLIENTE_H_INCLUDED
