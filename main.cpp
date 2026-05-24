@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 #include "Cliente.h"
 #include "Equipo.h"
 #include "Venta.h"
@@ -7,9 +6,9 @@
 using namespace std;
 
 int main() {
-    vector<Cliente> clientes;
-    vector<Equipo> equipos;
-    vector<Venta> ventas;
+    Cliente *clientes;
+    Equipo *equipos;
+    Venta *ventas;
 
     int opcion;
     do {
@@ -35,7 +34,7 @@ int main() {
                     switch (opcionClientes) {
                         case 1: {
                             Cliente c1;
-                            //c1.guardar("clientes.dat"); // seg�n apunte Archivos
+                            //c1.guardar("clientes.dat"); // segun apunte Archivos
                             cout << "Cliente agregado correctamente.\n";
                             break;
                         }

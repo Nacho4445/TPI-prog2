@@ -1,21 +1,29 @@
 #ifndef CLIENTE_H_INCLUDED
 #define CLIENTE_H_INCLUDED
 
-#include <vector>
-#include <string>
-using namespace std;
+#include "Persona.h"
 
-class Cliente {
+class Cliente : public Persona {
 private:
-    string cuit;
-    string nombre;
-    string apellido;
-    string telefono;
-    string email;
-    string direccion;
-    int tipoCliente; // 1 = particular, 2 = empresa
+    long idCliente = 0;
+    int tipoCliente = 0; // 1 = particular, 2 = empresa
+    bool estado = false; // true = Activo, false = Inactivo
 public:
-    string ingresarCuit();
+    Cliente() = default;
+
+    Cliente(long idCliente, int tipoCliente);
+
+    long getIdCliente();
+
+    int getTipoCliente();
+
+    bool getEstado();
+
+    void setIdCliente(long idCliente);
+
+    void setTipoCliente(int tipoCliente);
+
+    void setEstado(bool estado);
 };
 
 #endif // CLIENTE_H_INCLUDED
