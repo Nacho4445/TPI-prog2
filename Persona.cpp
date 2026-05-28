@@ -8,7 +8,8 @@ Persona::Persona(int cuit,
                  const char *apellido,
                  const char *telefono,
                  const char *email,
-                 const Direccion &direccion) : cuit(cuit), direccion(direccion) {
+                 const Direccion &direccion,
+                 bool estado) : cuit(cuit), direccion(direccion), estado(estado) {
 	strcpy(this->nombre, nombre);
 	strcpy(this->apellido, apellido);
 	strcpy(this->telefono, telefono);
@@ -39,6 +40,10 @@ Direccion Persona::getDireccion() {
 	return direccion;
 }
 
+bool Persona::getEstado() {
+	return estado;
+}
+
 void Persona::setCuit(const int cuit) {
 	this->cuit = cuit;
 }
@@ -61,4 +66,8 @@ void Persona::setEmail(const char *email) {
 
 void Persona::setDireccion(const Direccion &direccion) {
 	this->direccion = direccion;
+}
+
+void Persona::setEstado(const bool estado) {
+	this->estado = estado;
 }
