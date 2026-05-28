@@ -11,6 +11,7 @@ protected:
 	char telefono[20] = "";
 	char email[50] = "";
 	Direccion direccion;
+	bool estado = false; // true = Activo, false = Inactivo
 
 public:
 	Persona() = default;
@@ -20,7 +21,8 @@ public:
 	        const char *apellido,
 	        const char *telefono,
 	        const char *email,
-	        const Direccion &direccion);
+	        const Direccion &direccion,
+	        bool estado = true);
 
 	int getCuit();
 
@@ -34,6 +36,8 @@ public:
 
 	Direccion getDireccion();
 
+	bool getEstado();
+
 	void setCuit(int cuit);
 
 	void setNombre(const char *nombre);
@@ -45,6 +49,8 @@ public:
 	void setEmail(const char *email);
 
 	void setDireccion(const Direccion &direccion);
+
+	void setEstado(bool estado);
 };
 
 #endif //TPI_PROG2_PERSONA_H

@@ -5,20 +5,15 @@
 class Empleado : public Persona {
 private:
 	int idEmpleado = 0;
-	bool estado = false;
 
 public:
 	Empleado() = default;
 
-	Empleado(int idEmpleado, bool estado = true);
+	Empleado(int idEmpleado);
 
 	int getIdEmpleado();
 
-	bool getEstado();
-
 	void setIdEmpleado(int idEmpleado);
-
-	void setEstado(bool estado);
 };
 
 

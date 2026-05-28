@@ -3,21 +3,13 @@
 
 using namespace std;
 
-Empleado::Empleado(int idEmpleado, bool estado) : idEmpleado(idEmpleado), estado(estado) {
+Empleado::Empleado(int idEmpleado) : idEmpleado(idEmpleado) {
 }
 
 int Empleado::getIdEmpleado() {
 	return idEmpleado;
 }
 
-bool Empleado::getEstado() {
-	return estado;
-}
-
 void Empleado::setIdEmpleado(int idEmpleado) {
 	this->idEmpleado = idEmpleado;
-}
-
-void Empleado::setEstado(bool estado) {
-	this->estado = estado;
 }
