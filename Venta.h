@@ -1,51 +1,43 @@
 #ifndef VENTAS_H_INCLUDED
 #define VENTAS_H_INCLUDED
 
-#include "Cliente.h"
-#include "Empleado.h"
-#include "Equipo.h"
 #include "Fecha.h"
 
 class Venta {
 private:
-    int idVenta;
-    Cliente comprador;
-    Empleado vendedor;
-    Equipo *equipos;
-    Fecha fecha;
-    double importe;
-    bool estado;
+    int idVenta = 0;
+    int idCliente = 0;
+    int idEmpleado = 0;
+    Fecha fechaVenta;
+    double importeTotal = 0.0;
+    bool estado = false;
 
 public:
-    Venta();
+    Venta() = default;
 
-    Venta(int idVenta, Cliente comprador, Empleado vendedor, Equipo *equipos, Fecha fecha, double importe, bool estado);
+    Venta(int idVenta, int idCliente, int idEmpleado, Fecha fecha, double importe, bool estado = true);
 
-    const int getIdVenta();
+    int getIdVenta();
 
-    const Cliente getComprador();
+    int getIdCliente();
 
-    const Empleado getVendedor();
+    int getIdEmpleado();
 
-    const Equipo *getEquipos();
+    Fecha getFecha();
 
-    const Fecha getFecha();
+    double getImporteTotal();
 
-    const double getImporite();
-
-    const bool getEstado();
+    bool getEstado();
 
     void setIdVenta(int idVenta);
 
-    void setComprador(Cliente comprador);
+    void setIdCliente(int idCliente);
 
-    void setVendedor(Empleado vendedor);
+    void setIdEmpleado(int idEmpleado);
 
-    void setEquipos(Equipo *equipos);
+    void setFecha(Fecha fechaVenta);
 
-    void setFecha(Fecha fecha);
-
-    void setImporte(double importe);
+    void setImporteTotal(double importeTotal);
 
     void setEstado(bool estado);
 };
