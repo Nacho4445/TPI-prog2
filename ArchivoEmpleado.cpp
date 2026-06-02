@@ -54,42 +54,55 @@ int ArchivoEmpleado::buscar(int id){
   return -1;
 }
 
-Empleado ArchivoEmpleado::leer(int nroRegistro){
+Empleado ArchivoEmpleado::leer(int id){
   Empleado aux;
+
+  int pos = buscar(id);
+
+  if (pos == -1){
+        return aux;
+  }
+
   FILE *p = fopen(ruta.c_str(), "rb");
   if (p == NULL){
     return aux;
   }
 
-  fseek(p, nroRegistro * sizeof(Empleado), SEEK_SET);
+  fseek(p, pos * sizeof(Empleado), SEEK_SET);
   fread(&aux, sizeof(Empleado), 1, p);
+
   fclose(p);
   return aux;
 }
 
-bool ArchivoEmpleado::borrarRegistro(int nroRegistro){
+bool ArchivoEmpleado::borrarRegistro(int id){
   Empleado aux;
+
+  int pos = buscar(id);
+
+  if (pos == -1){
+    return false;
+  }
+
   FILE *p = fopen(ruta.c_str(), "rb+");
   if (p == NULL){
     return false;
   }
 
-  fseek(p, nroRegistro * sizeof(Empleado), SEEK_SET);
+  fseek(p, pos * sizeof(Empleado), SEEK_SET);
   fread(&aux, sizeof(Empleado), 1, p);
   aux.setEstado(false);
 
-  fseek(p, nroRegistro * sizeof(Empleado), SEEK_SET);
+  fseek(p, pos * sizeof(Empleado), SEEK_SET);
   bool pudoEscribir = fwrite(&aux, sizeof(Empleado), 1, p);
 
   fclose(p);
   return pudoEscribir;
-
 }
 
 void ArchivoEmpleado::vaciar(){
   FILE *p = fopen(ruta.c_str(), "wb");
-  if (p == NULL)
-  {
+  if (p == NULL){
     return ;
   }
   fclose(p);

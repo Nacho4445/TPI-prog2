@@ -12,7 +12,7 @@ public:
     int getCantidadRegistros();
     bool guardar(Empleado reg);
     int buscar(int id);
-    Empleado leer(int nroRegistro);
-    bool borrarRegistro(int nroRegistro);
+    Empleado leer(int id);
+    bool borrarRegistro(int id);
     void vaciar();
 } ;

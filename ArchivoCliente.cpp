@@ -54,36 +54,50 @@ int ArchivoCliente::buscar(int id){
   return -1;
 }
 
-Cliente ArchivoCliente::leer(int nroRegistro){
+Cliente ArchivoCliente::leer(int id){
   Cliente aux;
+
+  int pos = buscar(id);
+
+  if (pos == -1){
+        return aux;
+  }
+
   FILE *p = fopen(ruta.c_str(), "rb");
   if (p == NULL){
     return aux;
   }
 
-  fseek(p, nroRegistro * sizeof(Cliente), SEEK_SET);
+  fseek(p, pos * sizeof(Cliente), SEEK_SET);
   fread(&aux, sizeof(Cliente), 1, p);
+
   fclose(p);
   return aux;
 }
 
-bool ArchivoCliente::borrarRegistro(int nroRegistro){
+bool ArchivoCliente::borrarRegistro(int id){
   Cliente aux;
+
+  int pos = buscar(id);
+
+  if (pos == -1){
+    return false;
+  }
+
   FILE *p = fopen(ruta.c_str(), "rb+");
   if (p == NULL){
     return false;
   }
 
-  fseek(p, nroRegistro * sizeof(Cliente), SEEK_SET);
+  fseek(p, pos * sizeof(Cliente), SEEK_SET);
   fread(&aux, sizeof(Cliente), 1, p);
   aux.setEstado(false);
 
-  fseek(p, nroRegistro * sizeof(Cliente), SEEK_SET);
+  fseek(p, pos * sizeof(Cliente), SEEK_SET);
   bool pudoEscribir = fwrite(&aux, sizeof(Cliente), 1, p);
 
   fclose(p);
   return pudoEscribir;
-
 }
 
 void ArchivoCliente::vaciar(){
