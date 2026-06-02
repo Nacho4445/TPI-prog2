@@ -1,3 +1,6 @@
 .idea/
 cmake-build-debug/
 CMakeLists.txt
+bin/Debug/TPI Prog 2.exe
+TPI Prog 2.depend
+obj/Debug/ArchivoEmpleado.o
