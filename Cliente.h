@@ -12,7 +12,7 @@ public:
 
     Cliente(long idCliente, int tipoCliente);
 
-    long getIdCliente();
+    int getIdCliente();
 
     int getTipoCliente();
 
