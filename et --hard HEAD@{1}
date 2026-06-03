@@ -1,0 +1,6 @@
+[33ma5caa2b[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{0}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33m2a2abda[m HEAD@{1}: reset: moving to HEAD
+[33m2a2abda[m HEAD@{2}: commit: Update main.cpp
+[33mf7058d5[m HEAD@{3}: commit: Update Ventas.h
+[33m0b83df1[m HEAD@{4}: commit: Update 30-04-26
+[33m98ece76[m HEAD@{5}: commit (initial): Primer commit 22-04-26
