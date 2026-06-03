@@ -1,9 +1,6 @@
 #include <iostream>
 #include "DetalleVenta.h"
 
-
-#include "DetalleVenta.h"
-
 DetalleVenta::DetalleVenta(int idDetalleVenta,int idVenta,int idEquipo,int cantidad,float precioUnitario,float subtotal,bool estado)
 
 {
