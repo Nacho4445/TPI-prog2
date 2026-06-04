@@ -1,34 +1,36 @@
-#include <iostream>
 #include <cstring>
 #include "TipoCliente.h"
 
-using namespace std;
+TipoCliente::TipoCliente(int idTipoCliente, const char *descripcion, bool estado) 
 
-TipoCliente::TipoCliente(int idTipoCliente, const char *descripcion, bool estado)
-    : idTipoCliente(idTipoCliente), estado(estado) {
-    strcpy(this->descripcion, descripcion);
+{
+
+    _idTipoCliente = idTipoCliente;
+    _estado = estado;
+
+    strcpy(_descripcion, descripcion);
 }
 
 int TipoCliente::getIdTipoCliente() {
-    return idTipoCliente;
+    return _idTipoCliente;
 }
 
 const char *TipoCliente::getDescripcion() {
-    return descripcion;
+    return _descripcion;
 }
 
 bool TipoCliente::getEstado() {
-    return estado;
+    return _estado;
 }
 
 void TipoCliente::setIdTipoCliente(int idTipoCliente) {
-    this->idTipoCliente = idTipoCliente;
+    _idTipoCliente = idTipoCliente;
 }
 
 void TipoCliente::setDescripcion(const char *descripcion) {
-    strcpy(this->descripcion, descripcion);
+    strcpy(_descripcion, descripcion);
 }
 
 void TipoCliente::setEstado(bool estado) {
-    this->estado = estado;
+    _estado = estado;
 }
