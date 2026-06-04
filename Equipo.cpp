@@ -1,10 +1,13 @@
-#include <cstring>
 #include "Equipo.h"
 
-Equipo::Equipo(int idEquipo, const char *descripcion, int stock, float precioUnitario, bool estado)
+#include <cstring>
 
-{
+Equipo::Equipo(int idEquipo,  int idTipoEquipo, int idTipoMarca,  const char *descripcion, int stock, 
+               float precioUnitario, bool estado) {
+
     _idEquipo = idEquipo;
+    _idTipoEquipo = idTipoEquipo;
+    _idTipoMarca = idTipoMarca;
     _stock = stock;
     _precioUnitario = precioUnitario;
     _estado = estado;
@@ -14,6 +17,14 @@ Equipo::Equipo(int idEquipo, const char *descripcion, int stock, float precioUni
 
 int Equipo::getIdEquipo() {
     return _idEquipo;
+}
+
+int Equipo::getIdTipoEquipo() {
+    return _idTipoEquipo;
+}
+
+int Equipo::getIdTipoMarca() {
+    return _idTipoMarca;
 }
 
 const char *Equipo::getDescripcion() {
@@ -36,6 +47,14 @@ void Equipo::setIdEquipo(int idEquipo) {
     _idEquipo = idEquipo;
 }
 
+void Equipo::setIdTipoEquipo(int idTipoEquipo) {
+    _idTipoEquipo = idTipoEquipo;
+}
+
+void Equipo::setIdTipoMarca(int idTipoMarca) {
+    _idTipoMarca = idTipoMarca;
+}
+
 void Equipo::setDescripcion(const char *descripcion) {
     strcpy(_descripcion, descripcion);
 }
@@ -47,7 +66,7 @@ void Equipo::setStock(int stock) {
 }
 
 void Equipo::setPrecioUnitario(float precioUnitario) {
-    if (precioUnitario >= 0.0f) {
+    if (precioUnitario >= 0) {
         _precioUnitario = precioUnitario;
     }
 }
