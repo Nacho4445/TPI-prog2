@@ -1,73 +1,71 @@
 #include <cstring>
 #include "Persona.h"
 
-using namespace std;
+Persona::Persona(int cuit, const char *nombre, const char *apellido, const char *telefono,const char *email,
+                 const Direccion &direccion, bool estado) {
 
-Persona::Persona(int cuit,
-                 const char *nombre,
-                 const char *apellido,
-                 const char *telefono,
-                 const char *email,
-                 const Direccion &direccion,
-                 bool estado) : cuit(cuit), direccion(direccion), estado(estado) {
-	strcpy(this->nombre, nombre);
-	strcpy(this->apellido, apellido);
-	strcpy(this->telefono, telefono);
-	strcpy(this->email, email);
+    _cuit = cuit;
+    _direccion = direccion;
+    _estado = estado;
+
+    strcpy(_nombre, nombre);
+    strcpy(_apellido, apellido);
+    strcpy(_telefono, telefono);
+    strcpy(_email, email);
 }
 
 int Persona::getCuit() {
-	return cuit;
+    return _cuit;
 }
 
 const char *Persona::getNombre() {
-	return nombre;
+    return _nombre;
 }
 
 const char *Persona::getApellido() {
-	return apellido;
+    return _apellido;
 }
 
 const char *Persona::getTelefono() {
-	return telefono;
+    return _telefono;
 }
 
 const char *Persona::getEmail() {
-	return email;
+    return _email;
 }
 
 Direccion Persona::getDireccion() {
-	return direccion;
+    return _direccion;
 }
 
 bool Persona::getEstado() {
-	return estado;
+    return _estado;
 }
 
-void Persona::setCuit(const int cuit) {
-	this->cuit = cuit;
+void Persona::setCuit(int cuit) {
+    _cuit = cuit;
 }
 
 void Persona::setNombre(const char *nombre) {
-	strcpy(this->nombre, nombre);
+    strcpy(_nombre, nombre);
 }
 
 void Persona::setApellido(const char *apellido) {
-	strcpy(this->apellido, apellido);
+    strcpy(_apellido, apellido);
 }
 
 void Persona::setTelefono(const char *telefono) {
-	strcpy(this->telefono, telefono);
+    strcpy(_telefono, telefono);
 }
 
 void Persona::setEmail(const char *email) {
-	strcpy(this->email, email);
+    strcpy(_email, email);
 }
 
 void Persona::setDireccion(const Direccion &direccion) {
-	this->direccion = direccion;
+    _direccion = direccion;
 }
 
-void Persona::setEstado(const bool estado) {
-	this->estado = estado;
+void Persona::setEstado(bool estado) {
+    _estado = estado;
 }
