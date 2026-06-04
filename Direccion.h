@@ -9,7 +9,7 @@ public:
 	Direccion(long idDireccion, const char *calle, int altura,const char *piso,const char *departamento, const char *localidad, 
               const char *codigoPostal, const char *provincia, bool estado = true);
 
-	 int getIdDireccion();
+	int getIdDireccion();
     const char* getCalle();
     int getAltura();
     const char* getPiso();
