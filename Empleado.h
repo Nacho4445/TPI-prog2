@@ -1,20 +1,21 @@
 #ifndef TPI_PROG2_EMPLEADO_H
 #define TPI_PROG2_EMPLEADO_H
+
 #include "Persona.h"
 
 class Empleado : public Persona {
-private:
-	int idEmpleado = 0;
+
 
 public:
-	Empleado() = default;
+    Empleado() = default;
+    Empleado(int idEmpleado);
 
-	Empleado(int idEmpleado);
+    int getIdEmpleado();
+    void setIdEmpleado(int idEmpleado);
 
-	int getIdEmpleado();
+private:
+    int _idEmpleado = 0;
 
-	void setIdEmpleado(int idEmpleado);
 };
 
-
-#endif //TPI_PROG2_EMPLEADO_H
+#endif // TPI_PROG2_EMPLEADO_H
