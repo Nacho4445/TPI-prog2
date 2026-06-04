@@ -1,54 +1,57 @@
-#include <iostream>
 #include <cstring>
 #include "Equipo.h"
 
-using namespace std;
+Equipo::Equipo(int idEquipo, const char *descripcion, int stock, float precioUnitario, bool estado)
 
-Equipo::Equipo(int idEquipo, const char *descripcion, int stock, float precioUnitario,
-               bool estado) : idEquipo(idEquipo), stock(stock), precioUnitario(precioUnitario), estado(estado) {
-	strcpy(this->descripcion, descripcion);
+{
+    _idEquipo = idEquipo;
+    _stock = stock;
+    _precioUnitario = precioUnitario;
+    _estado = estado;
+
+    strcpy(_descripcion, descripcion);
 }
 
 int Equipo::getIdEquipo() {
-	return idEquipo;
+    return _idEquipo;
 }
 
 const char *Equipo::getDescripcion() {
-	return descripcion;
+    return _descripcion;
 }
 
 int Equipo::getStock() {
-	return stock;
+    return _stock;
 }
 
 float Equipo::getPrecioUnitario() {
-	return precioUnitario;
+    return _precioUnitario;
 }
 
 bool Equipo::getEstado() {
-	return estado;
+    return _estado;
 }
 
 void Equipo::setIdEquipo(int idEquipo) {
-	this->idEquipo = idEquipo;
+    _idEquipo = idEquipo;
 }
 
-void Equipo::setDescripcion(char *descripcion) {
-	strcpy(this->descripcion, descripcion);
+void Equipo::setDescripcion(const char *descripcion) {
+    strcpy(_descripcion, descripcion);
 }
 
 void Equipo::setStock(int stock) {
-	if (stock >= 0) {
-		this->stock = stock;
-	}
+    if (stock >= 0) {
+        _stock = stock;
+    }
 }
 
 void Equipo::setPrecioUnitario(float precioUnitario) {
-	if (precioUnitario >= 0.0) {
-		this->precioUnitario = precioUnitario;
-	}
+    if (precioUnitario >= 0.0f) {
+        _precioUnitario = precioUnitario;
+    }
 }
 
 void Equipo::setEstado(bool estado) {
-	this->estado = estado;
+    _estado = estado;
 }
