@@ -3,8 +3,7 @@
 #include <string>
 
 class ArchivoVenta {
-private:
-    std::string ruta;
+
 public:
     ArchivoVenta();
     ArchivoVenta(std::string _ruta);
@@ -15,6 +14,9 @@ public:
     Venta leer(int id);
     bool borrarRegistro(int id);
     void vaciar();
+
+private:
+    std::string ruta;
 };
 
 
