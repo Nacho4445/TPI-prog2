@@ -1,69 +1,62 @@
-#include <iostream>
 #include "Venta.h"
 
-using namespace std;
+Venta::Venta(int idVenta, int idCliente, int idEmpleado, Fecha fechaVenta, double importeTotal, bool estado) 
 
-Venta::Venta(
-	int idVenta,
-	int idCliente,
-	int idEmpleado,
-	Fecha fechaVenta,
-	double importeTotal,
-	bool estado
-) : idVenta(idVenta),
-    idCliente(idCliente),
-    idEmpleado(idEmpleado),
-    fechaVenta(fechaVenta),
-    importeTotal(importeTotal),
-    estado(estado) {
+{
+    _idVenta = idVenta;
+    _idCliente = idCliente;
+    _idEmpleado = idEmpleado;
+    _fechaVenta = fechaVenta;
+    _importeTotal = importeTotal;
+    _estado = estado;
 }
 
 int Venta::getIdVenta() {
-	return idVenta;
+    return _idVenta;
 }
 
 int Venta::getIdCliente() {
-	return idCliente;
+    return _idCliente;
 }
 
 int Venta::getIdEmpleado() {
-	return idEmpleado;
+    return _idEmpleado;
 }
 
 Fecha Venta::getFecha() {
-	return fechaVenta;
+    return _fechaVenta;
 }
 
 double Venta::getImporteTotal() {
-	return importeTotal;
+    return _importeTotal;
 }
 
 bool Venta::getEstado() {
-	return estado;
+    return _estado;
 }
 
 void Venta::setIdVenta(int idVenta) {
-	this->idVenta = idVenta;
+    _idVenta = idVenta;
 }
 
 void Venta::setIdCliente(int idCliente) {
-	this->idCliente = idCliente;
+    _idCliente = idCliente;
 }
 
 void Venta::setIdEmpleado(int idEmpleado) {
-	this->idEmpleado = idEmpleado;
+    _idEmpleado = idEmpleado;
 }
 
 void Venta::setFecha(Fecha fechaVenta) {
-	this->fechaVenta = fechaVenta;
+    _fechaVenta = fechaVenta;
 }
 
 void Venta::setImporteTotal(double importeTotal) {
-	if (importeTotal > 0.0) {
-		this->importeTotal = importeTotal;
-	}
+    if (importeTotal > 0.0) {
+        _importeTotal = importeTotal;
+    }
 }
 
 void Venta::setEstado(bool estado) {
-	this->estado = estado;
+    _estado = estado;
 }
