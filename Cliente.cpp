@@ -4,32 +4,38 @@
 
 using namespace std;
 
-Cliente::Cliente(long idCliente, int tipoCliente) : idCliente(idCliente) {
-	if (tipoCliente == 1 || tipoCliente == 2) {
-		this->tipoCliente = tipoCliente;
-		setEstado(true);
-	} else {
-		this->tipoCliente = 0;
-		setEstado(false);
-	}
+Cliente::Cliente(long idCliente, int tipoCliente) {
+
+    _idCliente = idCliente;
+
+    if (tipoCliente == 1 || tipoCliente == 2) {
+        _tipoCliente = tipoCliente;
+        setEstado(true);
+    }
+    else {
+        _tipoCliente = 0;
+        setEstado(false);
+    }
 }
 
 long Cliente::getIdCliente() {
-	return idCliente;
+    return _idCliente;
 }
 
 int Cliente::getTipoCliente() {
-	return tipoCliente;
+    return _tipoCliente;
 }
 
 void Cliente::setIdCliente(long idCliente) {
-	this->idCliente = idCliente;
+    _idCliente = idCliente;
 }
 
 void Cliente::setTipoCliente(int tipoCliente) {
-	if (tipoCliente == 1 || tipoCliente == 2) {
-		this->tipoCliente = tipoCliente;
-	} else {
-		cout << "tipoCliente invalido para cliente: " << idCliente << endl;
-	}
+
+    if (tipoCliente == 1 || tipoCliente == 2) {
+        _tipoCliente = tipoCliente;
+    }
+    else {
+        cout << "tipoCliente invalido para cliente: " << _idCliente << endl;
+    }
 }
