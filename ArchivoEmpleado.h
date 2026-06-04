@@ -3,8 +3,7 @@
 #include <string>
 
 class ArchivoEmpleado{
-private:
-    std::string ruta;
+
 public:
     ArchivoEmpleado();
     ArchivoEmpleado(std::string _ruta);
@@ -15,4 +14,7 @@ public:
     Empleado leer(int id);
     bool borrarRegistro(int id);
     void vaciar();
+
+private:
+    std::string ruta;
 } ;
