@@ -2,91 +2,89 @@
 
 #include <cstring>
 
-Direccion::Direccion(long idDireccion,
-                     const char *calle,
-                     int altura,
-                     const char *piso,
-                     const char *departamento,
-                     const char *localidad,
-                     const char *codigoPostal,
-                     const char *provincia,
-                     bool estado) : idDireccion(idDireccion), altura(altura), estado(estado) {
-	strcpy(this->calle, calle);
-	strcpy(this->piso, piso);
-	strcpy(this->departamento, departamento);
-	strcpy(this->localidad, localidad);
-	strcpy(this->codigoPostal, codigoPostal);
-	strcpy(this->provincia, provincia);
+Direccion::Direccion(long idDireccion, const char *calle, int altura, const char *piso, const char *departamento, const char *localidad,
+                     const char *codigoPostal, const char *provincia, bool estado) {
+
+    _idDireccion = idDireccion;
+    _altura = altura;
+    _estado = estado;
+
+    strcpy(_calle, calle);
+    strcpy(_piso, piso);
+    strcpy(_departamento, departamento);
+    strcpy(_localidad, localidad);
+    strcpy(_codigoPostal, codigoPostal);
+    strcpy(_provincia, provincia);
 }
 
 int Direccion::getIdDireccion() {
-	return idDireccion;
+    return _idDireccion;
 }
 
 const char *Direccion::getCalle() {
-	return calle;
+    return _calle;
 }
 
 int Direccion::getAltura() {
-	return altura;
+    return _altura;
 }
 
 const char *Direccion::getPiso() {
-	return piso;
+    return _piso;
 }
 
 const char *Direccion::getDepartamento() {
-	return departamento;
+    return _departamento;
 }
 
 const char *Direccion::getLocalidad() {
-	return localidad;
+    return _localidad;
 }
 
 const char *Direccion::getCodigoPostal() {
-	return codigoPostal;
+    return _codigoPostal;
 }
 
 const char *Direccion::getProvincia() {
-	return provincia;
+    return _provincia;
 }
 
 bool Direccion::getEstado() {
-	return estado;
+    return _estado;
 }
 
 void Direccion::setIdDireccion(int idDireccion) {
-	this->idDireccion = idDireccion;
+    _idDireccion = idDireccion;
 }
 
-void Direccion::setCalle(char *calle) {
-	strcpy(this->calle, calle);
+void Direccion::setCalle(const char *calle) {
+    strcpy(_calle, calle);
 }
 
 void Direccion::setAltura(int altura) {
-	this->altura = altura;
+    _altura = altura;
 }
 
-void Direccion::setPiso(char *piso) {
-	strcpy(this->piso, piso);
+void Direccion::setPiso(const char *piso) {
+    strcpy(_piso, piso);
 }
 
-void Direccion::setDepartamento(char *departamento) {
-	strcpy(this->departamento, departamento);
+void Direccion::setDepartamento(const char *departamento) {
+    strcpy(_departamento, departamento);
 }
 
-void Direccion::setLocalidad(char *localidad) {
-	strcpy(this->localidad, localidad);
+void Direccion::setLocalidad(const char *localidad) {
+    strcpy(_localidad, localidad);
 }
 
-void Direccion::setCodigoPostal(char *codigoPostal) {
-	strcpy(this->codigoPostal, codigoPostal);
+void Direccion::setCodigoPostal(const char *codigoPostal) {
+    strcpy(_codigoPostal, codigoPostal);
 }
 
-void Direccion::setProvincia(char *provincia) {
-	strcpy(this->provincia, provincia);
+void Direccion::setProvincia(const char *provincia) {
+    strcpy(_provincia, provincia);
 }
 
 void Direccion::setEstado(bool estado) {
-	this->estado = estado;
+    _estado = estado;
 }
