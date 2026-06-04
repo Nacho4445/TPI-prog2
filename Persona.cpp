@@ -2,7 +2,9 @@
 #include "Persona.h"
 
 Persona::Persona(int cuit, const char *nombre, const char *apellido, const char *telefono,const char *email,
-                 const Direccion &direccion, bool estado) {
+                 const Direccion &direccion, bool estado)
+
+{
 
     _cuit = cuit;
     _direccion = direccion;
