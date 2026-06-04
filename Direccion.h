@@ -2,65 +2,44 @@
 #define TPI_PROG2_DIRECCION_H
 
 class Direccion {
-private:
-	int idDireccion = 0;
-	char calle[50] = "";
-	int altura = 0;
-	char piso[10] = "";
-	char departamento[10] = "";
-	char localidad[50] = "";
-	char codigoPostal[10] = "";
-	char provincia[50] = "";
-	bool estado = false;
 
 public:
 	Direccion() = default;
 
-	Direccion(long idDireccion,
-	          const char *calle,
-	          int altura,
-	          const char *piso,
-	          const char *departamento,
-	          const char *localidad,
-	          const char *codigoPostal,
-	          const char *provincia,
-	          bool estado = true);
+	Direccion(long idDireccion, const char *calle, int altura,const char *piso,const char *departamento, const char *localidad, 
+              const char *codigoPostal, const char *provincia, bool estado = true);
 
-	int getIdDireccion();
-
-	const char *getCalle();
-
-	int getAltura();
-
-	const char *getPiso();
-
-	const char *getDepartamento();
-
-	const char *getLocalidad();
-
-	const char *getCodigoPostal();
-
-	const char *getProvincia();
-
-	bool getEstado();
+	 int getIdDireccion();
+    const char* getCalle();
+    int getAltura();
+    const char* getPiso();
+    const char* getDepartamento();
+    const char* getLocalidad();
+    const char* getCodigoPostal();
+    const char* getProvincia();
+    bool getEstado();
 
 	void setIdDireccion(int idDireccion);
+    void setCalle(const char* calle);
+    void setAltura(int altura);
+    void setPiso(const char* piso);
+    void setDepartamento(const char* departamento);
+    void setLocalidad(const char* localidad);
+    void setCodigoPostal(const char* codigoPostal);
+    void setProvincia(const char* provincia);
+    void setEstado(bool estado);
 
-	void setCalle(char *calle);
 
-	void setAltura(int altura);
-
-	void setPiso(char *piso);
-
-	void setDepartamento(char *departamento);
-
-	void setLocalidad(char *localidad);
-
-	void setCodigoPostal(char *codigoPostal);
-
-	void setProvincia(char *provincia);
-
-	void setEstado(bool estado);
+private:
+	long _idDireccion = 0;
+    char _calle[50] = "";
+    int _altura = 0;
+    char _piso[10] = "";
+    char _departamento[10] = "";
+    char _localidad[50] = "";
+    char _codigoPostal[20] = "";
+    char _provincia[50] = "";
+    bool _estado = false;
 };
 
 
