@@ -3,8 +3,7 @@
 #include <string>
 
 class ArchivoTipoCliente {
-private:
-    std::string ruta;
+
 public:
     ArchivoTipoCliente();
     ArchivoTipoCliente(std::string _ruta);
@@ -15,4 +14,6 @@ public:
     TipoCliente leer(int id);
     bool borrarRegistro(int id);
     void vaciar();
+private:
+    std::string ruta;
 };
