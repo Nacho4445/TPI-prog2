@@ -1,5 +1,4 @@
-#ifndef TIPOCLIENTE_H_INCLUDED
-#define TIPOCLIENTE_H_INCLUDED
+#pragma once
 
 class TipoCliente {
 
@@ -22,4 +21,3 @@ private:
     bool _estado = false;
 };
 
-#endif // TIPOCLIENTE_H_INCLUDED

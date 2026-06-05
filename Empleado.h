@@ -1,6 +1,4 @@
-#ifndef TPI_PROG2_EMPLEADO_H
-#define TPI_PROG2_EMPLEADO_H
-
+#pragma once
 #include "Persona.h"
 
 class Empleado : public Persona {
@@ -17,5 +15,3 @@ private:
     int _idEmpleado = 0;
 
 };
-
-#endif // TPI_PROG2_EMPLEADO_H

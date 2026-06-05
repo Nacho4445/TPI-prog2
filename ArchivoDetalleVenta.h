@@ -1,7 +1,5 @@
-#ifndef ARCHIVODETALLEVENTA_H
-#define ARCHIVODETALLEVENTA_H
-
-#include "DetalleVenta .h"
+#pragma once
+#include "DetalleVenta.h"
 #include <string>
 
 
@@ -20,5 +18,3 @@ public:
     void vaciar();
 
 };
-
-#endif // ARCHIVODETALLEVENTA_H

@@ -1,6 +1,4 @@
-#ifndef VENTAS_H_INCLUDED
-#define VENTAS_H_INCLUDED
-
+#pragma once
 #include "Fecha.h"
 
 class Venta {
@@ -32,5 +30,3 @@ private:
     double _importeTotal = 0.0;
     bool _estado = false;
 };
-
-#endif // VENTAS_H_INCLUDED

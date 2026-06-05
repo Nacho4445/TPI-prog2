@@ -1,5 +1,4 @@
-#ifndef EQUIPOS_H_INCLUDED
-#define EQUIPOS_H_INCLUDED
+#pragma once
 
 class Equipo {
 
@@ -34,4 +33,3 @@ private:
     bool _estado = false;
 };
 
-#endif // EQUIPOS_H_INCLUDED

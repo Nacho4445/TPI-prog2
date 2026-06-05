@@ -1,5 +1,4 @@
-#ifndef TPI_PROG2_PERSONA_H
-#define TPI_PROG2_PERSONA_H
+#pragma once
 
 #include "Direccion.h"
 
@@ -37,5 +36,3 @@ private:
     Direccion _direccion;
     bool _estado = false; // true = Activo, false = Inactivo
 };
-
-#endif // TPI_PROG2_PERSONA_H

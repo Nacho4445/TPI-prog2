@@ -1,5 +1,4 @@
-#ifndef TPI_PROG2_FECHA_H
-#define TPI_PROG2_FECHA_H
+#pragma once
 
 class Fecha {
 
@@ -22,4 +21,3 @@ private:
     int _anio = 0;
 };
 
-#endif // TPI_PROG2_FECHA_H
