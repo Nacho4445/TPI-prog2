@@ -1,11 +1,11 @@
 #include "ArchivoDetalleVenta.h"
 
 ArchivoDetalleVenta::ArchivoDetalleVenta() {
-    ruta = "detalleVentas.dat";
+    _ruta = "detalleVentas.dat";
 }
 
 int ArchivoDetalleVenta::getCantidadRegistros() {
-    FILE* pArchivo = fopen(ruta.c_str(), "rb");
+    FILE* pArchivo = fopen(_ruta.c_str(), "rb");
 
     if (pArchivo == nullptr) {
         return 0;
@@ -19,7 +19,7 @@ int ArchivoDetalleVenta::getCantidadRegistros() {
 }
 
 bool ArchivoDetalleVenta::guardar(DetalleVenta detalleVenta) {
-    FILE* pArchivo = fopen(ruta.c_str(), "ab");
+    FILE* pArchivo = fopen(_ruta.c_str(), "ab");
 
     if (pArchivo == nullptr) {
         return false;
@@ -32,7 +32,7 @@ bool ArchivoDetalleVenta::guardar(DetalleVenta detalleVenta) {
 }
 
 DetalleVenta ArchivoDetalleVenta::leer(int idDetalleVenta) {
-    FILE* pArchivo = fopen(ruta.c_str(), "rb");
+    FILE* pArchivo = fopen(_ruta.c_str(), "rb");
     DetalleVenta detalleVenta;
 
     if (pArchivo == nullptr) {
@@ -51,7 +51,7 @@ DetalleVenta ArchivoDetalleVenta::leer(int idDetalleVenta) {
 }
 
 bool ArchivoDetalleVenta::borrarRegistro(int idDetalleVenta) {
-    FILE* pArchivo = fopen(ruta.c_str(), "rb+");
+    FILE* pArchivo = fopen(_ruta.c_str(), "rb+");
     DetalleVenta detalleVenta;
 
     if (pArchivo == nullptr) {
@@ -75,7 +75,7 @@ bool ArchivoDetalleVenta::borrarRegistro(int idDetalleVenta) {
 }
 
 void ArchivoDetalleVenta::vaciar() {
-    FILE* pArchivo = fopen(ruta.c_str(), "wb");
+    FILE* pArchivo = fopen(_ruta.c_str(), "wb");
 
     if (pArchivo != nullptr) {
         fclose(pArchivo);

@@ -6,9 +6,6 @@
 using namespace std;
 
 int main() {
-    Cliente *clientes;
-    Equipo *equipos;
-    Venta *ventas;
 
     int opcion;
     do {

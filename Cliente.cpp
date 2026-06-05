@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Cliente::Cliente(long idCliente, int tipoCliente) {
+Cliente::Cliente(int idCliente, int tipoCliente) {
 
     _idCliente = idCliente;
 
@@ -18,7 +18,7 @@ Cliente::Cliente(long idCliente, int tipoCliente) {
     }
 }
 
-long Cliente::getIdCliente() {
+int Cliente::getIdCliente() {
     return _idCliente;
 }
 
@@ -26,7 +26,7 @@ int Cliente::getTipoCliente() {
     return _tipoCliente;
 }
 
-void Cliente::setIdCliente(long idCliente) {
+void Cliente::setIdCliente(int idCliente) {
     _idCliente = idCliente;
 }
 

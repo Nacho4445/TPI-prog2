@@ -1,16 +1,18 @@
 #ifndef ARCHIVODETALLEVENTA_H
 #define ARCHIVODETALLEVENTA_H
 
-#include "DetalleVenta.h"
+#include "DetalleVenta .h"
 #include <string>
 
 
 class ArchivoDetalleVenta {
 
 private:
+
     std::string _ruta;
 
 public:
+    ArchivoDetalleVenta();
     int getCantidadRegistros();
     bool guardar(DetalleVenta detalleVenta);
     DetalleVenta leer(int idDetalleVenta);
