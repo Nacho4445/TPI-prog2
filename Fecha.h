@@ -1,23 +1,20 @@
 #pragma once
+#include <string>
 
-class Fecha {
+class Fecha{
+   private:
+   int _dia, _mes, _anio;
 
-public:
-    Fecha() = default;
+   void establecerFechaPorDefecto();
+   bool esBisiesto();
 
-    Fecha(int dia, int mes, int anio);
+   public:
+      Fecha();
+      Fecha(int dia, int mes, int anio);
 
-    int getDia();
-    int getMes();
-    int getAnio();
-
-    void setDia(int dia);
-    void setMes(int mes);
-    void setAnio(int anio);
-
-private:
-    int _dia = 0;
-    int _mes = 0;
-    int _anio = 0;
+      int getDia();
+      int getMes();
+      int getAnio();
+      std::string toString(std::string formatoFecha = "DD/MM/YYYY");
 };
 

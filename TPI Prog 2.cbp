@@ -50,16 +50,52 @@
 		<Unit filename="ArchivoVenta.h" />
 		<Unit filename="Cliente.cpp" />
 		<Unit filename="Cliente.h" />
+		<Unit filename="ClienteManager.cpp" />
+		<Unit filename="ClienteManager.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="DetalleVenta.cpp" />
 		<Unit filename="DetalleVenta.h" />
 		<Unit filename="Direccion.cpp" />
 		<Unit filename="Direccion.h" />
 		<Unit filename="Empleado.cpp" />
 		<Unit filename="Empleado.h" />
+		<Unit filename="EmpleadoManager.cpp" />
+		<Unit filename="EmpleadoManager.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="Equipo.cpp" />
 		<Unit filename="Equipo.h" />
+		<Unit filename="EquipoManager.cpp" />
+		<Unit filename="EquipoManager.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="Fecha.cpp" />
 		<Unit filename="Fecha.h" />
+		<Unit filename="Menu.cpp" />
+		<Unit filename="Menu.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="MenuClientes.cpp" />
+		<Unit filename="MenuClientes.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="MenuEmpleados.cpp" />
+		<Unit filename="MenuEmpleados.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="MenuEquipos.cpp" />
+		<Unit filename="MenuEquipos.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="MenuPrincipal.cpp" />
+		<Unit filename="MenuPrincipal.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="MenuVentas.cpp" />
+		<Unit filename="MenuVentas.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="Persona.cpp" />
 		<Unit filename="Persona.h" />
 		<Unit filename="TipoCliente.cpp" />
@@ -70,6 +106,10 @@
 		<Unit filename="TipoMarca.h" />
 		<Unit filename="Venta.cpp" />
 		<Unit filename="Venta.h" />
+		<Unit filename="VentaManager.cpp" />
+		<Unit filename="VentaManager.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="main.cpp" />
 		<Extensions />
 	</Project>

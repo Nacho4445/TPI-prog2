@@ -1,13 +1,13 @@
 #include <iostream>
-#include "Cliente.h"
-#include "Equipo.h"
-#include "Venta.h"
+#include "MenuPrincipal.h"
 
 using namespace std;
 
 int main() {
+    MenuPrincipal menu;
+    menu.ejecutarMenu();
 
-    int opcion;
+/*    int opcion;
     do {
         cout << "\n=== MENU DE GESTION ===\n";
         cout << "1. Gestionar Clientes\n";
@@ -102,6 +102,6 @@ int main() {
                 cout << "Opcion invalida.\n";
         }
     } while (opcion != 0);
-
+*/
     return 0;
 }
