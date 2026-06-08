@@ -1,0 +1,225 @@
+# depslib dependency file v1.0
+1780770139 source:d:\programacion\tpi-prog2-main\cliente.cpp
+	<iostream>
+	<cstring>
+	"Cliente.h"
+
+1780770139 d:\programacion\tpi-prog2-main\cliente.h
+	"Persona.h"
+
+1780858410 d:\programacion\tpi-prog2-main\persona.h
+	"Direccion.h"
+
+1780869905 d:\programacion\tpi-prog2-main\direccion.h
+
+1780770139 source:d:\programacion\tpi-prog2-main\direccion.cpp
+	"Direccion.h"
+	<cstring>
+
+1780770139 source:d:\programacion\tpi-prog2-main\empleado.cpp
+	<iostream>
+	"Empleado.h"
+
+1780770139 d:\programacion\tpi-prog2-main\empleado.h
+	"Persona.h"
+
+1780770139 source:d:\programacion\tpi-prog2-main\equipo.cpp
+	"Equipo.h"
+	<cstring>
+
+1780770139 d:\programacion\tpi-prog2-main\equipo.h
+
+1780770139 source:d:\programacion\tpi-prog2-main\fecha.cpp
+	"Fecha.h"
+
+1780770139 d:\programacion\tpi-prog2-main\fecha.h
+	<string>
+
+1780770139 source:d:\programacion\tpi-prog2-main\main.cpp
+	<iostream>
+	"MenuPrincipal.h"
+
+1780770139 d:\programacion\tpi-prog2-main\menuprincipal.h
+	"Menu.h"
+	"MenuClientes.h"
+	"MenuEquipos.h"
+	"MenuVentas.h"
+	"MenuEmpleados.h"
+
+1780770139 d:\programacion\tpi-prog2-main\menu.h
+
+1780770139 d:\programacion\tpi-prog2-main\menuclientes.h
+	"Menu.h"
+	"ClienteManager.h"
+
+1780869905 d:\programacion\tpi-prog2-main\clientemanager.h
+	"ArchivoCliente.h"
+	"ClienteManager.h"
+
+1780869486 d:\programacion\tpi-prog2-main\archivocliente.h
+	"Cliente.h"
+	<string>
+
+1780770139 d:\programacion\tpi-prog2-main\menuequipos.h
+	"Menu.h"
+	"EquipoManager.h"
+
+1780877515 d:\programacion\tpi-prog2-main\equipomanager.h
+	"ArchivoEquipo.h"
+
+1780770139 d:\programacion\tpi-prog2-main\archivoequipo.h
+	"Equipo.h"
+	<string>
+
+1780770139 d:\programacion\tpi-prog2-main\menuventas.h
+	"Menu.h"
+	"VentaManager.h"
+
+1780770139 d:\programacion\tpi-prog2-main\ventamanager.h
+	"ArchivoVenta.h"
+
+1780770139 d:\programacion\tpi-prog2-main\archivoventa.h
+	"Venta.h"
+	<string>
+
+1780770139 d:\programacion\tpi-prog2-main\venta.h
+	"Fecha.h"
+
+1780770139 d:\programacion\tpi-prog2-main\menuempleados.h
+	"Menu.h"
+	"EmpleadoManager.h"
+
+1780876246 d:\programacion\tpi-prog2-main\empleadomanager.h
+	"ArchivoEmpleado.h"
+
+1780876245 d:\programacion\tpi-prog2-main\archivoempleado.h
+	"Empleado.h"
+	<string>
+
+1780770139 source:d:\programacion\tpi-prog2-main\venta.cpp
+	"Venta.h"
+
+1780770139 source:d:\programacion\tpi-prog2-main\archivodetalleventa.cpp
+	"ArchivoDetalleVenta.h"
+
+1780770139 d:\programacion\tpi-prog2-main\archivodetalleventa.h
+	"DetalleVenta.h"
+	<string>
+
+1780770139 d:\programacion\tpi-prog2-main\detalleventa.h
+
+1780770139 source:d:\programacion\tpi-prog2-main\archivoequipo.cpp
+	"ArchivoEquipo.h"
+
+1780770139 source:d:\programacion\tpi-prog2-main\archivotipocliente.cpp
+	<iostream>
+	<cstdio>
+	"ArchivoTipoCliente.h"
+
+1780770139 d:\programacion\tpi-prog2-main\archivotipocliente.h
+	"TipoCliente.h"
+	<string>
+
+1780770139 d:\programacion\tpi-prog2-main\tipocliente.h
+
+1780770139 source:d:\programacion\tpi-prog2-main\archivotipoequipo.cpp
+	"ArchivoTipoEquipo.h"
+
+1780770139 d:\programacion\tpi-prog2-main\archivotipoequipo.h
+	"TipoEquipo.h"
+	<string>
+
+1780770139 d:\programacion\tpi-prog2-main\tipoequipo.h
+
+1780770139 source:d:\programacion\tpi-prog2-main\archivotipomarca.cpp
+	"ArchivoTipoMarca.h"
+
+1780770139 d:\programacion\tpi-prog2-main\archivotipomarca.h
+	"TipoMarca.h"
+	<string>
+
+1780770139 d:\programacion\tpi-prog2-main\tipomarca.h
+
+1780770139 source:d:\programacion\tpi-prog2-main\archivoventa.cpp
+	<iostream>
+	<cstdio>
+	"ArchivoVenta.h"
+
+1780770139 source:d:\programacion\tpi-prog2-main\archivoempleado.cpp
+	<iostream>
+	"ArchivoEmpleado.h"
+
+1780770139 source:d:\programacion\tpi-prog2-main\detalleventa.cpp
+	<iostream>
+	"DetalleVenta.h"
+
+1780770139 source:d:\programacion\tpi-prog2-main\empleadomanager.cpp
+	<iostream>
+	"Empleado.h"
+	"EmpleadoManager.h"
+
+1780770139 source:d:\programacion\tpi-prog2-main\equipomanager.cpp
+	<iostream>
+	"Equipo.h"
+	"EquipoManager.h"
+
+1780770139 source:d:\programacion\tpi-prog2-main\menu.cpp
+	<iostream>
+	"Menu.h"
+	<cstdio>
+
+1780770139 source:d:\programacion\tpi-prog2-main\menuclientes.cpp
+	<iostream>
+	"MenuClientes.h"
+	<cstdio>
+
+1780770139 source:d:\programacion\tpi-prog2-main\menuempleados.cpp
+	<iostream>
+	"MenuEmpleados.h"
+	<cstdio>
+
+1780770139 source:d:\programacion\tpi-prog2-main\menuequipos.cpp
+	<iostream>
+	"MenuEquipos.h"
+	<cstdio>
+
+1780770139 source:d:\programacion\tpi-prog2-main\menuprincipal.cpp
+	<iostream>
+	"MenuPrincipal.h"
+	<cstdio>
+
+1780870075 source:d:\programacion\tpi-prog2-main\archivocliente.cpp
+	<iostream>
+	"ArchivoCliente.h"
+
+1780770139 source:d:\programacion\tpi-prog2-main\menuventas.cpp
+	<iostream>
+	"MenuVentas.h"
+	<cstdio>
+
+1780858410 source:d:\programacion\tpi-prog2-main\persona.cpp
+	<cstring>
+	"Persona.h"
+
+1780770139 source:d:\programacion\tpi-prog2-main\tipocliente.cpp
+	<cstring>
+	"TipoCliente.h"
+
+1780770139 source:d:\programacion\tpi-prog2-main\tipoequipo.cpp
+	"TipoEquipo.h"
+	<cstring>
+
+1780770139 source:d:\programacion\tpi-prog2-main\tipomarca.cpp
+	"TipoMarca.h"
+	<cstring>
+
+1780770139 source:d:\programacion\tpi-prog2-main\ventamanager.cpp
+	<iostream>
+	"Venta.h"
+	"VentaManager.h"
+
+1780873076 source:d:\programacion\tpi-prog2-main\clientemanager.cpp
+	<iostream>
+	"Cliente.h"
+	"ClienteManager.h"
+

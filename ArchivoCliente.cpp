@@ -75,6 +75,21 @@ Cliente ArchivoCliente::leer(int id){
   return aux;
 }
 
+Cliente ArchivoCliente::leerPorPosicion(int posicion){
+    Cliente aux;
+
+    FILE *p = fopen(ruta.c_str(), "rb");
+    if (p == NULL){
+        return aux;
+    }
+
+    fseek(p, posicion * sizeof(Cliente), SEEK_SET);
+    fread(&aux, sizeof(Cliente), 1, p);
+
+    fclose(p);
+    return aux;
+}
+
 bool ArchivoCliente::borrarRegistro(int id){
   Cliente aux;
 
@@ -106,4 +121,31 @@ void ArchivoCliente::vaciar(){
     return ;
   }
   fclose(p);
+}
+
+int ArchivoCliente::buscarPorCuit(long long cuit){
+
+    Cliente cliente;
+    FILE* pFile = fopen(ruta.c_str(), "rb");
+
+    if(pFile == nullptr){
+        return -1;
+    }
+
+    int pos = 0;
+
+    while(fread(&cliente, sizeof(Cliente), 1, pFile) == 1){
+
+        if(cliente.getEstado() &&
+           cliente.getCuit() == cuit){
+
+            fclose(pFile);
+            return pos;
+        }
+
+        pos++;
+    }
+
+    fclose(pFile);
+    return -1;
 }

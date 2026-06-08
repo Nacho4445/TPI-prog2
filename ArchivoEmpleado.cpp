@@ -75,6 +75,31 @@ Empleado ArchivoEmpleado::leer(int id){
   return aux;
 }
 
+int ArchivoEmpleado::buscarPorCuit(long long cuit){
+
+    Empleado reg;
+    FILE *pFile = fopen(ruta.c_str(), "rb");
+
+    if(pFile == nullptr){
+        return -1;
+    }
+
+    int pos = 0;
+
+    while(fread(&reg, sizeof(Empleado), 1, pFile) == 1){
+
+        if(reg.getEstado() && reg.getCuit() == cuit){
+            fclose(pFile);
+            return pos;
+        }
+
+        pos++;
+    }
+
+    fclose(pFile);
+    return -1;
+}
+
 bool ArchivoEmpleado::borrarRegistro(int id){
   Empleado aux;
 

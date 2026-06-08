@@ -6,7 +6,7 @@ private:
    Empleado crearEmpleado();
    void mostrarEmpleado(const Empleado &reg);
    void ordenarEmpleados(Empleado vEmpleados[], int cantidad);
-   ArchivoEmpleado _repoEmpleados;
+   ArchivoEmpleado _archivoEmpleados;
 
 public:
 	EmpleadoManager();

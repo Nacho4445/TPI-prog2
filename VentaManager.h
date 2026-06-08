@@ -6,7 +6,7 @@ private:
    Venta crearVenta();
    void mostrarVenta(const Venta &reg);
    void ordenarVentas(Venta vVentas[], int cantidad);
-   ArchivoVenta _repoVentas;
+   ArchivoVenta _archivoVentas;
 
 public:
 	VentaManager();

@@ -6,7 +6,7 @@ class Direccion {
 public:
 	Direccion() = default;
 
-	Direccion(long idDireccion, const char *calle, int altura,const char *piso,const char *departamento, const char *localidad, 
+	Direccion(long idDireccion, const char *calle, int altura,const char *piso,const char *departamento, const char *localidad,
               const char *codigoPostal, const char *provincia, bool estado = true);
 
 	int getIdDireccion();

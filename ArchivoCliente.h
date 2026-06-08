@@ -13,6 +13,8 @@ public:
     bool guardar(Cliente reg);
     int buscar(int id);
     Cliente leer(int id);
+    Cliente leerPorPosicion(int posicion);
+    int buscarPorCuit(long long cuit);
     bool borrarRegistro(int id);
     void vaciar();
 } ;

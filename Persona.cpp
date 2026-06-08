@@ -1,7 +1,7 @@
 #include <cstring>
 #include "Persona.h"
 
-Persona::Persona(int cuit, const char *nombre, const char *apellido, const char *telefono,const char *email,
+Persona::Persona(long long cuit, const char *nombre, const char *apellido, const char *telefono,const char *email,
                  const Direccion &direccion, bool estado)
 
 {
@@ -16,7 +16,7 @@ Persona::Persona(int cuit, const char *nombre, const char *apellido, const char 
     strcpy(_email, email);
 }
 
-int Persona::getCuit() {
+long long Persona::getCuit(){
     return _cuit;
 }
 
@@ -44,7 +44,7 @@ bool Persona::getEstado() {
     return _estado;
 }
 
-void Persona::setCuit(int cuit) {
+void Persona::setCuit(long long cuit) {
     _cuit = cuit;
 }
 

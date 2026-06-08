@@ -8,10 +8,10 @@ class Persona {
 public:
     Persona() = default;
 
-    Persona(int cuit, const char *nombre, const char *apellido,  const char *telefono, const char *email,
+    Persona(long long cuit, const char *nombre, const char *apellido,  const char *telefono, const char *email,
             const Direccion &direccion, bool estado = true);
 
-    int getCuit();
+    long long getCuit();
     const char *getNombre();
     const char *getApellido();
     const char *getTelefono();
@@ -19,7 +19,7 @@ public:
     Direccion getDireccion();
     bool getEstado();
 
-    void setCuit(int cuit);
+    void setCuit(long long cuit);
     void setNombre(const char *nombre);
     void setApellido(const char *apellido);
     void setTelefono(const char *telefono);
@@ -28,7 +28,7 @@ public:
     void setEstado(bool estado);
 
 private:
-    int _cuit = 0;
+    long long _cuit = 0;
     char _nombre[30] = "";
     char _apellido[30] = "";
     char _telefono[20] = "";
