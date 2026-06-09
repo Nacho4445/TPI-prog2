@@ -22,16 +22,16 @@ void MenuClientes::mostrarOpciones(){
 void MenuClientes::ejecutarOpcion(int opcion){
     switch(opcion){
 case 1:
-    ///Registrar Cliente
+    managerClientes.guardarCliente();
     break;
 case 2:
-    ///Modificar Cliente
+    managerClientes.modificarCliente();
     break;
 case 3:
-    ///Eliminar Cliente
+    managerClientes.eliminarCliente();
     break;
 case 4:
-    ///Listar Clientes
+    managerClientes.listarClientes();
     break;
 case 0:
     cout << "Regresando al menu principal..." << endl;

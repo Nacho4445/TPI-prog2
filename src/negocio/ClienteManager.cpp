@@ -80,7 +80,7 @@ void ClienteManager::guardarCliente(){
 
 void ClienteManager::listarClientes(){
     int cantidad = _archivoClientes.getCantidadRegistros();
-
+    bool hayClientes = false;
     if (cantidad == 0){
         cout << "No hay clientes cargados." << endl;
         return;
@@ -91,10 +91,14 @@ void ClienteManager::listarClientes(){
 
         if (cliente.getEstado()){
             mostrarCliente(cliente);
+            hayClientes = true;
         }
     }
-}
 
+    if(!hayClientes && cantidad > 0){
+        cout << "No hay clientes activos." << endl;
+        }
+}
 
 void ClienteManager::mostrarCliente(Cliente &reg){
     Direccion direccion = reg.getDireccion();
@@ -106,7 +110,7 @@ void ClienteManager::mostrarCliente(Cliente &reg){
     cout << "Apellido: " << reg.getApellido() << endl;
     cout << "Telefono: " << reg.getTelefono() << endl;
     cout << "Email: " << reg.getEmail() << endl;
-    cout << "Tipo Cliente: " << reg.getTipoCliente();
+    cout << "Tipo Cliente: " << reg.getTipoCliente() << endl;
     cout << "==================================" << endl;
 
     if (reg.getTipoCliente() == 1){
@@ -211,4 +215,34 @@ void ClienteManager::mostrarClientesOrdenados(){
     }
 
     delete [] vClientes;
+}
+
+
+void ClienteManager::eliminarCliente(){
+    int idEliminado;
+    char confirmar;
+
+    cout << "Ingrese el ID del cliente a eliminar: ";
+    cin >> idEliminado;
+
+    Cliente cliente = _archivoClientes.leer(idEliminado);
+
+    if(cliente.getEstado() == false){
+        cout << "Cliente no encontrado." << endl;
+        return;
+    }
+
+    mostrarCliente(cliente);
+
+    cout << "Eliminar? (s/n): ";
+    cin >> confirmar;
+
+    if(confirmar == 's' || confirmar == 'S'){
+        if(_archivoClientes.borrarRegistro(idEliminado)){
+            cout << "Cliente eliminado con exito." << endl;
+        }
+        else{
+            cout << "No se pudo eliminar el cliente." << endl;
+        }
+    }
 }

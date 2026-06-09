@@ -1,4 +1,5 @@
 #include <iostream>
+using namespace std;
 #include "archivos/ArchivoCliente.h"
 
 ArchivoCliente::ArchivoCliente(){
@@ -27,6 +28,7 @@ bool ArchivoCliente::guardar(Cliente reg){
   FILE *p = fopen(ruta.c_str(), "ab");
 
   if (p == NULL){
+    cout << "No se pudo abrir: " << ruta << endl;
     return false;
   }
 

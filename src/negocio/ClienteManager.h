@@ -16,6 +16,7 @@ public:
    void listarClientes();
    void modificarCliente();
    void mostrarClientesOrdenados();
+   void eliminarCliente();
 
 
 };
