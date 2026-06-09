@@ -22,16 +22,16 @@ void MenuVentas::mostrarOpciones(){
 void MenuVentas::ejecutarOpcion(int opcion){
     switch(opcion){
 case 1:
-    ///Registrar Venta
+    managerVentas.guardarVenta();
     break;
 case 2:
-    ///Modificar Venta
+    managerVentas.modificarVenta();
     break;
 case 3:
-    ///Eliminar Venta
+    managerVentas.eliminarVenta();
     break;
 case 4:
-    ///Listar Ventas
+    managerVentas.listarVentas();
     break;
 case 0:
     cout << "Regresando al menu principal..." << endl;

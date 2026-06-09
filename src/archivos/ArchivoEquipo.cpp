@@ -80,6 +80,32 @@ Equipo ArchivoEquipo::leer(int idEquipo) {
     return Equipo();
 }
 
+bool ArchivoEquipo::modificar(Equipo equipo) {
+    FILE* pArchivo = fopen(_ruta.c_str(), "rb+");
+
+    if (pArchivo == nullptr) {
+        return false;
+    }
+
+    Equipo aux;
+
+    while (fread(&aux, sizeof(Equipo), 1, pArchivo) == 1) {
+
+        if (aux.getIdEquipo() == equipo.getIdEquipo() && aux.getEstado()) {
+
+            fseek(pArchivo, -sizeof(Equipo), SEEK_CUR);
+
+            bool pudoModificar = fwrite(&equipo, sizeof(Equipo), 1, pArchivo);
+
+            fclose(pArchivo);
+            return pudoModificar;
+        }
+    }
+
+    fclose(pArchivo);
+    return false;
+}
+
 bool ArchivoEquipo::borrarRegistro(int idEquipo) {
     FILE* pArchivo = fopen(_ruta.c_str(), "rb+");
 
@@ -100,7 +126,6 @@ bool ArchivoEquipo::borrarRegistro(int idEquipo) {
             bool pudoModificar = fwrite(&equipo, sizeof(Equipo), 1, pArchivo);
 
             fclose(pArchivo);
-
             return pudoModificar;
         }
     }

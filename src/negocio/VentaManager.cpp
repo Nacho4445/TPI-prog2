@@ -4,7 +4,7 @@
 using namespace std;
 
 VentaManager::VentaManager()
-   : _archivoVentas(){}
+   : _archivoVentas(), _archivoEquipos(), _archivoDetalleVentas(){}
 
 Venta VentaManager::crearVenta(){
 
@@ -14,7 +14,6 @@ Venta VentaManager::crearVenta(){
     int idCliente;
     int idEmpleado;
     int dia, mes, anio;
-    double importeTotal;
 
     idVenta = _archivoVentas.getCantidadRegistros() + 1;
 
@@ -26,25 +25,29 @@ Venta VentaManager::crearVenta(){
     cout << "ID Empleado: ";
     cin >> idEmpleado;
 
-    cout << "Dia: ";
-    cin >> dia;
+    do{
+        cout << "Dia: ";
+        cin >> dia;
 
-    cout << "Mes: ";
-    cin >> mes;
+        cout << "Mes: ";
+        cin >> mes;
 
-    cout << "Anio: ";
-    cin >> anio;
+        cout << "Anio: ";
+        cin >> anio;
+
+        if(dia <= 0 || mes <= 0 || mes > 12 || anio <= 0){
+            cout << "Fecha invalida. Ingrese nuevamente." << endl;
+        }
+
+    }while(dia <= 0 || mes <= 0 || mes > 12 || anio <= 0);
 
     Fecha fecha(dia, mes, anio);
-
-    cout << "Importe total: ";
-    cin >> importeTotal;
 
     venta.setIdVenta(idVenta);
     venta.setIdCliente(idCliente);
     venta.setIdEmpleado(idEmpleado);
     venta.setFecha(fecha);
-    venta.setImporteTotal(importeTotal);
+    venta.setImporteTotal(0);
     venta.setEstado(true);
 
     return venta;
@@ -54,12 +57,95 @@ void VentaManager::guardarVenta(){
 
     Venta venta = crearVenta();
 
+    int cantidadEquipos;
+    cout << "Cantidad de equipos a agregar a la venta: ";
+    cin >> cantidadEquipos;
+
+    if(cantidadEquipos <= 0){
+        cout << "La cantidad de equipos debe ser mayor a cero." << endl;
+        return;
+    }
+
+    DetalleVenta *detalles = new DetalleVenta[cantidadEquipos];
+
+    if(detalles == nullptr){
+        cout << "No se pudo reservar memoria." << endl;
+        return;
+    }
+
+    double importeTotal = 0;
+    int cantidadCargados = 0;
+
+    for(int i = 0; i < cantidadEquipos; i++){
+
+        int idEquipo;
+        int cantidad;
+
+        cout << "-- Equipo " << i + 1 << " --" << endl;
+        cout << "ID Equipo: ";
+        cin >> idEquipo;
+
+        Equipo equipo = _archivoEquipos.leer(idEquipo);
+
+        if(equipo.getIdEquipo() == 0){
+            cout << "No existe un equipo activo con ese ID." << endl;
+            continue;
+        }
+
+        cout << "Cantidad: ";
+        cin >> cantidad;
+
+        if(cantidad <= 0){
+            cout << "La cantidad debe ser mayor a cero." << endl;
+            continue;
+        }
+
+        if(cantidad > equipo.getStock()){
+            cout << "Sin stock suficiente. Stock disponible: " << equipo.getStock() << endl;
+            continue;
+        }
+
+        int idDetalle = _archivoDetalleVentas.getCantidadRegistros() + 1 + cantidadCargados;
+        float precioUnitario = equipo.getPrecioUnitario();
+        float subtotal = precioUnitario * cantidad;
+
+        detalles[cantidadCargados].setIdDetalleVenta(idDetalle);
+        detalles[cantidadCargados].setIdVenta(venta.getIdVenta());
+        detalles[cantidadCargados].setIdEquipo(idEquipo);
+        detalles[cantidadCargados].setCantidad(cantidad);
+        detalles[cantidadCargados].setPrecioUnitario(precioUnitario);
+        detalles[cantidadCargados].setSubtotal(subtotal);
+        detalles[cantidadCargados].setEstado(true);
+
+        equipo.setStock(equipo.getStock() - cantidad);
+        _archivoEquipos.modificar(equipo);
+
+        importeTotal += subtotal;
+        cantidadCargados++;
+    }
+
+    if(cantidadCargados == 0){
+        cout << "No se pudo registrar ningun equipo. Venta cancelada." << endl;
+        delete[] detalles;
+        return;
+    }
+
+    venta.setImporteTotal(importeTotal);
+
     if(_archivoVentas.guardar(venta)){
+
+        for(int i = 0; i < cantidadCargados; i++){
+            _archivoDetalleVentas.guardar(detalles[i]);
+        }
+
         cout << "Venta guardada correctamente." << endl;
+        cout << "Importe total: $" << importeTotal << endl;
     }
     else{
         cout << "Error al guardar la venta." << endl;
     }
+
+    delete[] detalles;
 }
 
 void VentaManager::listarVentas(){
@@ -179,4 +265,19 @@ void VentaManager::mostrarVentasOrdenadas(){
     }
 
     delete[] ventas;
+}
+
+void VentaManager::eliminarVenta(){
+
+    int idVenta;
+
+    cout << "Ingrese el ID de la venta a eliminar: ";
+    cin >> idVenta;
+
+    if(_archivoVentas.borrarRegistro(idVenta)){
+        cout << "Venta eliminada correctamente." << endl;
+    }
+    else{
+        cout << "No existe una venta activa con ese ID." << endl;
+    }
 }

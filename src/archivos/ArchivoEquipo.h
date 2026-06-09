@@ -11,6 +11,7 @@ public:
     bool guardar(Equipo equipo);
     int getPosicion(int idEquipo);
     Equipo leer(int idEquipo);
+    bool modificar(Equipo equipo);
     bool borrarRegistro(int idEquipo);
     void vaciar();
 
