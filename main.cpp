@@ -1,5 +1,5 @@
 #include <iostream>
-#include "src/Vista/MenuPrincipal.h"
+#include "src/vista/MenuPrincipal.h"
 
 using namespace std;
 
