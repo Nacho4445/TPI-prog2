@@ -34,85 +34,71 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="ArchivoCliente.cpp" />
-		<Unit filename="ArchivoCliente.h" />
-		<Unit filename="ArchivoDetalleVenta.cpp" />
-		<Unit filename="ArchivoDetalleVenta.h" />
-		<Unit filename="ArchivoEmpleado.cpp" />
-		<Unit filename="ArchivoEmpleado.h" />
-		<Unit filename="ArchivoEquipo.cpp" />
-		<Unit filename="ArchivoEquipo.h" />
-		<Unit filename="ArchivoTipoCliente.cpp" />
-		<Unit filename="ArchivoTipoCliente.h" />
-		<Unit filename="ArchivoTipoEquipo.cpp" />
-		<Unit filename="ArchivoTipoEquipo.h" />
-		<Unit filename="ArchivoTipoMarca.cpp" />
-		<Unit filename="ArchivoTipoMarca.h" />
-		<Unit filename="ArchivoVenta.cpp" />
-		<Unit filename="ArchivoVenta.h" />
-		<Unit filename="Cliente.cpp" />
-		<Unit filename="Cliente.h" />
-		<Unit filename="ClienteManager.cpp" />
-		<Unit filename="ClienteManager.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="DetalleVenta.cpp" />
-		<Unit filename="DetalleVenta.h" />
-		<Unit filename="Direccion.cpp" />
-		<Unit filename="Direccion.h" />
-		<Unit filename="Empleado.cpp" />
-		<Unit filename="Empleado.h" />
-		<Unit filename="EmpleadoManager.cpp" />
-		<Unit filename="EmpleadoManager.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="Equipo.cpp" />
-		<Unit filename="Equipo.h" />
-		<Unit filename="EquipoManager.cpp" />
-		<Unit filename="EquipoManager.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="Fecha.cpp" />
-		<Unit filename="Fecha.h" />
-		<Unit filename="Menu.cpp" />
-		<Unit filename="Menu.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="MenuClientes.cpp" />
-		<Unit filename="MenuClientes.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="MenuEmpleados.cpp" />
-		<Unit filename="MenuEmpleados.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="MenuEquipos.cpp" />
-		<Unit filename="MenuEquipos.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="MenuPrincipal.cpp" />
-		<Unit filename="MenuPrincipal.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="MenuVentas.cpp" />
-		<Unit filename="MenuVentas.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="Persona.cpp" />
-		<Unit filename="Persona.h" />
-		<Unit filename="TipoCliente.cpp" />
-		<Unit filename="TipoCliente.h" />
-		<Unit filename="TipoEquipo.cpp" />
-		<Unit filename="TipoEquipo.h" />
-		<Unit filename="TipoMarca.cpp" />
-		<Unit filename="TipoMarca.h" />
-		<Unit filename="Venta.cpp" />
-		<Unit filename="Venta.h" />
-		<Unit filename="VentaManager.cpp" />
-		<Unit filename="VentaManager.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
 		<Unit filename="main.cpp" />
+
+        <Unit filename="src/Modelos/Cliente.cpp" />
+        <Unit filename="src/Modelos/Cliente.h" />
+        <Unit filename="src/Modelos/DetalleVenta.cpp" />
+        <Unit filename="src/Modelos/DetalleVenta.h" />
+        <Unit filename="src/Modelos/Empleado.cpp" />
+        <Unit filename="src/Modelos/Empleado.h" />
+        <Unit filename="src/Modelos/Equipo.cpp" />
+        <Unit filename="src/Modelos/Equipo.h" />
+        <Unit filename="src/Modelos/Menu.cpp" />
+        <Unit filename="src/Modelos/Menu.h" />
+        <Unit filename="src/Modelos/Persona.cpp" />
+        <Unit filename="src/Modelos/Persona.h" />
+        <Unit filename="src/Modelos/TipoCliente.cpp" />
+        <Unit filename="src/Modelos/TipoCliente.h" />
+        <Unit filename="src/Modelos/TipoEquipo.cpp" />
+        <Unit filename="src/Modelos/TipoEquipo.h" />
+        <Unit filename="src/Modelos/TipoMarca.cpp" />
+        <Unit filename="src/Modelos/TipoMarca.h" />
+        <Unit filename="src/Modelos/Venta.cpp" />
+        <Unit filename="src/Modelos/Venta.h" />
+
+        <Unit filename="src/Archivos/ArchivoCliente.cpp" />
+        <Unit filename="src/Archivos/ArchivoCliente.h" />
+        <Unit filename="src/Archivos/ArchivoDetalleVenta.h" />
+        <Unit filename="src/Archivos/ArchivoDetalleVenta.cpp" />
+        <Unit filename="src/Archivos/ArchivoEmpleado.cpp" />
+        <Unit filename="src/Archivos/ArchivoEmpleado.h" />
+        <Unit filename="src/Archivos/ArchivoEquipo.cpp" />
+        <Unit filename="src/Archivos/ArchivoEquipo.h" />
+        <Unit filename="src/Archivos/ArchivoTipoCliente.cpp" />
+        <Unit filename="src/Archivos/ArchivoTipoCliente.h" />
+        <Unit filename="src/Archivos/ArchivoTipoEquipo.cpp" />
+        <Unit filename="src/Archivos/ArchivoTipoEquipo.h" />
+        <Unit filename="src/Archivos/ArchivoTipoMarca.cpp" />
+        <Unit filename="src/Archivos/ArchivoTipoMarca.h" />
+        <Unit filename="src/Archivos/ArchivoVenta.cpp" />
+        <Unit filename="src/Archivos/ArchivoVenta.h" />
+
+        <Unit filename="src/Negocio/ClienteManager.cpp" />
+        <Unit filename="src/Negocio/ClienteManager.h" />
+        <Unit filename="src/Negocio/EmpleadoManager.cpp" />
+        <Unit filename="src/Negocio/EmpleadoManager.h" />
+        <Unit filename="src/Negocio/EquipoManager.cpp" />
+        <Unit filename="src/Negocio/EquipoManager.h" />
+        <Unit filename="src/Negocio/VentaManager.cpp" />
+        <Unit filename="src/Negocio/VentaManager.h" />
+
+        <Unit filename="src/Vista/MenuClientes.cpp" />
+        <Unit filename="src/Vista/MenuClientes.h" />
+        <Unit filename="src/Vista/MenuEmpleados.cpp" />
+        <Unit filename="src/Vista/MenuEmpleados.h" />
+        <Unit filename="src/Vista/MenuEquipos.cpp" />
+        <Unit filename="src/Vista/MenuEquipos.h" />
+        <Unit filename="src/Vista/MenuPrincipal.cpp" />
+        <Unit filename="src/Vista/MenuPrincipal.h" />
+        <Unit filename="src/Vista/MenuVentas.cpp" />
+        <Unit filename="src/Vista/MenuVentas.h" />
+
+        <Unit filename="src/Utils/Direccion.cpp" />
+        <Unit filename="src/Utils/Direccion.h" />
+        <Unit filename="src/Utils/Fecha.cpp" />
+        <Unit filename="src/Utils/Fecha.h" />
+
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>
