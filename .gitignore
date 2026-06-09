@@ -1,8 +1,27 @@
+# Archivos específicos de Code Blocks
+*.depend
+*.layout
+
+# Carpetas de Compilación de Code Blocks (Binarios y Objetos)
+bin/
+obj/
+
+# Archivos/Carpetas de CLion
 .idea/
 cmake-build-debug/
+cmake-build-release/
+.cmake/
 CMakeLists.txt
-bin/Debug/TPI Prog 2.exe
-TPI Prog 2.depend
-obj/Debug/ArchivoEmpleado.o
+
+# Otros archivos
 *.o
-*.layout
+*.obj
+*.gch
+
+# Ejecutables
+*.exe
+*.out
+*.app
+
+# Archivos binarios (para no estar subiendo los archivos binarios que creamos para guardar objetos cuando hacemos pruebas)
+*.dat
