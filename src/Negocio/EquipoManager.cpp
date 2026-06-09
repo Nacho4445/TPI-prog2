@@ -83,7 +83,7 @@ void EquipoManager::listarEquipos(){
     }
 }
 
-void EquipoManager::mostrarEquipo(const Equipo &reg){
+void EquipoManager::mostrarEquipo(Equipo &reg){
 
     cout << "==================================" << endl;
     cout << "ID Equipo: " << reg.getIdEquipo() << endl;

@@ -96,7 +96,7 @@ void ClienteManager::listarClientes(){
 }
 
 
-void ClienteManager::mostrarCliente(const Cliente &reg){
+void ClienteManager::mostrarCliente(Cliente &reg){
     Direccion direccion = reg.getDireccion();
 
     cout << "=================================="<< endl;

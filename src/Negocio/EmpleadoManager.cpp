@@ -96,7 +96,7 @@ void EmpleadoManager::listarEmpleados(){
     }
 }
 
-void EmpleadoManager::mostrarEmpleado(const Empleado &reg){
+void EmpleadoManager::mostrarEmpleado(Empleado &reg){
 
     cout << "==================================" << endl;
     cout << "ID Empleado: " << reg.getIdEmpleado() << endl;

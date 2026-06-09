@@ -4,7 +4,7 @@
 class VentaManager {
 private:
    Venta crearVenta();
-   void mostrarVenta(const Venta &reg);
+   void mostrarVenta(Venta &reg);
    void ordenarVentas(Venta vVentas[], int cantidad);
    ArchivoVenta _archivoVentas;
 

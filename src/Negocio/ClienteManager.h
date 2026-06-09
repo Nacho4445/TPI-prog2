@@ -5,7 +5,7 @@
 class ClienteManager {
 private:
    Cliente crearCliente();
-   void mostrarCliente(const Cliente &reg);
+   void mostrarCliente(Cliente &reg);
    void ordenarClientes(Cliente vClientes[], int cantidad);
    ArchivoCliente _archivoClientes;
 

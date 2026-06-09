@@ -4,7 +4,7 @@
 class EquipoManager {
 private:
    Equipo crearEquipo();
-   void mostrarEquipo(const Equipo &reg);
+   void mostrarEquipo(Equipo &reg);
    void ordenarEquipos(Equipo vEquipos[], int cantidad);
    ArchivoEquipo _archivoEquipos;
 

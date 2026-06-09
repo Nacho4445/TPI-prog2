@@ -4,7 +4,7 @@
 class EmpleadoManager {
 private:
    Empleado crearEmpleado();
-   void mostrarEmpleado(const Empleado &reg);
+   void mostrarEmpleado(Empleado &reg);
    void ordenarEmpleados(Empleado vEmpleados[], int cantidad);
    ArchivoEmpleado _archivoEmpleados;
 

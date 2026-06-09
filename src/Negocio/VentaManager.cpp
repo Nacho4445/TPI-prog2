@@ -82,7 +82,7 @@ void VentaManager::listarVentas(){
     }
 }
 
-void VentaManager::mostrarVenta(const Venta &reg){
+void VentaManager::mostrarVenta(Venta &reg){
 
     cout << "==================================" << endl;
     cout << "ID Venta: " << reg.getIdVenta() << endl;
