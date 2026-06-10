@@ -22,16 +22,16 @@ void MenuEmpleados::mostrarOpciones(){
 void MenuEmpleados::ejecutarOpcion(int opcion){
     switch(opcion){
 case 1:
-    ///Registrar Empleado
+    managerEmpleados.guardarEmpleado();
     break;
 case 2:
-    ///Modificar Empleado
+    managerEmpleados.modificarEmpleado();
     break;
 case 3:
-    ///Eliminar Empleado
+    managerEmpleados.eliminarEmpleado();
     break;
 case 4:
-    ///Listar Empleados
+    managerEmpleados.listarEmpleados();
     break;
 case 0:
     cout << "Regresando al menu principal..." << endl;

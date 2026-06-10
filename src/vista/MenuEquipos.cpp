@@ -22,16 +22,16 @@ void MenuEquipos::mostrarOpciones(){
 void MenuEquipos::ejecutarOpcion(int opcion){
     switch(opcion){
 case 1:
-    ///Registrar Equipo
+    managerEquipos.guardarEquipo();
     break;
 case 2:
-    ///Modificar Equipo
+    managerEquipos.modificarEquipo();
     break;
 case 3:
-    ///Eliminar Equipo
+    managerEquipos.eliminarEquipo();
     break;
 case 4:
-    ///Listar Equipo
+    managerEquipos.listarEquipos();
     break;
 case 0:
     cout << "Regresando al menu principal..." << endl;
