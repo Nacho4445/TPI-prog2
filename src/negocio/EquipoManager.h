@@ -15,6 +15,7 @@ public:
    void listarEquipos();
    void modificarEquipo();
    void mostrarEquiposOrdenados();
+   void eliminarEquipo();
 
 
 };

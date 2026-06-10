@@ -182,3 +182,31 @@ void EquipoManager::mostrarEquiposOrdenados(){
 
     delete[] equipos;
 }
+void EquipoManager::eliminarEquipo(){
+    int idEliminado;
+    char confirmar;
+
+    cout << "Ingrese el ID del equipo a eliminar: ";
+    cin >> idEliminado;
+
+    Equipo equipo = _archivoEquipos.leer(idEliminado);
+
+    if(equipo.getEstado() == false){
+        cout << "Equipo no encontrado." << endl;
+        return;
+    }
+
+    mostrarEquipo(equipo);
+
+    cout << "Eliminar? (s/n): ";
+    cin >> confirmar;
+
+    if(confirmar == 's' || confirmar == 'S'){
+        if(_archivoEquipos.borrarRegistro(idEliminado)){
+            cout << "Equipo eliminado con exito." << endl;
+        }
+        else{
+            cout << "No se pudo eliminar el equipo." << endl;
+        }
+    }
+}

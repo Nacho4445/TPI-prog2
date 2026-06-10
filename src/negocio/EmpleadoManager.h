@@ -15,6 +15,6 @@ public:
    void listarEmpleados();
    void modificarEmpleado();
    void mostrarEmpleadosOrdenados();
-
+   void eliminarEmpleado();
 
 };

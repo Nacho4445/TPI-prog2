@@ -196,3 +196,32 @@ void EmpleadoManager::mostrarEmpleadosOrdenados(){
 
     delete[] empleados;
 }
+
+void EmpleadoManager::eliminarEmpleado(){
+    int idEliminado;
+    char confirmar;
+
+    cout << "Ingrese el ID del empleado a eliminar: ";
+    cin >> idEliminado;
+
+    Empleado empleado = _archivoEmpleados.leer(idEliminado);
+
+    if(empleado.getEstado() == false){
+        cout << "Empleado no encontrado." << endl;
+        return;
+    }
+
+    mostrarEmpleado(empleado);
+
+    cout << "Eliminar? (s/n): ";
+    cin >> confirmar;
+
+    if(confirmar == 's' || confirmar == 'S'){
+        if(_archivoEmpleados.borrarRegistro(idEliminado)){
+            cout << "Empleado eliminado con exito." << endl;
+        }
+        else{
+            cout << "No se pudo eliminar el empleado." << endl;
+        }
+    }
+}
