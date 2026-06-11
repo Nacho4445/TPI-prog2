@@ -8,6 +8,7 @@ MenuEmpleados::MenuEmpleados(){
 }
 
 void MenuEmpleados::mostrarOpciones(){
+    system("cls");
     cout << "------------------------" << endl;
     cout << "-----MENU EMPLEADOS-----" << endl;
     cout << "1. Registrar Empleado" << endl;
@@ -29,12 +30,13 @@ case 2:{
     int opcionConsulta;
 
     do{
-        cout << "------------------------" << endl;
+        system("cls");
+        cout << "---------------------------" << endl;
         cout << "--- CONSULTAS EMPLEADOS ---" << endl;
         cout << "1. Consultar por ID" << endl;
         cout << "2. Consultar por CUIT" << endl;
         cout << "3. Consultar por Apellido" << endl;
-        cout << "------------------------" << endl;
+        cout << "---------------------------" << endl;
         cout << "0. Volver" << endl;
         cout << "Opcion: ";
         cin >> opcionConsulta;

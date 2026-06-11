@@ -2,12 +2,12 @@
 
 #include <cstring>
 
-Direccion::Direccion(long idDireccion, const char *calle, int altura, const char *piso, const char *departamento, 
-                     const char *localidad, const char *codigoPostal, const char *provincia, bool estado) 
+Direccion::Direccion(const char *calle, int altura, const char *piso, const char *departamento,
+                     const char *localidad, const char *codigoPostal, const char *provincia, bool estado)
 
 {
 
-    _idDireccion = idDireccion;
+    //_idDireccion = idDireccion;
     _altura = altura;
     _estado = estado;
 

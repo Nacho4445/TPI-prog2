@@ -8,6 +8,7 @@ MenuEquipos::MenuEquipos(){
 }
 
 void MenuEquipos::mostrarOpciones(){
+    system("cls");
     cout << "------------------------" << endl;
     cout << "-----MENU EQUIPOS-----" << endl;
     cout << "1. Registrar Equipo" << endl;
@@ -31,6 +32,7 @@ void MenuEquipos::ejecutarOpcion(int opcion){
         int opcionConsulta;
 
         do{
+            system("cls");
             cout << "------------------------" << endl;
             cout << "--- CONSULTAS EQUIPOS ---" << endl;
             cout << "1. Consultar por ID" << endl;

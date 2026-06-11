@@ -1,12 +1,11 @@
-#ifndef TPI_PROG2_DIRECCION_H
-#define TPI_PROG2_DIRECCION_H
+#pragma once
 
 class Direccion {
 
 public:
 	Direccion() = default;
 
-	Direccion(long idDireccion, const char *calle, int altura,const char *piso,const char *departamento, const char *localidad,
+	Direccion(const char *calle, int altura,const char *piso,const char *departamento, const char *localidad,
               const char *codigoPostal, const char *provincia, bool estado = true);
 
 	int getIdDireccion();
@@ -43,4 +42,3 @@ private:
 };
 
 
-#endif //TPI_PROG2_DIRECCION_H

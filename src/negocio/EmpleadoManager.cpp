@@ -11,6 +11,7 @@ EmpleadoManager::EmpleadoManager()
 Empleado EmpleadoManager::crearEmpleado(){
 
     Empleado empleado;
+    Direccion direccion;
 
     int idEmpleado;
     long long cuit;
@@ -20,6 +21,13 @@ Empleado EmpleadoManager::crearEmpleado(){
     char apellido[30];
     char telefono[20];
     char email[50];
+    char calle[50];
+    int altura;
+    char piso[10];
+    char departamento[10];
+    char localidad[50];
+    char codigoPostal[20];
+    char provincia[50];
 
     idEmpleado = _archivoEmpleados.getCantidadRegistros() + 1;
 
@@ -51,6 +59,28 @@ Empleado EmpleadoManager::crearEmpleado(){
     cout << "Email: ";
     cin.getline(email, 50);
 
+    cout << "Calle: ";
+    cin.getline(calle, 50);
+
+    cout << "Altura: ";
+    cin >> altura;
+    cin.ignore();
+
+    cout << "Piso: ";
+    cin.getline(piso, 10);
+
+    cout << "Departamento: ";
+    cin.getline(departamento, 10);
+
+    cout << "Localidad: ";
+    cin.getline(localidad, 50);
+
+    cout << "Codigo Postal: ";
+    cin.getline(codigoPostal, 20);
+
+    cout << "Provincia: ";
+    cin.getline(provincia, 50);
+
     empleado.setIdEmpleado(idEmpleado);
 
     empleado.setCuit(cuit);
@@ -58,8 +88,20 @@ Empleado EmpleadoManager::crearEmpleado(){
     empleado.setApellido(apellido);
     empleado.setTelefono(telefono);
     empleado.setEmail(email);
-
     empleado.setEstado(true);
+
+    direccion.setCalle(calle);
+    direccion.setAltura(altura);
+    direccion.setPiso(piso);
+    direccion.setDepartamento(departamento);
+    direccion.setLocalidad(localidad);
+    direccion.setCodigoPostal(codigoPostal);
+    direccion.setProvincia(provincia);
+    direccion.setEstado(true);
+
+    empleado.setDireccion(direccion);
+
+    system("pause");
 
     return empleado;
 }
@@ -74,6 +116,7 @@ void EmpleadoManager::guardarEmpleado(){
     else{
         cout << "Error al guardar el empleado." << endl;
     }
+    system("pause");
 }
 
 void EmpleadoManager::consultarPorId(){
@@ -99,6 +142,7 @@ void EmpleadoManager::consultarPorId(){
 
         cout << "Empleado no encontrado. Intente nuevamente." << endl;
     }
+    system("pause");
 }
 
 void EmpleadoManager::consultarPorCuit(){
@@ -126,6 +170,7 @@ void EmpleadoManager::consultarPorCuit(){
 
         cout << "Empleado no encontrado. Intente nuevamente." << endl;
     }
+    system("pause");
 }
 
 void EmpleadoManager::consultarPorApellido(){
@@ -154,17 +199,20 @@ void EmpleadoManager::consultarPorApellido(){
     if(!encontro){
         cout << "No se encontraron empleados con ese apellido." << endl;
     }
+    system("pause");
 }
+
 void EmpleadoManager::listarEmpleados(){
 
     int cantidadRegistros = _archivoEmpleados.getCantidadRegistros();
 
     if(cantidadRegistros == 0){
         cout << "No hay empleados cargados." << endl;
+        system("cls");
         return;
     }
 
-    for(int i = 1; i <= cantidadRegistros; i++){
+    for(int i = 0; i <= cantidadRegistros; i++){
 
         Empleado empleado = _archivoEmpleados.leer(i);
 
@@ -173,9 +221,11 @@ void EmpleadoManager::listarEmpleados(){
             cout << endl;
         }
     }
+    system("pause");
 }
 
 void EmpleadoManager::mostrarEmpleado(Empleado &reg){
+    Direccion direccion = reg.getDireccion();
 
     cout << "==================================" << endl;
     cout << "ID Empleado: " << reg.getIdEmpleado() << endl;
@@ -184,6 +234,20 @@ void EmpleadoManager::mostrarEmpleado(Empleado &reg){
     cout << "Apellido: " << reg.getApellido() << endl;
     cout << "Telefono: " << reg.getTelefono() << endl;
     cout << "Email: " << reg.getEmail() << endl;
+    cout << "Direccion: " << direccion.getCalle() << " " << direccion.getAltura();
+
+    if (direccion.getPiso()[0] != '\0'){
+        cout << ", Piso " << direccion.getPiso();
+    }
+
+    if (direccion.getDepartamento()[0] != '\0'){
+        cout << ", Depto " << direccion.getDepartamento();
+    }
+
+    cout << endl;
+    cout << "Localidad: " << direccion.getLocalidad() << endl;
+    cout << "Codigo Postal: " << direccion.getCodigoPostal() << endl;
+    cout << "Provincia: " << direccion.getProvincia() << endl;
     cout << "==================================" << endl;
 }
 
@@ -218,8 +282,6 @@ void EmpleadoManager::modificarEmpleado(){
         cout << "No se pudo modificar el empleado." << endl;
     }
 }
-
-#include <cstring>
 
 void EmpleadoManager::ordenarEmpleados(Empleado vEmpleados[], int cantidad){
 
@@ -256,7 +318,7 @@ void EmpleadoManager::mostrarEmpleadosOrdenados(){
 
     int cantidadActivos = 0;
 
-    for(int i = 1; i <= cantidadRegistros; i++){
+    for(int i = 0; i <= cantidadRegistros; i++){
 
         Empleado empleado = _archivoEmpleados.leer(i);
 
@@ -274,6 +336,7 @@ void EmpleadoManager::mostrarEmpleadosOrdenados(){
     }
 
     delete[] empleados;
+    system("pause");
 }
 
 void EmpleadoManager::eliminarEmpleado(){
@@ -303,4 +366,5 @@ void EmpleadoManager::eliminarEmpleado(){
             cout << "No se pudo eliminar el empleado." << endl;
         }
     }
+    system("pause");
 }

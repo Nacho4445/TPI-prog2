@@ -20,6 +20,13 @@ Cliente ClienteManager::crearCliente(){
     char apellido[30];
     char telefono[20];
     char email[50];
+    char calle[50];
+    int altura;
+    char piso[10];
+    char departamento[10];
+    char localidad[50];
+    char codigoPostal[20];
+    char provincia[50];
 
     idCliente = _archivoClientes.getCantidadRegistros() + 1;
 
@@ -51,7 +58,29 @@ Cliente ClienteManager::crearCliente(){
 
     cout << "Tipo Cliente (1-Particular / 2-Empresa): ";
     cin >> tipoCliente;
+    cin.ignore();
 
+    cout << "Calle: ";
+    cin.getline(calle, 50);
+
+    cout << "Altura: ";
+    cin >> altura;
+    cin.ignore();
+
+    cout << "Piso: ";
+    cin.getline(piso, 10);
+
+    cout << "Departamento: ";
+    cin.getline(departamento, 10);
+
+    cout << "Localidad: ";
+    cin.getline(localidad, 50);
+
+    cout << "Codigo Postal: ";
+    cin.getline(codigoPostal, 20);
+
+    cout << "Provincia: ";
+    cin.getline(provincia, 50);
 
     cliente.setIdCliente(idCliente);
     cliente.setTipoCliente(tipoCliente);
@@ -62,6 +91,18 @@ Cliente ClienteManager::crearCliente(){
     cliente.setEmail(email);
     cliente.setEstado(true);
 
+    direccion.setCalle(calle);
+    direccion.setAltura(altura);
+    direccion.setPiso(piso);
+    direccion.setDepartamento(departamento);
+    direccion.setLocalidad(localidad);
+    direccion.setCodigoPostal(codigoPostal);
+    direccion.setProvincia(provincia);
+    direccion.setEstado(true);
+
+    cliente.setDireccion(direccion);
+
+    system("pause");
     return cliente;
 }
 
@@ -75,7 +116,7 @@ void ClienteManager::guardarCliente(){
     else{
         cout << "Error al guardar el cliente." << endl;
     }
-
+    system("pause");
 }
 void ClienteManager::consultarPorId(){
 
@@ -100,6 +141,7 @@ void ClienteManager::consultarPorId(){
 
         cout << "Cliente no encontrado. Intente nuevamente." << endl;
     }
+    system("pause");
 }
 
 void ClienteManager::consultarPorCuit(){
@@ -127,6 +169,7 @@ void ClienteManager::consultarPorCuit(){
 
         cout << "Cliente no encontrado. Intente nuevamente." << endl;
     }
+    system("pause");
 }
 
 void ClienteManager::consultarPorApellido(){
@@ -155,7 +198,9 @@ void ClienteManager::consultarPorApellido(){
     if(!encontro){
         cout << "No se encontraron clientes con ese apellido." << endl;
     }
+    system("pause");
 }
+
 void ClienteManager::consultarPorTipo(){
 
     int tipoCliente;
@@ -191,6 +236,7 @@ void ClienteManager::consultarPorTipo(){
     if(!encontro){
         cout << "No se encontraron clientes de ese tipo." << endl;
     }
+    system("pause");
 }
 
 
@@ -214,6 +260,7 @@ void ClienteManager::listarClientes(){
     if(!hayClientes && cantidad > 0){
         cout << "No hay clientes activos." << endl;
         }
+    system("pause");
 }
 
 void ClienteManager::mostrarCliente(Cliente &reg){
@@ -227,7 +274,6 @@ void ClienteManager::mostrarCliente(Cliente &reg){
     cout << "Telefono: " << reg.getTelefono() << endl;
     cout << "Email: " << reg.getEmail() << endl;
     cout << "Tipo Cliente: " << reg.getTipoCliente() << endl;
-    cout << "==================================" << endl;
 
     if (reg.getTipoCliente() == 1){
         cout << " - Particular" << endl;
@@ -253,7 +299,7 @@ void ClienteManager::mostrarCliente(Cliente &reg){
     cout << "Localidad: " << direccion.getLocalidad() << endl;
     cout << "Codigo Postal: " << direccion.getCodigoPostal() << endl;
     cout << "Provincia: " << direccion.getProvincia() << endl;
-    cout << "------------------------" << endl;
+    cout << "==================================" << endl;
 }
 
 void ClienteManager::modificarCliente(){
@@ -284,6 +330,7 @@ void ClienteManager::modificarCliente(){
     else{
         cout << "No se pudo modificar el cliente." << endl;
     }
+    system("pause");
 }
 
 void ClienteManager::ordenarClientes(Cliente *vClientes, int cantidad){
@@ -331,6 +378,7 @@ void ClienteManager::mostrarClientesOrdenados(){
     }
 
     delete [] vClientes;
+    system("pause");
 }
 
 
@@ -361,4 +409,5 @@ void ClienteManager::eliminarCliente(){
             cout << "No se pudo eliminar el cliente." << endl;
         }
     }
+    system("pause");
 }

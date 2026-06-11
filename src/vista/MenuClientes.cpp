@@ -4,10 +4,11 @@ using namespace std;
 #include <cstdio>
 
 MenuClientes::MenuClientes(){
-    setCantidadOpciones(4);
+    setCantidadOpciones(5);
 }
 
 void MenuClientes::mostrarOpciones(){
+    system("cls");
     cout << "------------------------" << endl;
     cout << "-----MENU CLIENTES-----" << endl;
     cout << "1. Registrar Cliente" << endl;
@@ -29,6 +30,7 @@ case 2:
     int opcionConsulta;
 
     do{
+        system("cls");
         cout << "------------------------" << endl;
         cout << "--- CONSULTAS CLIENTES ---" << endl;
         cout << "1. Consultar por ID" << endl;
