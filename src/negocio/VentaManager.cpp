@@ -148,149 +148,30 @@ void VentaManager::guardarVenta(){
     delete[] detalles;
 }
 
+void VentaManager::mostrarVenta(Venta &reg, DetalleVenta *detalles){
 
-void VentaManager::consultarPorId(){
+    cout << "==================================" << endl;
+    cout << "ID Venta: " << reg.getIdVenta() << endl;
+    cout << "ID Cliente: " << reg.getIdCliente() << endl;
+    cout << "ID Empleado: " << reg.getIdEmpleado() << endl;
+    cout << "Fecha: " << reg.getFecha().toString() << endl;
+    cout << "Importe Total: $" << reg.getImporteTotal() << endl;
 
-    int idVenta;
-    Venta venta;
+    int cantidadDetalles = 0;
+    _archivoDetalleVentas.leerPorIdVenta(reg.getIdVenta(), detalles, cantidadDetalles);
 
-    while(true){
-        cout << "Ingrese el ID de la venta (0 para volver): ";
-        cin >> idVenta;
-
-        if(idVenta == 0){
-            return;
-        }
-
-        venta = _archivoVentas.leer(idVenta);
-
-        if(venta.getEstado()){
-            mostrarVenta(venta);
-            return;
-        }
-
-        cout << "Venta no encontrada. Intente nuevamente." << endl;
-    }
-}
-
-void VentaManager::consultarPorCliente(){
-
-    int idCliente;
-    Venta venta;
-    bool encontro = false;
-    int cantidad = _archivoVentas.getCantidadRegistros();
-
-    cout << "Ingrese ID del cliente: ";
-    cin >> idCliente;
-
-    for(int i = 0; i < cantidad; i++){
-        venta = _archivoVentas.leerPorPosicion(i);
-
-        if(venta.getEstado() && venta.getIdCliente() == idCliente){
-            mostrarVenta(venta);
-            cout << endl;
-            encontro = true;
+    if(cantidadDetalles > 0){
+        cout << "----------------------------------" << endl;
+        cout << "Detalle:" << endl;
+        for(int i = 0; i < cantidadDetalles; i++){
+            cout << "  Equipo ID: " << detalles[i].getIdEquipo()
+                 << " | Cantidad: " << detalles[i].getCantidad()
+                 << " | Precio unit.: $" << detalles[i].getPrecioUnitario()
+                 << " | Subtotal: $" << detalles[i].getSubtotal() << endl;
         }
     }
 
-    if(!encontro){
-        cout << "No se encontraron ventas para ese cliente." << endl;
-    }
-}
-
-void VentaManager::consultarPorEmpleado(){
-
-    int idEmpleado;
-    Venta venta;
-    bool encontro = false;
-    int cantidad = _archivoVentas.getCantidadRegistros();
-
-    cout << "Ingrese ID del empleado: ";
-    cin >> idEmpleado;
-
-    for(int i = 0; i < cantidad; i++){
-        venta = _archivoVentas.leerPorPosicion(i);
-
-        if(venta.getEstado() && venta.getIdEmpleado() == idEmpleado){
-            mostrarVenta(venta);
-            cout << endl;
-            encontro = true;
-        }
-    }
-
-    if(!encontro){
-        cout << "No se encontraron ventas para ese empleado." << endl;
-    }
-}
-
-void VentaManager::consultarPorFecha(){
-
-    int dia, mes, anio;
-    Venta venta;
-    bool encontro = false;
-    int cantidad = _archivoVentas.getCantidadRegistros();
-
-    cout << "Dia: ";
-    cin >> dia;
-
-    cout << "Mes: ";
-    cin >> mes;
-
-    cout << "Anio: ";
-    cin >> anio;
-
-    for(int i = 0; i < cantidad; i++){
-        venta = _archivoVentas.leerPorPosicion(i);
-
-        Fecha fecha = venta.getFecha();
-
-        if(venta.getEstado() &&
-           fecha.getDia() == dia &&
-           fecha.getMes() == mes &&
-           fecha.getAnio() == anio){
-
-            mostrarVenta(venta);
-            cout << endl;
-            encontro = true;
-        }
-    }
-
-    if(!encontro){
-        cout << "No se encontraron ventas en esa fecha." << endl;
-    }
-}
-
-void VentaManager::consultarPorEquipo(){
-
-    int idEquipo;
-    bool encontro = false;
-
-    ArchivoDetalleVenta archivoDetalles;
-
-    int cantidadDetalles = archivoDetalles.getCantidadRegistros();
-
-    cout << "Ingrese ID del equipo vendido: ";
-    cin >> idEquipo;
-
-    for(int i = 0; i < cantidadDetalles; i++){
-
-        DetalleVenta detalle = archivoDetalles.leerPorPosicion(i);
-
-        if(detalle.getEstado() && detalle.getIdEquipo() == idEquipo){
-
-            Venta venta = _archivoVentas.leer(detalle.getIdVenta());
-
-            if(venta.getEstado()){
-                mostrarVenta(venta);
-                cout << endl;
-                encontro = true;
-            }
-        }
-    }
-
-    if(!encontro){
-        cout << "No se encontraron ventas para ese equipo." << endl;
-    }
+    cout << "==================================" << endl;
 }
 
 void VentaManager::listarVentas(){
@@ -302,26 +183,26 @@ void VentaManager::listarVentas(){
         return;
     }
 
+    int cantidadDetalles = _archivoDetalleVentas.getCantidadRegistros();
+
+    DetalleVenta *detalles = new DetalleVenta[cantidadDetalles + 1];
+
+    if(detalles == nullptr){
+        cout << "No se pudo reservar memoria." << endl;
+        return;
+    }
+
     for(int i = 1; i <= cantidadRegistros; i++){
 
         Venta venta = _archivoVentas.leer(i);
 
         if(venta.getEstado()){
-            mostrarVenta(venta);
+            mostrarVenta(venta, detalles);
             cout << endl;
         }
     }
-}
 
-void VentaManager::mostrarVenta(Venta &reg){
-
-    cout << "==================================" << endl;
-    cout << "ID Venta: " << reg.getIdVenta() << endl;
-    cout << "ID Cliente: " << reg.getIdCliente() << endl;
-    cout << "ID Empleado: " << reg.getIdEmpleado() << endl;
-    cout << "Fecha: " << reg.getFecha().toString() << endl;
-    cout << "Importe Total: $" << reg.getImporteTotal() << endl;
-    cout << "==================================" << endl;
+    delete[] detalles;
 }
 
 void VentaManager::modificarVenta(){
@@ -340,8 +221,18 @@ void VentaManager::modificarVenta(){
 
     Venta ventaActual = _archivoVentas.leer(idVenta);
 
+    int cantidadDetalles = _archivoDetalleVentas.getCantidadRegistros();
+    DetalleVenta *detalles = new DetalleVenta[cantidadDetalles + 1];
+
+    if(detalles == nullptr){
+        cout << "No se pudo reservar memoria." << endl;
+        return;
+    }
+
     cout << "Venta actual:" << endl;
-    mostrarVenta(ventaActual);
+    mostrarVenta(ventaActual, detalles);
+
+    delete[] detalles;
 
     cout << "Ingrese los nuevos datos de la venta." << endl;
 
@@ -355,6 +246,21 @@ void VentaManager::modificarVenta(){
     }
     else{
         cout << "No se pudo modificar la venta." << endl;
+    }
+}
+
+void VentaManager::eliminarVenta(){
+
+    int idVenta;
+
+    cout << "Ingrese el ID de la venta a eliminar: ";
+    cin >> idVenta;
+
+    if(_archivoVentas.borrarRegistro(idVenta)){
+        cout << "Venta eliminada correctamente." << endl;
+    }
+    else{
+        cout << "No existe una venta activa con ese ID." << endl;
     }
 }
 
@@ -404,25 +310,242 @@ void VentaManager::mostrarVentasOrdenadas(){
 
     ordenarVentas(ventas, cantidadActivas);
 
+    int cantidadDetalles = _archivoDetalleVentas.getCantidadRegistros();
+    DetalleVenta *detalles = new DetalleVenta[cantidadDetalles + 1];
+
+    if(detalles == nullptr){
+        cout << "No se pudo reservar memoria." << endl;
+        delete[] ventas;
+        return;
+    }
+
     for(int i = 0; i < cantidadActivas; i++){
-        mostrarVenta(ventas[i]);
+        mostrarVenta(ventas[i], detalles);
         cout << endl;
     }
 
     delete[] ventas;
+    delete[] detalles;
 }
 
-void VentaManager::eliminarVenta(){
+void VentaManager::consultarPorId(){
 
     int idVenta;
 
-    cout << "Ingrese el ID de la venta a eliminar: ";
+    cout << "Ingrese el ID de la venta: ";
     cin >> idVenta;
 
-    if(_archivoVentas.borrarRegistro(idVenta)){
-        cout << "Venta eliminada correctamente." << endl;
-    }
-    else{
+    Venta venta = _archivoVentas.leer(idVenta);
+
+    if(venta.getIdVenta() == 0){
         cout << "No existe una venta activa con ese ID." << endl;
+        return;
     }
+
+    int cantidadDetalles = _archivoDetalleVentas.getCantidadRegistros();
+    DetalleVenta *detalles = new DetalleVenta[cantidadDetalles + 1];
+
+    if(detalles == nullptr){
+        cout << "No se pudo reservar memoria." << endl;
+        return;
+    }
+
+    mostrarVenta(venta, detalles);
+
+    delete[] detalles;
+}
+
+void VentaManager::consultarPorCliente(){
+
+    int idCliente;
+
+    cout << "Ingrese el ID del cliente: ";
+    cin >> idCliente;
+
+    int cantidadRegistros = _archivoVentas.getCantidadRegistros();
+
+    if(cantidadRegistros == 0){
+        cout << "No hay ventas cargadas." << endl;
+        return;
+    }
+
+    int cantidadDetalles = _archivoDetalleVentas.getCantidadRegistros();
+    DetalleVenta *detalles = new DetalleVenta[cantidadDetalles + 1];
+
+    if(detalles == nullptr){
+        cout << "No se pudo reservar memoria." << endl;
+        return;
+    }
+
+    bool encontro = false;
+
+    for(int i = 1; i <= cantidadRegistros; i++){
+
+        Venta venta = _archivoVentas.leer(i);
+
+        if(venta.getEstado() && venta.getIdCliente() == idCliente){
+            mostrarVenta(venta, detalles);
+            cout << endl;
+            encontro = true;
+        }
+    }
+
+    if(!encontro){
+        cout << "No se encontraron ventas para ese cliente." << endl;
+    }
+
+    delete[] detalles;
+}
+
+void VentaManager::consultarPorEmpleado(){
+
+    int idEmpleado;
+
+    cout << "Ingrese el ID del empleado: ";
+    cin >> idEmpleado;
+
+    int cantidadRegistros = _archivoVentas.getCantidadRegistros();
+
+    if(cantidadRegistros == 0){
+        cout << "No hay ventas cargadas." << endl;
+        return;
+    }
+
+    int cantidadDetalles = _archivoDetalleVentas.getCantidadRegistros();
+    DetalleVenta *detalles = new DetalleVenta[cantidadDetalles + 1];
+
+    if(detalles == nullptr){
+        cout << "No se pudo reservar memoria." << endl;
+        return;
+    }
+
+    bool encontro = false;
+
+    for(int i = 1; i <= cantidadRegistros; i++){
+
+        Venta venta = _archivoVentas.leer(i);
+
+        if(venta.getEstado() && venta.getIdEmpleado() == idEmpleado){
+            mostrarVenta(venta, detalles);
+            cout << endl;
+            encontro = true;
+        }
+    }
+
+    if(!encontro){
+        cout << "No se encontraron ventas para ese empleado." << endl;
+    }
+
+    delete[] detalles;
+}
+
+void VentaManager::consultarPorFecha(){
+
+    int dia, mes, anio;
+
+    do{
+        cout << "Dia: ";
+        cin >> dia;
+
+        cout << "Mes: ";
+        cin >> mes;
+
+        cout << "Anio: ";
+        cin >> anio;
+
+        if(dia <= 0 || mes <= 0 || mes > 12 || anio <= 0){
+            cout << "Fecha invalida. Ingrese nuevamente." << endl;
+        }
+
+    }while(dia <= 0 || mes <= 0 || mes > 12 || anio <= 0);
+
+    int cantidadRegistros = _archivoVentas.getCantidadRegistros();
+
+    if(cantidadRegistros == 0){
+        cout << "No hay ventas cargadas." << endl;
+        return;
+    }
+
+    int cantidadDetalles = _archivoDetalleVentas.getCantidadRegistros();
+    DetalleVenta *detalles = new DetalleVenta[cantidadDetalles + 1];
+
+    if(detalles == nullptr){
+        cout << "No se pudo reservar memoria." << endl;
+        return;
+    }
+
+    bool encontro = false;
+
+    for(int i = 1; i <= cantidadRegistros; i++){
+
+        Venta venta = _archivoVentas.leer(i);
+
+        if(venta.getEstado() &&
+           venta.getFecha().getDia() == dia &&
+           venta.getFecha().getMes() == mes &&
+           venta.getFecha().getAnio() == anio){
+
+            mostrarVenta(venta, detalles);
+            cout << endl;
+            encontro = true;
+        }
+    }
+
+    if(!encontro){
+        cout << "No se encontraron ventas para esa fecha." << endl;
+    }
+
+    delete[] detalles;
+}
+
+void VentaManager::consultarPorEquipo(){
+
+    int idEquipo;
+
+    cout << "Ingrese el ID del equipo: ";
+    cin >> idEquipo;
+
+    int cantidadRegistros = _archivoVentas.getCantidadRegistros();
+
+    if(cantidadRegistros == 0){
+        cout << "No hay ventas cargadas." << endl;
+        return;
+    }
+
+    int cantidadDetalles = _archivoDetalleVentas.getCantidadRegistros();
+    DetalleVenta *detalles = new DetalleVenta[cantidadDetalles + 1];
+
+    if(detalles == nullptr){
+        cout << "No se pudo reservar memoria." << endl;
+        return;
+    }
+
+    bool encontro = false;
+
+    for(int i = 1; i <= cantidadRegistros; i++){
+
+        Venta venta = _archivoVentas.leer(i);
+
+        if(venta.getEstado()){
+
+            int cantidadEncontrados = 0;
+            _archivoDetalleVentas.leerPorIdVenta(venta.getIdVenta(), detalles, cantidadEncontrados);
+
+            for(int j = 0; j < cantidadEncontrados; j++){
+
+                if(detalles[j].getIdEquipo() == idEquipo){
+                    mostrarVenta(venta, detalles);
+                    cout << endl;
+                    encontro = true;
+                    break;
+                }
+            }
+        }
+    }
+
+    if(!encontro){
+        cout << "No se encontraron ventas con ese equipo." << endl;
+    }
+
+    delete[] detalles;
 }

@@ -6,24 +6,24 @@
 class VentaManager {
 private:
    Venta crearVenta();
-   void mostrarVenta(Venta &reg);
+   void mostrarVenta(Venta &reg, DetalleVenta *detalles);
    void ordenarVentas(Venta vVentas[], int cantidad);
    ArchivoVenta _archivoVentas;
    ArchivoEquipo _archivoEquipos;
    ArchivoDetalleVenta _archivoDetalleVentas;
 
 public:
-	VentaManager();
+    VentaManager();
 
-   void guardarVenta();
-   void consultarPorId();
-   void consultarPorCliente();
-   void consultarPorEmpleado();
-   void consultarPorFecha();
-   void consultarPorEquipo();
-   void listarVentas();
-   void modificarVenta();
-   void eliminarVenta();
-   void mostrarVentasOrdenadas();
+    void guardarVenta();
+    void listarVentas();
+    void modificarVenta();
+    void eliminarVenta();
+    void mostrarVentasOrdenadas();
 
+    void consultarPorId();
+    void consultarPorCliente();
+    void consultarPorEmpleado();
+    void consultarPorFecha();
+    void consultarPorEquipo();
 };

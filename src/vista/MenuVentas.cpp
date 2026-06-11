@@ -83,7 +83,7 @@ void MenuVentas::ejecutarOpcion(int opcion){
         managerVentas.modificarVenta();
         break;
 
-    case 4:
+    case 5:
         managerVentas.listarVentas();
         break;
 

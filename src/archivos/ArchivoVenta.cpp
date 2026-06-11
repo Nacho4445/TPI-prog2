@@ -111,7 +111,7 @@ bool ArchivoVenta::borrarRegistro(int id) {
     fseek(p, pos * sizeof(Venta), SEEK_SET);
     fread(&aux, sizeof(Venta), 1, p);
 
-    aux.setEstado(false); // Baja l�gica
+    aux.setEstado(false);
 
     fseek(p, pos * sizeof(Venta), SEEK_SET);
     bool pudoEscribir = fwrite(&aux, sizeof(Venta), 1, p);
