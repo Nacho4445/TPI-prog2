@@ -45,22 +45,27 @@ case 2:{
 
         case 1:
             managerEmpleados.consultarPorId();
+            system("pause");
             break;
 
         case 2:
             managerEmpleados.consultarPorCuit();
+            system("pause");
             break;
 
         case 3:
             managerEmpleados.consultarPorApellido();
+            system("pause");
             break;
 
         case 0:
             cout << "Volviendo al menu empleados..." << endl;
+            system("pause");
             break;
 
         default:
             cout << "Opcion invalida." << endl;
+            system("pause");
             break;
         }
 
