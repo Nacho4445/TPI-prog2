@@ -12,6 +12,7 @@ public:
     bool guardar(Empleado reg);
     int buscar(int id);
     Empleado leer(int id);
+    Empleado leerPorPosicion(int posicion);
     int buscarPorCuit(long long cuit);
     bool borrarRegistro(int id);
     void vaciar();

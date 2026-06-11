@@ -50,6 +50,25 @@ DetalleVenta ArchivoDetalleVenta::leer(int idDetalleVenta) {
     return DetalleVenta();
 }
 
+DetalleVenta ArchivoDetalleVenta::leerPorPosicion(int posicion){
+
+    DetalleVenta detalleVenta;
+
+    FILE *p = fopen(_ruta.c_str(), "rb");
+
+    if(p == NULL){
+        return detalleVenta;
+    }
+
+    fseek(p, posicion * sizeof(DetalleVenta), SEEK_SET);
+
+    fread(&detalleVenta, sizeof(DetalleVenta), 1, p);
+
+    fclose(p);
+
+    return detalleVenta;
+}
+
 bool ArchivoDetalleVenta::borrarRegistro(int idDetalleVenta) {
     FILE* pArchivo = fopen(_ruta.c_str(), "rb+");
     DetalleVenta detalleVenta;

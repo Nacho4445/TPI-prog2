@@ -76,6 +76,25 @@ Venta ArchivoVenta::leer(int id) {
     return aux;
 }
 
+Venta ArchivoVenta::leerPorPosicion(int posicion){
+
+    Venta reg;
+
+    FILE *p = fopen(ruta.c_str(), "rb");
+
+    if(p == NULL){
+        return reg;
+    }
+
+    fseek(p, posicion * sizeof(Venta), SEEK_SET);
+
+    fread(&reg, sizeof(Venta), 1, p);
+
+    fclose(p);
+
+    return reg;
+}
+
 bool ArchivoVenta::borrarRegistro(int id) {
     int pos = buscar(id);
 

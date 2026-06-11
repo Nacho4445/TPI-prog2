@@ -75,6 +75,25 @@ Empleado ArchivoEmpleado::leer(int id){
   return aux;
 }
 
+Empleado ArchivoEmpleado::leerPorPosicion(int posicion){
+
+    Empleado reg;
+
+    FILE *p = fopen(ruta.c_str(), "rb");
+
+    if(p == NULL){
+        return reg;
+    }
+
+    fseek(p, posicion * sizeof(Empleado), SEEK_SET);
+
+    fread(&reg, sizeof(Empleado), 1, p);
+
+    fclose(p);
+
+    return reg;
+}
+
 int ArchivoEmpleado::buscarPorCuit(long long cuit){
 
     Empleado reg;

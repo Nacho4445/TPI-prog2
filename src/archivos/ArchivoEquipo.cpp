@@ -80,6 +80,25 @@ Equipo ArchivoEquipo::leer(int idEquipo) {
     return Equipo();
 }
 
+Equipo ArchivoEquipo::leerPorPosicion(int posicion){
+
+    Equipo equipo;
+
+    FILE *p = fopen(_ruta.c_str(), "rb");
+
+    if(p == NULL){
+        return equipo;
+    }
+
+    fseek(p, posicion * sizeof(Equipo), SEEK_SET);
+
+    fread(&equipo, sizeof(Equipo), 1, p);
+
+    fclose(p);
+
+    return equipo;
+}
+
 bool ArchivoEquipo::modificar(Equipo equipo) {
     FILE* pArchivo = fopen(_ruta.c_str(), "rb+");
 

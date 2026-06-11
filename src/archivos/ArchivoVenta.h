@@ -12,6 +12,7 @@ public:
     bool guardar(Venta reg);
     int buscar(int id);
     Venta leer(int id);
+    Venta leerPorPosicion(int posicion);
     bool borrarRegistro(int id);
     void vaciar();
 

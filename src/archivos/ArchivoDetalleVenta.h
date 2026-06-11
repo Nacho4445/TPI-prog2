@@ -11,10 +11,11 @@ private:
 
 public:
     ArchivoDetalleVenta();
-    int getCantidadRegistros();
-    bool guardar(DetalleVenta detalleVenta);
-    DetalleVenta leer(int idDetalleVenta);
-    bool borrarRegistro(int idDetalleVenta);
-    void vaciar();
+   int getCantidadRegistros();
+   bool guardar(DetalleVenta detalleVenta);
+   DetalleVenta leer(int idDetalleVenta);
+   DetalleVenta leerPorPosicion(int posicion);
+   bool borrarRegistro(int idDetalleVenta);
+   void vaciar();
 
 };
