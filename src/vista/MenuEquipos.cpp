@@ -4,16 +4,17 @@ using namespace std;
 #include <cstdio>
 
 MenuEquipos::MenuEquipos(){
-    setCantidadOpciones(4);
+    setCantidadOpciones(5);
 }
 
 void MenuEquipos::mostrarOpciones(){
     cout << "------------------------" << endl;
     cout << "-----MENU EQUIPOS-----" << endl;
     cout << "1. Registrar Equipo" << endl;
-    cout << "2. Modificar Equipo" << endl;
-    cout << "3. Eliminar Equipo" << endl;
-    cout << "4. Listar Equipos" << endl;
+    cout << "2. Consultar Equipo" << endl;
+    cout << "3. Modificar Equipo" << endl;
+    cout << "4. Eliminar Equipo" << endl;
+    cout << "5. Listar Equipos" << endl;
     cout << "------------------------" << endl;
     cout << "0. Salir" << endl;
     cout << "------------------------" << endl;
@@ -21,22 +22,77 @@ void MenuEquipos::mostrarOpciones(){
 
 void MenuEquipos::ejecutarOpcion(int opcion){
     switch(opcion){
-case 1:
-    managerEquipos.guardarEquipo();
-    break;
-case 2:
-    managerEquipos.modificarEquipo();
-    break;
-case 3:
-    managerEquipos.eliminarEquipo();
-    break;
-case 4:
-    managerEquipos.listarEquipos();
-    break;
-case 0:
-    cout << "Regresando al menu principal..." << endl;
-    break;
 
+    case 1:
+        managerEquipos.guardarEquipo();
+        break;
 
+    case 2:{
+        int opcionConsulta;
+
+        do{
+            cout << "------------------------" << endl;
+            cout << "--- CONSULTAS EQUIPOS ---" << endl;
+            cout << "1. Consultar por ID" << endl;
+            cout << "2. Consultar por Tipo de Equipo" << endl;
+            cout << "3. Consultar por Marca" << endl;
+            cout << "4. Consultar por Rango de Precio" << endl;
+            cout << "5. Consultar con Stock Disponible" << endl;
+            cout << "------------------------" << endl;
+            cout << "0. Volver" << endl;
+            cout << "Opcion: ";
+            cin >> opcionConsulta;
+
+            switch(opcionConsulta){
+
+            case 1:
+                managerEquipos.consultarPorId();
+                break;
+
+            case 2:
+                managerEquipos.consultarPorTipo();
+                break;
+
+            case 3:
+                managerEquipos.consultarPorMarca();
+                break;
+
+            case 4:
+                managerEquipos.consultarPorPrecio();
+                break;
+
+            case 5:
+                managerEquipos.consultarPorStock();
+                break;
+
+            case 0:
+                cout << "Volviendo al menu equipos..." << endl;
+                break;
+
+            default:
+                cout << "Opcion invalida." << endl;
+                break;
+            }
+
+        }while(opcionConsulta != 0);
+
+        break;
+    }
+
+    case 3:
+        managerEquipos.modificarEquipo();
+        break;
+
+    case 4:
+        managerEquipos.eliminarEquipo();
+        break;
+
+    case 5:
+        managerEquipos.listarEquipos();
+        break;
+
+    case 0:
+        cout << "Regresando al menu principal..." << endl;
+        break;
     }
 }

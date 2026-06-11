@@ -4,16 +4,17 @@ using namespace std;
 #include <cstdio>
 
 MenuEmpleados::MenuEmpleados(){
-    setCantidadOpciones(4);
+    setCantidadOpciones(5);
 }
 
 void MenuEmpleados::mostrarOpciones(){
     cout << "------------------------" << endl;
     cout << "-----MENU EMPLEADOS-----" << endl;
     cout << "1. Registrar Empleado" << endl;
-    cout << "2. Modificar Empleado" << endl;
-    cout << "3. Eliminar Empleado" << endl;
-    cout << "4. Listar Empleados" << endl;
+    cout << "2. Consultas de Empleados" << endl;
+    cout << "3. Modificar Empleado" << endl;
+    cout << "4. Eliminar Empleado" << endl;
+    cout << "5. Listar Empleados" << endl;
     cout << "------------------------" << endl;
     cout << "0. Salir" << endl;
     cout << "------------------------" << endl;
@@ -24,19 +25,59 @@ void MenuEmpleados::ejecutarOpcion(int opcion){
 case 1:
     managerEmpleados.guardarEmpleado();
     break;
-case 2:
+case 2:{
+    int opcionConsulta;
+
+    do{
+        cout << "------------------------" << endl;
+        cout << "--- CONSULTAS EMPLEADOS ---" << endl;
+        cout << "1. Consultar por ID" << endl;
+        cout << "2. Consultar por CUIT" << endl;
+        cout << "3. Consultar por Apellido" << endl;
+        cout << "------------------------" << endl;
+        cout << "0. Volver" << endl;
+        cout << "Opcion: ";
+        cin >> opcionConsulta;
+
+        switch(opcionConsulta){
+
+        case 1:
+            managerEmpleados.consultarPorId();
+            break;
+
+        case 2:
+            managerEmpleados.consultarPorCuit();
+            break;
+
+        case 3:
+            managerEmpleados.consultarPorApellido();
+            break;
+
+        case 0:
+            cout << "Volviendo al menu empleados..." << endl;
+            break;
+
+        default:
+            cout << "Opcion invalida." << endl;
+            break;
+        }
+
+    }while(opcionConsulta != 0);
+
+    break;
+ }
+
+case 3:
     managerEmpleados.modificarEmpleado();
     break;
-case 3:
+
+case 4:
     managerEmpleados.eliminarEmpleado();
     break;
-case 4:
+
+case 5:
     managerEmpleados.listarEmpleados();
     break;
-case 0:
-    cout << "Regresando al menu principal..." << endl;
-    break;
 
-
-    }
+  }
 }
