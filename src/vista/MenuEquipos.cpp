@@ -49,22 +49,27 @@ void MenuEquipos::ejecutarOpcion(int opcion){
 
             case 1:
                 managerEquipos.consultarPorId();
+                system("pause");
                 break;
 
             case 2:
                 managerEquipos.consultarPorTipo();
+                system("pause");
                 break;
 
             case 3:
                 managerEquipos.consultarPorMarca();
+                system("pause");
                 break;
 
             case 4:
                 managerEquipos.consultarPorPrecio();
+                system("pause");
                 break;
 
             case 5:
                 managerEquipos.consultarPorStock();
+                system("pause");
                 break;
 
             case 0:
