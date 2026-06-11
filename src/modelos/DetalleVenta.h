@@ -27,7 +27,6 @@ public:
 
 private:
 
-   private:
 
     int _idDetalleVenta = 0;
     int _idVenta = 0;
