@@ -63,6 +63,134 @@ void EquipoManager::guardarEquipo(){
     }
 }
 
+void EquipoManager::consultarPorId(){
+
+    int idEquipo;
+    Equipo equipo;
+
+    while(true){
+        cout << "Ingrese el ID del equipo (0 para volver): ";
+        cin >> idEquipo;
+
+        if(idEquipo == 0){
+            return;
+        }
+
+        equipo = _archivoEquipos.leer(idEquipo);
+
+        if(equipo.getEstado()){
+            mostrarEquipo(equipo);
+            return;
+        }
+
+        cout << "Equipo no encontrado. Intente nuevamente." << endl;
+    }
+}
+
+void EquipoManager::consultarPorTipo(){
+
+    int idTipoEquipo;
+    Equipo equipo;
+    bool encontro = false;
+    int cantidad = _archivoEquipos.getCantidadEquipos();
+
+    cout << "Ingrese ID tipo de equipo: ";
+    cin >> idTipoEquipo;
+
+    for(int i = 0; i < cantidad; i++){
+        equipo = _archivoEquipos.leerPorPosicion(i);
+
+        if(equipo.getEstado() && equipo.getIdTipoEquipo() == idTipoEquipo){
+            mostrarEquipo(equipo);
+            cout << endl;
+            encontro = true;
+        }
+    }
+
+    if(!encontro){
+        cout << "No se encontraron equipos de ese tipo." << endl;
+    }
+}
+
+void EquipoManager::consultarPorMarca(){
+
+    int idTipoMarca;
+    Equipo equipo;
+    bool encontro = false;
+    int cantidad = _archivoEquipos.getCantidadEquipos();
+
+    cout << "Ingrese ID marca: ";
+    cin >> idTipoMarca;
+
+    for(int i = 0; i < cantidad; i++){
+        equipo = _archivoEquipos.leerPorPosicion(i);
+
+        if(equipo.getEstado() && equipo.getIdTipoMarca() == idTipoMarca){
+            mostrarEquipo(equipo);
+            cout << endl;
+            encontro = true;
+        }
+    }
+
+    if(!encontro){
+        cout << "No se encontraron equipos de esa marca." << endl;
+    }
+}
+
+void EquipoManager::consultarPorPrecio(){
+
+    float precioMin, precioMax;
+    Equipo equipo;
+    bool encontro = false;
+    int cantidad = _archivoEquipos.getCantidadEquipos();
+
+    cout << "Ingrese precio minimo: ";
+    cin >> precioMin;
+
+    cout << "Ingrese precio maximo: ";
+    cin >> precioMax;
+
+    for(int i = 0; i < cantidad; i++){
+        equipo = _archivoEquipos.leerPorPosicion(i);
+
+        if(equipo.getEstado() &&
+           equipo.getPrecioUnitario() >= precioMin &&
+           equipo.getPrecioUnitario() <= precioMax){
+
+            mostrarEquipo(equipo);
+            cout << endl;
+            encontro = true;
+        }
+    }
+
+    if(!encontro){
+        cout << "No se encontraron equipos en ese rango de precio." << endl;
+    }
+}
+
+void EquipoManager::consultarPorStock(){
+
+    Equipo equipo;
+    bool encontro = false;
+    int cantidad = _archivoEquipos.getCantidadEquipos();
+
+    for(int i = 0; i < cantidad; i++){
+        equipo = _archivoEquipos.leerPorPosicion(i);
+
+        if(equipo.getEstado() && equipo.getStock() > 0){
+            mostrarEquipo(equipo);
+            cout << endl;
+            encontro = true;
+        }
+    }
+
+    if(!encontro){
+        cout << "No hay equipos con stock disponible." << endl;
+    }
+}
+
+
+
 void EquipoManager::listarEquipos(){
 
     int cantidadEquipos = _archivoEquipos.getCantidadEquipos();

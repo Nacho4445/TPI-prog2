@@ -13,6 +13,10 @@ public:
 	ClienteManager();
 
    void guardarCliente();
+   void consultarPorId();
+   void consultarPorCuit();
+   void consultarPorApellido();
+   void consultarPorTipo();
    void listarClientes();
    void modificarCliente();
    void mostrarClientesOrdenados();

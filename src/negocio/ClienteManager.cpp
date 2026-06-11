@@ -77,6 +77,122 @@ void ClienteManager::guardarCliente(){
     }
 
 }
+void ClienteManager::consultarPorId(){
+
+    int idCliente;
+    Cliente cliente;
+
+    while(true){
+
+        cout << "Ingrese el ID del cliente: ";
+        cin >> idCliente;
+
+        if(idCliente == 0){
+            return;
+        }
+
+        cliente = _archivoClientes.leer(idCliente);
+
+        if(cliente.getEstado()){
+            mostrarCliente(cliente);
+            return;
+        }
+
+        cout << "Cliente no encontrado. Intente nuevamente." << endl;
+    }
+}
+
+void ClienteManager::consultarPorCuit(){
+
+    long long cuit;
+    int pos;
+    Cliente cliente;
+
+    while(true){
+
+        cout << "Ingrese el CUIT del cliente: ";
+        cin >> cuit;
+
+        if(cuit == 0){
+            return;
+        }
+
+        pos = _archivoClientes.buscarPorCuit(cuit);
+
+        if(pos != -1){
+            cliente = _archivoClientes.leerPorPosicion(pos);
+            mostrarCliente(cliente);
+            return;
+        }
+
+        cout << "Cliente no encontrado. Intente nuevamente." << endl;
+    }
+}
+
+void ClienteManager::consultarPorApellido(){
+
+    char apellido[30];
+    Cliente cliente;
+    bool encontro = false;
+    int cantidad = _archivoClientes.getCantidadRegistros();
+
+    cin.ignore();
+
+    cout << "Ingrese el apellido a buscar: ";
+    cin.getline(apellido, 30);
+
+    for(int i = 0; i < cantidad; i++){
+
+        cliente = _archivoClientes.leerPorPosicion(i);
+
+        if(cliente.getEstado() && strcmp(cliente.getApellido(), apellido) == 0){
+            mostrarCliente(cliente);
+            cout << endl;
+            encontro = true;
+        }
+    }
+
+    if(!encontro){
+        cout << "No se encontraron clientes con ese apellido." << endl;
+    }
+}
+void ClienteManager::consultarPorTipo(){
+
+    int tipoCliente;
+    Cliente cliente;
+    bool encontro = false;
+    int cantidad = _archivoClientes.getCantidadRegistros();
+
+    do{
+        cout << "Ingrese tipo de cliente (1-Particular / 2-Empresa / 0-Volver): ";
+        cin >> tipoCliente;
+
+        if(tipoCliente == 0){
+            return;
+        }
+
+        if(tipoCliente != 1 && tipoCliente != 2){
+            cout << "Tipo invalido." << endl;
+        }
+
+    }while(tipoCliente != 1 && tipoCliente != 2);
+
+    for(int i = 0; i < cantidad; i++){
+
+        cliente = _archivoClientes.leerPorPosicion(i);
+
+        if(cliente.getEstado() && cliente.getTipoCliente() == tipoCliente){
+            mostrarCliente(cliente);
+            cout << endl;
+            encontro = true;
+        }
+    }
+
+    if(!encontro){
+        cout << "No se encontraron clientes de ese tipo." << endl;
+    }
+}
+
 
 void ClienteManager::listarClientes(){
     int cantidad = _archivoClientes.getCantidadRegistros();

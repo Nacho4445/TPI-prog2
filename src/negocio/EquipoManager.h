@@ -12,6 +12,11 @@ public:
 	EquipoManager();
 
    void guardarEquipo();
+   void consultarPorId();
+   void consultarPorTipo();
+   void consultarPorMarca();
+   void consultarPorPrecio();
+   void consultarPorStock();
    void listarEquipos();
    void modificarEquipo();
    void mostrarEquiposOrdenados();

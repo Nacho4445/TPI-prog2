@@ -12,6 +12,9 @@ public:
 	EmpleadoManager();
 
    void guardarEmpleado();
+   void consultarPorId();
+   void consultarPorCuit();
+   void consultarPorApellido();
    void listarEmpleados();
    void modificarEmpleado();
    void mostrarEmpleadosOrdenados();

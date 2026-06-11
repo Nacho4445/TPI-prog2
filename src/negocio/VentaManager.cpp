@@ -148,6 +148,151 @@ void VentaManager::guardarVenta(){
     delete[] detalles;
 }
 
+
+void VentaManager::consultarPorId(){
+
+    int idVenta;
+    Venta venta;
+
+    while(true){
+        cout << "Ingrese el ID de la venta (0 para volver): ";
+        cin >> idVenta;
+
+        if(idVenta == 0){
+            return;
+        }
+
+        venta = _archivoVentas.leer(idVenta);
+
+        if(venta.getEstado()){
+            mostrarVenta(venta);
+            return;
+        }
+
+        cout << "Venta no encontrada. Intente nuevamente." << endl;
+    }
+}
+
+void VentaManager::consultarPorCliente(){
+
+    int idCliente;
+    Venta venta;
+    bool encontro = false;
+    int cantidad = _archivoVentas.getCantidadRegistros();
+
+    cout << "Ingrese ID del cliente: ";
+    cin >> idCliente;
+
+    for(int i = 0; i < cantidad; i++){
+        venta = _archivoVentas.leerPorPosicion(i);
+
+        if(venta.getEstado() && venta.getIdCliente() == idCliente){
+            mostrarVenta(venta);
+            cout << endl;
+            encontro = true;
+        }
+    }
+
+    if(!encontro){
+        cout << "No se encontraron ventas para ese cliente." << endl;
+    }
+}
+
+void VentaManager::consultarPorEmpleado(){
+
+    int idEmpleado;
+    Venta venta;
+    bool encontro = false;
+    int cantidad = _archivoVentas.getCantidadRegistros();
+
+    cout << "Ingrese ID del empleado: ";
+    cin >> idEmpleado;
+
+    for(int i = 0; i < cantidad; i++){
+        venta = _archivoVentas.leerPorPosicion(i);
+
+        if(venta.getEstado() && venta.getIdEmpleado() == idEmpleado){
+            mostrarVenta(venta);
+            cout << endl;
+            encontro = true;
+        }
+    }
+
+    if(!encontro){
+        cout << "No se encontraron ventas para ese empleado." << endl;
+    }
+}
+
+void VentaManager::consultarPorFecha(){
+
+    int dia, mes, anio;
+    Venta venta;
+    bool encontro = false;
+    int cantidad = _archivoVentas.getCantidadRegistros();
+
+    cout << "Dia: ";
+    cin >> dia;
+
+    cout << "Mes: ";
+    cin >> mes;
+
+    cout << "Anio: ";
+    cin >> anio;
+
+    for(int i = 0; i < cantidad; i++){
+        venta = _archivoVentas.leerPorPosicion(i);
+
+        Fecha fecha = venta.getFecha();
+
+        if(venta.getEstado() &&
+           fecha.getDia() == dia &&
+           fecha.getMes() == mes &&
+           fecha.getAnio() == anio){
+
+            mostrarVenta(venta);
+            cout << endl;
+            encontro = true;
+        }
+    }
+
+    if(!encontro){
+        cout << "No se encontraron ventas en esa fecha." << endl;
+    }
+}
+
+void VentaManager::consultarPorEquipo(){
+
+    int idEquipo;
+    bool encontro = false;
+
+    ArchivoDetalleVenta archivoDetalles;
+
+    int cantidadDetalles = archivoDetalles.getCantidadRegistros();
+
+    cout << "Ingrese ID del equipo vendido: ";
+    cin >> idEquipo;
+
+    for(int i = 0; i < cantidadDetalles; i++){
+
+        DetalleVenta detalle = archivoDetalles.leerPorPosicion(i);
+
+        if(detalle.getEstado() && detalle.getIdEquipo() == idEquipo){
+
+            Venta venta = _archivoVentas.leer(detalle.getIdVenta());
+
+            if(venta.getEstado()){
+                mostrarVenta(venta);
+                cout << endl;
+                encontro = true;
+            }
+        }
+    }
+
+    if(!encontro){
+        cout << "No se encontraron ventas para ese equipo." << endl;
+    }
+}
+
 void VentaManager::listarVentas(){
 
     int cantidadRegistros = _archivoVentas.getCantidadRegistros();

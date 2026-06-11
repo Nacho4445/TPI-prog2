@@ -76,6 +76,85 @@ void EmpleadoManager::guardarEmpleado(){
     }
 }
 
+void EmpleadoManager::consultarPorId(){
+
+    int idEmpleado;
+    Empleado empleado;
+
+    while(true){
+
+        cout << "Ingrese el ID del empleado: ";
+        cin >> idEmpleado;
+
+        if(idEmpleado == 0){
+            return;
+        }
+
+        empleado = _archivoEmpleados.leer(idEmpleado);
+
+        if(empleado.getEstado()){
+            mostrarEmpleado(empleado);
+            return;
+        }
+
+        cout << "Empleado no encontrado. Intente nuevamente." << endl;
+    }
+}
+
+void EmpleadoManager::consultarPorCuit(){
+
+    long long cuit;
+    int pos;
+    Empleado empleado;
+
+    while(true){
+
+        cout << "Ingrese el CUIT del empleado: ";
+        cin >> cuit;
+
+        if(cuit == 0){
+            return;
+        }
+
+        pos = _archivoEmpleados.buscarPorCuit(cuit);
+
+        if(pos != -1){
+            empleado = _archivoEmpleados.leerPorPosicion(pos);
+            mostrarEmpleado(empleado);
+            return;
+        }
+
+        cout << "Empleado no encontrado. Intente nuevamente." << endl;
+    }
+}
+
+void EmpleadoManager::consultarPorApellido(){
+
+    char apellido[30];
+    Empleado empleado;
+    bool encontro = false;
+    int cantidad = _archivoEmpleados.getCantidadRegistros();
+
+    cin.ignore();
+
+    cout << "Ingrese el apellido a buscar: ";
+    cin.getline(apellido, 30);
+
+    for(int i = 0; i < cantidad; i++){
+
+        empleado = _archivoEmpleados.leerPorPosicion(i);
+
+        if(empleado.getEstado() && strcmp(empleado.getApellido(), apellido) == 0){
+            mostrarEmpleado(empleado);
+            cout << endl;
+            encontro = true;
+        }
+    }
+
+    if(!encontro){
+        cout << "No se encontraron empleados con ese apellido." << endl;
+    }
+}
 void EmpleadoManager::listarEmpleados(){
 
     int cantidadRegistros = _archivoEmpleados.getCantidadRegistros();

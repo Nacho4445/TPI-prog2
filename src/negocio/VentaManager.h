@@ -16,6 +16,11 @@ public:
 	VentaManager();
 
    void guardarVenta();
+   void consultarPorId();
+   void consultarPorCliente();
+   void consultarPorEmpleado();
+   void consultarPorFecha();
+   void consultarPorEquipo();
    void listarVentas();
    void modificarVenta();
    void eliminarVenta();
