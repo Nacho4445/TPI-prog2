@@ -45,15 +45,19 @@ case 2:
         switch(opcionConsulta){
         case 1:
             managerClientes.consultarPorId();
+            system("pause");
             break;
         case 2:
             managerClientes.consultarPorCuit();
+            system("pause");
             break;
         case 3:
             managerClientes.consultarPorApellido();
+            system("pause");
             break;
         case 4:
             managerClientes.consultarPorTipo();
+            system("pause");
             break;
         case 0:
             cout << "Volviendo al menu clientes..." << endl;
