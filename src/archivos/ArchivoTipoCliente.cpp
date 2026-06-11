@@ -3,7 +3,7 @@
 #include "archivos/ArchivoTipoCliente.h"
 
 ArchivoTipoCliente::ArchivoTipoCliente() {
-    ruta = "datos/tipos_clientes.dat";
+    ruta = "datos/tiposClientes.dat";
 }
 
 ArchivoTipoCliente::ArchivoTipoCliente(std::string _ruta) {
