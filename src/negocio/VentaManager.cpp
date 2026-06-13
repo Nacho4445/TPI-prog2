@@ -1,6 +1,12 @@
 #include <iostream>
 #include "../modelos/Venta.h"
 #include "VentaManager.h"
+#include "../archivos/ArchivoDetalleVenta.h"
+#include "../archivos/ArchivoEquipo.h"
+#include "../archivos/ArchivoTipoMarca.h"
+#include "../archivos/ArchivoTipoEquipo.h"
+
+
 using namespace std;
 
 VentaManager::VentaManager()
@@ -156,6 +162,7 @@ void VentaManager::mostrarVenta(Venta &reg, DetalleVenta *detalles){
     cout << "ID Empleado: " << reg.getIdEmpleado() << endl;
     cout << "Fecha: " << reg.getFecha().toString() << endl;
     cout << "Importe Total: $" << reg.getImporteTotal() << endl;
+    cout << "Estado: " << (reg.getEstado() ? "Activa" : "Cancelada") << endl;
 
     int cantidadDetalles = 0;
     _archivoDetalleVentas.leerPorIdVenta(reg.getIdVenta(), detalles, cantidadDetalles);
@@ -164,8 +171,10 @@ void VentaManager::mostrarVenta(Venta &reg, DetalleVenta *detalles){
         cout << "----------------------------------" << endl;
         cout << "Detalle:" << endl;
         for(int i = 0; i < cantidadDetalles; i++){
-            cout << "  Equipo ID: " << detalles[i].getIdEquipo()
-                 << " | Cantidad: " << detalles[i].getCantidad()
+            cout << "  Equipo: ";
+            mostrarEquipoDetalle(detalles[i].getIdEquipo());
+
+            cout << " | Cantidad: " << detalles[i].getCantidad()
                  << " | Precio unit.: $" << detalles[i].getPrecioUnitario()
                  << " | Subtotal: $" << detalles[i].getSubtotal() << endl;
         }
@@ -249,20 +258,69 @@ void VentaManager::modificarVenta(){
     }
 }
 
-void VentaManager::eliminarVenta(){
+void VentaManager::cancelarVenta(){
 
     int idVenta;
+    char confirmar;
+    Venta venta;
 
-    cout << "Ingrese el ID de la venta a eliminar: ";
+    cout << "Ingrese el ID de la venta a cancelar: ";
     cin >> idVenta;
 
-    if(_archivoVentas.borrarRegistro(idVenta)){
-        cout << "Venta eliminada correctamente." << endl;
+    venta = _archivoVentas.leer(idVenta);
+
+    if(!venta.getEstado()){
+        cout << "Venta no encontrada o ya cancelada." << endl;
+        return;
+    }
+
+    int cantidadRegistrosDetalle = _archivoDetalleVentas.getCantidadRegistros();
+
+    DetalleVenta *detalles = new DetalleVenta[cantidadRegistrosDetalle];
+
+    if(detalles == nullptr){
+        cout << "No se pudo reservar memoria." << endl;
+        return;
+    }
+
+    int cantidadDetalles = 0;
+
+    _archivoDetalleVentas.leerPorIdVenta(idVenta, detalles, cantidadDetalles);
+
+    cout << "Venta encontrada:" << endl;
+    mostrarVenta(venta, detalles);
+
+    cout << "Cancelar esta venta? (s/n): ";
+    cin >> confirmar;
+
+    if(confirmar != 's' && confirmar != 'S'){
+        cout << "Cancelacion anulada." << endl;
+        delete[] detalles;
+        return;
+    }
+
+    for(int i = 0; i < cantidadDetalles; i++){
+
+        Equipo equipo = _archivoEquipos.leer(detalles[i].getIdEquipo());
+
+        if(equipo.getEstado()){
+
+            equipo.setStock(equipo.getStock() + detalles[i].getCantidad());
+
+            _archivoEquipos.modificar(equipo);
+        }
+    }
+
+    if(_archivoVentas.cancelarVenta(idVenta)){
+        cout << "Venta cancelada correctamente." << endl;
     }
     else{
-        cout << "No existe una venta activa con ese ID." << endl;
+        cout << "No se pudo cancelar la venta." << endl;
     }
+
+    delete[] detalles;
 }
+
 
 void VentaManager::ordenarVentas(Venta vVentas[], int cantidad){
 
@@ -335,26 +393,29 @@ void VentaManager::consultarPorId(){
     cout << "Ingrese el ID de la venta: ";
     cin >> idVenta;
 
-    Venta venta = _archivoVentas.leer(idVenta);
+    Venta venta = _archivoVentas.leerIncluyendoCanceladas(idVenta);
 
     if(venta.getIdVenta() == 0){
-        cout << "No existe una venta activa con ese ID." << endl;
+        cout << "No existe una venta con ese ID." << endl;
         return;
     }
 
     int cantidadDetalles = _archivoDetalleVentas.getCantidadRegistros();
-    DetalleVenta *detalles = new DetalleVenta[cantidadDetalles + 1];
+    DetalleVenta *detalles = new DetalleVenta[cantidadDetalles];
 
     if(detalles == nullptr){
         cout << "No se pudo reservar memoria." << endl;
         return;
     }
 
+    int cantidadEncontrada = 0;
+
+    _archivoDetalleVentas.leerPorIdVenta(idVenta, detalles, cantidadEncontrada);
+
     mostrarVenta(venta, detalles);
 
     delete[] detalles;
 }
-
 void VentaManager::consultarPorCliente(){
 
     int idCliente;
@@ -548,4 +609,39 @@ void VentaManager::consultarPorEquipo(){
     }
 
     delete[] detalles;
+}
+
+const char* VentaManager::obtenerNombreMarca(int idMarca){
+    TipoMarca marca = _archivoTipoMarcas.leer(idMarca);
+
+    if(marca.getIdTipoMarca() == 0){
+        return "Marca no encontrada";
+    }
+
+    return marca.getDescripcion();
+}
+
+const char* VentaManager::obtenerNombreTipoEquipo(int idTipoEquipo){
+    TipoEquipo tipo = _archivoTipoEquipos.leer(idTipoEquipo);
+
+    if(tipo.getIdTipoEquipo() == 0){
+        return "Tipo no encontrado";
+    }
+
+    return tipo.getDescripcion();
+}
+
+void VentaManager::mostrarEquipoDetalle(int idEquipo){
+
+    Equipo equipo = _archivoEquipos.leer(idEquipo);
+
+
+    if(equipo.getIdEquipo() == 0){
+        cout << "Equipo no encontrado";
+        return;
+    }
+
+    cout << equipo.getDescripcion()
+         << " | Marca: " << obtenerNombreMarca(equipo.getIdTipoMarca())
+         << " | Tipo: " << obtenerNombreTipoEquipo(equipo.getIdTipoEquipo());
 }

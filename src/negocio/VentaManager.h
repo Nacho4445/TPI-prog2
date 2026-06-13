@@ -2,15 +2,24 @@
 #include "archivos/ArchivoVenta.h"
 #include "archivos/ArchivoEquipo.h"
 #include "archivos/ArchivoDetalleVenta.h"
+#include "archivos/ArchivoTipoMarca.h"
+#include "archivos/ArchivoTipoEquipo.h"
 
 class VentaManager {
 private:
    Venta crearVenta();
    void mostrarVenta(Venta &reg, DetalleVenta *detalles);
    void ordenarVentas(Venta vVentas[], int cantidad);
+
+   const char* obtenerNombreMarca(int idMarca);
+   const char* obtenerNombreTipoEquipo(int idTipoEquipo);
+   void mostrarEquipoDetalle(int idEquipo);
+
    ArchivoVenta _archivoVentas;
    ArchivoEquipo _archivoEquipos;
    ArchivoDetalleVenta _archivoDetalleVentas;
+   ArchivoTipoMarca _archivoTipoMarcas;
+   ArchivoTipoEquipo _archivoTipoEquipos;
 
 public:
     VentaManager();
@@ -18,7 +27,7 @@ public:
     void guardarVenta();
     void listarVentas();
     void modificarVenta();
-    void eliminarVenta();
+    void cancelarVenta();
     void mostrarVentasOrdenadas();
 
     void consultarPorId();
