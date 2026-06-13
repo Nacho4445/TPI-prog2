@@ -11,10 +11,13 @@ public:
     int getCantidadRegistros();
     bool guardar(Venta reg);
     int buscar(int id);
+    int buscarIncluyendoCanceladas(int id);
     Venta leer(int id);
     Venta leerPorPosicion(int posicion);
+    Venta leerIncluyendoCanceladas(int id);
     bool borrarRegistro(int id);
-    void vaciar();
+    bool cancelarVenta(int idVenta);
+
 
 private:
     std::string ruta;

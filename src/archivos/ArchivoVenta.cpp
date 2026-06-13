@@ -55,6 +55,31 @@ int ArchivoVenta::buscar(int id) {
     return -1;
 }
 
+int ArchivoVenta::buscarIncluyendoCanceladas(int id){
+
+    FILE *p = fopen(ruta.c_str(), "rb");
+
+    if(p == NULL){
+        return -1;
+    }
+
+    Venta aux;
+    int numReg = 0;
+
+    while(fread(&aux, sizeof(Venta), 1, p) == 1){
+
+        if(aux.getIdVenta() == id){
+            fclose(p);
+            return numReg;
+        }
+
+        numReg++;
+    }
+
+    fclose(p);
+    return -1;
+}
+
 Venta ArchivoVenta::leer(int id) {
     Venta aux;
 
@@ -73,6 +98,30 @@ Venta ArchivoVenta::leer(int id) {
     fread(&aux, sizeof(Venta), 1, p);
 
     fclose(p);
+    return aux;
+}
+
+Venta ArchivoVenta::leerIncluyendoCanceladas(int id){
+
+    Venta aux;
+
+    int pos = buscarIncluyendoCanceladas(id);
+
+    if(pos == -1){
+        return aux;
+    }
+
+    FILE *p = fopen(ruta.c_str(), "rb");
+
+    if(p == NULL){
+        return aux;
+    }
+
+    fseek(p, pos * sizeof(Venta), SEEK_SET);
+    fread(&aux, sizeof(Venta), 1, p);
+
+    fclose(p);
+
     return aux;
 }
 
@@ -95,34 +144,60 @@ Venta ArchivoVenta::leerPorPosicion(int posicion){
     return reg;
 }
 
-bool ArchivoVenta::borrarRegistro(int id) {
-    int pos = buscar(id);
+bool ArchivoVenta::cancelarVenta(int idVenta){
 
-    if (pos == -1) {
+    Venta venta;
+
+    int pos = buscar(idVenta);
+
+    if(pos == -1){
         return false;
     }
 
     FILE *p = fopen(ruta.c_str(), "rb+");
-    if (p == NULL) {
+
+    if(p == NULL){
         return false;
     }
 
-    Venta aux;
     fseek(p, pos * sizeof(Venta), SEEK_SET);
-    fread(&aux, sizeof(Venta), 1, p);
+    fread(&venta, sizeof(Venta), 1, p);
 
-    aux.setEstado(false);
+    venta.setEstado(false);
 
     fseek(p, pos * sizeof(Venta), SEEK_SET);
-    bool pudoEscribir = fwrite(&aux, sizeof(Venta), 1, p);
+    bool escribio = fwrite(&venta, sizeof(Venta), 1, p);
 
     fclose(p);
-    return pudoEscribir;
+
+    return escribio;
 }
 
-void ArchivoVenta::vaciar() {
-    FILE *p = fopen(ruta.c_str(), "wb");
-    if (p != NULL) {
-        fclose(p);
+bool ArchivoVenta::borrarRegistro(int id){
+
+    Venta venta;
+
+    int pos = buscar(id);
+
+    if(pos == -1){
+        return false;
     }
+
+    FILE *p = fopen(ruta.c_str(), "rb+");
+
+    if(p == NULL){
+        return false;
+    }
+
+    fseek(p, pos * sizeof(Venta), SEEK_SET);
+    fread(&venta, sizeof(Venta), 1, p);
+
+    venta.setEstado(false);
+
+    fseek(p, pos * sizeof(Venta), SEEK_SET);
+    bool escribio = fwrite(&venta, sizeof(Venta), 1, p);
+
+    fclose(p);
+
+    return escribio;
 }
