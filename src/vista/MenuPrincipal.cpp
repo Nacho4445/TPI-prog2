@@ -4,7 +4,7 @@ using namespace std;
 #include <cstdio>
 
 MenuPrincipal::MenuPrincipal(){
-    setCantidadOpciones(4);
+    setCantidadOpciones(5);
 }
 
 void MenuPrincipal::mostrarOpciones(){
@@ -14,6 +14,7 @@ void MenuPrincipal::mostrarOpciones(){
     cout << "2. Gestionar Equipos" << endl;
     cout << "3. Gestionar Ventas" << endl;
     cout << "4. Gestionar Empleados" << endl;
+    cout << "5. Informes" << endl;
     cout << "------------------------" << endl;
     cout << "0. Salir" << endl;
     cout << "------------------------" << endl;
@@ -32,6 +33,9 @@ case 3:
     break;
 case 4:
     menuEmpleados.ejecutarMenu();
+    break;
+case 5:
+    menuInformes.ejecutarMenu();
     break;
 case 0:
     cout << "Saliendo del programa..." << endl;

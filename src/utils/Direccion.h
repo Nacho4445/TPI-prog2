@@ -8,7 +8,6 @@ public:
 	Direccion(const char *calle, int altura,const char *piso,const char *departamento, const char *localidad,
               const char *codigoPostal, const char *provincia, bool estado = true);
 
-	int getIdDireccion();
     const char* getCalle();
     int getAltura();
     const char* getPiso();
@@ -18,7 +17,6 @@ public:
     const char* getProvincia();
     bool getEstado();
 
-	void setIdDireccion(int idDireccion);
     void setCalle(const char* calle);
     void setAltura(int altura);
     void setPiso(const char* piso);
@@ -30,7 +28,6 @@ public:
 
 
 private:
-	long _idDireccion = 0;
     char _calle[50] = "";
     int _altura = 0;
     char _piso[10] = "";

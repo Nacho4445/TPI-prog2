@@ -3,11 +3,8 @@
 #include <cstring>
 
 Direccion::Direccion(const char *calle, int altura, const char *piso, const char *departamento,
-                     const char *localidad, const char *codigoPostal, const char *provincia, bool estado)
+                     const char *localidad, const char *codigoPostal, const char *provincia, bool estado){
 
-{
-
-    //_idDireccion = idDireccion;
     _altura = altura;
     _estado = estado;
 
@@ -17,10 +14,6 @@ Direccion::Direccion(const char *calle, int altura, const char *piso, const char
     strcpy(_localidad, localidad);
     strcpy(_codigoPostal, codigoPostal);
     strcpy(_provincia, provincia);
-}
-
-int Direccion::getIdDireccion() {
-    return _idDireccion;
 }
 
 const char *Direccion::getCalle() {
@@ -53,10 +46,6 @@ const char *Direccion::getProvincia() {
 
 bool Direccion::getEstado() {
     return _estado;
-}
-
-void Direccion::setIdDireccion(int idDireccion) {
-    _idDireccion = idDireccion;
 }
 
 void Direccion::setCalle(const char *calle) {

@@ -4,6 +4,7 @@
 #include "vista/MenuEquipos.h"
 #include "vista/MenuVentas.h"
 #include "vista/MenuEmpleados.h"
+#include "vista/MenuInformes.h"
 
 class MenuPrincipal : public Menu{
 private:
@@ -11,6 +12,7 @@ private:
     MenuEquipos menuEquipos;
     MenuVentas menuVentas;
     MenuEmpleados menuEmpleados;
+    MenuInformes menuInformes;
 
 public:
     MenuPrincipal();
