@@ -26,7 +26,6 @@ public:
 
     void guardarVenta();
     void listarVentas();
-    void modificarVenta();
     void cancelarVenta();
     void mostrarVentasOrdenadas();
 
