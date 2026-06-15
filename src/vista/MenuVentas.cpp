@@ -4,7 +4,7 @@ using namespace std;
 #include <cstdio>
 
 MenuVentas::MenuVentas(){
-    setCantidadOpciones(5);
+    setCantidadOpciones(4);
 }
 
 void MenuVentas::mostrarOpciones(){
@@ -12,9 +12,8 @@ void MenuVentas::mostrarOpciones(){
     cout << "-----MENU VENTAS-----" << endl;
     cout << "1. Registrar Venta" << endl;
     cout << "2. Consultar Venta" << endl;
-    cout << "3. Modificar Venta" << endl;
-    cout << "4. Eliminar Venta" << endl;
-    cout << "5. Listar Ventas" << endl;
+    cout << "3. Cancelar Venta" << endl;
+    cout << "4. Listar Ventas" << endl;
     cout << "------------------------" << endl;
     cout << "0. Salir" << endl;
     cout << "------------------------" << endl;
@@ -85,7 +84,7 @@ void MenuVentas::ejecutarOpcion(int opcion){
     }
 
     case 3:
-        managerVentas.modificarVenta();
+        managerVentas.cancelarVenta();
         break;
 
     case 5:
