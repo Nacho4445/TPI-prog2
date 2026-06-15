@@ -6,6 +6,7 @@
 #include "archivos/ArchivoVenta.h"
 #include "modelos/RecaudacionAnual.h"
 #include "modelos/RecaudacionClientes.h"
+#include "modelos/StockEquipos.h"
 using namespace std;
 
 void InformeManager::recaudacionXanio(){
@@ -118,5 +119,39 @@ void InformeManager::ventasXempleado(){
 }
 
 void InformeManager::stockDisponible(){
+    Equipo regEquipo;
+    ArchivoEquipo repoEquipos;
+    bool encontro = false;
+    int cantidad = repoEquipos.getCantidadEquipos();
+
+
+    FILE *p = fopen("informes/stockDisponible.dat", "wb");
+
+    if(p == nullptr){
+        cout << "Error de informe..." << endl;
+        return;
+    }
+
+    for(int i = 0; i < cantidad; i++){
+        regEquipo = repoEquipos.leerPorPosicion(i);
+        int stock = regEquipo.getStock();
+        if(regEquipo.getEstado() && stock > 0){
+            cout << "------------------------" << endl;
+            cout << "Equipo ID: " << regEquipo.getIdEquipo() << endl;
+            cout << "Stock disponible: " << stock << endl;
+            cout << "------------------------" << endl;
+
+            StockEquipos regStock(regEquipo, stock);
+            fwrite(&regStock, sizeof(StockEquipos), 1, p);
+
+            encontro = true;
+        }
+    }
+
+    if(!encontro){
+        cout << "No hay equipos con stock disponible." << endl;
+    }
+
+    fclose(p);
 
 }

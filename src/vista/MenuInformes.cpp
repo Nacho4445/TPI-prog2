@@ -40,7 +40,7 @@ void MenuInformes::ejecutarOpcion(int opcion){
         break;
 
     case 5:
-        ///managerInformes.stockDisponible();
+        managerInformes.stockDisponible();
         break;
 
     case 0:
