@@ -252,7 +252,6 @@ void EmpleadoManager::mostrarEmpleado(Empleado &reg){
 }
 
 void EmpleadoManager::modificarEmpleado(){
-
     int idEmpleado;
 
     cout << "Ingrese el ID del empleado a modificar: ";
@@ -270,17 +269,131 @@ void EmpleadoManager::modificarEmpleado(){
     cout << "Empleado actual:" << endl;
     mostrarEmpleado(empleadoActual);
 
-    cout << "Ingrese los nuevos datos del empleado." << endl;
+    int opcion;
 
-    Empleado empleadoModificado = crearEmpleado();
-    empleadoModificado.setIdEmpleado(idEmpleado);
+    cout << endl;
+    cout << "Que dato desea modificar?" << endl;
+    cout << "1. CUIT" << endl;
+    cout << "2. Nombre" << endl;
+    cout << "3. Apellido" << endl;
+    cout << "4. Telefono" << endl;
+    cout << "5. Email" << endl;
+    cout << "6. Direccion" << endl;
+    cout << "0. Cancelar" << endl;
+    cout << "Opcion: ";
+    cin >> opcion;
 
-    if(_archivoEmpleados.borrarRegistro(idEmpleado) && _archivoEmpleados.guardar(empleadoModificado)){
+    switch(opcion){
+
+    case 1:{
+        long long cuit;
+        cout << "Ingrese nuevo CUIT: ";
+        cin >> cuit;
+        empleadoActual.setCuit(cuit);
+        break;
+    }
+
+    case 2:{
+        char nombre[30];
+        cout << "Ingrese nuevo nombre: ";
+        cin.ignore();
+        cin.getline(nombre, 30);
+        empleadoActual.setNombre(nombre);
+        break;
+    }
+
+    case 3:{
+        char apellido[30];
+        cout << "Ingrese nuevo apellido: ";
+        cin.ignore();
+        cin.getline(apellido, 30);
+        empleadoActual.setApellido(apellido);
+        break;
+    }
+
+    case 4:{
+        char telefono[20];
+        cout << "Ingrese nuevo telefono: ";
+        cin.ignore();
+        cin.getline(telefono, 20);
+        empleadoActual.setTelefono(telefono);
+        break;
+    }
+
+    case 5:{
+        char email[50];
+        cout << "Ingrese nuevo email: ";
+        cin.ignore();
+        cin.getline(email, 50);
+        empleadoActual.setEmail(email);
+        break;
+    }
+
+    case 6:{
+        char calle[50], piso[10], departamento[10], localidad[50], codigoPostal[20], provincia[50];
+        int altura;
+
+        cout << "Ingrese nueva direccion: ";
+        cin.ignore();
+
+        cout << "Calle: ";
+        cin.getline(calle, 50);
+
+        cout << "Altura: ";
+        cin >> altura;
+        cin.ignore();
+
+        cout << "Piso: ";
+        cin.getline(piso, 10);
+
+        cout << "Departamento: ";
+        cin.getline(departamento, 10);
+
+        cout << "Localidad: ";
+        cin.getline(localidad, 50);
+
+        cout << "Codigo postal: ";
+        cin.getline(codigoPostal, 20);
+
+        cout << "Provincia: ";
+        cin.getline(provincia, 50);
+
+        Direccion direccionNueva(calle, altura, piso, departamento, localidad, codigoPostal, provincia, true);
+        empleadoActual.setDireccion(direccionNueva);
+        break;
+    }
+
+    case 0:
+        cout << "Modificacion cancelada." << endl;
+        system("pause");
+        return;
+
+    default:
+        cout << "Opcion invalida." << endl;
+        system("pause");
+        return;
+    }
+
+    char confirmar;
+
+    cout << endl;
+    cout << "Desea confirmar los cambios? (S/N): ";
+    cin >> confirmar;
+
+     if(confirmar != 'S' && confirmar != 's'){
+      cout << "Modificacion cancelada." << endl;
+      system("pause");
+      return;
+     }
+
+    if(_archivoEmpleados.borrarRegistro(idEmpleado) && _archivoEmpleados.guardar(empleadoActual)){
         cout << "Empleado modificado correctamente." << endl;
     }
     else{
         cout << "No se pudo modificar el empleado." << endl;
     }
+
+    system("pause");
 }
 
 void EmpleadoManager::ordenarEmpleados(Empleado vEmpleados[], int cantidad){
