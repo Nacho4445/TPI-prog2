@@ -223,7 +223,6 @@ void EquipoManager::mostrarEquipo(Equipo &reg){
     cout << "==================================" << endl;
 }
 void EquipoManager::modificarEquipo(){
-
     int idEquipo;
 
     cout << "Ingrese el ID del equipo a modificar: ";
@@ -241,19 +240,93 @@ void EquipoManager::modificarEquipo(){
     cout << "Equipo actual:" << endl;
     mostrarEquipo(equipoActual);
 
-    cout << "Ingrese los nuevos datos del equipo." << endl;
+    int opcion;
 
-    Equipo equipoModificado = crearEquipo();
-    equipoModificado.setIdEquipo(idEquipo);
+    cout << endl;
+    cout << "Que dato desea modificar?" << endl;
+    cout << "1. Tipo de equipo" << endl;
+    cout << "2. Marca" << endl;
+    cout << "3. Descripcion" << endl;
+    cout << "4. Stock" << endl;
+    cout << "5. Precio unitario" << endl;
+    cout << "0. Cancelar" << endl;
+    cout << "Opcion: ";
+    cin >> opcion;
 
-    if(_archivoEquipos.borrarRegistro(idEquipo) &&
-       _archivoEquipos.guardar(equipoModificado)){
+    switch(opcion){
 
+    case 1:{
+        int idTipoEquipo;
+        cout << "Ingrese nuevo tipo de equipo: ";
+        cin >> idTipoEquipo;
+        equipoActual.setIdTipoEquipo(idTipoEquipo);
+        break;
+    }
+
+    case 2:{
+        int idTipoMarca;
+        cout << "Ingrese nueva marca: ";
+        cin >> idTipoMarca;
+        equipoActual.setIdTipoMarca(idTipoMarca);
+        break;
+    }
+
+    case 3:{
+        char descripcion[30];
+        cout << "Ingrese nueva descripcion: ";
+        cin.ignore();
+        cin.getline(descripcion, 30);
+        equipoActual.setDescripcion(descripcion);
+        break;
+    }
+
+    case 4:{
+        int stock;
+        cout << "Ingrese nuevo stock: ";
+        cin >> stock;
+        equipoActual.setStock(stock);
+        break;
+    }
+
+    case 5:{
+        float precioUnitario;
+        cout << "Ingrese nuevo precio unitario: ";
+        cin >> precioUnitario;
+        equipoActual.setPrecioUnitario(precioUnitario);
+        break;
+    }
+
+    case 0:
+        cout << "Modificacion cancelada." << endl;
+        system("pause");
+        return;
+
+    default:
+        cout << "Opcion invalida." << endl;
+        system("pause");
+        return;
+    }
+
+    char confirmar;
+
+    cout << endl;
+    cout << "Desea confirmar los cambios? (S/N): ";
+    cin >> confirmar;
+
+    if(confirmar != 'S' && confirmar != 's'){
+       cout << "Modificacion cancelada por el usuario." << endl;
+       system("pause");
+       return;
+       }
+
+    if(_archivoEquipos.borrarRegistro(idEquipo) && _archivoEquipos.guardar(equipoActual)){
         cout << "Equipo modificado correctamente." << endl;
     }
     else{
         cout << "No se pudo modificar el equipo." << endl;
     }
+
+    system("pause");
 }
 
 void EquipoManager::ordenarEquipos(Equipo vEquipos[], int cantidad){
