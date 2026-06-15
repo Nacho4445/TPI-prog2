@@ -214,50 +214,6 @@ void VentaManager::listarVentas(){
     delete[] detalles;
 }
 
-void VentaManager::modificarVenta(){
-
-    int idVenta;
-
-    cout << "Ingrese el ID de la venta a modificar: ";
-    cin >> idVenta;
-
-    int pos = _archivoVentas.buscar(idVenta);
-
-    if(pos == -1){
-        cout << "No existe una venta activa con ese ID." << endl;
-        return;
-    }
-
-    Venta ventaActual = _archivoVentas.leer(idVenta);
-
-    int cantidadDetalles = _archivoDetalleVentas.getCantidadRegistros();
-    DetalleVenta *detalles = new DetalleVenta[cantidadDetalles + 1];
-
-    if(detalles == nullptr){
-        cout << "No se pudo reservar memoria." << endl;
-        return;
-    }
-
-    cout << "Venta actual:" << endl;
-    mostrarVenta(ventaActual, detalles);
-
-    delete[] detalles;
-
-    cout << "Ingrese los nuevos datos de la venta." << endl;
-
-    Venta ventaModificada = crearVenta();
-    ventaModificada.setIdVenta(idVenta);
-
-    if(_archivoVentas.borrarRegistro(idVenta) &&
-       _archivoVentas.guardar(ventaModificada)){
-
-        cout << "Venta modificada correctamente." << endl;
-    }
-    else{
-        cout << "No se pudo modificar la venta." << endl;
-    }
-}
-
 void VentaManager::cancelarVenta(){
 
     int idVenta;
