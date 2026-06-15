@@ -67,6 +67,10 @@
 		<Unit filename="src/modelos/RecaudacionAnual.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="src/modelos/RecaudacionClientes.cpp" />
+		<Unit filename="src/modelos/RecaudacionClientes.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="src/modelos/TipoCliente.cpp" />
 		<Unit filename="src/modelos/TipoCliente.h" />
 		<Unit filename="src/modelos/TipoEquipo.cpp" />

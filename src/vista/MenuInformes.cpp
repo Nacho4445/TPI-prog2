@@ -29,7 +29,7 @@ void MenuInformes::ejecutarOpcion(int opcion){
         break;
 
     case 2:
-        ///managerInformes.recaudacionXcliente();
+        managerInformes.recaudacionXcliente();
         break;
     case 3:
         ///managerInformes.equiposMasVendidos();
