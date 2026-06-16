@@ -101,7 +101,8 @@ Empleado EmpleadoManager::crearEmpleado(){
 
     empleado.setDireccion(direccion);
 
-    system("pause");
+    //system("pause");
+    consola.pausar();
 
     return empleado;
 }
@@ -116,7 +117,8 @@ void EmpleadoManager::guardarEmpleado(){
     else{
         cout << "Error al guardar el empleado." << endl;
     }
-    system("pause");
+    //system("pause");
+    consola.pausar();
 }
 
 void EmpleadoManager::consultarPorId(){
@@ -142,7 +144,8 @@ void EmpleadoManager::consultarPorId(){
 
         cout << "Empleado no encontrado. Intente nuevamente." << endl;
     }
-    system("pause");
+    //system("pause");
+    consola.pausar();
 }
 
 void EmpleadoManager::consultarPorCuit(){
@@ -170,7 +173,8 @@ void EmpleadoManager::consultarPorCuit(){
 
         cout << "Empleado no encontrado. Intente nuevamente." << endl;
     }
-    system("pause");
+    //system("pause");
+    consola.pausar();
 }
 
 void EmpleadoManager::consultarPorApellido(){
@@ -199,7 +203,8 @@ void EmpleadoManager::consultarPorApellido(){
     if(!encontro){
         cout << "No se encontraron empleados con ese apellido." << endl;
     }
-    system("pause");
+    //system("pause");
+    consola.pausar();
 }
 
 void EmpleadoManager::listarEmpleados(){
@@ -208,11 +213,11 @@ void EmpleadoManager::listarEmpleados(){
 
     if(cantidadRegistros == 0){
         cout << "No hay empleados cargados." << endl;
-        system("cls");
+        consola.pausar();
         return;
     }
 
-    for(int i = 0; i <= cantidadRegistros; i++){
+    for(int i = 0; i < cantidadRegistros; i++){
 
         Empleado empleado = _archivoEmpleados.leer(i);
 
@@ -221,7 +226,7 @@ void EmpleadoManager::listarEmpleados(){
             cout << endl;
         }
     }
-    system("pause");
+    consola.pausar();
 }
 
 void EmpleadoManager::mostrarEmpleado(Empleado &reg){
@@ -376,12 +381,14 @@ void EmpleadoManager::modificarEmpleado(){
 
     case 0:
         cout << "Modificacion cancelada." << endl;
-        system("pause");
+        //system("pause");
+        consola.pausar();
         return;
 
     default:
         cout << "Opcion invalida." << endl;
-        system("pause");
+        //system("pause");
+        consola.pausar();
         return;
     }
 
@@ -393,7 +400,8 @@ void EmpleadoManager::modificarEmpleado(){
 
      if(confirmar != 'S' && confirmar != 's'){
       cout << "Modificacion cancelada." << endl;
-      system("pause");
+      //system("pause");
+      consola.pausar();
       return;
      }
 
@@ -404,7 +412,8 @@ void EmpleadoManager::modificarEmpleado(){
       cout << "No se pudo modificar el empleado." << endl;
       }
 
-    system("pause");
+    //system("pause");
+    consola.pausar();
 
 }
 
@@ -461,7 +470,8 @@ void EmpleadoManager::mostrarEmpleadosOrdenados(){
     }
 
     delete[] empleados;
-    system("pause");
+    //system("pause");
+    consola.pausar();
 }
 
 void EmpleadoManager::eliminarEmpleado(){
@@ -491,5 +501,6 @@ void EmpleadoManager::eliminarEmpleado(){
             cout << "No se pudo eliminar el empleado." << endl;
         }
     }
-    system("pause");
+    //system("pause");
+    consola.pausar();
 }

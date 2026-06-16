@@ -1,4 +1,5 @@
 #pragma once
+#include "utils/Consola.h"
 
 class InformeManager{
 public:
@@ -8,5 +9,5 @@ public:
     void ventasXempleado();
     void stockDisponible();
 private:
-
+    Consola consola;
 };

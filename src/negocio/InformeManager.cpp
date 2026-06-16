@@ -7,6 +7,7 @@
 #include "modelos/RecaudacionAnual.h"
 #include "modelos/RecaudacionClientes.h"
 #include "modelos/StockEquipos.h"
+
 using namespace std;
 
 void InformeManager::recaudacionXanio(){
@@ -30,6 +31,7 @@ void InformeManager::recaudacionXanio(){
 
     if (anioMin == 9999) {
         cout << "No hay ventas activas" << endl;
+        consola.pausar();
         return;
     }
 
@@ -37,6 +39,7 @@ void InformeManager::recaudacionXanio(){
 
     if(p == nullptr){
         cout << "Error de informe..." << endl;
+        consola.pausar();
         return;
     }
 
@@ -59,6 +62,7 @@ void InformeManager::recaudacionXanio(){
         fwrite(&reg, sizeof(RecaudacionAnual), 1, p);
     }
     fclose(p);
+    consola.pausar();
 }
 
 void InformeManager::recaudacionXcliente(){
@@ -70,6 +74,7 @@ void InformeManager::recaudacionXcliente(){
 
     if(pClientes == nullptr){
         cout << "Error de memoria..." << endl;
+        consola.pausar();
         return;
     }
 
@@ -90,6 +95,7 @@ void InformeManager::recaudacionXcliente(){
 
     if(p == nullptr){
         cout << "Error de informe..." << endl;
+        consola.pausar();
         return;
     }
 
@@ -108,14 +114,17 @@ void InformeManager::recaudacionXcliente(){
 
     fclose(p);
     delete[] pClientes;
+    consola.pausar();
 }
 
 void InformeManager::equiposMasVendidos(){
 
+consola.pausar();
 }
 
 void InformeManager::ventasXempleado(){
 
+consola.pausar();
 }
 
 void InformeManager::stockDisponible(){
@@ -129,6 +138,7 @@ void InformeManager::stockDisponible(){
 
     if(p == nullptr){
         cout << "Error de informe..." << endl;
+        consola.pausar();
         return;
     }
 
@@ -150,8 +160,9 @@ void InformeManager::stockDisponible(){
 
     if(!encontro){
         cout << "No hay equipos con stock disponible." << endl;
+        consola.pausar();
     }
 
     fclose(p);
-
+consola.pausar();
 }

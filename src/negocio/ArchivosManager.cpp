@@ -9,14 +9,14 @@ bool ArchivosManager::copiarArchivo(const string &rutaOrigen, const string &ruta
 	// Puntero del archivo origen
 	FILE *pOrigen = fopen(rutaOrigen.c_str(), "rb");
 	if (pOrigen == NULL) {
-		cout << "Error al intentar abrir el archivo '" << rutaOrigen << "'\n";
+		cout << "Error al intentar abrir el archivo '" << rutaOrigen << endl;
 		return false;
 	}
 
 	// Puntero del archivo destino
 	FILE *pDestino = fopen(rutaDestino.c_str(), "wb");
 	if (pDestino == NULL) {
-		cout << "Error al crear/editar el archivo '" << rutaDestino << "'\n";
+		cout << "Error al crear/editar el archivo '" << rutaDestino << endl;
 		fclose(pOrigen);
 		return false;
 	}

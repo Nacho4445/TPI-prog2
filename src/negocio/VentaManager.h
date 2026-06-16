@@ -4,6 +4,7 @@
 #include "archivos/ArchivoDetalleVenta.h"
 #include "archivos/ArchivoTipoMarca.h"
 #include "archivos/ArchivoTipoEquipo.h"
+#include "utils/Consola.h"
 
 class VentaManager {
 private:
@@ -20,6 +21,8 @@ private:
    ArchivoDetalleVenta _archivoDetalleVentas;
    ArchivoTipoMarca _archivoTipoMarcas;
    ArchivoTipoEquipo _archivoTipoEquipos;
+
+   Consola consola;
 
 public:
     VentaManager();

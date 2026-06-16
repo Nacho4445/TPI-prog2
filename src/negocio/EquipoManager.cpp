@@ -57,9 +57,11 @@ void EquipoManager::guardarEquipo(){
 
     if(_archivoEquipos.guardar(equipo)){
         cout << "Equipo guardado correctamente." << endl;
+        consola.pausar();
     }
     else{
         cout << "Error al guardar el equipo." << endl;
+        consola.pausar();
     }
 }
 
@@ -84,6 +86,7 @@ void EquipoManager::consultarPorId(){
         }
 
         cout << "Equipo no encontrado. Intente nuevamente." << endl;
+        consola.pausar();
     }
 }
 
@@ -109,6 +112,7 @@ void EquipoManager::consultarPorTipo(){
 
     if(!encontro){
         cout << "No se encontraron equipos de ese tipo." << endl;
+        consola.pausar();
     }
 }
 
@@ -134,6 +138,7 @@ void EquipoManager::consultarPorMarca(){
 
     if(!encontro){
         cout << "No se encontraron equipos de esa marca." << endl;
+        consola.pausar();
     }
 }
 
@@ -165,6 +170,7 @@ void EquipoManager::consultarPorPrecio(){
 
     if(!encontro){
         cout << "No se encontraron equipos en ese rango de precio." << endl;
+        consola.pausar();
     }
 }
 
@@ -186,6 +192,7 @@ void EquipoManager::consultarPorStock(){
 
     if(!encontro){
         cout << "No hay equipos con stock disponible." << endl;
+        consola.pausar();
     }
 }
 
@@ -195,10 +202,11 @@ void EquipoManager::listarEquipos(){
 
     if(cantidadEquipos == 0){
         cout << "No hay equipos cargados." << endl;
+        consola.pausar();
         return;
     }
 
-    for(int i = 1; i <= cantidadEquipos; i++){
+    for(int i = 1; i < cantidadEquipos; i++){
 
         Equipo equipo = _archivoEquipos.leer(i);
 
@@ -207,6 +215,7 @@ void EquipoManager::listarEquipos(){
             cout << endl;
         }
     }
+    consola.pausar();
 }
 
 void EquipoManager::mostrarEquipo(Equipo &reg){
@@ -230,6 +239,7 @@ void EquipoManager::modificarEquipo(){
 
     if(pos == -1){
         cout << "No existe un equipo activo con ese ID." << endl;
+        consola.pausar();
         return;
     }
 
@@ -296,12 +306,14 @@ void EquipoManager::modificarEquipo(){
 
     case 0:
         cout << "Modificacion cancelada." << endl;
-        system("pause");
+        //system("pause");
+        consola.pausar();
         return;
 
     default:
         cout << "Opcion invalida." << endl;
-        system("pause");
+        //system("pause");
+        consola.pausar();
         return;
     }
 
@@ -313,7 +325,8 @@ void EquipoManager::modificarEquipo(){
 
     if(confirmar != 'S' && confirmar != 's'){
        cout << "Modificacion cancelada por el usuario." << endl;
-       system("pause");
+       //system("pause");
+       consola.pausar();
        return;
        }
 
@@ -324,7 +337,8 @@ void EquipoManager::modificarEquipo(){
         cout << "No se pudo modificar el equipo." << endl;
     }
 
-    system("pause");
+    //system("pause");
+    consola.pausar();
 }
 
 void EquipoManager::ordenarEquipos(Equipo vEquipos[], int cantidad){
@@ -350,6 +364,7 @@ void EquipoManager::mostrarEquiposOrdenados(){
 
     if(cantidadEquipos == 0){
         cout << "No hay equipos cargados." << endl;
+        consola.pausar();
         return;
     }
 
@@ -357,6 +372,7 @@ void EquipoManager::mostrarEquiposOrdenados(){
 
     if(equipos == nullptr){
         cout << "No se pudo reservar memoria." << endl;
+        consola.pausar();
         return;
     }
 
@@ -392,6 +408,7 @@ void EquipoManager::eliminarEquipo(){
 
     if(equipo.getEstado() == false){
         cout << "Equipo no encontrado." << endl;
+        consola.pausar();
         return;
     }
 
@@ -408,4 +425,5 @@ void EquipoManager::eliminarEquipo(){
             cout << "No se pudo eliminar el equipo." << endl;
         }
     }
+    consola.pausar();
 }

@@ -56,6 +56,7 @@ Venta VentaManager::crearVenta(){
     venta.setImporteTotal(0);
     venta.setEstado(true);
 
+    consola.pausar();
     return venta;
 }
 
@@ -69,6 +70,7 @@ void VentaManager::guardarVenta(){
 
     if(cantidadEquipos <= 0){
         cout << "La cantidad de equipos debe ser mayor a cero." << endl;
+        consola.pausar();
         return;
     }
 
@@ -76,6 +78,7 @@ void VentaManager::guardarVenta(){
 
     if(detalles == nullptr){
         cout << "No se pudo reservar memoria." << endl;
+        consola.pausar();
         return;
     }
 
@@ -140,6 +143,7 @@ void VentaManager::guardarVenta(){
 
     if(cantidadCargados == 0){
         cout << "No se pudo registrar ningun equipo. Venta cancelada." << endl;
+        consola.pausar();
         delete[] detalles;
         return;
     }
@@ -160,6 +164,7 @@ void VentaManager::guardarVenta(){
     }
 
     delete[] detalles;
+    consola.pausar();
 }
 
 void VentaManager::mostrarVenta(Venta &reg, DetalleVenta *detalles){
@@ -197,6 +202,7 @@ void VentaManager::listarVentas(){
 
     if(cantidadRegistros == 0){
         cout << "No hay ventas cargadas." << endl;
+        consola.pausar();
         return;
     }
 
@@ -206,10 +212,11 @@ void VentaManager::listarVentas(){
 
     if(detalles == nullptr){
         cout << "No se pudo reservar memoria." << endl;
+        consola.pausar();
         return;
     }
 
-    for(int i = 0; i <= cantidadRegistros; i++){
+    for(int i = 0; i < cantidadRegistros; i++){
 
         Venta venta = _archivoVentas.leerPorPosicion(i);
 
@@ -218,7 +225,7 @@ void VentaManager::listarVentas(){
             cout << endl;
         }
     }
-
+    consola.pausar();
     delete[] detalles;
 }
 
@@ -235,6 +242,7 @@ void VentaManager::cancelarVenta(){
 
     if(!venta.getEstado()){
         cout << "Venta no encontrada o ya cancelada." << endl;
+        consola.pausar();
         return;
     }
 
@@ -244,6 +252,7 @@ void VentaManager::cancelarVenta(){
 
     if(detalles == nullptr){
         cout << "No se pudo reservar memoria." << endl;
+        consola.pausar();
         return;
     }
 
@@ -260,6 +269,7 @@ void VentaManager::cancelarVenta(){
     if(confirmar != 's' && confirmar != 'S'){
         cout << "Cancelacion anulada." << endl;
         delete[] detalles;
+        consola.pausar();
         return;
     }
 
@@ -283,6 +293,7 @@ void VentaManager::cancelarVenta(){
     }
 
     delete[] detalles;
+    consola.pausar();
 }
 
 
@@ -308,6 +319,7 @@ void VentaManager::mostrarVentasOrdenadas(){
 
     if(cantidadRegistros == 0){
         cout << "No hay ventas cargadas." << endl;
+        consola.pausar();
         return;
     }
 
@@ -315,6 +327,7 @@ void VentaManager::mostrarVentasOrdenadas(){
 
     if(ventas == nullptr){
         cout << "No se pudo reservar memoria." << endl;
+        consola.pausar();
         return;
     }
 
@@ -338,6 +351,7 @@ void VentaManager::mostrarVentasOrdenadas(){
     if(detalles == nullptr){
         cout << "No se pudo reservar memoria." << endl;
         delete[] ventas;
+        consola.pausar();
         return;
     }
 
@@ -348,6 +362,7 @@ void VentaManager::mostrarVentasOrdenadas(){
 
     delete[] ventas;
     delete[] detalles;
+    consola.pausar();
 }
 
 void VentaManager::consultarPorId(){
@@ -361,6 +376,7 @@ void VentaManager::consultarPorId(){
 
     if(venta.getIdVenta() == 0){
         cout << "No existe una venta con ese ID." << endl;
+        consola.pausar();
         return;
     }
 
@@ -369,6 +385,7 @@ void VentaManager::consultarPorId(){
 
     if(detalles == nullptr){
         cout << "No se pudo reservar memoria." << endl;
+        consola.pausar();
         return;
     }
 
@@ -379,7 +396,9 @@ void VentaManager::consultarPorId(){
     mostrarVenta(venta, detalles);
 
     delete[] detalles;
+    consola.pausar();
 }
+
 void VentaManager::consultarPorCliente(){
 
     int idCliente;
@@ -391,6 +410,7 @@ void VentaManager::consultarPorCliente(){
 
     if(cantidadRegistros == 0){
         cout << "No hay ventas cargadas." << endl;
+        consola.pausar();
         return;
     }
 
@@ -399,6 +419,7 @@ void VentaManager::consultarPorCliente(){
 
     if(detalles == nullptr){
         cout << "No se pudo reservar memoria." << endl;
+        consola.pausar();
         return;
     }
 
@@ -420,6 +441,7 @@ void VentaManager::consultarPorCliente(){
     }
 
     delete[] detalles;
+    consola.pausar();
 }
 
 void VentaManager::consultarPorEmpleado(){
@@ -433,6 +455,7 @@ void VentaManager::consultarPorEmpleado(){
 
     if(cantidadRegistros == 0){
         cout << "No hay ventas cargadas." << endl;
+        consola.pausar();
         return;
     }
 
@@ -441,6 +464,7 @@ void VentaManager::consultarPorEmpleado(){
 
     if(detalles == nullptr){
         cout << "No se pudo reservar memoria." << endl;
+        consola.pausar();
         return;
     }
 
@@ -462,6 +486,7 @@ void VentaManager::consultarPorEmpleado(){
     }
 
     delete[] detalles;
+    consola.pausar();
 }
 
 void VentaManager::consultarPorFecha(){
@@ -488,6 +513,7 @@ void VentaManager::consultarPorFecha(){
 
     if(cantidadRegistros == 0){
         cout << "No hay ventas cargadas." << endl;
+        consola.pausar();
         return;
     }
 
@@ -496,6 +522,7 @@ void VentaManager::consultarPorFecha(){
 
     if(detalles == nullptr){
         cout << "No se pudo reservar memoria." << endl;
+        consola.pausar();
         return;
     }
 
@@ -521,6 +548,7 @@ void VentaManager::consultarPorFecha(){
     }
 
     delete[] detalles;
+    consola.pausar();
 }
 
 void VentaManager::consultarPorEquipo(){
@@ -534,6 +562,7 @@ void VentaManager::consultarPorEquipo(){
 
     if(cantidadRegistros == 0){
         cout << "No hay ventas cargadas." << endl;
+        consola.pausar();
         return;
     }
 
@@ -542,6 +571,7 @@ void VentaManager::consultarPorEquipo(){
 
     if(detalles == nullptr){
         cout << "No se pudo reservar memoria." << endl;
+        consola.pausar();
         return;
     }
 
@@ -573,6 +603,7 @@ void VentaManager::consultarPorEquipo(){
     }
 
     delete[] detalles;
+    consola.pausar();
 }
 
 const char* VentaManager::obtenerNombreMarca(int idMarca){
@@ -602,10 +633,12 @@ void VentaManager::mostrarEquipoDetalle(int idEquipo){
 
     if(equipo.getIdEquipo() == 0){
         cout << "Equipo no encontrado";
+        consola.pausar();
         return;
     }
 
     cout << equipo.getDescripcion()
          << " | Marca: " << obtenerNombreMarca(equipo.getIdTipoMarca())
          << " | Tipo: " << obtenerNombreTipoEquipo(equipo.getIdTipoEquipo());
+    //consola.pausar();
 }
