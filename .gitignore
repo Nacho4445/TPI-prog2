@@ -13,10 +13,11 @@ cmake-build-release/
 .cmake/
 CMakeLists.txt
 
-# Otros archivos
+# Otros archivos/carpetas
 *.o
 *.obj
 *.gch
+datos/
 
 # Ejecutables
 *.exe
