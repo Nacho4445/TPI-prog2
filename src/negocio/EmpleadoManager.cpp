@@ -474,33 +474,38 @@ void EmpleadoManager::mostrarEmpleadosOrdenados(){
     consola.pausar();
 }
 
-void EmpleadoManager::eliminarEmpleado(){
-    int idEliminado;
+void EmpleadoManager::darDeBajaEmpleado(){
+
+    int idEmpleado;
     char confirmar;
 
-    cout << "Ingrese el ID del empleado a eliminar: ";
-    cin >> idEliminado;
+    cout << "Ingrese el ID del empleado a dar de baja: ";
+    cin >> idEmpleado;
 
-    Empleado empleado = _archivoEmpleados.leer(idEliminado);
+    Empleado empleado = _archivoEmpleados.leer(idEmpleado);
 
-    if(empleado.getEstado() == false){
+    if(!empleado.getEstado()){
         cout << "Empleado no encontrado." << endl;
         return;
     }
 
+    cout << "Empleado seleccionado:" << endl;
     mostrarEmpleado(empleado);
 
-    cout << "Eliminar? (s/n): ";
+    cout << endl;
+    cout << "Dar de baja este empleado? (S/N): ";
     cin >> confirmar;
 
-    if(confirmar == 's' || confirmar == 'S'){
-        if(_archivoEmpleados.borrarRegistro(idEliminado)){
-            cout << "Empleado eliminado con exito." << endl;
-        }
-        else{
-            cout << "No se pudo eliminar el empleado." << endl;
-        }
+    if(confirmar != 'S' && confirmar != 's'){
+        cout << "Operacion cancelada." << endl;
+        return;
     }
-    //system("pause");
-    consola.pausar();
+
+    if(_archivoEmpleados.borrarRegistro(idEmpleado)){
+        cout << "Empleado dado de baja correctamente." << endl;
+    }
+    else{
+        cout << "No se pudo dar de baja el empleado." << endl;
+    }
 }
+
