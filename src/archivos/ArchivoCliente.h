@@ -15,6 +15,7 @@ public:
     Cliente leer(int id);
     Cliente leerPorPosicion(int posicion);
     int buscarPorCuit(long long cuit);
+    bool modificar(Cliente cliente);
     bool borrarRegistro(int id);
     void vaciar();
 } ;

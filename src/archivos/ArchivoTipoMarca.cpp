@@ -93,7 +93,7 @@ bool ArchivoTipoMarca::borrarRegistro(int idTipoMarca) {
 
             tipo.setEstado(false);
 
-            fseek(pArchivo, -sizeof(TipoMarca), SEEK_CUR);
+            fseek(pArchivo, -(long)sizeof(TipoMarca), SEEK_CUR);
 
             bool pudoModificar = fwrite(&tipo, sizeof(TipoMarca), 1, pArchivo);
 

@@ -92,6 +92,29 @@ Cliente ArchivoCliente::leerPorPosicion(int posicion){
     return aux;
 }
 
+bool ArchivoCliente::modificar(Cliente cliente){
+
+    int pos = buscar(cliente.getIdCliente());
+
+    if(pos == -1){
+        return false;
+    }
+
+    FILE *p = fopen(ruta.c_str(), "rb+");
+
+    if(p == NULL){
+        return false;
+    }
+
+    fseek(p, pos * sizeof(Cliente), SEEK_SET);
+
+    bool escribio = fwrite(&cliente, sizeof(Cliente), 1, p);
+
+    fclose(p);
+
+    return escribio;
+}
+
 bool ArchivoCliente::borrarRegistro(int id){
   Cliente aux;
 
