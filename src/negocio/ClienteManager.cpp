@@ -531,36 +531,3 @@ void ClienteManager::mostrarClientesOrdenados(){
     consola.pausar();
     //system("pause");
 }
-
-
-void ClienteManager::eliminarCliente(){
-    int idEliminado;
-    char confirmar;
-
-    cout << "Ingrese el ID del cliente a eliminar: ";
-    cin >> idEliminado;
-
-    Cliente cliente = _archivoClientes.leer(idEliminado);
-
-    if(cliente.getEstado() == false){
-        cout << "Cliente no encontrado." << endl;
-        return;
-    }
-
-    mostrarCliente(cliente);
-
-    cout << "Eliminar? (s/n): ";
-    cin >> confirmar;
-
-    if(confirmar == 's' || confirmar == 'S'){
-        if(_archivoClientes.borrarRegistro(idEliminado)){
-            cout << "Cliente eliminado con exito." << endl;
-        }
-        else{
-            cout << "No se pudo eliminar el cliente." << endl;
-        }
-    }
-    consola.pausar();
-    //system("pause");
-}
-
