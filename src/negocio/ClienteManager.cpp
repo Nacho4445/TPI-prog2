@@ -56,9 +56,15 @@ Cliente ClienteManager::crearCliente(){
     cout << "Email: ";
     cin.getline(email, 50);
 
-    cout << "Tipo Cliente (1-Particular / 2-Empresa): ";
-    cin >> tipoCliente;
-    cin.ignore();
+    do{
+        cout << "Ingrese tipo de cliente (1-Particular / 2-Empresa): ";
+        cin >> tipoCliente;
+
+        if(tipoCliente != 1 && tipoCliente != 2){
+            cout << "Tipo invalido." << endl;
+        }
+
+    }while(tipoCliente != 1 && tipoCliente != 2);
 
     cout << "Calle: ";
     cin.getline(calle, 50);
@@ -339,11 +345,22 @@ void ClienteManager::modificarCliente(){
 
     case 1:{
         long long cuit;
-        cout << "Ingrese nuevo CUIT: ";
-        cin >> cuit;
+        int posEncontrada;
+
+        do{
+            cout << "Ingrese nuevo CUIT: ";
+            cin >> cuit;
+
+            posEncontrada = _archivoClientes.buscarPorCuit(cuit);
+
+            if(posEncontrada != -1 && posEncontrada != pos){
+            cout << "Ya existe un cliente con ese CUIT. Ingrese otro." << endl;
+            }
+
+        }while(posEncontrada != -1 && posEncontrada != pos);
+
         clienteActual.setCuit(cuit);
-        break;
-    }
+        }
 
     case 2:{
         char nombre[30];
@@ -446,14 +463,14 @@ void ClienteManager::modificarCliente(){
         return;
      }
 
-    if (_archivoClientes.borrarRegistro(idCliente) && _archivoClientes.guardar(clienteActual)){
+    if (_archivoClientes.modificar(clienteActual)){
         cout << "Cliente modificado correctamente." << endl;
-    }
+        }
     else{
         cout << "No se pudo modificar el cliente." << endl;
-    }
+        }
 
-    system("pause");
+     system("pause");
 }
 
 void ClienteManager::ordenarClientes(Cliente *vClientes, int cantidad){

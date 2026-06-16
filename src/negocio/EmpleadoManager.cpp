@@ -287,10 +287,21 @@ void EmpleadoManager::modificarEmpleado(){
 
     case 1:{
         long long cuit;
-        cout << "Ingrese nuevo CUIT: ";
-        cin >> cuit;
+        int posEncontrada;
+
+        do{
+           cout << "Ingrese nuevo CUIT: ";
+           cin >> cuit;
+
+           posEncontrada = _archivoEmpleados.buscarPorCuit(cuit);
+
+           if(posEncontrada != -1 && posEncontrada != pos){
+           cout << "Ya existe un empleado con ese CUIT. Ingrese otro." << endl;
+           }
+
+        }while(posEncontrada != -1 && posEncontrada != pos);
+
         empleadoActual.setCuit(cuit);
-        break;
     }
 
     case 2:{
@@ -386,7 +397,7 @@ void EmpleadoManager::modificarEmpleado(){
       return;
      }
 
-    if(_archivoEmpleados.borrarRegistro(idEmpleado) && _archivoEmpleados.guardar(empleadoActual)){
+    if(_archivoEmpleados.borrarRegistro(idEmpleado)){
         cout << "Empleado modificado correctamente." << endl;
     }
     else{
@@ -394,6 +405,7 @@ void EmpleadoManager::modificarEmpleado(){
     }
 
     system("pause");
+
 }
 
 void EmpleadoManager::ordenarEmpleados(Empleado vEmpleados[], int cantidad){

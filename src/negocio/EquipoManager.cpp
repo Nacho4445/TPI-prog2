@@ -189,8 +189,6 @@ void EquipoManager::consultarPorStock(){
     }
 }
 
-
-
 void EquipoManager::listarEquipos(){
 
     int cantidadEquipos = _archivoEquipos.getCantidadEquipos();
@@ -319,7 +317,7 @@ void EquipoManager::modificarEquipo(){
        return;
        }
 
-    if(_archivoEquipos.borrarRegistro(idEquipo) && _archivoEquipos.guardar(equipoActual)){
+    if(_archivoEquipos.borrarRegistro(idEquipo)){
         cout << "Equipo modificado correctamente." << endl;
     }
     else{

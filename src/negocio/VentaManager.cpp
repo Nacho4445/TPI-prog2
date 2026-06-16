@@ -84,50 +84,58 @@ void VentaManager::guardarVenta(){
 
     for(int i = 0; i < cantidadEquipos; i++){
 
-        int idEquipo;
-        int cantidad;
+        bool equipoValido = false;
 
-        cout << "-- Equipo " << i + 1 << " --" << endl;
-        cout << "ID Equipo: ";
-        cin >> idEquipo;
+        while(!equipoValido){
 
-        Equipo equipo = _archivoEquipos.leer(idEquipo);
+            int idEquipo;
+            int cantidad;
 
-        if(equipo.getIdEquipo() == 0){
-            cout << "No existe un equipo activo con ese ID." << endl;
-            continue;
+            cout << "-- Equipo " << i + 1 << " --" << endl;
+            cout << "ID Equipo: ";
+            cin >> idEquipo;
+
+            Equipo equipo = _archivoEquipos.leer(idEquipo);
+
+            if(equipo.getIdEquipo() == 0){
+                cout << "No existe un equipo activo con ese ID. Ingrese otro." << endl;
+                continue;
+            }
+
+            cout << "Cantidad: ";
+            cin >> cantidad;
+
+            if(cantidad <= 0){
+                cout << "La cantidad debe ser mayor a cero. Ingrese nuevamente." << endl;
+                continue;
+            }
+
+            if(cantidad > equipo.getStock()){
+                cout << "Sin stock suficiente. Stock disponible: "
+                     << equipo.getStock() << endl;
+                continue;
+            }
+
+            int idDetalle = _archivoDetalleVentas.getCantidadRegistros() + 1 + cantidadCargados;
+            float precioUnitario = equipo.getPrecioUnitario();
+            float subtotal = precioUnitario * cantidad;
+
+            detalles[cantidadCargados].setIdDetalleVenta(idDetalle);
+            detalles[cantidadCargados].setIdVenta(venta.getIdVenta());
+            detalles[cantidadCargados].setIdEquipo(idEquipo);
+            detalles[cantidadCargados].setCantidad(cantidad);
+            detalles[cantidadCargados].setPrecioUnitario(precioUnitario);
+            detalles[cantidadCargados].setSubtotal(subtotal);
+            detalles[cantidadCargados].setEstado(true);
+
+            equipo.setStock(equipo.getStock() - cantidad);
+            _archivoEquipos.modificar(equipo);
+
+            importeTotal += subtotal;
+            cantidadCargados++;
+
+            equipoValido = true;
         }
-
-        cout << "Cantidad: ";
-        cin >> cantidad;
-
-        if(cantidad <= 0){
-            cout << "La cantidad debe ser mayor a cero." << endl;
-            continue;
-        }
-
-        if(cantidad > equipo.getStock()){
-            cout << "Sin stock suficiente. Stock disponible: " << equipo.getStock() << endl;
-            continue;
-        }
-
-        int idDetalle = _archivoDetalleVentas.getCantidadRegistros() + 1 + cantidadCargados;
-        float precioUnitario = equipo.getPrecioUnitario();
-        float subtotal = precioUnitario * cantidad;
-
-        detalles[cantidadCargados].setIdDetalleVenta(idDetalle);
-        detalles[cantidadCargados].setIdVenta(venta.getIdVenta());
-        detalles[cantidadCargados].setIdEquipo(idEquipo);
-        detalles[cantidadCargados].setCantidad(cantidad);
-        detalles[cantidadCargados].setPrecioUnitario(precioUnitario);
-        detalles[cantidadCargados].setSubtotal(subtotal);
-        detalles[cantidadCargados].setEstado(true);
-
-        equipo.setStock(equipo.getStock() - cantidad);
-        _archivoEquipos.modificar(equipo);
-
-        importeTotal += subtotal;
-        cantidadCargados++;
     }
 
     if(cantidadCargados == 0){
@@ -201,9 +209,9 @@ void VentaManager::listarVentas(){
         return;
     }
 
-    for(int i = 1; i <= cantidadRegistros; i++){
+    for(int i = 0; i <= cantidadRegistros; i++){
 
-        Venta venta = _archivoVentas.leer(i);
+        Venta venta = _archivoVentas.leerPorPosicion(i);
 
         if(venta.getEstado()){
             mostrarVenta(venta, detalles);
@@ -312,9 +320,9 @@ void VentaManager::mostrarVentasOrdenadas(){
 
     int cantidadActivas = 0;
 
-    for(int i = 1; i <= cantidadRegistros; i++){
+    for(int i = 0; i < cantidadRegistros; i++){
 
-        Venta venta = _archivoVentas.leer(i);
+        Venta venta = _archivoVentas.leerPorPosicion(i);
 
         if(venta.getEstado()){
             ventas[cantidadActivas] = venta;
@@ -396,16 +404,16 @@ void VentaManager::consultarPorCliente(){
 
     bool encontro = false;
 
-    for(int i = 1; i <= cantidadRegistros; i++){
+    for(int i = 0; i < cantidadRegistros; i++){
 
-        Venta venta = _archivoVentas.leer(i);
+    Venta venta = _archivoVentas.leerPorPosicion(i);
 
-        if(venta.getEstado() && venta.getIdCliente() == idCliente){
-            mostrarVenta(venta, detalles);
-            cout << endl;
-            encontro = true;
-        }
+    if(venta.getEstado() && venta.getIdCliente() == idCliente){
+        mostrarVenta(venta, detalles);
+        cout << endl;
+        encontro = true;
     }
+}
 
     if(!encontro){
         cout << "No se encontraron ventas para ese cliente." << endl;
@@ -438,9 +446,9 @@ void VentaManager::consultarPorEmpleado(){
 
     bool encontro = false;
 
-    for(int i = 1; i <= cantidadRegistros; i++){
+    for(int i = 0; i < cantidadRegistros; i++){
 
-        Venta venta = _archivoVentas.leer(i);
+        Venta venta = _archivoVentas.leerPorPosicion(i);
 
         if(venta.getEstado() && venta.getIdEmpleado() == idEmpleado){
             mostrarVenta(venta, detalles);
@@ -493,9 +501,9 @@ void VentaManager::consultarPorFecha(){
 
     bool encontro = false;
 
-    for(int i = 1; i <= cantidadRegistros; i++){
+    for(int i = 0; i < cantidadRegistros; i++){
 
-        Venta venta = _archivoVentas.leer(i);
+       Venta venta = _archivoVentas.leerPorPosicion(i);
 
         if(venta.getEstado() &&
            venta.getFecha().getDia() == dia &&
@@ -539,9 +547,9 @@ void VentaManager::consultarPorEquipo(){
 
     bool encontro = false;
 
-    for(int i = 1; i <= cantidadRegistros; i++){
+    for(int i = 0; i < cantidadRegistros; i++){
 
-        Venta venta = _archivoVentas.leer(i);
+        Venta venta = _archivoVentas.leerPorPosicion(i);
 
         if(venta.getEstado()){
 
