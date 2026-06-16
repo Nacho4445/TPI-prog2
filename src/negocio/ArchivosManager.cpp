@@ -34,7 +34,7 @@ bool ArchivosManager::copiarArchivo(const string &rutaOrigen, const string &ruta
 
 void ArchivosManager::crearBackup(Empleado &empleado) {
 	const bool exito = copiarArchivo("datos/empleados.dat",
-	                                 "datos/backups/empleados.dat",
+	                                 "backups/empleados.dat",
 	                                 &empleado,
 	                                 sizeof(Empleado));
 
@@ -44,7 +44,7 @@ void ArchivosManager::crearBackup(Empleado &empleado) {
 
 void ArchivosManager::crearBackup(Cliente &cliente) {
 	const bool exito = copiarArchivo("datos/clientes.dat",
-	                                 "datos/backups/clientes.dat",
+	                                 "backups/clientes.dat",
 	                                 &cliente,
 	                                 sizeof(Cliente));
 	if (exito) cout << "Backup de Clientes generado!\n";
@@ -53,7 +53,7 @@ void ArchivosManager::crearBackup(Cliente &cliente) {
 
 void ArchivosManager::crearBackup(TipoCliente &tipoCliente) {
 	const bool exito = copiarArchivo("datos/tiposClientes.dat",
-	                                 "datos/backups/tiposClientes.dat",
+	                                 "backups/tiposClientes.dat",
 	                                 &tipoCliente,
 	                                 sizeof(TipoCliente));
 	if (exito) cout << "Backup de Tipos de Clientes generado!\n";
@@ -62,7 +62,7 @@ void ArchivosManager::crearBackup(TipoCliente &tipoCliente) {
 
 void ArchivosManager::crearBackup(Venta &venta) {
 	const bool exito = copiarArchivo("datos/ventas.dat",
-	                                 "datos/backups/ventas.dat",
+	                                 "backups/ventas.dat",
 	                                 &venta,
 	                                 sizeof(Venta));
 	if (exito) cout << "Backup de Ventas generado!\n";
@@ -71,7 +71,7 @@ void ArchivosManager::crearBackup(Venta &venta) {
 
 void ArchivosManager::crearBackup(DetalleVenta &detalleVenta) {
 	const bool exito = copiarArchivo("datos/detalleVentas.dat",
-	                                 "datos/backups/detalleVentas.dat",
+	                                 "backups/detalleVentas.dat",
 	                                 &detalleVenta,
 	                                 sizeof(DetalleVenta));
 	if (exito) cout << "Backup de Detalles de Venta generado!\n";
@@ -80,7 +80,7 @@ void ArchivosManager::crearBackup(DetalleVenta &detalleVenta) {
 
 void ArchivosManager::crearBackup(Equipo &equipo) {
 	const bool exito = copiarArchivo("datos/equipos.dat",
-	                                 "datos/backups/equipos.dat",
+	                                 "backups/equipos.dat",
 	                                 &equipo,
 	                                 sizeof(Equipo));
 	if (exito) cout << "Backup de Equipos generado!\n";
@@ -89,7 +89,7 @@ void ArchivosManager::crearBackup(Equipo &equipo) {
 
 void ArchivosManager::crearBackup(TipoEquipo &tipoEquipo) {
 	const bool exito = copiarArchivo("datos/tiposEquipos.dat",
-	                                 "datos/backups/tiposEquipos.dat",
+	                                 "backups/tiposEquipos.dat",
 	                                 &tipoEquipo,
 	                                 sizeof(TipoEquipo));
 	if (exito) cout << "Backup de Tipos de Equipos generado!\n";
@@ -98,7 +98,7 @@ void ArchivosManager::crearBackup(TipoEquipo &tipoEquipo) {
 
 void ArchivosManager::crearBackup(TipoMarca &tipoMarca) {
 	const bool exito = copiarArchivo("datos/tiposMarcas.dat",
-	                                 "datos/backups/tiposMarcas.dat",
+	                                 "backups/tiposMarcas.dat",
 	                                 &tipoMarca,
 	                                 sizeof(TipoMarca));
 	if (exito) cout << "Backup de Tipos de Marcas generado!\n";
@@ -108,7 +108,7 @@ void ArchivosManager::crearBackup(TipoMarca &tipoMarca) {
 // ------------------------------------ SOBRECARGA RESTAURACION BACKUPS -----------------------------------------------
 
 void ArchivosManager::restaurarBackup(Empleado &empleado) {
-	const bool exito = copiarArchivo("datos/backups/empleados.dat",
+	const bool exito = copiarArchivo("backups/empleados.dat",
 	                                 "datos/empleados.dat",
 	                                 &empleado,
 	                                 sizeof(Empleado));
@@ -117,7 +117,7 @@ void ArchivosManager::restaurarBackup(Empleado &empleado) {
 }
 
 void ArchivosManager::restaurarBackup(Cliente &cliente) {
-	const bool exito = copiarArchivo("datos/backups/clientes.dat",
+	const bool exito = copiarArchivo("backups/clientes.dat",
 	                                 "datos/clientes.dat",
 	                                 &cliente,
 	                                 sizeof(Cliente));
@@ -126,7 +126,7 @@ void ArchivosManager::restaurarBackup(Cliente &cliente) {
 }
 
 void ArchivosManager::restaurarBackup(TipoCliente &tipoCliente) {
-	const bool exito = copiarArchivo("datos/backups/tiposClientes.dat",
+	const bool exito = copiarArchivo("backups/tiposClientes.dat",
 	                                 "datos/tiposClientes.dat",
 	                                 &tipoCliente,
 	                                 sizeof(TipoCliente));
@@ -135,7 +135,7 @@ void ArchivosManager::restaurarBackup(TipoCliente &tipoCliente) {
 }
 
 void ArchivosManager::restaurarBackup(Venta &venta) {
-	const bool exito = copiarArchivo("datos/backups/ventas.dat",
+	const bool exito = copiarArchivo("backups/ventas.dat",
 	                                 "datos/ventas.dat",
 	                                 &venta,
 	                                 sizeof(Venta));
@@ -144,7 +144,7 @@ void ArchivosManager::restaurarBackup(Venta &venta) {
 }
 
 void ArchivosManager::restaurarBackup(DetalleVenta &detalleVenta) {
-	const bool exito = copiarArchivo("datos/backups/detalleVentas.dat",
+	const bool exito = copiarArchivo("backups/detalleVentas.dat",
 	                                 "datos/detalleVentas.dat",
 	                                 &detalleVenta,
 	                                 sizeof(DetalleVenta));
@@ -153,7 +153,7 @@ void ArchivosManager::restaurarBackup(DetalleVenta &detalleVenta) {
 }
 
 void ArchivosManager::restaurarBackup(Equipo &equipo) {
-	const bool exito = copiarArchivo("datos/backups/equipos.dat",
+	const bool exito = copiarArchivo("backups/equipos.dat",
 	                                 "datos/equipos.dat",
 	                                 &equipo,
 	                                 sizeof(Equipo));
@@ -162,7 +162,7 @@ void ArchivosManager::restaurarBackup(Equipo &equipo) {
 }
 
 void ArchivosManager::restaurarBackup(TipoEquipo &tipoEquipo) {
-	const bool exito = copiarArchivo("datos/backups/tiposEquipos.dat",
+	const bool exito = copiarArchivo("backups/tiposEquipos.dat",
 	                                 "datos/tiposEquipos.dat",
 	                                 &tipoEquipo,
 	                                 sizeof(TipoEquipo));
@@ -171,7 +171,7 @@ void ArchivosManager::restaurarBackup(TipoEquipo &tipoEquipo) {
 }
 
 void ArchivosManager::restaurarBackup(TipoMarca &tipoMarca) {
-	const bool exito = copiarArchivo("datos/backups/tiposMarcas.dat",
+	const bool exito = copiarArchivo("backups/tiposMarcas.dat",
 	                                 "datos/tiposMarcas.dat",
 	                                 &tipoMarca,
 	                                 sizeof(TipoMarca));
