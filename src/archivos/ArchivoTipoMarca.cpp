@@ -78,6 +78,47 @@ TipoMarca ArchivoTipoMarca::leer(int idTipoMarca) {
     return TipoMarca();
 }
 
+TipoMarca ArchivoTipoMarca::leerPorPosicion(int posicion){
+
+    TipoMarca reg;
+
+    FILE *p = fopen(_ruta.c_str(), "rb");
+
+    if(p == NULL){
+        return reg;
+    }
+
+    fseek(p, posicion * sizeof(TipoMarca), SEEK_SET);
+
+    fread(&reg, sizeof(TipoMarca), 1, p);
+
+    fclose(p);
+
+    return reg;
+}
+int ArchivoTipoMarca::generarNuevoId(){
+
+    FILE *pArchivo = fopen(_ruta.c_str(), "rb");
+
+    if(pArchivo == nullptr){
+        return 1;
+    }
+
+    TipoMarca tipo;
+    int maxId = 0;
+
+    while(fread(&tipo, sizeof(TipoMarca), 1, pArchivo) == 1){
+
+        if(tipo.getIdTipoMarca() > maxId){
+            maxId = tipo.getIdTipoMarca();
+        }
+    }
+
+    fclose(pArchivo);
+
+    return maxId + 1;
+}
+
 bool ArchivoTipoMarca::borrarRegistro(int idTipoMarca) {
     FILE* pArchivo = fopen(_ruta.c_str(), "rb+");
 
@@ -113,3 +154,4 @@ void ArchivoTipoMarca::vaciar() {
         fclose(pArchivo);
     }
 }
+
