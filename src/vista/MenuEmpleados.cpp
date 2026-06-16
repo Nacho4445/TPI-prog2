@@ -15,7 +15,7 @@ void MenuEmpleados::mostrarOpciones(){
     cout << "1. Registrar Empleado" << endl;
     cout << "2. Consultas de Empleados" << endl;
     cout << "3. Modificar Empleado" << endl;
-    cout << "4. Eliminar Empleado" << endl;
+    cout << "4. Dar de baja Empleado" << endl;
     cout << "5. Listar Empleados" << endl;
     cout << "------------------------" << endl;
     cout << "0. Salir" << endl;
@@ -86,7 +86,7 @@ case 3:
     break;
 
 case 4:
-    managerEmpleados.eliminarEmpleado();
+    managerEmpleados.darDeBajaEmpleado();
     break;
 
 case 5:
