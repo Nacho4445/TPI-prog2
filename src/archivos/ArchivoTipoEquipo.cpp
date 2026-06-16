@@ -78,6 +78,48 @@ TipoEquipo ArchivoTipoEquipo::leer(int idTipoEquipo) {
     return TipoEquipo();
 }
 
+TipoEquipo ArchivoTipoEquipo::leerPorPosicion(int posicion){
+
+    TipoEquipo reg;
+
+    FILE *p = fopen(_ruta.c_str(), "rb");
+
+    if(p == NULL){
+        return reg;
+    }
+
+    fseek(p, posicion * sizeof(TipoEquipo), SEEK_SET);
+
+    fread(&reg, sizeof(TipoEquipo), 1, p);
+
+    fclose(p);
+
+    return reg;
+}
+
+int ArchivoTipoEquipo::generarNuevoId(){
+
+    FILE *pArchivo = fopen(_ruta.c_str(), "rb");
+
+    if(pArchivo == nullptr){
+        return 1;
+    }
+
+    TipoEquipo tipo;
+    int maxId = 0;
+
+    while(fread(&tipo, sizeof(TipoEquipo), 1, pArchivo) == 1){
+
+        if(tipo.getIdTipoEquipo() > maxId){
+            maxId = tipo.getIdTipoEquipo();
+        }
+    }
+
+    fclose(pArchivo);
+
+    return maxId + 1;
+}
+
 bool ArchivoTipoEquipo::borrarRegistro(int idTipoEquipo) {
     FILE* pArchivo = fopen(_ruta.c_str(), "rb+");
 
@@ -93,7 +135,7 @@ bool ArchivoTipoEquipo::borrarRegistro(int idTipoEquipo) {
 
             tipo.setEstado(false);
 
-            fseek(pArchivo, -sizeof(TipoEquipo), SEEK_CUR);
+            fseek(pArchivo, -(long)sizeof(TipoEquipo), SEEK_CUR);
 
             bool pudoModificar = fwrite(&tipo, sizeof(TipoEquipo), 1, pArchivo);
 
