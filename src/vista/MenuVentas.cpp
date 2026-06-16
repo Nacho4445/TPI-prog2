@@ -87,7 +87,7 @@ void MenuVentas::ejecutarOpcion(int opcion){
         managerVentas.cancelarVenta();
         break;
 
-    case 5:
+    case 4:
         managerVentas.listarVentas();
         break;
 
