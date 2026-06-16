@@ -119,6 +119,29 @@ int ArchivoEmpleado::buscarPorCuit(long long cuit){
     return -1;
 }
 
+bool ArchivoEmpleado::modificar(Empleado empleado){
+
+    int pos = buscar(empleado.getIdEmpleado());
+
+    if(pos == -1){
+        return false;
+    }
+
+    FILE *p = fopen(ruta.c_str(), "rb+");
+
+    if(p == NULL){
+        return false;
+    }
+
+    fseek(p, pos * sizeof(Empleado), SEEK_SET);
+
+    bool escribio = fwrite(&empleado, sizeof(Empleado), 1, p);
+
+    fclose(p);
+
+    return escribio;
+}
+
 bool ArchivoEmpleado::borrarRegistro(int id){
   Empleado aux;
 
