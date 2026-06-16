@@ -14,7 +14,7 @@ void Consola::limpiar() {
 
 void Consola::pausar() {
 #ifdef _WIN32
-	system("pause")
+	system("pause");
 #else
 	cout << "\nPresione Enter para continuar...";
 	cin.ignore();
