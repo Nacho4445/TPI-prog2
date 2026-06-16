@@ -1,3 +1,7 @@
 #pragma once
 
-void cargarDatosPrueba();
+class CargarDatosPrueba {
+public:
+	void cargarDatosPrueba();
+};
+

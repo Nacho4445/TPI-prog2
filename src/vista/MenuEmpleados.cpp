@@ -8,7 +8,8 @@ MenuEmpleados::MenuEmpleados(){
 }
 
 void MenuEmpleados::mostrarOpciones(){
-    system("cls");
+    consola.limpiar();
+    //system("cls");
     cout << "------------------------" << endl;
     cout << "-----MENU EMPLEADOS-----" << endl;
     cout << "1. Registrar Empleado" << endl;
@@ -30,7 +31,8 @@ case 2:{
     int opcionConsulta;
 
     do{
-        system("cls");
+        consola.limpiar();
+        //system("cls");
         cout << "---------------------------" << endl;
         cout << "--- CONSULTAS EMPLEADOS ---" << endl;
         cout << "1. Consultar por ID" << endl;
@@ -45,27 +47,32 @@ case 2:{
 
         case 1:
             managerEmpleados.consultarPorId();
-            system("pause");
+            consola.pausar();
+            //system("pause");
             break;
 
         case 2:
             managerEmpleados.consultarPorCuit();
-            system("pause");
+            consola.pausar();
+            //system("pause");
             break;
 
         case 3:
             managerEmpleados.consultarPorApellido();
-            system("pause");
+            consola.pausar();
+            //system("pause");
             break;
 
         case 0:
             cout << "Volviendo al menu empleados..." << endl;
-            system("pause");
+            consola.pausar();
+            //system("pause");
             break;
 
         default:
             cout << "Opcion invalida." << endl;
-            system("pause");
+            consola.pausar();
+            //system("pause");
             break;
         }
 

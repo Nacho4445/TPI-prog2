@@ -1,5 +1,6 @@
 #pragma once
 #include "archivos/ArchivoEmpleado.h"
+#include "utils/Consola.h"
 
 class EmpleadoManager {
 private:
@@ -7,7 +8,7 @@ private:
    void mostrarEmpleado(Empleado &reg);
    void ordenarEmpleados(Empleado vEmpleados[], int cantidad);
    ArchivoEmpleado _archivoEmpleados;
-
+	Consola consola;
 public:
 	EmpleadoManager();
 

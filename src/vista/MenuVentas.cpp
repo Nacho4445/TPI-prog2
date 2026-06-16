@@ -46,27 +46,32 @@ void MenuVentas::ejecutarOpcion(int opcion){
 
             case 1:
                 managerVentas.consultarPorId();
-                system("pause");
+                consola.pausar();
+                //system("pause");
                 break;
 
             case 2:
                 managerVentas.consultarPorCliente();
-                system("pause");
+                consola.pausar();
+                //system("pause");
                 break;
 
             case 3:
                 managerVentas.consultarPorEmpleado();
-                system("pause");
+                consola.pausar();
+                //system("pause");
                 break;
 
             case 4:
                 managerVentas.consultarPorFecha();
-                system("pause");
+                consola.pausar();
+                //system("pause");
                 break;
 
             case 5:
                 managerVentas.consultarPorEquipo();
-                system("pause");
+                consola.pausar();
+                //system("pause");
                 break;
 
             case 0:

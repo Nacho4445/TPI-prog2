@@ -24,7 +24,7 @@
 #include <iostream>
 using namespace std;
 
-void cargarDatosPrueba(){
+void CargarDatosPrueba::cargarDatosPrueba(){
 
     ArchivoTipoCliente archivoTipoCliente;
     ArchivoTipoMarca archivoTipoMarca;
@@ -45,8 +45,8 @@ void cargarDatosPrueba(){
     archivoDetalleVenta.vaciar();
 
     // OJO: ArchivoVenta no tiene vaciar().
-    // Por ahora borrá manualmente datos/ventas.dat antes de ejecutar esto,
-    // o agregamos después un vaciar() a ArchivoVenta.
+    // Por ahora borrï¿½ manualmente datos/ventas.dat antes de ejecutar esto,
+    // o agregamos despuï¿½s un vaciar() a ArchivoVenta.
 
     // ---------------- TIPOS CLIENTE ----------------
     archivoTipoCliente.guardar(TipoCliente(1, "Particular", true));

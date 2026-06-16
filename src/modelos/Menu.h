@@ -1,8 +1,11 @@
 #pragma once
 
+#include "utils/Consola.h"
+
 class Menu{
 private:
     int cantidadOpciones;
+    Consola consola;
 protected:
     void setCantidadOpciones(int cantidad);
     int getCantidadOpciones();

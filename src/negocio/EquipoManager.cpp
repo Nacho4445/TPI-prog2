@@ -296,12 +296,14 @@ void EquipoManager::modificarEquipo(){
 
     case 0:
         cout << "Modificacion cancelada." << endl;
-        system("pause");
+        consola.pausar();
+        //system("pause");
         return;
 
     default:
         cout << "Opcion invalida." << endl;
-        system("pause");
+        consola.pausar();
+        //system("pause");
         return;
     }
 
@@ -312,10 +314,11 @@ void EquipoManager::modificarEquipo(){
     cin >> confirmar;
 
     if(confirmar != 'S' && confirmar != 's'){
-       cout << "Modificacion cancelada por el usuario." << endl;
-       system("pause");
-       return;
-       }
+        cout << "Modificacion cancelada por el usuario." << endl;
+        consola.pausar();
+        //system("pause");
+        return;
+    }
 
     if(_archivoEquipos.borrarRegistro(idEquipo)){
         cout << "Equipo modificado correctamente." << endl;
@@ -324,7 +327,8 @@ void EquipoManager::modificarEquipo(){
         cout << "No se pudo modificar el equipo." << endl;
     }
 
-    system("pause");
+    consola.pausar();
+    //system("pause");
 }
 
 void EquipoManager::ordenarEquipos(Equipo vEquipos[], int cantidad){

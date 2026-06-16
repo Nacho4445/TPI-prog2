@@ -1,6 +1,7 @@
 #pragma once
 #include "archivos/ArchivoCliente.h"
 #include "negocio/ClienteManager.h"
+#include "utils/Consola.h"
 
 class ClienteManager {
 private:
@@ -8,7 +9,7 @@ private:
    void mostrarCliente(Cliente &reg);
    void ordenarClientes(Cliente vClientes[], int cantidad);
    ArchivoCliente _archivoClientes;
-
+	Consola consola;
 public:
 	ClienteManager();
 

@@ -8,7 +8,8 @@ MenuClientes::MenuClientes(){
 }
 
 void MenuClientes::mostrarOpciones(){
-    system("cls");
+    consola.limpiar();
+    // system("cls");
     cout << "------------------------" << endl;
     cout << "-----MENU CLIENTES-----" << endl;
     cout << "1. Registrar Cliente" << endl;
@@ -30,7 +31,8 @@ case 2:
     int opcionConsulta;
 
     do{
-        system("cls");
+        consola.limpiar();
+        //system("cls");
         cout << "------------------------" << endl;
         cout << "--- CONSULTAS CLIENTES ---" << endl;
         cout << "1. Consultar por ID" << endl;
@@ -45,19 +47,23 @@ case 2:
         switch(opcionConsulta){
         case 1:
             managerClientes.consultarPorId();
-            system("pause");
+            consola.pausar();
+            //system("pause");
             break;
         case 2:
             managerClientes.consultarPorCuit();
-            system("pause");
+            consola.pausar();
+            //system("pause");
             break;
         case 3:
             managerClientes.consultarPorApellido();
-            system("pause");
+            consola.pausar();
+            //system("pause");
             break;
         case 4:
             managerClientes.consultarPorTipo();
-            system("pause");
+            consola.pausar();
+            //system("pause");
             break;
         case 0:
             cout << "Volviendo al menu clientes..." << endl;

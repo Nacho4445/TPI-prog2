@@ -8,7 +8,8 @@ MenuEquipos::MenuEquipos(){
 }
 
 void MenuEquipos::mostrarOpciones(){
-    system("cls");
+    consola.limpiar();
+    //system("cls");
     cout << "------------------------" << endl;
     cout << "-----MENU EQUIPOS-----" << endl;
     cout << "1. Registrar Equipo" << endl;
@@ -32,7 +33,8 @@ void MenuEquipos::ejecutarOpcion(int opcion){
         int opcionConsulta;
 
         do{
-            system("cls");
+            consola.limpiar();
+            //system("cls");
             cout << "------------------------" << endl;
             cout << "--- CONSULTAS EQUIPOS ---" << endl;
             cout << "1. Consultar por ID" << endl;
@@ -49,27 +51,32 @@ void MenuEquipos::ejecutarOpcion(int opcion){
 
             case 1:
                 managerEquipos.consultarPorId();
-                system("pause");
+                consola.pausar();
+                //system("pause");
                 break;
 
             case 2:
                 managerEquipos.consultarPorTipo();
-                system("pause");
+                consola.pausar();
+                //system("pause");
                 break;
 
             case 3:
                 managerEquipos.consultarPorMarca();
-                system("pause");
+                consola.pausar();
+                //system("pause");
                 break;
 
             case 4:
                 managerEquipos.consultarPorPrecio();
-                system("pause");
+                consola.pausar();
+                //system("pause");
                 break;
 
             case 5:
                 managerEquipos.consultarPorStock();
-                system("pause");
+                consola.pausar();
+                //system("pause");
                 break;
 
             case 0:

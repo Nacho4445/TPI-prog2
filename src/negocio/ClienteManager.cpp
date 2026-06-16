@@ -108,7 +108,8 @@ Cliente ClienteManager::crearCliente(){
 
     cliente.setDireccion(direccion);
 
-    system("pause");
+    consola.pausar();
+    //system("pause");
     return cliente;
 }
 
@@ -122,7 +123,8 @@ void ClienteManager::guardarCliente(){
     else{
         cout << "Error al guardar el cliente." << endl;
     }
-    system("pause");
+    consola.pausar();
+    //system("pause");
 }
 void ClienteManager::consultarPorId(){
 
@@ -147,7 +149,8 @@ void ClienteManager::consultarPorId(){
 
         cout << "Cliente no encontrado. Intente nuevamente." << endl;
     }
-    system("pause");
+    consola.pausar();
+    //system("pause");
 }
 
 void ClienteManager::consultarPorCuit(){
@@ -175,7 +178,8 @@ void ClienteManager::consultarPorCuit(){
 
         cout << "Cliente no encontrado. Intente nuevamente." << endl;
     }
-    system("pause");
+    consola.pausar();
+    //system("pause");
 }
 
 void ClienteManager::consultarPorApellido(){
@@ -204,7 +208,8 @@ void ClienteManager::consultarPorApellido(){
     if(!encontro){
         cout << "No se encontraron clientes con ese apellido." << endl;
     }
-    system("pause");
+    consola.pausar();
+    //system("pause");
 }
 
 void ClienteManager::consultarPorTipo(){
@@ -242,7 +247,8 @@ void ClienteManager::consultarPorTipo(){
     if(!encontro){
         cout << "No se encontraron clientes de ese tipo." << endl;
     }
-    system("pause");
+    consola.pausar();
+    //system("pause");
 }
 
 
@@ -266,7 +272,8 @@ void ClienteManager::listarClientes(){
     if(!hayClientes && cantidad > 0){
         cout << "No hay clientes activos." << endl;
         }
-    system("pause");
+    consola.pausar();
+    //system("pause");
 }
 
 void ClienteManager::mostrarCliente(Cliente &reg){
@@ -442,12 +449,14 @@ void ClienteManager::modificarCliente(){
 
     case 0:
         cout << "Modificacion cancelada." << endl;
-        system("pause");
+        consola.pausar();
+        //system("pause");
         return;
 
     default:
         cout << "Opcion invalida." << endl;
-        system("pause");
+        consola.pausar();
+        //system("pause");
         return;
     }
 
@@ -468,9 +477,9 @@ void ClienteManager::modificarCliente(){
         }
     else{
         cout << "No se pudo modificar el cliente." << endl;
-        }
-
-     system("pause");
+    }
+    consola.pausar();
+    //system("pause");
 }
 
 void ClienteManager::ordenarClientes(Cliente *vClientes, int cantidad){
@@ -518,7 +527,8 @@ void ClienteManager::mostrarClientesOrdenados(){
     }
 
     delete [] vClientes;
-    system("pause");
+    consola.pausar();
+    //system("pause");
 }
 
 
@@ -549,6 +559,7 @@ void ClienteManager::eliminarCliente(){
             cout << "No se pudo eliminar el cliente." << endl;
         }
     }
-    system("pause");
+    consola.pausar();
+    //system("pause");
 }
 

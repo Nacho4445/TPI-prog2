@@ -10,12 +10,14 @@ Menu::Menu(){
 void Menu::ejecutarMenu(){
     int opcion;
     do{
-        system("cls");
+        consola.limpiar();
+        //system("cls");
         mostrarOpciones();
         opcion = seleccionarOpcion();
         ejecutarOpcion(opcion);
         if(opcion != 0){
-            system("pause");
+            consola.limpiar();
+            //system("pause");
         }
     }while (opcion !=0);
 }
