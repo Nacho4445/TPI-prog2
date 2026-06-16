@@ -11,6 +11,8 @@ public:
     bool guardar(TipoEquipo tipo);
     int getPosicion(int idTipoEquipo);
     TipoEquipo leer(int idTipoEquipo);
+    TipoEquipo leerPorPosicion(int posicion);
+    int generarNuevoId();
     bool borrarRegistro(int idTipoEquipo);
     void vaciar();
 
