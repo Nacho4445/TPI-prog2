@@ -11,6 +11,8 @@ public:
     bool guardar(TipoMarca tipo);
     int getPosicion(int idTipoMarca);
     TipoMarca leer(int idTipoMarca);
+    TipoMarca leerPorPosicion(int posicion);
+    int generarNuevoId();
     bool borrarRegistro(int idTipoMarca);
     void vaciar();
 
