@@ -1,163 +1,223 @@
-#include "archivos/ArchivoEquipo.h"
+#include <iostream>
+#include "archivos/ArchivoEmpleado.h"
 
-ArchivoEquipo::ArchivoEquipo() {
-    _ruta = "datos/equipos.dat";
+ArchivoEmpleado::ArchivoEmpleado(){
+  ruta = "datos/empleados.dat";
 }
 
-int ArchivoEquipo::getCantidadEquipos() {
-    FILE* pArchivo = fopen(_ruta.c_str(), "rb");
-
-    if (pArchivo == nullptr) {
-        return 0;
-    }
-
-    fseek(pArchivo, 0, SEEK_END);
-    int cantidadBytes = ftell(pArchivo);
-
-    fclose(pArchivo);
-
-    return cantidadBytes / sizeof(Equipo);
+ArchivoEmpleado::ArchivoEmpleado(std::string _ruta){
+  ruta = _ruta;
 }
 
-bool ArchivoEquipo::guardar(Equipo equipo) {
-    FILE* pArchivo = fopen(_ruta.c_str(), "ab");
+int ArchivoEmpleado::getCantidadRegistros(){
+  FILE *p = fopen(ruta.c_str(), "rb");
 
-    if (pArchivo == nullptr) {
-        return false;
-    }
+  if (p == NULL){
+    return 0;
+  }
 
-    bool pudoGuardar = fwrite(&equipo, sizeof(Equipo), 1, pArchivo);
+  fseek(p, 0, SEEK_END);
+  int bytes = ftell(p);
+  fclose(p);
 
-    fclose(pArchivo);
-
-    return pudoGuardar;
+  return bytes / sizeof(Empleado);
 }
 
-int ArchivoEquipo::getPosicion(int idEquipo) {
-    FILE* pArchivo = fopen(_ruta.c_str(), "rb");
+bool ArchivoEmpleado::guardar(Empleado reg){
+  FILE *p = fopen(ruta.c_str(), "ab");
 
-    if (pArchivo == nullptr) {
-        return -1;
-    }
+  if (p == NULL){
+    return false;
+  }
 
-    Equipo equipo;
-    int posicion = 0;
-
-    while (fread(&equipo, sizeof(Equipo), 1, pArchivo) == 1) {
-
-        if (equipo.getIdEquipo() == idEquipo && equipo.getEstado()) {
-            fclose(pArchivo);
-            return posicion;
-        }
-
-        posicion++;
-    }
-
-    fclose(pArchivo);
-
-    return -1;
+  bool pudoEscribir = fwrite(&reg, sizeof(Empleado), 1, p);
+  fclose(p);
+  return pudoEscribir;
 }
 
-Equipo ArchivoEquipo::leer(int idEquipo) {
-    Equipo equipo;
+int ArchivoEmpleado::buscar(int id){
+  FILE *p = fopen(ruta.c_str(), "rb");
+  if (p == NULL) return -1;
 
-    FILE* pArchivo = fopen(_ruta.c_str(), "rb");
+  Empleado aux;
+  int numReg = 0;
 
-    if (pArchivo == nullptr) {
-        return equipo;
+  while (fread(&aux, sizeof(Empleado), 1, p) == 1) {
+    if (aux.getIdEmpleado() == id && aux.getEstado() == true) {
+      fclose(p);
+      return numReg;
     }
+    numReg++;
+  }
 
-    while (fread(&equipo, sizeof(Equipo), 1, pArchivo) == 1) {
-
-        if (equipo.getIdEquipo() == idEquipo && equipo.getEstado()) {
-            fclose(pArchivo);
-            return equipo;
-        }
-    }
-
-    fclose(pArchivo);
-
-    return Equipo();
+  fclose(p);
+  return -1;
 }
 
-Equipo ArchivoEquipo::leerPorPosicion(int posicion){
+Empleado ArchivoEmpleado::leer(int id){
+  Empleado aux;
 
-    Equipo equipo;
+  int pos = buscar(id);
 
-    FILE *p = fopen(_ruta.c_str(), "rb");
+  if (pos == -1){
+        return aux;
+  }
+
+  FILE *p = fopen(ruta.c_str(), "rb");
+  if (p == NULL){
+    return aux;
+  }
+
+  fseek(p, pos * sizeof(Empleado), SEEK_SET);
+  fread(&aux, sizeof(Empleado), 1, p);
+
+  fclose(p);
+  return aux;
+}
+
+Empleado ArchivoEmpleado::leerPorPosicion(int posicion){
+
+    Empleado reg;
+
+    FILE *p = fopen(ruta.c_str(), "rb");
 
     if(p == NULL){
-        return equipo;
+        return reg;
     }
 
-    fseek(p, posicion * sizeof(Equipo), SEEK_SET);
+    fseek(p, posicion * sizeof(Empleado), SEEK_SET);
 
-    fread(&equipo, sizeof(Equipo), 1, p);
+    fread(&reg, sizeof(Empleado), 1, p);
 
     fclose(p);
 
-    return equipo;
+    return reg;
 }
 
-bool ArchivoEquipo::modificar(Equipo equipo) {
-    FILE* pArchivo = fopen(_ruta.c_str(), "rb+");
+Empleado ArchivoEmpleado::leerIncluyendoBajas(int id){
+    Empleado aux;
 
-    if (pArchivo == nullptr) {
+    int pos = buscarIncluyendoBajas(id);
+
+    if(pos == -1){
+        return aux;
+    }
+
+    FILE *p = fopen(ruta.c_str(), "rb");
+
+    if(p == NULL){
+        return aux;
+    }
+
+    fseek(p, pos * sizeof(Empleado), SEEK_SET);
+    fread(&aux, sizeof(Empleado), 1, p);
+
+    fclose(p);
+
+    return aux;
+}
+
+int ArchivoEmpleado::buscarPorCuit(long long cuit){
+
+    Empleado reg;
+    FILE *pFile = fopen(ruta.c_str(), "rb");
+
+    if(pFile == nullptr){
+        return -1;
+    }
+
+    int pos = 0;
+
+    while(fread(&reg, sizeof(Empleado), 1, pFile) == 1){
+
+        if(reg.getEstado() && reg.getCuit() == cuit){
+            fclose(pFile);
+            return pos;
+        }
+
+        pos++;
+    }
+
+    fclose(pFile);
+    return -1;
+}
+
+int ArchivoEmpleado::buscarIncluyendoBajas(int id){
+    FILE *p = fopen(ruta.c_str(), "rb");
+
+    if(p == NULL){
+        return -1;
+    }
+
+    Empleado aux;
+    int pos = 0;
+
+    while(fread(&aux, sizeof(Empleado), 1, p) == 1){
+        if(aux.getIdEmpleado() == id){
+            fclose(p);
+            return pos;
+        }
+
+        pos++;
+    }
+
+    fclose(p);
+    return -1;
+}
+
+bool ArchivoEmpleado::modificar(Empleado empleado){
+
+    int pos = buscar(empleado.getIdEmpleado());
+
+    if(pos == -1){
         return false;
     }
 
-    Equipo aux;
+    FILE *p = fopen(ruta.c_str(), "rb+");
 
-    while (fread(&aux, sizeof(Equipo), 1, pArchivo) == 1) {
-
-        if (aux.getIdEquipo() == equipo.getIdEquipo() && aux.getEstado()) {
-
-            fseek(pArchivo, -sizeof(Equipo), SEEK_CUR);
-
-            bool pudoModificar = fwrite(&equipo, sizeof(Equipo), 1, pArchivo);
-
-            fclose(pArchivo);
-            return pudoModificar;
-        }
-    }
-
-    fclose(pArchivo);
-    return false;
-}
-
-bool ArchivoEquipo::borrarRegistro(int idEquipo) {
-    FILE* pArchivo = fopen(_ruta.c_str(), "rb+");
-
-    if (pArchivo == nullptr) {
+    if(p == NULL){
         return false;
     }
 
-    Equipo equipo;
+    fseek(p, pos * sizeof(Empleado), SEEK_SET);
 
-    while (fread(&equipo, sizeof(Equipo), 1, pArchivo) == 1) {
+    bool escribio = fwrite(&empleado, sizeof(Empleado), 1, p);
 
-        if (equipo.getIdEquipo() == idEquipo && equipo.getEstado()) {
+    fclose(p);
 
-            equipo.setEstado(false);
+    return escribio;
+}
 
-            fseek(pArchivo, -sizeof(Equipo), SEEK_CUR);
+bool ArchivoEmpleado::borrarRegistro(int id){
+  Empleado aux;
 
-            bool pudoModificar = fwrite(&equipo, sizeof(Equipo), 1, pArchivo);
+  int pos = buscar(id);
 
-            fclose(pArchivo);
-            return pudoModificar;
-        }
-    }
-
-    fclose(pArchivo);
-
+  if (pos == -1){
     return false;
+  }
+
+  FILE *p = fopen(ruta.c_str(), "rb+");
+  if (p == NULL){
+    return false;
+  }
+
+  fseek(p, pos * sizeof(Empleado), SEEK_SET);
+  fread(&aux, sizeof(Empleado), 1, p);
+  aux.setEstado(false);
+
+  fseek(p, pos * sizeof(Empleado), SEEK_SET);
+  bool pudoEscribir = fwrite(&aux, sizeof(Empleado), 1, p);
+
+  fclose(p);
+  return pudoEscribir;
 }
 
-void ArchivoEquipo::vaciar() {
-    FILE* pArchivo = fopen(_ruta.c_str(), "wb");
-
-    if (pArchivo != nullptr) {
-        fclose(pArchivo);
-    }
+void ArchivoEmpleado::vaciar(){
+  FILE *p = fopen(ruta.c_str(), "wb");
+  if (p == NULL){
+    return ;
+  }
+  fclose(p);
 }
+
