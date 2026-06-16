@@ -66,6 +66,7 @@ Cliente ClienteManager::crearCliente(){
 
     }while(tipoCliente != 1 && tipoCliente != 2);
 
+    cin.ignore();
     cout << "Calle: ";
     cin.getline(calle, 50);
 
