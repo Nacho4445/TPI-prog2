@@ -71,11 +71,8 @@ void EquipoManager::consultarPorId(){
     Equipo equipo;
 
     while(true){
-        cout << "Ingrese el ID del equipo (0 para volver): ";
+        cout << "Ingrese el ID del equipo: ";
         cin >> idEquipo;
-
-        if(idEquipo == 0){
-            return;
         }
 
         equipo = _archivoEquipos.leer(idEquipo);
