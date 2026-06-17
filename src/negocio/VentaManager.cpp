@@ -31,23 +31,16 @@ Venta VentaManager::crearVenta(){
     cout << "ID Empleado: ";
     cin >> idEmpleado;
 
-    do{
-        cout << "Dia: ";
-        cin >> dia;
-
-        cout << "Mes: ";
-        cin >> mes;
-
-        cout << "Anio: ";
-        cin >> anio;
-
-        if(dia <= 0 || mes <= 0 || mes > 12 || anio <= 0){
+    Fecha fecha;
+    do {
+        cout << "Dia: ";  cin >> dia;
+        cout << "Mes: ";  cin >> mes;
+        cout << "Anio: "; cin >> anio;
+        fecha = Fecha(dia, mes, anio);
+        if (fecha.getDia() == 1 && fecha.getMes() == 1 && fecha.getAnio() == 1900) {
             cout << "Fecha invalida. Ingrese nuevamente." << endl;
         }
-
-    }while(dia <= 0 || mes <= 0 || mes > 12 || anio <= 0);
-
-    Fecha fecha(dia, mes, anio);
+    } while (fecha.getDia() == 1 && fecha.getMes() == 1 && fecha.getAnio() == 1900);
 
     venta.setIdVenta(idVenta);
     venta.setIdCliente(idCliente);
@@ -493,21 +486,16 @@ void VentaManager::consultarPorFecha(){
 
     int dia, mes, anio;
 
-    do{
-        cout << "Dia: ";
-        cin >> dia;
-
-        cout << "Mes: ";
-        cin >> mes;
-
-        cout << "Anio: ";
-        cin >> anio;
-
-        if(dia <= 0 || mes <= 0 || mes > 12 || anio <= 0){
+     Fecha fecha;
+    do {
+        cout << "Dia: ";  cin >> dia;
+        cout << "Mes: ";  cin >> mes;
+        cout << "Anio: "; cin >> anio;
+        fecha = Fecha(dia, mes, anio);
+        if (fecha.getDia() == 1 && fecha.getMes() == 1 && fecha.getAnio() == 1900) {
             cout << "Fecha invalida. Ingrese nuevamente." << endl;
         }
-
-    }while(dia <= 0 || mes <= 0 || mes > 12 || anio <= 0);
+    } while (fecha.getDia() == 1 && fecha.getMes() == 1 && fecha.getAnio() == 1900);
 
     int cantidadRegistros = _archivoVentas.getCantidadRegistros();
 
@@ -533,9 +521,9 @@ void VentaManager::consultarPorFecha(){
        Venta venta = _archivoVentas.leerPorPosicion(i);
 
         if(venta.getEstado() &&
-           venta.getFecha().getDia() == dia &&
-           venta.getFecha().getMes() == mes &&
-           venta.getFecha().getAnio() == anio){
+           venta.getFecha().getDia() == fecha.getDia() &&
+           venta.getFecha().getMes() == fecha.getMes() &&
+           venta.getFecha().getAnio() == fecha.getAnio()){
 
             mostrarVenta(venta, detalles);
             cout << endl;

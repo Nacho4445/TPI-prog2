@@ -22,7 +22,7 @@ Fecha::Fecha(int dia, int mes, int anio){
    _mes = mes;
    _anio = anio;
 
-   if (_dia <= 0 || _mes <= 0 || _anio <= 0 || _mes > 12){
+  if (_dia <= 0 || _mes <= 0 || _anio < 1900 || _anio > 2100 || _mes > 12){
       establecerFechaPorDefecto();
    }
    else{
