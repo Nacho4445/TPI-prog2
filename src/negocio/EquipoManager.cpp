@@ -84,8 +84,8 @@ void EquipoManager::consultarPorId(){
 
         cout << "Equipo no encontrado. Intente nuevamente." << endl;
         consola.pausar();
-    }
 }
+
 
 void EquipoManager::consultarPorTipo(){
 
