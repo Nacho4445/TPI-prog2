@@ -124,8 +124,84 @@ consola.pausar();
 
 void InformeManager::ventasXempleado(){
 
-consola.pausar();
+    ArchivoEmpleado repoEmpleados;
+    ArchivoVenta repoVentas;
+    ArchivoCliente repoClientes;
+
+    int cantidadEmpleados = repoEmpleados.getCantidadRegistros();
+    int cantidadVentas = repoVentas.getCantidadRegistros();
+
+    if(cantidadEmpleados == 0){
+        cout << "No hay empleados cargados." << endl;
+        consola.pausar();
+        return;
+    }
+
+    if(cantidadVentas == 0){
+        cout << "No hay ventas cargadas." << endl;
+        consola.pausar();
+        return;
+    }
+
+    for(int i = 0; i < cantidadEmpleados; i++){
+
+        Empleado empleado = repoEmpleados.leerPorPosicion(i);
+
+        if(!empleado.getEstado()){
+            continue;
+        }
+
+        int cantidadVentasEmpleado = 0;
+        double totalVendido = 0;
+
+        cout << "========================================" << endl;
+        cout << "Empleado ID: " << empleado.getIdEmpleado() << endl;
+        cout << "Empleado: "
+             << empleado.getNombre()
+             << " "
+             << empleado.getApellido() << endl;
+        cout << "----------------------------------------" << endl;
+
+        for(int j = 0; j < cantidadVentas; j++){
+
+            Venta venta = repoVentas.leerPorPosicion(j);
+
+            if(venta.getEstado() &&
+               venta.getIdEmpleado() == empleado.getIdEmpleado()){
+
+                Cliente cliente = repoClientes.leer(venta.getIdCliente());
+
+                cout << "Venta Nro " << venta.getIdVenta()
+                     << " | Fecha: " << venta.getFecha().toString()
+                     << " | Importe: $" << venta.getImporteTotal()
+                     << " | Tipo cliente: ";
+
+                if(cliente.getTipoCliente() == 1){
+                    cout << "Particular";
+                }
+                else if(cliente.getTipoCliente() == 2){
+                    cout << "Empresa";
+                }
+                else{
+                    cout << "No definido";
+                }
+
+                cout << endl;
+
+                cantidadVentasEmpleado++;
+                totalVendido += venta.getImporteTotal();
+            }
+        }
+
+        cout << "----------------------------------------" << endl;
+        cout << "Cantidad de ventas: " << cantidadVentasEmpleado << endl;
+        cout << "Total vendido: $" << totalVendido << endl;
+        cout << "========================================" << endl << endl;
+    }
+
+    consola.pausar();
 }
+
 
 void InformeManager::stockDisponible(){
     Equipo regEquipo;
