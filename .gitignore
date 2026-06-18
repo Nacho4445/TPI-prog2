@@ -19,6 +19,7 @@ CMakeLists.txt
 *.gch
 datos/
 backups/
+exports/
 
 # Ejecutables
 *.exe
