@@ -2,16 +2,21 @@
 #include "archivos/ArchivoCliente.h"
 #include "negocio/ClienteManager.h"
 #include "utils/Consola.h"
+#include "utils/Validador.h"
 
 class ClienteManager {
 private:
-   Cliente crearCliente();
-   void mostrarCliente(Cliente &reg);
-   void ordenarClientes(Cliente vClientes[], int cantidad);
-   void ordenarClientesPorTipo(Cliente *vClientes, int cantidad);
+    Consola consola;
+    Validador validador;
 
-   ArchivoCliente _archivoClientes;
-   Consola consola;
+    ArchivoCliente _archivoClientes;
+
+    Cliente crearCliente();
+    void mostrarCliente(Cliente &reg);
+    void ordenarClientes(Cliente vClientes[], int cantidad);
+    void ordenarClientesPorTipo(Cliente *vClientes, int cantidad);
+
+
 
 public:
 	ClienteManager();
@@ -21,7 +26,6 @@ public:
     void consultarPorCuit();
     void consultarPorApellido();
     void consultarPorTipo();
-    void listarClientes();
     void modificarCliente();
     void eliminarCliente();
     void mostrarClientesOrdenados();
