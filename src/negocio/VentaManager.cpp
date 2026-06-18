@@ -35,6 +35,16 @@ Venta VentaManager::crearVenta(){
     validador.leerEnteroPositivo(idCliente, "ID Cliente: ");
     validador.leerEnteroPositivo(idEmpleado, "ID Empleado: ");
 
+    int posEmpleado = archivoEmpleado.buscar(idEmpleado);
+
+    while (posEmpleado == -1) {
+        cout << "Empleado dado de baja, ingrese otro!\n";
+
+        validador.leerEnteroPositivo(idEmpleado, "ID Empleado: ");
+
+        posEmpleado = archivoEmpleado.buscar(idEmpleado);
+    }
+
     // Valida fecha.
     do{
         validador.leerEnteroPositivo(dia, "Dia: ");

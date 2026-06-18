@@ -17,8 +17,8 @@ void Consola::pausar() {
 	system("pause");
 #else
 	cout << "\nPresione Enter para continuar...";
-	cin.ignore();
-	cin.get();
+	cin.ignore(); // limpia caracteres en el buffer
+	cin.get(); // espera que se presione una tecla
 #endif
 }
 
