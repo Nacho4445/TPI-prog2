@@ -678,3 +678,45 @@ void ClienteManager::mostrarClientesOrdenadosPorId(){
 
     delete[] vClientes;
 }
+
+void ClienteManager::darDeBajaCliente(){
+
+    int idCliente;
+    char confirmar;
+
+    // Solicita un ID válido o permite cancelar la operación.
+    validador.leerEnteroConCero(idCliente,
+                                "Ingrese el ID del cliente a dar de baja (0 para cancelar): ");
+
+    if(idCliente == 0){
+        cout << "Operacion cancelada." << endl;
+        return;
+    }
+
+    Cliente cliente = _archivoClientes.leer(idCliente);
+
+    if(!cliente.getEstado()){
+        cout << "Cliente no encontrado." << endl;
+        return;
+    }
+
+    cout << "Cliente seleccionado:" << endl;
+    mostrarCliente(cliente);
+
+    cout << endl;
+
+    // Solicita confirmación antes de dar de baja.
+    validador.leerConfirmacion(confirmar);
+
+    if(confirmar == 'N' || confirmar == 'n'){
+        cout << "Operacion cancelada." << endl;
+        return;
+    }
+
+    if(_archivoClientes.borrarRegistro(idCliente)){
+        cout << "Cliente dado de baja correctamente." << endl;
+    }
+    else{
+        cout << "No se pudo dar de baja el cliente." << endl;
+    }
+}

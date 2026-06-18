@@ -33,15 +33,24 @@ Venta VentaManager::crearVenta(){
 
     // Valida IDs cliente y empleado.
     validador.leerEnteroPositivo(idCliente, "ID Cliente: ");
+
+    int posCliente = archivoCliente.buscar(idCliente);
+
+    while (posCliente == -1) {
+        cout << "Empleado dado de baja, ingrese otro!\n";
+        validador.leerEnteroPositivo(idCliente, "ID Cliente: ");
+        posCliente = archivoCliente.buscar(idCliente);
+
+
+    }
+
     validador.leerEnteroPositivo(idEmpleado, "ID Empleado: ");
 
     int posEmpleado = archivoEmpleado.buscar(idEmpleado);
 
     while (posEmpleado == -1) {
         cout << "Empleado dado de baja, ingrese otro!\n";
-
         validador.leerEnteroPositivo(idEmpleado, "ID Empleado: ");
-
         posEmpleado = archivoEmpleado.buscar(idEmpleado);
     }
 

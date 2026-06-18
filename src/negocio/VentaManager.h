@@ -3,17 +3,19 @@
 #include "archivos/ArchivoEquipo.h"
 #include "archivos/ArchivoDetalleVenta.h"
 #include "archivos/ArchivoTipoMarca.h"
+#include "archivos/ArchivoEmpleado.h"
+#include "archivos/ArchivoCliente.h"
 #include "archivos/ArchivoTipoEquipo.h"
+
 #include "utils/Consola.h"
 #include "utils/Validador.h"
-#include "archivos/ArchivoEmpleado.h"
-
 
 class VentaManager {
 private:
    Venta crearVenta();
    Validador validador;
-	ArchivoEmpleado archivoEmpleado;
+   ArchivoEmpleado archivoEmpleado;
+   ArchivoCliente archivoCliente;
    void mostrarVenta(Venta &reg, DetalleVenta *detalles);
    void ordenarVentas(Venta vVentas[], int cantidad);
 

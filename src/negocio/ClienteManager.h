@@ -33,6 +33,7 @@ public:
     void mostrarClientesOrdenados();
     void mostrarClientesOrdenadosPorTipo();
     void mostrarClientesOrdenadosPorId();
+    void darDeBajaCliente();
 
 
 
