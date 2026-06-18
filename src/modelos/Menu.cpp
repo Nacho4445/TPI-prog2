@@ -26,7 +26,7 @@ int Menu::seleccionarOpcion(){
     cout << endl;
     do {
         cout << "Seleccione una opcion: ";
-        cin >> opcion;
+        validador.leerTamanioEntrada(opcion, 10);
         cout << endl;
 
         // Si no es un numero colocamos el valor -1 para continuar el el loop while

@@ -28,4 +28,5 @@ public:
     void leerEmail(char email[]);
     void leerConfirmacion(char &opcion);
     void leerTipoCliente(int &tipo);
+    void leerTamanioEntrada(char destino[], int tamanioMax);
 };

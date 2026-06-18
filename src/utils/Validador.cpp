@@ -326,3 +326,14 @@ void Validador::leerTipoCliente(int &tipo){
 
     tipo = convertirEntero(texto);
 }
+
+void Validador::leerTamanioEntrada(char destino[], const int tamanioMax) {
+    // Solo leemos el maximo de caracteres
+    cin.width(tamanioMax);
+    cin >> destino;
+
+    // descartamos el sobrante para que no haya basura en la proxima lectura
+    cin.clear();
+    cin.ignore(1000, '\n');
+}
+
