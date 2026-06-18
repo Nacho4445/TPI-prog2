@@ -78,10 +78,45 @@ void MenuClientes::ejecutarOpcion(int opcion){
 
                     switch(opcionApellido){
 
-                    case 1:
-                        consola.limpiar();
-                        managerClientes.consultarPorApellido();
-                        break;
+                    case 1:{
+                         int opcionId;
+
+                         do{
+                             consola.limpiar();
+
+                             cout << "----------------------------" << endl;
+                             cout << "1. Buscar por ID" << endl;
+                             cout << "2. Ordenar por ID" << endl;
+                             cout << "----------------------------" << endl;
+                             cout << "0. Volver" << endl;
+
+                             validador.leerEnteroConCero(opcionId, "Opcion: ");
+
+                             switch(opcionId){
+                                 case 1:
+                                     consola.limpiar();
+                                     managerClientes.consultarPorId();
+                                     break;
+
+                                 case 2:
+                                     consola.limpiar();
+                                     managerClientes.mostrarClientesOrdenadosPorId();
+                                     break;
+
+                                 case 0:
+                                     break;
+
+                                 default:
+                                     cout << "Opcion invalida." << endl;
+                                     consola.pausar();
+                                     break;
+                                }
+
+                             consola.pausar();
+
+                        }while(opcionId != 0);
+                         break;
+                    }
 
                     case 2:
                         consola.limpiar();

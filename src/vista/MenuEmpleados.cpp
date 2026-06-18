@@ -49,12 +49,42 @@ void MenuEmpleados::ejecutarOpcion(int opcion){
             validador.leerEnteroConCero(opcionConsulta, "Opcion: ");
 
             switch(opcionConsulta){
+                 case 1:{
+                     int opcionId;
+                     do{
+                         consola.limpiar();
+                         cout << "----------------------------" << endl;
+                         cout << "1. Buscar por ID" << endl;
+                         cout << "2. Ordenar por ID" << endl;
+                         cout << "----------------------------" << endl;
+                         cout << "0. Volver" << endl;
+                         validador.leerEnteroConCero(opcionId, "Opcion: ");
 
-            case 1:
-                consola.limpiar();
-                managerEmpleados.consultarPorId();
-                consola.pausar();
-                break;
+                         switch(opcionId){
+                             case 1:
+                                 consola.limpiar();
+                                 managerEmpleados.consultarPorId();
+                                 break;
+
+                             case 2:
+                                 consola.limpiar();
+                                 managerEmpleados.mostrarEmpleadosOrdenadosPorId();
+                                 break;
+
+                             case 0:
+                                 break;
+
+                             default:
+                                 cout << "Opcion invalida." << endl;
+                                 consola.pausar();
+                                 break;
+                             }
+
+                         consola.pausar();
+
+                    }while(opcionId != 0);
+                     break;
+                }
 
             case 2:
                 consola.limpiar();
