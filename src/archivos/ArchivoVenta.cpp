@@ -201,3 +201,13 @@ bool ArchivoVenta::borrarRegistro(int id){
 
     return escribio;
 }
+void ArchivoVenta::vaciar(){
+
+    FILE *p = fopen(ruta.c_str(), "wb");
+
+    if(p == NULL){
+        return;
+    }
+
+    fclose(p);
+}

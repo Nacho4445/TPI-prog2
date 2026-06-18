@@ -17,6 +17,7 @@ public:
     Venta leerIncluyendoCanceladas(int id);
     bool borrarRegistro(int id);
     bool cancelarVenta(int idVenta);
+    void vaciar();
 
 
 private:

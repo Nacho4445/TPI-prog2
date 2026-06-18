@@ -50,6 +50,24 @@ DetalleVenta ArchivoDetalleVenta::leer(int idDetalleVenta) {
     return DetalleVenta();
 }
 
+DetalleVenta ArchivoDetalleVenta::leerPorPosicion(int posicion){
+
+    DetalleVenta reg;
+
+    FILE *p = fopen(_ruta.c_str(), "rb");
+
+    if(p == NULL){
+        return reg;
+    }
+
+    fseek(p, posicion * sizeof(DetalleVenta), SEEK_SET);
+
+    fread(&reg, sizeof(DetalleVenta), 1, p);
+
+    fclose(p);
+
+    return reg;
+}
 bool ArchivoDetalleVenta::borrarRegistro(int idDetalleVenta) {
     FILE* pArchivo = fopen(_ruta.c_str(), "rb+");
     DetalleVenta detalleVenta;
@@ -62,7 +80,7 @@ bool ArchivoDetalleVenta::borrarRegistro(int idDetalleVenta) {
         if (detalleVenta.getIdDetalleVenta() == idDetalleVenta && detalleVenta.getEstado()) {
             detalleVenta.setEstado(false);
 
-            fseek(pArchivo, -sizeof(DetalleVenta), SEEK_CUR);
+            fseek(pArchivo, -(long)sizeof(DetalleVenta), SEEK_CUR);
             bool pudoModificar = fwrite(&detalleVenta, sizeof(DetalleVenta), 1, pArchivo);
 
             fclose(pArchivo);
