@@ -9,6 +9,7 @@
 #include "modelos/StockEquipos.h"
 #include "archivos/ArchivoDetalleVenta.h"
 #include "modelos/DetalleVenta.h"
+#include "modelos/EquiposMasVendidos.h"
 
 using namespace std;
 
@@ -241,10 +242,22 @@ void InformeManager::equiposMasVendidos(){
 
     bool hayVentas = false;
 
+    // Creo el puntero p con la ruta del archivo.
+    FILE *p = fopen("informes/equiposMasVendidos.dat", "wb");
+
+    if(p == nullptr){
+        cout << "Error de informe..." << endl;
+        delete[] equipos;
+        delete[] cantidadesVendidas;
+        return;
+    }
+
     // Muestra solo los equipos que tuvieron ventas.
     for(int i = 0; i < cantidadEquipos; i++){
 
         if(cantidadesVendidas[i] > 0){
+            EquiposMasVendidos regMasVendidos(equipos[i], cantidadesVendidas[i]);
+            fwrite(&regMasVendidos, sizeof(EquiposMasVendidos), 1, p);
             cout << endl;
             cout << "Equipo ID: " << equipos[i].getIdEquipo() << endl;
             cout << "Descripcion: " << equipos[i].getDescripcion() << endl;
@@ -261,6 +274,7 @@ void InformeManager::equiposMasVendidos(){
         cout << "No hay equipos vendidos." << endl;
     }
 
+    fclose(p);
     delete[] equipos;
     delete[] cantidadesVendidas;
 
