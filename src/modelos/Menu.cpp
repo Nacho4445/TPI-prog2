@@ -11,7 +11,6 @@ void Menu::ejecutarMenu(){
     int opcion;
     do{
         consola.limpiar();
-        //system("cls");
         mostrarOpciones();
         opcion = seleccionarOpcion();
         ejecutarOpcion(opcion);

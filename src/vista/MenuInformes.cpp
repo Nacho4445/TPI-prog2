@@ -9,7 +9,6 @@ MenuInformes::MenuInformes(){
 
 void MenuInformes::mostrarOpciones(){
     consola.limpiar();
-    //system("cls");
     cout << "------------------------" << endl;
     cout << "-----MENU INFORMES-----" << endl;
     cout << "1. Recaudacion anual" << endl;

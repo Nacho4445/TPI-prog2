@@ -9,7 +9,6 @@ MenuEmpleados::MenuEmpleados(){
 
 void MenuEmpleados::mostrarOpciones(){
     consola.limpiar();
-    //system("cls");
     cout << "------------------------" << endl;
     cout << "-----MENU EMPLEADOS-----" << endl;
     cout << "1. Registrar Empleado" << endl;
