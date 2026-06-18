@@ -26,7 +26,9 @@ void MenuEmpleados::ejecutarOpcion(int opcion){
     switch(opcion){
 
     case 1:
+        consola.limpiar();
         managerEmpleados.guardarEmpleado();
+        consola.pausar();
         break;
 
     case 2:{
@@ -42,17 +44,20 @@ void MenuEmpleados::ejecutarOpcion(int opcion){
             cout << "3. Consultar por Apellido" << endl;
             cout << "---------------------------" << endl;
             cout << "0. Volver" << endl;
+            cout << endl;
 
             validador.leerEnteroConCero(opcionConsulta, "Opcion: ");
 
             switch(opcionConsulta){
 
             case 1:
+                consola.limpiar();
                 managerEmpleados.consultarPorId();
                 consola.pausar();
                 break;
 
             case 2:
+                consola.limpiar();
                 managerEmpleados.consultarPorCuit();
                 consola.pausar();
                 break;
@@ -65,6 +70,7 @@ void MenuEmpleados::ejecutarOpcion(int opcion){
 
                     cout << "1. Buscar por un apellido" << endl;
                     cout << "2. Ordenar alfabeticamente" << endl;
+                    cout << endl;
                     cout << "0. Volver" << endl;
 
                     validador.leerEnteroConCero(opcionApellido, "Opcion: ");
@@ -98,12 +104,10 @@ void MenuEmpleados::ejecutarOpcion(int opcion){
 
             case 0:
                 cout << "Volviendo al menu empleados..." << endl;
-                consola.pausar();
                 break;
 
             default:
                 cout << "Opcion invalida." << endl;
-                consola.pausar();
                 break;
             }
 
@@ -113,11 +117,15 @@ void MenuEmpleados::ejecutarOpcion(int opcion){
     }
 
     case 3:
+        consola.limpiar();
         managerEmpleados.modificarEmpleado();
+        consola.pausar();
         break;
 
     case 4:
+        consola.limpiar();
         managerEmpleados.darDeBajaEmpleado();
+        consola.pausar();
         break;
 
     case 0:

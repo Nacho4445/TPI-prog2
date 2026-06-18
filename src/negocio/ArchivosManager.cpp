@@ -39,7 +39,6 @@ void ArchivosManager::crearBackup(Empleado &empleado) {
 	                                 sizeof(Empleado));
 
 	if (exito) cout << "Backup de Empleados generado!\n";
-	consola.pausar();
 }
 
 void ArchivosManager::crearBackup(Cliente &cliente) {
@@ -48,7 +47,6 @@ void ArchivosManager::crearBackup(Cliente &cliente) {
 	                                 &cliente,
 	                                 sizeof(Cliente));
 	if (exito) cout << "Backup de Clientes generado!\n";
-	consola.pausar();
 }
 
 void ArchivosManager::crearBackup(TipoCliente &tipoCliente) {
@@ -57,7 +55,6 @@ void ArchivosManager::crearBackup(TipoCliente &tipoCliente) {
 	                                 &tipoCliente,
 	                                 sizeof(TipoCliente));
 	if (exito) cout << "Backup de Tipos de Clientes generado!\n";
-	consola.pausar();
 }
 
 void ArchivosManager::crearBackup(Venta &venta) {
@@ -66,7 +63,6 @@ void ArchivosManager::crearBackup(Venta &venta) {
 	                                 &venta,
 	                                 sizeof(Venta));
 	if (exito) cout << "Backup de Ventas generado!\n";
-	consola.pausar();
 }
 
 void ArchivosManager::crearBackup(DetalleVenta &detalleVenta) {
@@ -75,7 +71,6 @@ void ArchivosManager::crearBackup(DetalleVenta &detalleVenta) {
 	                                 &detalleVenta,
 	                                 sizeof(DetalleVenta));
 	if (exito) cout << "Backup de Detalles de Venta generado!\n";
-	consola.pausar();
 }
 
 void ArchivosManager::crearBackup(Equipo &equipo) {
@@ -84,7 +79,6 @@ void ArchivosManager::crearBackup(Equipo &equipo) {
 	                                 &equipo,
 	                                 sizeof(Equipo));
 	if (exito) cout << "Backup de Equipos generado!\n";
-	consola.pausar();
 }
 
 void ArchivosManager::crearBackup(TipoEquipo &tipoEquipo) {
@@ -93,7 +87,6 @@ void ArchivosManager::crearBackup(TipoEquipo &tipoEquipo) {
 	                                 &tipoEquipo,
 	                                 sizeof(TipoEquipo));
 	if (exito) cout << "Backup de Tipos de Equipos generado!\n";
-	consola.pausar();
 }
 
 void ArchivosManager::crearBackup(TipoMarca &tipoMarca) {
@@ -102,7 +95,6 @@ void ArchivosManager::crearBackup(TipoMarca &tipoMarca) {
 	                                 &tipoMarca,
 	                                 sizeof(TipoMarca));
 	if (exito) cout << "Backup de Tipos de Marcas generado!\n";
-	consola.pausar();
 }
 
 // ------------------------------------ SOBRECARGA RESTAURACION BACKUPS -----------------------------------------------
@@ -113,7 +105,6 @@ void ArchivosManager::restaurarBackup(Empleado &empleado) {
 	                                 &empleado,
 	                                 sizeof(Empleado));
 	if (exito) cout << "Backup de Empleados restaurado!\n";
-	consola.pausar();
 }
 
 void ArchivosManager::restaurarBackup(Cliente &cliente) {
@@ -122,7 +113,6 @@ void ArchivosManager::restaurarBackup(Cliente &cliente) {
 	                                 &cliente,
 	                                 sizeof(Cliente));
 	if (exito) cout << "Backup de Clientes restaurado!\n";
-	consola.pausar();
 }
 
 void ArchivosManager::restaurarBackup(TipoCliente &tipoCliente) {
@@ -131,7 +121,6 @@ void ArchivosManager::restaurarBackup(TipoCliente &tipoCliente) {
 	                                 &tipoCliente,
 	                                 sizeof(TipoCliente));
 	if (exito) cout << "Backup de Tipos de Clientes restaurado!\n";
-	consola.pausar();
 }
 
 void ArchivosManager::restaurarBackup(Venta &venta) {
@@ -140,7 +129,6 @@ void ArchivosManager::restaurarBackup(Venta &venta) {
 	                                 &venta,
 	                                 sizeof(Venta));
 	if (exito) cout << "Backup de Ventas restaurado!\n";
-	consola.pausar();
 }
 
 void ArchivosManager::restaurarBackup(DetalleVenta &detalleVenta) {
@@ -149,7 +137,6 @@ void ArchivosManager::restaurarBackup(DetalleVenta &detalleVenta) {
 	                                 &detalleVenta,
 	                                 sizeof(DetalleVenta));
 	if (exito) cout << "Backup de Detalles de Ventas restaurado!\n";
-	consola.pausar();
 }
 
 void ArchivosManager::restaurarBackup(Equipo &equipo) {
@@ -158,7 +145,6 @@ void ArchivosManager::restaurarBackup(Equipo &equipo) {
 	                                 &equipo,
 	                                 sizeof(Equipo));
 	if (exito) cout << "Backup de Equipos restaurado!\n";
-	consola.pausar();
 }
 
 void ArchivosManager::restaurarBackup(TipoEquipo &tipoEquipo) {
@@ -167,7 +153,6 @@ void ArchivosManager::restaurarBackup(TipoEquipo &tipoEquipo) {
 	                                 &tipoEquipo,
 	                                 sizeof(TipoEquipo));
 	if (exito) cout << "Backup de Tipos de Equipos restaurado!\n";
-	consola.pausar();
 }
 
 void ArchivosManager::restaurarBackup(TipoMarca &tipoMarca) {
@@ -176,5 +161,4 @@ void ArchivosManager::restaurarBackup(TipoMarca &tipoMarca) {
 	                                 &tipoMarca,
 	                                 sizeof(TipoMarca));
 	if (exito) cout << "Backup de Tipos de Marcas restaurado!\n";
-	consola.pausar();
 }

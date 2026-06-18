@@ -4,7 +4,7 @@
 
 using namespace std;
 
-// Verifica que una cadena contenga únicamente números.
+// Verifica que una cadena contenga unicamente numeros.
 bool Validador::esNumero(const char texto[]){
 
     if(strlen(texto) == 0){
@@ -20,22 +20,22 @@ bool Validador::esNumero(const char texto[]){
     return true;
 }
 
-// Verifica que un texto no esté vacío.
+// Verifica que un texto no este vacio.
 bool Validador::textoNoVacio(const char texto[]){
     return strlen(texto) > 0;
 }
 
-// Valida que el CUIT tenga 11 dígitos numéricos.
+// Valida que el CUIT tenga 11 digitos numericos.
 bool Validador::cuitValido(const char texto[]){
     return strlen(texto) == 11 && esNumero(texto);
 }
 
-// Valida que el teléfono tenga al menos 6 dígitos.
+// Valida que el telefono tenga al menos 6 digitos.
 bool Validador::telefonoValido(const char texto[]){
     return strlen(texto) >= 6 && esNumero(texto);
 }
 
-// Valida que el email contenga '@' y '.'.
+// Valida que el email contenga '@' y '.'
 bool Validador::emailValido(const char texto[]){
 
     bool tieneArroba = false;
@@ -65,7 +65,7 @@ bool Validador::enteroPositivo(const char texto[]){
     return convertirEntero(texto) > 0;
 }
 
-// Verifica que el texto represente un número decimal positivo.
+// Verifica que el texto represente un numero decimal positivo.
 bool Validador::decimalPositivo(const char texto[]){
 
     if(strlen(texto) == 0){
@@ -91,13 +91,13 @@ bool Validador::decimalPositivo(const char texto[]){
     return convertirFloat(texto) > 0;
 }
 
-// Verifica que la opción ingresada sea S o N.
+// Verifica que la opcion ingresada sea S o N.
 bool Validador::opcionSN(char opcion){
     return opcion == 'S' || opcion == 's' ||
            opcion == 'N' || opcion == 'n';
 }
 
-// Convierte un texto numérico a entero.
+// Convierte un texto numerico a entero.
 int Validador::convertirEntero(const char texto[]){
 
     int numero = 0;
@@ -109,7 +109,7 @@ int Validador::convertirEntero(const char texto[]){
     return numero;
 }
 
-// Convierte un texto numérico a long long.
+// Convierte un texto numerico a long long.
 long long Validador::convertirLongLong(const char texto[]){
 
     long long numero = 0;
@@ -121,7 +121,7 @@ long long Validador::convertirLongLong(const char texto[]){
     return numero;
 }
 
-// Convierte un texto numérico con decimales a float.
+// Convierte un texto numerico con decimales a float.
 float Validador::convertirFloat(const char texto[]){
 
     float numero = 0;
@@ -148,7 +148,7 @@ float Validador::convertirFloat(const char texto[]){
     return numero;
 }
 
-// Solicita un texto y verifica que no esté vacío.
+// Solicita un texto y verifica que no este vacio.
 void Validador::leerTexto(char texto[], int tamanio, const char mensaje[]){
 
     do{
@@ -223,7 +223,7 @@ void Validador::leerEnteroConCero(int &numero, const char mensaje[]){
     }while(!valido);
 }
 
-// Solicita un número decimal mayor que cero.
+// Solicita un numero decimal mayor que cero.
 void Validador::leerDecimalPositivo(float &numero, const char mensaje[]){
 
     char texto[30];
@@ -261,7 +261,7 @@ void Validador::leerCuit(long long &cuit){
     cuit = convertirLongLong(texto);
 }
 
-// Solicita y valida un teléfono.
+// Solicita y valida un telefono.
 void Validador::leerTelefono(char telefono[]){
 
     do{
@@ -291,7 +291,7 @@ void Validador::leerEmail(char email[]){
     }while(!emailValido(email));
 }
 
-// Solicita una confirmación S o N.
+// Solicita una confirmacion S o N.
 void Validador::leerConfirmacion(char &opcion){
 
     do{

@@ -12,30 +12,37 @@ MenuArchivos::MenuArchivos() {
 
 void MenuArchivos::mostrarOpciones() {
 	consola.limpiar();
-	cout << "\n### MENU ARCHIVOS ###\n";
-	cout << "1. Realizar un Backup\n";
-	cout << "2. Restaurar un Backup\n";
-	cout << "3. Exportar un archivo CSV\n";
-	cout << "- - - - - - - - - -\n";
-	cout << "0. Volver al menu principal\n";
+	cout << "#### MENU ARCHIVOS ####" << endl;
+	cout << "1. Realizar un Backup" << endl;
+	cout << "2. Restaurar un Backup" << endl;
+	cout << "3. Exportar un archivo CSV" << endl;
+	cout << "- - - - - - - - - - -" << endl;
+	cout << "0. Volver al menu principal" << endl;
 }
 
 void MenuArchivos::ejecutarOpcion(int opcion) {
 	switch (opcion) {
 		case 1: {
+		    consola.limpiar();
 			MenuBackups menuBackups;
 			menuBackups.ejecutarMenu();
+			consola.pausar();
 			break;
 		}
 		case 2: {
+		    consola.limpiar();
 			MenuRestaurar menuRestaurar;
 			menuRestaurar.ejecutarMenu();
+			consola.pausar();
 			break;
 		}
 		case 3:
+		    consola.limpiar();
 			// Falta generar CSV
+			consola.pausar();
 			break;
 		case 0:
+		    cout << "Volviendo al menu principal..." << endl;
 			break;
 		default:
 			cout << "Opcion Incorrecta!\n";

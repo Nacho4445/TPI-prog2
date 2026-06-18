@@ -12,12 +12,8 @@
 
 using namespace std;
 
-// Genera un informe con la recaudación total correspondiente
-// a cada año registrado en las ventas.
-//
-// El informe se muestra por pantalla y se guarda en el archivo
-// "informes/recaudacionAnual.dat".
-//
+// Genera un informe con la recaudacion total de cada anio registrado en las ventas.
+// Se muestran los datos y se guardan en "informes/recaudacionAnual.dat".
 // VALIDACIONES:
 // - Verifica que existan ventas activas.
 // - Comprueba que el archivo de informe pueda crearse correctamente.
@@ -28,7 +24,7 @@ void InformeManager::recaudacionXanio(){
     int anioMin = 9999;
     int anioMax = 0;
 
-    // Busca el primer y el último año con ventas activas.
+    // Busca el primer y el ultimo anio con ventas activas.
     for(int i = 0; i < cantidadVentas; i++){
 
         Venta venta = repoVentas.leerPorPosicion(i);
@@ -50,20 +46,17 @@ void InformeManager::recaudacionXanio(){
     // Verifica que existan ventas activas.
     if(anioMin == 9999){
         cout << "No hay ventas activas." << endl;
-        consola.pausar();
         return;
     }
 
     FILE *p = fopen("informes/recaudacionAnual.dat", "wb");
 
-    // Verifica que el archivo pueda crearse correctamente.
     if(p == nullptr){
         cout << "Error de informe..." << endl;
-        consola.pausar();
         return;
     }
 
-    // Calcula la recaudación correspondiente a cada año.
+    // Calcula la recaudacion correspondiente a cada año.
     for(int anio = anioMin; anio <= anioMax; anio++){
 
         float recaudacion = 0;
@@ -92,16 +85,12 @@ void InformeManager::recaudacionXanio(){
     }
 
     fclose(p);
-    consola.pausar();
 }
 
-// Genera un informe con la recaudación total por cada cliente.
-//
-// El informe se muestra por pantalla y se guarda en el archivo
-// "informes/recaudacionXcliente.dat".
-//
+// Genera un informe con la recaudacion total por cliente.
+// Se muestran los datos y se guardan en "informes/recaudacionXcliente.dat".
 // VALIDACIONES:
-// - Verifica que se pueda reservar memoria dinámica.
+// - Verifica que se pueda reservar memoria dinamica.
 // - Comprueba que el archivo de informe pueda crearse correctamente.
 // - Solo toma ventas activas.
 // - Solo muestra clientes activos.
@@ -115,14 +104,13 @@ void InformeManager::recaudacionXcliente(){
 
     if(pClientes == nullptr){
         cout << "Error de memoria..." << endl;
-        consola.pausar();
         return;
     }
 
     ArchivoVenta repoVentas;
     int cantidadVentas = repoVentas.getCantidadRegistros();
 
-    // Acumula el importe de las ventas activas en la posición correspondiente al cliente.
+    // Acumula el importe de las ventas activas en la posicion correspondiente al cliente.
     for(int i = 0; i < cantidadVentas; i++){
 
         Venta venta = repoVentas.leerPorPosicion(i);
@@ -141,14 +129,13 @@ void InformeManager::recaudacionXcliente(){
     if(p == nullptr){
         cout << "Error de informe..." << endl;
         delete[] pClientes;
-        consola.pausar();
         return;
     }
 
     cout << defaultfloat;
     cout.precision(10);
 
-    // Guarda y muestra la recaudación acumulada por cliente activo.
+    // Guarda y muestra la recaudacion acumulada por cliente activo.
     for(int i = 0; i < cantidadClientes; i++){
 
         Cliente regCliente = repoClientes.leerPorPosicion(i);
@@ -157,28 +144,25 @@ void InformeManager::recaudacionXcliente(){
             RecaudacionClientes regRecaudacion(pClientes[i], regCliente);
             fwrite(&regRecaudacion, sizeof(RecaudacionClientes), 1, p);
 
-            cout << "------------------------" << endl;
+            cout << endl;
             cout << "Cliente ID: " << regCliente.getIdCliente() << endl;
             cout << "Recaudacion: $" << pClientes[i] << endl;
+            cout << endl;
             cout << "------------------------" << endl;
         }
     }
 
     fclose(p);
     delete[] pClientes;
-    consola.pausar();
 }
 
-// Genera un informe con los equipos más vendidos.
-//
-// Para cada equipo se calcula la cantidad total vendida a partir
-// de los detalles de venta. Luego se ordenan de mayor a menor
-// según la cantidad vendida.
-//
+// Genera un informe con los equipos mas vendidos.
+// Para cada equipo se calcula la cantidad total vendida a partir de los detalles de venta.
+// Luego se ordenan de mayor a menor segun la cantidad vendida.
 // VALIDACIONES:
 // - Verifica que existan equipos cargados.
 // - Verifica que existan detalles de venta cargados.
-// - Comprueba que se pueda reservar memoria dinámica.
+// - Comprueba que se pueda reservar memoria dinamica.
 // - Solo toma detalles de venta activos.
 void InformeManager::equiposMasVendidos(){
 
@@ -190,13 +174,11 @@ void InformeManager::equiposMasVendidos(){
 
     if(cantidadEquipos == 0){
         cout << "No hay equipos cargados." << endl;
-        consola.pausar();
         return;
     }
 
     if(cantidadDetalles == 0){
         cout << "No hay ventas cargadas." << endl;
-        consola.pausar();
         return;
     }
 
@@ -208,8 +190,6 @@ void InformeManager::equiposMasVendidos(){
 
         delete[] equipos;
         delete[] cantidadesVendidas;
-
-        consola.pausar();
         return;
     }
 
@@ -261,15 +241,16 @@ void InformeManager::equiposMasVendidos(){
 
     bool hayVentas = false;
 
-    // Muestra únicamente los equipos que tuvieron ventas.
+    // Muestra solo los equipos que tuvieron ventas.
     for(int i = 0; i < cantidadEquipos; i++){
 
         if(cantidadesVendidas[i] > 0){
-
+            cout << endl;
             cout << "Equipo ID: " << equipos[i].getIdEquipo() << endl;
             cout << "Descripcion: " << equipos[i].getDescripcion() << endl;
             cout << "Cantidad vendida: " << cantidadesVendidas[i] << endl;
             cout << "Stock actual: " << equipos[i].getStock() << endl;
+            cout << endl;
             cout << "----------------------------------------" << endl;
 
             hayVentas = true;
@@ -283,20 +264,14 @@ void InformeManager::equiposMasVendidos(){
     delete[] equipos;
     delete[] cantidadesVendidas;
 
-    consola.pausar();
 }
 
-// Genera un informe de ventas realizadas por cada empleado.
-//
-// Para cada empleado activo se listan las ventas asociadas,
-// indicando fecha, importe y tipo de cliente.
-// También muestra la cantidad total de ventas y el importe total vendido.
-//
+// Genera un informe de ventas por cada empleado.
+// Para cada empleado activo se listan las ventas asociadas (+ fecha, importe y tipo de cliente).
+// Tambien muestra la cantidad total de ventas y el importe total vendido.
 // VALIDACIONES:
-// - Verifica que existan empleados cargados.
-// - Verifica que existan ventas cargadas.
-// - Solo toma empleados activos.
-// - Solo toma ventas activas.
+// - Verifica que existan empleados + Verifica que esten activos.
+// - Verifica que existan ventas + Verifica que esten activos.
 void InformeManager::ventasXempleado(){
 
     ArchivoEmpleado repoEmpleados;
@@ -308,18 +283,15 @@ void InformeManager::ventasXempleado(){
 
     if(cantidadEmpleados == 0){
         cout << "No hay empleados cargados." << endl;
-        consola.pausar();
         return;
     }
 
     if(cantidadVentas == 0){
         cout << "No hay ventas cargadas." << endl;
-        consola.pausar();
         return;
     }
 
-    // Evita que los valores monetarios se muestren en notación científica
-    // (por ejemplo, 1.58e+06) y aumenta la precisión de la salida.
+    // Evita que los valores se muestren en notacion científica (1.58e+06).
     cout << defaultfloat;
     cout.precision(10);
 
@@ -335,7 +307,7 @@ void InformeManager::ventasXempleado(){
         int cantidadVentasEmpleado = 0;
         double totalVendido = 0;
 
-        cout << "========================================" << endl;
+        cout << endl;
         cout << "Empleado ID: " << empleado.getIdEmpleado() << endl;
         cout << "Empleado: "
              << empleado.getNombre()
@@ -381,17 +353,14 @@ void InformeManager::ventasXempleado(){
         cout << "Cantidad de ventas: " << cantidadVentasEmpleado << endl;
         cout << defaultfloat;
         cout.precision(10);
+        cout << endl;
         cout << "Total vendido: $" << totalVendido << endl;
-        cout << "========================================" << endl << endl;
+        cout << "========================================" << endl;
     }
-
-    consola.pausar();
 }
 
 // Genera un informe con todos los equipos que tienen stock disponible.
-//
-// El informe se muestra por pantalla y se guarda en el archivo
-// "informes/stockDisponible.dat".
+// Se muestran los datos y se guardan en "informes/stockDisponible.dat".
 //
 // VALIDACIONES:
 // - Comprueba que el archivo de informe pueda crearse correctamente.
@@ -408,11 +377,10 @@ void InformeManager::stockDisponible(){
 
     if(p == nullptr){
         cout << "Error de informe..." << endl;
-        consola.pausar();
         return;
     }
 
-    // Recorre todos los equipos buscando aquellos con stock disponible.
+    // Recorre todos los equipos buscando los que tienen stock.
     for(int i = 0; i < cantidad; i++){
 
         regEquipo = repoEquipos.leerPorPosicion(i);
@@ -420,9 +388,10 @@ void InformeManager::stockDisponible(){
 
         if(regEquipo.getEstado() && stock > 0){
 
-            cout << "------------------------" << endl;
+            cout << endl;
             cout << "Equipo ID: " << regEquipo.getIdEquipo() << endl;
             cout << "Stock disponible: " << stock << endl;
+            cout << endl;
             cout << "------------------------" << endl;
 
             StockEquipos regStock(regEquipo, stock);
@@ -437,5 +406,4 @@ void InformeManager::stockDisponible(){
     }
 
     fclose(p);
-    consola.pausar();
 }

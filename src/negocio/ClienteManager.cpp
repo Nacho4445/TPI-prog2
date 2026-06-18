@@ -31,15 +31,15 @@ Cliente ClienteManager::crearCliente(){
     char codigoPostal[20];
     char provincia[50];
 
-    // Genera automáticamente el ID del nuevo cliente.
+    // Genera automaticamente el ID del nuevo cliente.
     idCliente = _archivoClientes.getCantidadRegistros() + 1;
 
     cout << "Ingrese los siguientes datos:" << endl;
 
     int pos;
 
-    // VALIDACIÓN:
-    // Solicita el CUIT hasta que sea válido y no exista otro cliente con el mismo.
+    // VALIDACION:
+    // Solicita el CUIT hasta que sea valido y no exista otro cliente con el mismo.
     do{
 
         validador.leerCuit(cuit);
@@ -54,21 +54,21 @@ Cliente ClienteManager::crearCliente(){
 
     cin.ignore(1000, '\n');
 
-    // VALIDACIÓN:
+    // VALIDACION:
     // Se validan los datos personales del cliente.
     validador.leerTexto(nombre, 30, "Nombre: ");
     validador.leerTexto(apellido, 30, "Apellido: ");
     validador.leerTelefono(telefono);
     validador.leerEmail(email);
 
-    // VALIDACIÓN:
-    // Solo permite seleccionar un tipo de cliente válido.
+    // VALIDACION:
+    // Solo permite seleccionar un tipo de cliente valido.
     validador.leerTipoCliente(tipoCliente);
 
     cin.ignore(1000, '\n');
 
-    // VALIDACIÓN:
-    // Se validan los datos obligatorios de la dirección.
+    // VALIDACION:
+    // Se validan los datos obligatorios de la direccion.
     validador.leerTexto(calle, 50, "Calle: ");
     validador.leerEnteroPositivo(altura, "Altura: ");
 
@@ -81,8 +81,8 @@ Cliente ClienteManager::crearCliente(){
     cout << "Departamento: ";
     cin.getline(departamento, 10);
 
-    // VALIDACIÓN:
-    // Se validan los restantes datos obligatorios de la dirección.
+    // VALIDACION:
+    // Se validan los datos obligatorios de la direccion que faltan.
     validador.leerTexto(localidad, 50, "Localidad: ");
     validador.leerTexto(codigoPostal, 20, "Codigo Postal: ");
     validador.leerTexto(provincia, 50, "Provincia: ");
@@ -97,7 +97,7 @@ Cliente ClienteManager::crearCliente(){
     cliente.setEmail(email);
     cliente.setEstado(true);
 
-    // Se cargan los datos de la dirección.
+    // Se cargan los datos de la direccion.
     direccion.setCalle(calle);
     direccion.setAltura(altura);
     direccion.setPiso(piso);
@@ -107,14 +107,13 @@ Cliente ClienteManager::crearCliente(){
     direccion.setProvincia(provincia);
     direccion.setEstado(true);
 
-    // Se asigna la dirección al cliente.
+    // Se asigna la direccion al cliente.
     cliente.setDireccion(direccion);
 
     return cliente;
 }
 
 // Guarda un nuevo cliente en el archivo.
-
 void ClienteManager::guardarCliente(){
 
     Cliente cliente = crearCliente();
@@ -128,20 +127,18 @@ void ClienteManager::guardarCliente(){
 }
 
 // Busca y muestra un cliente a partir de su ID.
-//
-// VALIDACIÓN:
-// - Solo permite ingresar números.
-// - Permite ingresar 0 para cancelar la búsqueda.
-// - Verifica que el cliente exista y esté activo.
+// VALIDACION:
+// - Solo permite ingresar numeros.
+// - Permite ingresar 0 para cancelar la busqueda.
+// - Verifica que el cliente exista y este activo.
 void ClienteManager::consultarPorId(){
 
     int idCliente;
 
     while(true){
 
-        // Solicita un ID válido o permite cancelar la operación.
-        validador.leerEnteroConCero(idCliente,
-                                    "Ingrese el ID del cliente (0 para volver): ");
+        // Solicita un ID valido o permite cancelar la operacion.
+        validador.leerEnteroConCero(idCliente, "Ingrese el ID del cliente (0 para volver): ");
 
         if(idCliente == 0){
             return;
@@ -160,10 +157,9 @@ void ClienteManager::consultarPorId(){
 }
 
 // Busca y muestra un cliente a partir de su CUIT.
-//
-// VALIDACIÓN:
-// - Verifica que el CUIT tenga un formato válido.
-// - Comprueba que el cliente exista en el sistema.
+// VALIDACION:
+// - Verifica que el CUIT tenga un formato valido.
+// - Comprueba que el cliente exista.
 void ClienteManager::consultarPorCuit(){
 
     long long cuit;
@@ -172,7 +168,7 @@ void ClienteManager::consultarPorCuit(){
 
     while(true){
 
-        // Solicita un CUIT válido.
+        // Solicita un CUIT valido.
         validador.leerCuit(cuit);
 
         pos = _archivoClientes.buscarPorCuit(cuit);
@@ -191,10 +187,10 @@ void ClienteManager::consultarPorCuit(){
         cout << "Cliente no encontrado. Intente nuevamente." << endl;
     }
 }
+
 // Busca y muestra todos los clientes que coincidan con el apellido ingresado.
-//
-// VALIDACIÓN:
-// - Verifica que el apellido ingresado no esté vacío.
+// VALIDACION:
+// - Verifica que el apellido ingresado no este vacío.
 void ClienteManager::consultarPorApellido(){
 
     char apellido[30];
@@ -204,7 +200,7 @@ void ClienteManager::consultarPorApellido(){
 
     cin.ignore(1000, '\n');
 
-    // Solicita un apellido válido.
+    // Solicita un apellido valido.
     validador.leerTexto(apellido, 30, "Ingrese el apellido a buscar: ");
 
     // Recorre todos los clientes buscando coincidencias.
@@ -226,10 +222,8 @@ void ClienteManager::consultarPorApellido(){
 }
 
 // Busca y muestra todos los clientes de un tipo determinado.
-//
-// VALIDACIÓN:
-// - Solo permite ingresar un tipo de cliente válido
-//   (1 = Particular, 2 = Empresa).
+// VALIDACION:
+// - Solo permite ingresar un tipo de cliente valido (1 = Particular, 2 = Empresa).
 void ClienteManager::consultarPorTipo(){
 
     int tipoCliente;
@@ -237,7 +231,7 @@ void ClienteManager::consultarPorTipo(){
     bool encontro = false;
     int cantidad = _archivoClientes.getCantidadRegistros();
 
-    // Solicita un tipo de cliente válido.
+    // Solicita un tipo de cliente valido.
     validador.leerTipoCliente(tipoCliente);
 
     // Recorre todos los clientes buscando coincidencias.
@@ -259,13 +253,12 @@ void ClienteManager::consultarPorTipo(){
     }
 }
 
-// Muestra por pantalla toda la información correspondiente a un cliente,
-// incluyendo sus datos personales y su dirección.
+// Muestra por pantalla toda la informacion de un cliente (datos personales y su direccion).
 void ClienteManager::mostrarCliente(Cliente &reg){
 
     Direccion direccion = reg.getDireccion();
 
-    cout << "=================================="<< endl;
+    cout << endl;
     cout << "ID Cliente: " << reg.getIdCliente() << endl;
     cout << "CUIT: " << reg.getCuit() << endl;
     cout << "Nombre: " << reg.getNombre() << endl;
@@ -273,7 +266,7 @@ void ClienteManager::mostrarCliente(Cliente &reg){
     cout << "Telefono: " << reg.getTelefono() << endl;
     cout << "Email: " << reg.getEmail() << endl;
 
-    // Muestra el tipo de cliente almacenado y su descripción.
+    // Muestra el tipo de cliente y descripcion.
     cout << "Tipo Cliente: " << reg.getTipoCliente() << endl;
 
     if (reg.getTipoCliente() == 1){
@@ -286,7 +279,7 @@ void ClienteManager::mostrarCliente(Cliente &reg){
         cout << endl;
     }
 
-    // Muestra la dirección completa del cliente.
+    // Muestra la direccion completa del cliente.
     cout << "Direccion: " << direccion.getCalle() << " " << direccion.getAltura();
 
     if (direccion.getPiso()[0] != '\0'){
@@ -301,23 +294,23 @@ void ClienteManager::mostrarCliente(Cliente &reg){
     cout << "Localidad: " << direccion.getLocalidad() << endl;
     cout << "Codigo Postal: " << direccion.getCodigoPostal() << endl;
     cout << "Provincia: " << direccion.getProvincia() << endl;
+    cout << endl;
     cout << "==================================" << endl;
 }
 
 // Permite modificar los datos de un cliente existente.
-//
 // VALIDACIONES:
-// - Verifica que el ID ingresado sea válido.
+// - Verifica que el ID sea valido.
 // - Comprueba que el cliente exista.
-// - Valida el nuevo dato ingresado según la opción elegida.
+// - Valida el nuevo dato ingresado segun la opcion elegida.
 // - Evita CUIT duplicados.
-// - Solicita confirmación antes de guardar los cambios.
+// - Solicita confirmacion antes de guardar los cambios.
 void ClienteManager::modificarCliente(){
 
     int idCliente;
 
-    // VALIDACIÓN:
-    // Solicita un ID válido o permite cancelar la operación.
+    // VALIDACION:
+    // Solicita un ID valido o permite cancelar la operacion.
     validador.leerEnteroConCero(idCliente, "Ingrese el ID del cliente a modificar (0 para cancelar): ");
 
     if(idCliente == 0){
@@ -341,7 +334,7 @@ void ClienteManager::modificarCliente(){
 
     int opcion;
 
-    // Muestra el menú de campos disponibles para modificar.
+    // Muestra el menu de campos disponibles para modificar.
     cout << endl;
     cout << "Que dato desea modificar?" << endl;
     cout << "1. CUIT" << endl;
@@ -353,8 +346,8 @@ void ClienteManager::modificarCliente(){
     cout << "7. Tipo de cliente" << endl;
     cout << "0. Cancelar" << endl;
 
-    // VALIDACIÓN:
-    // Solicita una opción válida del menú.
+    // VALIDACION:
+    // Solicita una opcion valida del menu.
     validador.leerEnteroConCero(opcion, "Opcion: ");
 
     if(opcion == 0){
@@ -367,15 +360,14 @@ void ClienteManager::modificarCliente(){
         return;
     }
 
-    // Según la opción elegida, modifica únicamente ese dato.
+    // Segun la opcion elegida, modifica solo ese dato.
     switch(opcion){
 
         case 1:{
             long long cuit;
             int posEncontrada;
 
-            // VALIDACIÓN:
-            // Verifica que el nuevo CUIT sea válido y no pertenezca a otro cliente.
+            // Verifica que el nuevo CUIT sea valido y unico.
             do{
 
                 validador.leerCuit(cuit);
@@ -397,8 +389,7 @@ void ClienteManager::modificarCliente(){
 
             cin.ignore(1000, '\n');
 
-            // VALIDACIÓN:
-            // Verifica que el nombre no esté vacío.
+            // Verifica que el nombre no este vacio.
             validador.leerTexto(nombre, 30, "Ingrese nuevo nombre: ");
 
             clienteActual.setNombre(nombre);
@@ -410,8 +401,7 @@ void ClienteManager::modificarCliente(){
 
             cin.ignore(1000, '\n');
 
-            // VALIDACIÓN:
-            // Verifica que el apellido no esté vacío.
+            // Verifica que el apellido no este vacio.
             validador.leerTexto(apellido, 30, "Ingrese nuevo apellido: ");
 
             clienteActual.setApellido(apellido);
@@ -421,8 +411,7 @@ void ClienteManager::modificarCliente(){
         case 4:{
             char telefono[20];
 
-            // VALIDACIÓN:
-            // Verifica que el teléfono tenga un formato válido.
+            // Verifica que el telefono tenga un formato valido.
             validador.leerTelefono(telefono);
 
             clienteActual.setTelefono(telefono);
@@ -432,8 +421,7 @@ void ClienteManager::modificarCliente(){
         case 5:{
             char email[50];
 
-            // VALIDACIÓN:
-            // Verifica que el email tenga un formato válido.
+            // Verifica que el email tenga un formato valido.
             validador.leerEmail(email);
 
             clienteActual.setEmail(email);
@@ -448,8 +436,7 @@ void ClienteManager::modificarCliente(){
 
             cin.ignore(1000, '\n');
 
-            // VALIDACIÓN:
-            // Verifica los datos obligatorios de la nueva dirección.
+            // Verifica los datos obligatorios de la nueva direccion.
             validador.leerTexto(calle, 50, "Calle: ");
             validador.leerEnteroPositivo(altura, "Altura: ");
 
@@ -474,8 +461,7 @@ void ClienteManager::modificarCliente(){
         case 7:{
             int tipoCliente;
 
-            // VALIDACIÓN:
-            // Solo permite seleccionar un tipo de cliente válido.
+            // Solo permite seleccionar un tipo de cliente valido.
             validador.leerTipoCliente(tipoCliente);
 
             clienteActual.setTipoCliente(tipoCliente);
@@ -491,8 +477,7 @@ void ClienteManager::modificarCliente(){
 
     cout << endl;
 
-    // VALIDACIÓN:
-    // Solicita confirmación antes de guardar los cambios realizados.
+    // Solicita confirmacion antes de guardar los cambios.
     validador.leerConfirmacion(confirmar);
 
     if(confirmar == 'N' || confirmar == 'n'){
@@ -509,11 +494,10 @@ void ClienteManager::modificarCliente(){
     }
 }
 
-// Ordena un vector de clientes alfabéticamente por apellido
-
+// Ordena los clientes alfabeticamente por apellido
 void ClienteManager::ordenarClientes(Cliente *vClientes, int cantidad){
 
-    // Recorre el vector realizando comparaciones e intercambios.
+    // Recorre el vector, compara e intercambia.
     for (int i = 0; i < cantidad - 1; i++){
 
         for (int j = 0; j < cantidad - i - 1; j++){
@@ -521,7 +505,7 @@ void ClienteManager::ordenarClientes(Cliente *vClientes, int cantidad){
             // Compara los apellidos de dos clientes consecutivos.
             if (strcmp(vClientes[j].getApellido(), vClientes[j + 1].getApellido()) > 0){
 
-                // Intercambia ambos registros.
+                // Intercambia registros.
                 Cliente aux = vClientes[j];
                 vClientes[j] = vClientes[j + 1];
                 vClientes[j + 1] = aux;
@@ -529,18 +513,16 @@ void ClienteManager::ordenarClientes(Cliente *vClientes, int cantidad){
         }
     }
 }
-// Ordena un vector de clientes por tipo de cliente.
-// Si dos clientes pertenecen al mismo tipo,
-// los ordena alfabéticamente por apellido.
+
+// Ordena los clientes por tipo de cliente.
+// Si dos clientes tienen el mismo tipo, los ordena alfabeticamente por apellido.
 void ClienteManager::ordenarClientesPorTipo(Cliente *vClientes, int cantidad){
 
-    // Recorre el vector realizando comparaciones e intercambios.
     for(int i = 0; i < cantidad - 1; i++){
 
         for(int j = 0; j < cantidad - i - 1; j++){
 
-            // Primero compara el tipo de cliente.
-            // Si ambos son del mismo tipo, compara el apellido.
+            // Primero compara el tipo de cliente y despues compara el apellido (si son del mismo tipo).
             if(
                 vClientes[j].getTipoCliente() > vClientes[j + 1].getTipoCliente()
                 ||
@@ -552,7 +534,7 @@ void ClienteManager::ordenarClientesPorTipo(Cliente *vClientes, int cantidad){
                 )
             ){
 
-                // Intercambia ambos registros.
+                // Intercambia registros.
                 Cliente aux = vClientes[j];
                 vClientes[j] = vClientes[j + 1];
                 vClientes[j + 1] = aux;
@@ -560,18 +542,16 @@ void ClienteManager::ordenarClientesPorTipo(Cliente *vClientes, int cantidad){
         }
     }
 }
-// Muestra todos los clientes activos ordenados alfabéticamente por apellido.
+// Muestra todos los clientes activos ordenados alfabeticamente por apellido.
 void ClienteManager::mostrarClientesOrdenados(){
 
     int cantidadRegistros = _archivoClientes.getCantidadRegistros();
 
-    // Verifica que existan clientes cargados.
     if (cantidadRegistros == 0){
         cout << "No hay clientes cargados." << endl;
         return;
     }
 
-    // Reserva memoria para almacenar los clientes activos.
     Cliente *vClientes = new Cliente[cantidadRegistros];
 
     if (vClientes == nullptr){
@@ -581,7 +561,7 @@ void ClienteManager::mostrarClientesOrdenados(){
 
     int cantidadActivos = 0;
 
-    // Copia únicamente los clientes activos al vector.
+    // Copia solo los clientes activos al vector.
     for (int i = 0; i < cantidadRegistros; i++){
 
         Cliente cliente = _archivoClientes.leerPorPosicion(i);
@@ -600,23 +580,19 @@ void ClienteManager::mostrarClientesOrdenados(){
         mostrarCliente(vClientes[i]);
     }
 
-    // Libera la memoria reservada dinámicamente.
     delete [] vClientes;
 }
 
-// Muestra todos los clientes activos ordenados por tipo de cliente.
-// Dentro de cada tipo, los clientes se ordenan alfabéticamente por apellido.
+// Muestra todos los clientes activos ordenados por tipo de cliente y apellido.
 void ClienteManager::mostrarClientesOrdenadosPorTipo(){
 
     int cantidadRegistros = _archivoClientes.getCantidadRegistros();
 
-    // Verifica que existan clientes cargados.
     if(cantidadRegistros == 0){
         cout << "No hay clientes cargados." << endl;
         return;
     }
 
-    // Reserva memoria para almacenar los clientes activos.
     Cliente *vClientes = new Cliente[cantidadRegistros];
 
     if(vClientes == nullptr){
@@ -626,7 +602,7 @@ void ClienteManager::mostrarClientesOrdenadosPorTipo(){
 
     int cantidadActivos = 0;
 
-    // Copia únicamente los clientes activos al vector.
+    // Copia solo los clientes activos al vector.
     for(int i = 0; i < cantidadRegistros; i++){
 
         Cliente cliente = _archivoClientes.leerPorPosicion(i);
@@ -637,8 +613,7 @@ void ClienteManager::mostrarClientesOrdenadosPorTipo(){
         }
     }
 
-    // Ordena el vector por tipo de cliente y, en caso de empate,
-    // por apellido.
+    // Ordena el vector por tipo de cliente y por apellido si hay empate.
     ordenarClientesPorTipo(vClientes, cantidadActivos);
 
     // Muestra el listado ordenado.
@@ -646,6 +621,5 @@ void ClienteManager::mostrarClientesOrdenadosPorTipo(){
         mostrarCliente(vClientes[i]);
     }
 
-    // Libera la memoria reservada dinámicamente.
     delete[] vClientes;
 }

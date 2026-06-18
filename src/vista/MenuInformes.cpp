@@ -26,22 +26,32 @@ void MenuInformes::ejecutarOpcion(int opcion){
     switch(opcion){
 
     case 1:
+        consola.limpiar();
         managerInformes.recaudacionXanio();
+        consola.pausar();
         break;
 
     case 2:
+        consola.limpiar();
         managerInformes.recaudacionXcliente();
+        consola.pausar();
         break;
     case 3:
+        consola.limpiar();
         managerInformes.equiposMasVendidos();
+        consola.pausar();
         break;
 
     case 4:
+        consola.limpiar();
          managerInformes.ventasXempleado();
+        consola.pausar();
         break;
 
     case 5:
+        consola.limpiar();
         managerInformes.stockDisponible();
+        consola.pausar();
         break;
 
     case 0:

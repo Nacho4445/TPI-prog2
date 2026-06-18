@@ -26,7 +26,9 @@ void MenuEquipos::ejecutarOpcion(int opcion){
     switch(opcion){
 
     case 1:
+        consola.limpiar();
         managerEquipos.guardarEquipo();
+        consola.pausar();
         break;
 
     case 2:{
@@ -44,6 +46,7 @@ void MenuEquipos::ejecutarOpcion(int opcion){
             cout << "5. Consultar con Stock Disponible" << endl;
             cout << "------------------------" << endl;
             cout << "0. Volver" << endl;
+            cout << endl;
 
             validador.leerEnteroConCero(opcionConsulta, "Opcion: ");
 
@@ -64,7 +67,7 @@ void MenuEquipos::ejecutarOpcion(int opcion){
                     cout << "1. Buscar un tipo de equipo" << endl;
                     cout << "2. Listar ordenados por tipo" << endl;
                     cout << "0. Volver" << endl;
-
+                    cout << endl;
                     validador.leerEnteroConCero(opcionTipo, "Opcion: ");
 
                     switch(opcionTipo){
@@ -199,11 +202,15 @@ void MenuEquipos::ejecutarOpcion(int opcion){
     }
 
     case 3:
+        consola.limpiar();
         managerEquipos.modificarEquipo();
+        consola.pausar();
         break;
 
     case 4:
+        consola.limpiar();
         managerEquipos.eliminarEquipo();
+        consola.pausar();
         break;
 
     case 0:

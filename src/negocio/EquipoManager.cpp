@@ -8,8 +8,8 @@ EquipoManager::EquipoManager()
    : _archivoEquipos(){
 }
 
-// Crea un nuevo equipo solicitando sus datos por teclado.
-// Realiza las validaciones necesarias antes de construir el objeto Equipo.
+// Crea un nuevo equipo solicitando datos por teclado.
+// Realiza las validaciones antes de construir el objeto Equipo.
 Equipo EquipoManager::crearEquipo(){
 
     Equipo equipo;
@@ -21,31 +21,24 @@ Equipo EquipoManager::crearEquipo(){
     float precioUnitario;
     char descripcion[30];
 
-    // Genera automáticamente el ID del nuevo equipo.
+    // Genera automaticamente el ID del nuevo equipo.
     idEquipo = _archivoEquipos.getCantidadEquipos() + 1;
 
     cout << "Ingrese los siguientes datos:" << endl;
 
-    // VALIDACIÓN:
-    // Permite ingresar el tipo de equipo por nombre.
-    // Si no existe, lo crea automáticamente.
+    // Permite ingresar el tipo de equipo por nombre. Si no existe, lo crea.
     idTipoEquipo = seleccionarTipoEquipo();
 
-    // VALIDACIÓN:
-    // Permite ingresar la marca por nombre.
-    // Si no existe, la crea automáticamente.
+    // Permite ingresar la marca por nombre. Si no existe, la crea.
     idTipoMarca = seleccionarMarca();
 
-    // VALIDACIÓN:
-    // Verifica que la descripción no esté vacía.
+    // Verifica que la descripcion no este vacia.
     validador.leerTexto(descripcion, 30, "Descripcion: ");
 
-    // VALIDACIÓN:
-    // Verifica que el stock sea un número entero positivo.
+    // Verifica que el stock sea un numero entero positivo.
     validador.leerEnteroPositivo(stock, "Stock: ");
 
-    // VALIDACIÓN:
-    // Verifica que el precio sea un número positivo.
+    // Verifica que el precio sea un numero positivo.
     validador.leerDecimalPositivo(precioUnitario, "Precio Unitario: ");
 
     // Se cargan los datos validados al objeto Equipo.
@@ -61,7 +54,6 @@ Equipo EquipoManager::crearEquipo(){
 }
 
 // Guarda un nuevo equipo en el archivo.
-
 void EquipoManager::guardarEquipo(){
 
     Equipo equipo = crearEquipo();
@@ -72,25 +64,21 @@ void EquipoManager::guardarEquipo(){
     else{
         cout << "Error al guardar el equipo." << endl;
     }
-
-    consola.pausar();
 }
 
-// Busca y muestra un equipo a partir de su ID.
-//
+// Busca y muestra un equipo a partir del ID.
 // VALIDACIONES:
-// - Solo permite ingresar números.
-// - Permite ingresar 0 para cancelar la búsqueda.
-// - Verifica que el equipo exista y esté activo.
+// - Solo permite ingresar numeros.
+// - Permite ingresar 0 para cancelar la busqueda.
+// - Verifica que el equipo exista y este activo.
 void EquipoManager::consultarPorId(){
 
     int idEquipo;
 
     while(true){
 
-        // Solicita un ID válido o permite cancelar la operación.
-        validador.leerEnteroConCero(idEquipo,
-                                    "Ingrese el ID del equipo (0 para volver): ");
+        // Solicita un ID valido o permite cancelar la operacion.
+        validador.leerEnteroConCero(idEquipo, "Ingrese el ID del equipo (0 para volver): ");
 
         if(idEquipo == 0){
             return;
@@ -98,7 +86,7 @@ void EquipoManager::consultarPorId(){
 
         Equipo equipo = _archivoEquipos.leer(idEquipo);
 
-        // Si el equipo existe, se muestran sus datos.
+        // Si el equipo existe, se muestran los datos.
         if(equipo.getEstado()){
             mostrarEquipo(equipo);
             return;
@@ -108,10 +96,9 @@ void EquipoManager::consultarPorId(){
     }
 }
 
-// Busca y muestra todos los equipos pertenecientes a un tipo determinado.
-//
+// Busca y muestra todos los equipos de un tipo determinado.
 // VALIDACIONES:
-// - Verifica que el tipo de equipo exista antes de realizar la búsqueda.
+// - Verifica que el tipo de equipo exista antes de buscar.
 void EquipoManager::consultarPorTipo(){
 
     // Obtiene el ID correspondiente al tipo de equipo ingresado.
@@ -145,10 +132,9 @@ void EquipoManager::consultarPorTipo(){
     }
 }
 
-// Busca y muestra todos los equipos pertenecientes a una marca determinada.
-//
+// Busca y muestra todos los equipos de una marca determinada.
 // VALIDACIONES:
-// - Verifica que la marca exista antes de realizar la búsqueda.
+// - Verifica que la marca exista antes de buscar.
 void EquipoManager::consultarPorMarca(){
 
     // Obtiene el ID correspondiente a la marca ingresada.
@@ -182,12 +168,10 @@ void EquipoManager::consultarPorMarca(){
     }
 }
 
-// Busca y muestra todos los equipos cuyo precio se encuentre
-// dentro del rango ingresado por el usuario.
-//
+// Busca y muestra todos los equipos con precio dentro del rango ingresado por el usuario.
 // VALIDACIONES:
-// - Verifica que ambos precios sean valores positivos.
-// - Comprueba que el precio mínimo no sea mayor que el máximo.
+// - Verifica que los precios sean valores positivos.
+// - Comprueba que el precio minimo no sea mayor que el maximo.
 void EquipoManager::consultarPorPrecio(){
 
     float precioMin;
@@ -197,12 +181,10 @@ void EquipoManager::consultarPorPrecio(){
     bool encontro = false;
     int cantidad = _archivoEquipos.getCantidadEquipos();
 
-    // VALIDACIÓN:
-    // Solicita un precio mínimo válido.
+    // Solicita un precio minimo valido.
     validador.leerDecimalPositivo(precioMin, "Ingrese precio minimo: ");
 
-    // VALIDACIÓN:
-    // Solicita un precio máximo válido.
+    // Solicita un precio maximo valido.
     validador.leerDecimalPositivo(precioMax, "Ingrese precio maximo: ");
 
     // Verifica que el rango ingresado sea correcto.
@@ -235,8 +217,7 @@ void EquipoManager::consultarPorPrecio(){
 }
 
 // Muestra todos los equipos activos que tienen stock disponible.
-//
-// VALIDACIÓN:
+// VALIDACION:
 // - No requiere ingreso de datos.
 // - Solo muestra equipos activos con stock mayor a cero.
 void EquipoManager::consultarPorStock(){
@@ -264,7 +245,7 @@ void EquipoManager::consultarPorStock(){
 
 void EquipoManager::mostrarEquipo(Equipo &reg){
 
-    cout << "==================================" << endl;
+    cout << endl;
     cout << "ID Equipo: " << reg.getIdEquipo() << endl;
     cout << "ID Tipo Equipo: " << reg.getIdTipoEquipo() << endl;
     cout << "ID Tipo Marca: " << reg.getIdTipoMarca() << endl;
@@ -273,22 +254,22 @@ void EquipoManager::mostrarEquipo(Equipo &reg){
     cout << defaultfloat;
     cout.precision(10);
     cout << "Precio Unitario: $" << reg.getPrecioUnitario() << endl;
+    cout << endl;
     cout << "==================================" << endl;
 }
+
 // Permite modificar los datos de un equipo existente.
-//
 // VALIDACIONES:
-// - Verifica que el ID ingresado sea válido.
+// - Verifica que el ID ingresado sea valido.
 // - Comprueba que el equipo exista.
-// - Valida el nuevo dato ingresado según la opción elegida.
+// - Valida el nuevo dato ingresado segun la opcion elegida.
 // - Permite ingresar tipo y marca por nombre.
-// - Solicita confirmación antes de guardar los cambios.
+// - Solicita confirmacion antes de guardar los cambios.
 void EquipoManager::modificarEquipo(){
 
     int idEquipo;
 
-    // VALIDACIÓN:
-    // Solicita un ID válido o permite cancelar la operación.
+    // Solicita un ID valido o permite cancelar la operacion.
     validador.leerEnteroConCero(idEquipo,
         "Ingrese el ID del equipo a modificar (0 para cancelar): ");
 
@@ -320,8 +301,7 @@ void EquipoManager::modificarEquipo(){
     cout << "5. Precio unitario" << endl;
     cout << "0. Cancelar" << endl;
 
-    // VALIDACIÓN:
-    // Solicita una opción numérica del menú.
+    // Solicita una opcion numerica del menu.
     validador.leerEnteroConCero(opcion, "Opcion: ");
 
     if(opcion == 0){
@@ -337,9 +317,7 @@ void EquipoManager::modificarEquipo(){
     switch(opcion){
 
     case 1:{
-        // VALIDACIÓN:
-        // Permite ingresar el tipo de equipo por nombre.
-        // Si no existe, lo crea automáticamente.
+        // Permite ingresar el tipo de equipo por nombre. Si no existe, lo crea.
         int idTipoEquipo = seleccionarTipoEquipo();
 
         equipoActual.setIdTipoEquipo(idTipoEquipo);
@@ -347,9 +325,7 @@ void EquipoManager::modificarEquipo(){
     }
 
     case 2:{
-        // VALIDACIÓN:
-        // Permite ingresar la marca por nombre.
-        // Si no existe, la crea automáticamente.
+        // Permite ingresar la marca por nombre. Si no existe, la crea.
         int idTipoMarca = seleccionarMarca();
 
         equipoActual.setIdTipoMarca(idTipoMarca);
@@ -361,8 +337,7 @@ void EquipoManager::modificarEquipo(){
 
         cin.ignore(1000, '\n');
 
-        // VALIDACIÓN:
-        // Verifica que la descripción no esté vacía.
+        // Verifica que la descripcion no este vacia.
         validador.leerTexto(descripcion, 30, "Ingrese nueva descripcion: ");
 
         equipoActual.setDescripcion(descripcion);
@@ -372,8 +347,7 @@ void EquipoManager::modificarEquipo(){
     case 4:{
         int stock;
 
-        // VALIDACIÓN:
-        // Verifica que el stock sea un número entero positivo.
+        // Verifica que el stock sea un numero entero positivo.
         validador.leerEnteroPositivo(stock, "Ingrese nuevo stock: ");
 
         equipoActual.setStock(stock);
@@ -383,10 +357,8 @@ void EquipoManager::modificarEquipo(){
     case 5:{
         float precioUnitario;
 
-        // VALIDACIÓN:
-        // Verifica que el precio sea un número positivo.
-        validador.leerDecimalPositivo(precioUnitario,
-                                      "Ingrese nuevo precio unitario: ");
+        // Verifica que el precio sea un numero positivo.
+        validador.leerDecimalPositivo(precioUnitario, "Ingrese nuevo precio unitario: ");
 
         equipoActual.setPrecioUnitario(precioUnitario);
         break;
@@ -401,8 +373,7 @@ void EquipoManager::modificarEquipo(){
 
     cout << endl;
 
-    // VALIDACIÓN:
-    // Solicita confirmación antes de guardar los cambios.
+    // Solicita confirmacion antes de guardar cambios.
     validador.leerConfirmacion(confirmar);
 
     if(confirmar == 'N' || confirmar == 'n'){
@@ -417,23 +388,19 @@ void EquipoManager::modificarEquipo(){
         cout << "No se pudo modificar el equipo." << endl;
     }
 
-    consola.pausar();
 }
 
 // Da de baja un equipo del sistema.
-//
 // VALIDACIONES:
-// - Verifica que el ID ingresado sea válido.
+// - Verifica que el ID sea valido.
 // - Comprueba que el equipo exista y se encuentre activo.
-// - Solicita confirmación antes de realizar la baja.
+// - Solicita confirmacion antes de realizar la baja.
 void EquipoManager::eliminarEquipo(){
 
     int idEliminado;
 
-    // VALIDACIÓN:
-    // Solicita un ID válido o permite cancelar la operación.
-    validador.leerEnteroConCero(idEliminado,
-        "Ingrese el ID del equipo a dar de baja (0 para cancelar): ");
+    // Solicita un ID valido o permite cancelar la operacion.
+    validador.leerEnteroConCero(idEliminado, "Ingrese el ID del equipo a dar de baja (0 para cancelar): ");
 
     if(idEliminado == 0){
         cout << "Operacion cancelada." << endl;
@@ -452,8 +419,7 @@ void EquipoManager::eliminarEquipo(){
 
     char confirmar;
 
-    // VALIDACIÓN:
-    // Solicita confirmación antes de dar de baja el equipo.
+    // Solicita confirmacion antes de eliminar el equipo.
     validador.leerConfirmacion(confirmar);
 
     if(confirmar == 'S' || confirmar == 's'){
@@ -472,19 +438,14 @@ void EquipoManager::eliminarEquipo(){
     consola.pausar();
 }
 
-// Permite seleccionar un tipo de equipo.
-//
-// Si el tipo ingresado ya existe, devuelve su ID.
-// En caso contrario, crea un nuevo tipo y devuelve el ID generado.
-//
+// Establece el tipo de equipo. Si ya existe el tipo, devuelve ID. Si no existe, lo crea y devuelve ID.
 // VALIDACIONES:
-// - Verifica que la descripción ingresada no esté vacía.
+// - Verifica que la descripcion ingresada no este vacia.
 int EquipoManager::seleccionarTipoEquipo(){
 
     char descripcion[30];
 
-    // VALIDACIÓN:
-    // Solicita un tipo de equipo válido.
+    // Solicita un tipo de equipo valido.
     validador.leerTexto(descripcion, 30, "Tipo de equipo: ");
 
     int cantidad = _archivoTipoEquipos.getCantidadTipos();
@@ -514,19 +475,15 @@ int EquipoManager::seleccionarTipoEquipo(){
     return 0;
 }
 
-// Permite seleccionar una marca.
-//
-// Si la marca ingresada ya existe, devuelve su ID.
-// En caso contrario, crea una nueva marca y devuelve el ID generado.
-//
+// Permite seleccionar una marca. Si la marca ingresada ya existe, devuelve su ID.
+// Si no existe, crea una nueva marca y devuelve el ID generado.
 // VALIDACIONES:
-// - Verifica que la descripción ingresada no esté vacía.
+// - Verifica que la descripcion no este vacia.
 int EquipoManager::seleccionarMarca(){
 
     char descripcion[30];
 
-    // VALIDACIÓN:
-    // Solicita una marca válida.
+    // Solicita una marca valida.
     validador.leerTexto(descripcion, 30, "Marca: ");
 
     int cantidad = _archivoTipoMarcas.getCantidadTipos();
@@ -556,20 +513,16 @@ int EquipoManager::seleccionarMarca(){
     return 0;
 }
 
-// Busca un tipo de equipo por su descripción.
-//
-// Devuelve el ID del tipo de equipo si existe.
-// Si no existe, devuelve 0.
-//
+// Busca un tipo de equipo por su descripcion.
+// Si existe, devuelve el ID del tipo de equipo. Si no existe, devuelve 0.
 // VALIDACIONES:
-// - Verifica que la descripción ingresada no esté vacía.
+// - Verifica que la descripcion ingresada no este vacia.
 int EquipoManager::buscarTipoEquipo(){
 
     char descripcion[30];
 
-    // VALIDACIÓN:
-    // Solicita un tipo de equipo válido.
-    validador.leerTexto(descripcion, 30, "Ingrese el tipo de equipo: ");
+    // Solicita un tipo de equipo valido.
+    validador.leerTexto(descripcion, 30, "Ingrese el tipo de equipo (Monitor, Impresora, etc.): ");
 
     int cantidad = _archivoTipoEquipos.getCantidadTipos();
 
@@ -587,19 +540,14 @@ int EquipoManager::buscarTipoEquipo(){
 
     return 0;
 }
-// Busca una marca por su descripción.
-//
-// Devuelve el ID de la marca si existe.
-// Si no existe, devuelve 0.
-//
+// Busca una marca por su descripcion. Si existe, devuelve ID. Si no, devuelve 0.
 // VALIDACIONES:
-// - Verifica que la descripción ingresada no esté vacía.
+// - Verifica que la descripcion ingresada no este vacía.
 int EquipoManager::buscarMarca(){
 
     char descripcion[30];
 
-    // VALIDACIÓN:
-    // Solicita una marca válida.
+    // Solicita una marca valida.
     validador.leerTexto(descripcion, 30, "Ingrese la marca: ");
 
     int cantidad = _archivoTipoMarcas.getCantidadTipos();
@@ -654,8 +602,8 @@ void EquipoManager::ordenarEquiposPorMarca(Equipo vEquipos[], int cantidad){
         }
     }
 }
-// Ordena un vector de equipos por precio unitario de menor a mayor.
 
+// Ordena un vector de equipos por precio unitario de menor a mayor.
 void EquipoManager::ordenarEquiposPorPrecioAsc(Equipo vEquipos[], int cantidad){
 
     for(int i = 0; i < cantidad - 1; i++){
@@ -674,7 +622,6 @@ void EquipoManager::ordenarEquiposPorPrecioAsc(Equipo vEquipos[], int cantidad){
 }
 
 // Ordena un vector de equipos por precio unitario de mayor a menor.
-
 void EquipoManager::ordenarEquiposPorPrecioDesc(Equipo vEquipos[], int cantidad){
 
     for(int i = 0; i < cantidad - 1; i++){
@@ -694,18 +641,17 @@ void EquipoManager::ordenarEquiposPorPrecioDesc(Equipo vEquipos[], int cantidad)
 
 // Carga en un vector todos los equipos que se encuentran activos.
 // Devuelve la cantidad de equipos activos cargados.
-
 int EquipoManager::cargarEquiposActivos(Equipo vEquipos[]){
 
     int cantidad = _archivoEquipos.getCantidadEquipos();
     int cantidadActivos = 0;
 
-    // Recorre todos los equipos almacenados.
+    // Recorre todos los equipos en sistema.
     for(int i = 0; i < cantidad; i++){
 
         Equipo equipo = _archivoEquipos.leerPorPosicion(i);
 
-        // Copia únicamente los equipos activos al vector.
+        // Copia solo los equipos activos al vector.
         if(equipo.getEstado()){
             vEquipos[cantidadActivos] = equipo;
             cantidadActivos++;

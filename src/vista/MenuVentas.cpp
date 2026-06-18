@@ -8,6 +8,8 @@ MenuVentas::MenuVentas(){
 }
 
 void MenuVentas::mostrarOpciones(){
+    consola.limpiar();
+
     cout << "------------------------" << endl;
     cout << "-----MENU VENTAS-----" << endl;
     cout << "1. Registrar Venta" << endl;
@@ -23,7 +25,9 @@ void MenuVentas::ejecutarOpcion(int opcion){
     switch(opcion){
 
     case 1:
+        consola.limpiar();
         managerVentas.guardarVenta();
+        consola.pausar();
         break;
 
     case 2:{
@@ -48,33 +52,33 @@ void MenuVentas::ejecutarOpcion(int opcion){
             switch(opcionConsulta){
 
             case 1:
+                consola.limpiar();
                 managerVentas.consultarPorId();
-                consola.pausar();
                 break;
 
             case 2:
+                consola.limpiar();
                 managerVentas.consultarPorCliente();
-                consola.pausar();
                 break;
 
             case 3:
+                consola.limpiar();
                 managerVentas.consultarPorEmpleado();
-                consola.pausar();
                 break;
 
             case 4:
+                consola.limpiar();
                 managerVentas.consultarPorFecha();
-                consola.pausar();
                 break;
 
             case 5:
+                consola.limpiar();
                 managerVentas.consultarPorEquipo();
-                consola.pausar();
                 break;
 
             case 6:
+                consola.limpiar();
                 managerVentas.listarVentas();
-                consola.pausar();
                 break;
 
             case 0:
@@ -83,9 +87,10 @@ void MenuVentas::ejecutarOpcion(int opcion){
 
             default:
                 cout << "Opcion invalida." << endl;
-                consola.pausar();
                 break;
             }
+
+            consola.pausar();
 
         }while(opcionConsulta != 0);
 
@@ -93,7 +98,9 @@ void MenuVentas::ejecutarOpcion(int opcion){
     }
 
     case 3:
+        consola.limpiar();
         managerVentas.cancelarVenta();
+        consola.pausar();
         break;
 
     case 0:

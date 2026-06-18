@@ -101,6 +101,8 @@
         <Unit filename="src/utils/Direccion.cpp" />
         <Unit filename="src/utils/Fecha.h" />
         <Unit filename="src/utils/Fecha.cpp" />
+        <Unit filename="src/utils/Validador.h" />
+        <Unit filename="src/utils/Validador.cpp" />
 
         <Unit filename="src/vista/MenuArchivos.h" />
 		<Unit filename="src/vista/MenuArchivos.cpp" />

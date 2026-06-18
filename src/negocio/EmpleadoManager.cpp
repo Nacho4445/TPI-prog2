@@ -31,13 +31,13 @@ Empleado EmpleadoManager::crearEmpleado(){
     char codigoPostal[20];
     char provincia[50];
 
-    // Genera automáticamente el ID del nuevo empleado.
+    // Genera automaticamente el ID del nuevo empleado.
     idEmpleado = _archivoEmpleados.getCantidadRegistros() + 1;
 
     cout << "Ingrese los siguientes datos:" << endl;
 
-    // VALIDACIÓN:
-    // Solicita el CUIT hasta que sea válido y no exista otro empleado con el mismo.
+    // VALIDACION:
+    // Solicita el CUIT hasta que sea valido y no exista otro empleado con el mismo.
     do{
         validador.leerCuit(cuit);
 
@@ -51,15 +51,15 @@ Empleado EmpleadoManager::crearEmpleado(){
 
     cin.ignore(1000, '\n');
 
-    // VALIDACIÓN:
+    // VALIDACION:
     // Se validan los datos personales del empleado.
     validador.leerTexto(nombre, 30, "Nombre: ");
     validador.leerTexto(apellido, 30, "Apellido: ");
     validador.leerTelefono(telefono);
     validador.leerEmail(email);
 
-    // VALIDACIÓN:
-    // Se validan los datos obligatorios de la dirección.
+    // VALIDACION:
+    // Se validan los datos obligatorios de la direccion.
     validador.leerTexto(calle, 50, "Calle: ");
     validador.leerEnteroPositivo(altura, "Altura: ");
 
@@ -72,8 +72,8 @@ Empleado EmpleadoManager::crearEmpleado(){
     cout << "Departamento: ";
     cin.getline(departamento, 10);
 
-    // VALIDACIÓN:
-    // Se validan los restantes datos obligatorios de la dirección.
+    // VALIDACION:
+    // Se validan los datos obligatorios de la direccion.
     validador.leerTexto(localidad, 50, "Localidad: ");
     validador.leerTexto(codigoPostal, 20, "Codigo Postal: ");
     validador.leerTexto(provincia, 50, "Provincia: ");
@@ -87,7 +87,7 @@ Empleado EmpleadoManager::crearEmpleado(){
     empleado.setEmail(email);
     empleado.setEstado(true);
 
-    // Se cargan los datos de la dirección.
+    // Se cargan los datos de la direccion.
     direccion.setCalle(calle);
     direccion.setAltura(altura);
     direccion.setPiso(piso);
@@ -97,7 +97,7 @@ Empleado EmpleadoManager::crearEmpleado(){
     direccion.setProvincia(provincia);
     direccion.setEstado(true);
 
-    // Se asigna la dirección al empleado.
+    // Se asigna la direccion al empleado.
     empleado.setDireccion(direccion);
 
     return empleado;
@@ -114,23 +114,20 @@ void EmpleadoManager::guardarEmpleado(){
     else{
         cout << "Error al guardar el empleado." << endl;
     }
-
-    consola.pausar();
 }
 
-// Busca y muestra un empleado a partir de su ID.
-//
-// VALIDACIÓN:
-// - Solo permite ingresar números.
-// - Permite ingresar 0 para cancelar la búsqueda.
-// - Verifica que el empleado exista y esté activo.
+// Busca y muestra un empleado a partir del ID.
+// VALIDACION:
+// - Solo permite numeros.
+// - Permite 0 para cancelar.
+// - Verifica que el empleado exista y este activo.
 void EmpleadoManager::consultarPorId(){
 
     int idEmpleado;
 
     while(true){
 
-        // Solicita un ID válido o permite cancelar la operación.
+        // Solicita un ID valido o permite cancelar la operacion.
         validador.leerEnteroConCero(idEmpleado,
                                     "Ingrese el ID del empleado (0 para volver): ");
 
@@ -149,11 +146,10 @@ void EmpleadoManager::consultarPorId(){
     }
 }
 
-// Busca y muestra un empleado a partir de su CUIT.
-//
-// VALIDACIÓN:
-// - Verifica que el CUIT tenga un formato válido.
-// - Comprueba que el empleado exista en el sistema.
+// Busca y muestra un empleado a partir del CUIT.
+// VALIDACION:
+// - Verifica que el CUIT sea valido.
+// - Comprueba que el empleado exista.
 void EmpleadoManager::consultarPorCuit(){
 
     long long cuit;
@@ -162,7 +158,7 @@ void EmpleadoManager::consultarPorCuit(){
 
     while(true){
 
-        // Solicita un CUIT válido.
+        // Solicita un CUIT valido.
         validador.leerCuit(cuit);
 
         pos = _archivoEmpleados.buscarPorCuit(cuit);
@@ -179,9 +175,8 @@ void EmpleadoManager::consultarPorCuit(){
 }
 
 // Busca y muestra todos los empleados que coincidan con el apellido ingresado.
-//
-// VALIDACIÓN:
-// - Verifica que el apellido ingresado no esté vacío.
+// VALIDACION:
+// - Verifica que el apellido ingresado no este vacio.
 void EmpleadoManager::consultarPorApellido(){
 
     char apellido[30];
@@ -189,9 +184,9 @@ void EmpleadoManager::consultarPorApellido(){
     bool encontro = false;
     int cantidad = _archivoEmpleados.getCantidadRegistros();
 
-    cin.ignore(1000, '\n');
+    // cin.ignore(1000, '\n');
 
-    // Solicita un apellido válido.
+    // Solicita un apellido valido.
     validador.leerTexto(apellido, 30, "Ingrese el apellido a buscar: ");
 
     // Recorre todos los empleados buscando coincidencias.
@@ -211,14 +206,13 @@ void EmpleadoManager::consultarPorApellido(){
     }
 }
 
-// Muestra por pantalla toda la información correspondiente a un empleado,
-// incluyendo sus datos personales y su dirección.
+// Muestra por pantalla toda la informacion de un empleado (datos personales y direccion).
 void EmpleadoManager::mostrarEmpleado(Empleado &reg){
 
     Direccion direccion = reg.getDireccion();
 
     // Muestra los datos personales del empleado.
-    cout << "==================================" << endl;
+    cout << endl;
     cout << "ID Empleado: " << reg.getIdEmpleado() << endl;
     cout << "CUIT: " << reg.getCuit() << endl;
     cout << "Nombre: " << reg.getNombre() << endl;
@@ -241,23 +235,23 @@ void EmpleadoManager::mostrarEmpleado(Empleado &reg){
     cout << "Localidad: " << direccion.getLocalidad() << endl;
     cout << "Codigo Postal: " << direccion.getCodigoPostal() << endl;
     cout << "Provincia: " << direccion.getProvincia() << endl;
+    cout << endl;
     cout << "==================================" << endl;
 }
 
 // Permite modificar los datos de un empleado existente.
-//
 // VALIDACIONES:
-// - Verifica que el ID ingresado sea válido.
+// - Verifica que el ID ingresado sea valido.
 // - Comprueba que el empleado exista.
-// - Valida el nuevo dato ingresado según la opción elegida.
+// - Valida el nuevo dato ingresado segun la opcion elegida.
 // - Evita CUIT duplicados.
-// - Solicita confirmación antes de guardar los cambios.
+// - Solicita confirmacion antes de guardar los cambios.
 void EmpleadoManager::modificarEmpleado(){
 
     int idEmpleado;
 
-    // VALIDACIÓN:
-    // Solicita un ID válido o permite cancelar la operación.
+    // VALIDACION:
+    // Solicita un ID valido o permite cancelar la operacion.
     validador.leerEnteroConCero(idEmpleado,
         "Ingrese el ID del empleado a modificar (0 para cancelar): ");
 
@@ -282,7 +276,7 @@ void EmpleadoManager::modificarEmpleado(){
 
     int opcion;
 
-    // Muestra el menú de campos disponibles para modificar.
+    // Muestra el menu de campos disponibles para modificar.
     cout << endl;
     cout << "Que dato desea modificar?" << endl;
     cout << "1. CUIT" << endl;
@@ -293,8 +287,7 @@ void EmpleadoManager::modificarEmpleado(){
     cout << "6. Direccion" << endl;
     cout << "0. Cancelar" << endl;
 
-    // VALIDACIÓN:
-    // Solicita una opción válida del menú.
+    // Solicita una opcion valida del menu.
     validador.leerEnteroConCero(opcion, "Opcion: ");
 
     if(opcion == 0){
@@ -307,15 +300,14 @@ void EmpleadoManager::modificarEmpleado(){
         return;
     }
 
-    // Según la opción elegida, modifica únicamente ese dato.
+    // Segun la opciun elegida, modifica solo ese dato.
     switch(opcion){
 
     case 1:{
         long long cuit;
         int posEncontrada;
 
-        // VALIDACIÓN:
-        // Verifica que el nuevo CUIT sea válido y no pertenezca a otro empleado.
+        // Verifica que el nuevo CUIT sea valido y no pertenezca a otro empleado.
         do{
 
             validador.leerCuit(cuit);
@@ -337,8 +329,7 @@ void EmpleadoManager::modificarEmpleado(){
 
         cin.ignore(1000, '\n');
 
-        // VALIDACIÓN:
-        // Verifica que el nombre no esté vacío.
+        // Verifica que el nombre no este vacío.
         validador.leerTexto(nombre, 30, "Ingrese nuevo nombre: ");
 
         empleadoActual.setNombre(nombre);
@@ -350,8 +341,7 @@ void EmpleadoManager::modificarEmpleado(){
 
         cin.ignore(1000, '\n');
 
-        // VALIDACIÓN:
-        // Verifica que el apellido no esté vacío.
+        // Verifica que el apellido no este vacio.
         validador.leerTexto(apellido, 30, "Ingrese nuevo apellido: ");
 
         empleadoActual.setApellido(apellido);
@@ -361,8 +351,7 @@ void EmpleadoManager::modificarEmpleado(){
     case 4:{
         char telefono[20];
 
-        // VALIDACIÓN:
-        // Verifica que el teléfono tenga un formato válido.
+        // Verifica que el telefono tenga un formato valido.
         validador.leerTelefono(telefono);
 
         empleadoActual.setTelefono(telefono);
@@ -372,8 +361,7 @@ void EmpleadoManager::modificarEmpleado(){
     case 5:{
         char email[50];
 
-        // VALIDACIÓN:
-        // Verifica que el email tenga un formato válido.
+        // Verifica que el email tenga un formato valido.
         validador.leerEmail(email);
 
         empleadoActual.setEmail(email);
@@ -389,8 +377,7 @@ void EmpleadoManager::modificarEmpleado(){
 
         cin.ignore(1000, '\n');
 
-        // VALIDACIÓN:
-        // Verifica los datos obligatorios de la nueva dirección.
+        // Verifica los datos obligatorios de la nueva direccion.
         validador.leerTexto(calle, 50, "Calle: ");
         validador.leerEnteroPositivo(altura, "Altura: ");
 
@@ -420,8 +407,7 @@ void EmpleadoManager::modificarEmpleado(){
 
     cout << endl;
 
-    // VALIDACIÓN:
-    // Solicita confirmación antes de guardar los cambios.
+    // Solicita confirmacion antes de guardar los cambios.
     validador.leerConfirmacion(confirmar);
 
     if(confirmar == 'N' || confirmar == 'n'){
@@ -436,14 +422,12 @@ void EmpleadoManager::modificarEmpleado(){
     else{
         cout << "No se pudo modificar el empleado." << endl;
     }
-
-    consola.pausar();
 }
 
-// Ordena un vector de empleados alfabéticamente por apellido
+// Ordena los empleados alfabeticamente por apellido
 void EmpleadoManager::ordenarEmpleados(Empleado vEmpleados[], int cantidad){
 
-    // Recorre el vector realizando comparaciones e intercambios.
+    // Recorre el vector, compara e intercambia.
     for(int i = 0; i < cantidad - 1; i++){
 
         for(int j = 0; j < cantidad - i - 1; j++){
@@ -452,7 +436,7 @@ void EmpleadoManager::ordenarEmpleados(Empleado vEmpleados[], int cantidad){
             if(strcmp(vEmpleados[j].getApellido(),
                       vEmpleados[j + 1].getApellido()) > 0){
 
-                // Intercambia ambos registros.
+                // Intercambia registros.
                 Empleado aux = vEmpleados[j];
                 vEmpleados[j] = vEmpleados[j + 1];
                 vEmpleados[j + 1] = aux;
@@ -461,7 +445,7 @@ void EmpleadoManager::ordenarEmpleados(Empleado vEmpleados[], int cantidad){
     }
 }
 
-// Muestra todos los empleados activos ordenados alfabéticamente por apellido.
+// Muestra todos los empleados activos ordenados alfabeticamente por apellido.
 void EmpleadoManager::mostrarEmpleadosOrdenados(){
 
     int cantidadRegistros = _archivoEmpleados.getCantidadRegistros();
@@ -482,7 +466,7 @@ void EmpleadoManager::mostrarEmpleadosOrdenados(){
 
     int cantidadActivos = 0;
 
-    // Copia únicamente los empleados activos al vector.
+    // Copia solo los empleados activos al vector.
     for(int i = 0; i < cantidadRegistros; i++){
 
         Empleado empleado = _archivoEmpleados.leerPorPosicion(i);
@@ -507,21 +491,18 @@ void EmpleadoManager::mostrarEmpleadosOrdenados(){
     consola.pausar();
 }
 
-// Da de baja lógica a un empleado existente.
-// No elimina el registro del archivo, solamente cambia su estado a inactivo.
-//
+// Baja logica a un empleado existente: No elimina el registro del archivo, solo cambia su estado a false.
 // VALIDACIONES:
-// - Verifica que el ID ingresado sea válido.
+// - Verifica que el ID ingresado sea valido.
 // - Permite ingresar 0 para cancelar.
-// - Comprueba que el empleado exista y esté activo.
-// - Solicita confirmación antes de realizar la baja.
+// - Comprueba que el empleado exista y este activo.
+// - Solicita confirmacion antes de realizar la baja.
 void EmpleadoManager::darDeBajaEmpleado(){
 
     int idEmpleado;
     char confirmar;
 
-    // VALIDACIÓN:
-    // Solicita un ID válido o permite cancelar la operación.
+    // Solicita un ID valido o permite cancelar la operacion.
     validador.leerEnteroConCero(idEmpleado,
                                 "Ingrese el ID del empleado a dar de baja (0 para cancelar): ");
 
@@ -542,8 +523,7 @@ void EmpleadoManager::darDeBajaEmpleado(){
 
     cout << endl;
 
-    // VALIDACIÓN:
-    // Solicita confirmación antes de dar de baja.
+    // Solicita confirmacion antes de dar de baja.
     validador.leerConfirmacion(confirmar);
 
     if(confirmar == 'N' || confirmar == 'n'){
