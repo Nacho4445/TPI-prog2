@@ -9,6 +9,7 @@
 #include "modelos/TipoMarca.h"
 
 #include "utils/Consola.h"
+#include "utils/Validador.h"
 
 class EquipoManager {
 private:
@@ -19,6 +20,7 @@ private:
     ArchivoTipoMarca _archivoTipoMarcas;
 
     Consola consola;
+    Validador validador;
 
     void mostrarEquipo(Equipo &reg);
     void ordenarEquipos(Equipo vEquipos[], int cantidad);
@@ -26,6 +28,7 @@ private:
     void ordenarEquiposPorMarca(Equipo vEquipos[], int cantidad);
     void ordenarEquiposPorPrecioAsc(Equipo vEquipos[], int cantidad);
     void ordenarEquiposPorPrecioDesc(Equipo vEquipos[], int cantidad);
+    int cargarEquiposActivos(Equipo vEquipos[]);
 
     int seleccionarTipoEquipo();
     int seleccionarMarca();
@@ -41,7 +44,6 @@ public:
 	void consultarPorMarca();
 	void consultarPorPrecio();
 	void consultarPorStock();
-	void listarEquipos();
 	void modificarEquipo();
 	void mostrarEquiposOrdenados();
 	void eliminarEquipo();
