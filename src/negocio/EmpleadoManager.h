@@ -1,14 +1,21 @@
 #pragma once
 #include "archivos/ArchivoEmpleado.h"
 #include "utils/Consola.h"
+#include "utils/Validador.h"
 
 class EmpleadoManager {
 private:
-   Empleado crearEmpleado();
-   void mostrarEmpleado(Empleado &reg);
-   void ordenarEmpleados(Empleado vEmpleados[], int cantidad);
-   ArchivoEmpleado _archivoEmpleados;
-	Consola consola;
+
+    Consola consola;
+	Validador validador;
+
+	Empleado crearEmpleado();
+    ArchivoEmpleado _archivoEmpleados;
+
+    void mostrarEmpleado(Empleado &reg);
+    void ordenarEmpleados(Empleado vEmpleados[], int cantidad);
+
+
 public:
 	EmpleadoManager();
 
