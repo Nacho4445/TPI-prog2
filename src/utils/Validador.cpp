@@ -4,6 +4,7 @@
 
 using namespace std;
 
+// Verifica que una cadena contenga únicamente números.
 bool Validador::esNumero(const char texto[]){
 
     if(strlen(texto) == 0){
@@ -19,24 +20,29 @@ bool Validador::esNumero(const char texto[]){
     return true;
 }
 
+// Verifica que un texto no esté vacío.
 bool Validador::textoNoVacio(const char texto[]){
     return strlen(texto) > 0;
 }
 
+// Valida que el CUIT tenga 11 dígitos numéricos.
 bool Validador::cuitValido(const char texto[]){
     return strlen(texto) == 11 && esNumero(texto);
 }
 
+// Valida que el teléfono tenga al menos 6 dígitos.
 bool Validador::telefonoValido(const char texto[]){
     return strlen(texto) >= 6 && esNumero(texto);
 }
 
+// Valida que el email contenga '@' y '.'.
 bool Validador::emailValido(const char texto[]){
 
     bool tieneArroba = false;
     bool tienePunto = false;
 
     for(int i = 0; texto[i] != '\0'; i++){
+
         if(texto[i] == '@'){
             tieneArroba = true;
         }
@@ -49,6 +55,7 @@ bool Validador::emailValido(const char texto[]){
     return textoNoVacio(texto) && tieneArroba && tienePunto;
 }
 
+// Verifica que el texto represente un entero mayor que cero.
 bool Validador::enteroPositivo(const char texto[]){
 
     if(!esNumero(texto)){
@@ -58,6 +65,7 @@ bool Validador::enteroPositivo(const char texto[]){
     return convertirEntero(texto) > 0;
 }
 
+// Verifica que el texto represente un número decimal positivo.
 bool Validador::decimalPositivo(const char texto[]){
 
     if(strlen(texto) == 0){
@@ -83,11 +91,13 @@ bool Validador::decimalPositivo(const char texto[]){
     return convertirFloat(texto) > 0;
 }
 
+// Verifica que la opción ingresada sea S o N.
 bool Validador::opcionSN(char opcion){
     return opcion == 'S' || opcion == 's' ||
            opcion == 'N' || opcion == 'n';
 }
 
+// Convierte un texto numérico a entero.
 int Validador::convertirEntero(const char texto[]){
 
     int numero = 0;
@@ -99,6 +109,7 @@ int Validador::convertirEntero(const char texto[]){
     return numero;
 }
 
+// Convierte un texto numérico a long long.
 long long Validador::convertirLongLong(const char texto[]){
 
     long long numero = 0;
@@ -110,6 +121,7 @@ long long Validador::convertirLongLong(const char texto[]){
     return numero;
 }
 
+// Convierte un texto numérico con decimales a float.
 float Validador::convertirFloat(const char texto[]){
 
     float numero = 0;
@@ -122,6 +134,7 @@ float Validador::convertirFloat(const char texto[]){
             despuesDelPunto = true;
         }
         else{
+
             if(!despuesDelPunto){
                 numero = numero * 10 + (texto[i] - '0');
             }
@@ -135,9 +148,11 @@ float Validador::convertirFloat(const char texto[]){
     return numero;
 }
 
+// Solicita un texto y verifica que no esté vacío.
 void Validador::leerTexto(char texto[], int tamanio, const char mensaje[]){
 
     do{
+
         cout << mensaje;
         cin.getline(texto, tamanio);
 
@@ -148,12 +163,13 @@ void Validador::leerTexto(char texto[], int tamanio, const char mensaje[]){
     }while(!textoNoVacio(texto));
 }
 
-
+// Solicita un entero mayor que cero.
 void Validador::leerEnteroPositivo(int &numero, const char mensaje[]){
 
     char texto[20];
 
     do{
+
         cout << mensaje;
         cin >> texto;
 
@@ -166,6 +182,7 @@ void Validador::leerEnteroPositivo(int &numero, const char mensaje[]){
     numero = convertirEntero(texto);
 }
 
+// Solicita un entero permitiendo el valor cero.
 void Validador::leerEnteroConCero(int &numero, const char mensaje[]){
 
     char texto[20];
@@ -192,7 +209,7 @@ void Validador::leerEnteroConCero(int &numero, const char mensaje[]){
 
         if(valido){
 
-            numero = atoi(texto);
+            numero = convertirEntero(texto);
 
             if(numero < 0){
                 valido = false;
@@ -206,11 +223,13 @@ void Validador::leerEnteroConCero(int &numero, const char mensaje[]){
     }while(!valido);
 }
 
+// Solicita un número decimal mayor que cero.
 void Validador::leerDecimalPositivo(float &numero, const char mensaje[]){
 
     char texto[30];
 
     do{
+
         cout << mensaje;
         cin >> texto;
 
@@ -223,11 +242,13 @@ void Validador::leerDecimalPositivo(float &numero, const char mensaje[]){
     numero = convertirFloat(texto);
 }
 
+// Solicita y valida un CUIT.
 void Validador::leerCuit(long long &cuit){
 
     char texto[20];
 
     do{
+
         cout << "CUIT: ";
         cin >> texto;
 
@@ -240,9 +261,11 @@ void Validador::leerCuit(long long &cuit){
     cuit = convertirLongLong(texto);
 }
 
+// Solicita y valida un teléfono.
 void Validador::leerTelefono(char telefono[]){
 
     do{
+
         cout << "Telefono: ";
         cin >> telefono;
 
@@ -253,9 +276,11 @@ void Validador::leerTelefono(char telefono[]){
     }while(!telefonoValido(telefono));
 }
 
+// Solicita y valida un email.
 void Validador::leerEmail(char email[]){
 
     do{
+
         cout << "Email: ";
         cin >> email;
 
@@ -266,9 +291,11 @@ void Validador::leerEmail(char email[]){
     }while(!emailValido(email));
 }
 
+// Solicita una confirmación S o N.
 void Validador::leerConfirmacion(char &opcion){
 
     do{
+
         cout << "Desea confirmar los cambios? (S/N): ";
         cin >> opcion;
 
@@ -279,11 +306,13 @@ void Validador::leerConfirmacion(char &opcion){
     }while(!opcionSN(opcion));
 }
 
+// Solicita y valida el tipo de cliente.
 void Validador::leerTipoCliente(int &tipo){
 
     char texto[5];
 
     do{
+
         cout << "Ingrese tipo de cliente (1-Particular / 2-Empresa): ";
         cin >> texto;
 
@@ -297,4 +326,3 @@ void Validador::leerTipoCliente(int &tipo){
 
     tipo = convertirEntero(texto);
 }
-
