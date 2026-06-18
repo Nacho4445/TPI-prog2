@@ -155,3 +155,18 @@ void ArchivoTipoEquipo::vaciar() {
         fclose(pArchivo);
     }
 }
+
+bool ArchivoTipoEquipo::exportarDatosCSV(FILE *pBinario, FILE *pCSV) {
+    // cabecera
+    fprintf(pCSV, "ID Tipo Equipo, Descripcion, Estado\n");
+
+    TipoEquipo reg;
+
+    while (fread(&reg, sizeof(TipoEquipo), 1, pBinario) == 1) {
+        fprintf(pCSV, "%d,%s,%s\n",
+            reg.getIdTipoEquipo(),
+            reg.getDescripcion(),
+            reg.getEstado() ? "activo" : "inactivo");
+    }
+    return true;
+}

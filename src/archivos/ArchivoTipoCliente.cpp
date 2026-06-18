@@ -107,3 +107,19 @@ void ArchivoTipoCliente::vaciar() {
         fclose(p);
     }
 }
+
+bool ArchivoTipoCliente::exportarDatosCSV(FILE *pBinario, FILE *pCSV) {
+    // cabecera
+    fprintf(pCSV, "ID Tipo Cliente, Descripcion, Estado\n");
+
+    TipoCliente reg;
+
+    while (fread(&reg, sizeof(TipoCliente), 1, pBinario) == 1) {
+        fprintf(pCSV, "%d,%s,%s\n",
+            reg.getIdTipoCliente(),
+            reg.getDescripcion(),
+            reg.getEstado() ? "activo" : "inactivo");
+    }
+    return true;
+}
+

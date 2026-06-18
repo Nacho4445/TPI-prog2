@@ -9,7 +9,8 @@ MenuBackups::MenuBackups() {
 
 void MenuBackups::mostrarOpciones() {
 	consola.limpiar();
-	cout << "#### HACER UN BACKUP ####" << endl;
+	cout << "-------------------------------------\n";
+	cout << "---------- HACER UN BACKUP ----------\n";
 	cout << "1. Hacer Backup de Empleados\n";
 	cout << "2. Hacer Backup de Clientes\n";
 	cout << "3. Hacer Backup de Tipos de Clientes\n";
@@ -18,8 +19,9 @@ void MenuBackups::mostrarOpciones() {
 	cout << "6. Hacer Backup de Equipos\n";
 	cout << "7. Hacer Backup de Tipos de Equipos\n";
 	cout << "8. Hacer Backup de Tipos de Marcas\n";
-	cout << "- - - - - - - - - - -" << endl;
-	cout << "0. Volver al menu anterior" << endl;
+	cout << "-------------------------------------\n";
+	cout << "0. Salir\n";
+	cout << "-------------------------------------\n";
 }
 
 void MenuBackups::ejecutarOpcion(int opcion) {
@@ -81,8 +83,6 @@ void MenuBackups::ejecutarOpcion(int opcion) {
 			break;
 		}
 		case 0:
-			cout << "Volviendo al menu archivos..." << endl;
-			consola.pausar();
 			break;
 		default:
 			cout << "Opcion Incorrecta!\n";

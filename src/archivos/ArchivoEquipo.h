@@ -15,6 +15,7 @@ public:
     bool modificar(Equipo equipo);
     bool borrarRegistro(int idEquipo);
     void vaciar();
+    bool exportarDatosCSV(FILE *pBinario, FILE *pCSV);
 
 private:
     std::string _ruta;

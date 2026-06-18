@@ -9,7 +9,8 @@ MenuRestaurar::MenuRestaurar() {
 
 void MenuRestaurar::mostrarOpciones() {
 	consola.limpiar();
-	cout << "#### RESTAURACION DE BACKUPS ####" << endl;
+    cout << "-----------------------------------------" << endl;
+	cout << "-------- RESTAURACION DE BACKUPS --------" << endl;
 	cout << "1. Restaurar Backup de Empleados" << endl;
 	cout << "2. Restaurar Backup de Clientes" << endl;
 	cout << "3. Restaurar Backup de Tipos de Clientes" << endl;
@@ -18,8 +19,9 @@ void MenuRestaurar::mostrarOpciones() {
 	cout << "6. Restaurar Backup de Equipos" << endl;
 	cout << "7. Restaurar Backup de Tipos de Equipos" << endl;
 	cout << "8. Restaurar Backup de Tipos de Marcas" << endl;
-	cout << "- - - - - - - - - - -" << endl;
-	cout << "0. Volver al menu anterior" << endl;
+    cout << "-----------------------------------------" << endl;
+	cout << "0. Salir" << endl;
+    cout << "-----------------------------------------" << endl;
 }
 
 void MenuRestaurar::ejecutarOpcion(int opcion) {
@@ -83,8 +85,6 @@ void MenuRestaurar::ejecutarOpcion(int opcion) {
         break;
     }
     case 0:
-        cout << "Volviendo al menu archivos..." << endl;
-        consola.pausar();
         break;
 
     default:

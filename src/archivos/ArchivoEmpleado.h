@@ -19,6 +19,7 @@ public:
     bool modificar(Empleado empleado);
     bool borrarRegistro(int id);
     void vaciar();
+    bool exportarDatosCSV(FILE *pBinario, FILE *pCSV);
 
 private:
     std::string ruta;

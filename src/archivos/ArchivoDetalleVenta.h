@@ -18,5 +18,6 @@ public:
     void leerPorIdVenta(int idVenta, DetalleVenta *detalles, int &cantidad);
     bool borrarRegistro(int idDetalleVenta);
     void vaciar();
+    bool exportarDatosCSV(FILE *pBinario, FILE *pCSV);
 
 };

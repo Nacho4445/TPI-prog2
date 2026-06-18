@@ -118,3 +118,22 @@ void ArchivoDetalleVenta::leerPorIdVenta(int idVenta, DetalleVenta *detalles, in
 
     fclose(pArchivo);
 }
+
+bool ArchivoDetalleVenta::exportarDatosCSV(FILE *pBinario, FILE *pCSV) {
+    // cabecera
+    fprintf(pCSV, "ID Detalle Venta, ID Venta, ID Equipo, Cantidad, Precio Unitario, Subtotal, Estado\n");
+
+    DetalleVenta reg;
+
+    while (fread(&reg, sizeof(DetalleVenta), 1, pBinario) == 1) {
+        fprintf(pCSV, "%d,%d,%d,%d,%f,%f,%s\n",
+            reg.getIdDetalleVenta(),
+            reg.getIdVenta(),
+            reg.getIdEquipo(),
+            reg.getCantidad(),
+            reg.getPrecioUnitario(),
+            reg.getSubtotal(),
+            reg.getEstado() ? "activo" : "inactivo");
+    }
+    return true;
+}

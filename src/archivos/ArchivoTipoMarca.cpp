@@ -155,3 +155,18 @@ void ArchivoTipoMarca::vaciar() {
     }
 }
 
+bool ArchivoTipoMarca::exportarDatosCSV(FILE *pBinario, FILE *pCSV) {
+    // cabecera
+    fprintf(pCSV, "ID Tipo Marca, Descripcion, Estado\n");
+
+    TipoMarca reg;
+
+    while (fread(&reg, sizeof(TipoMarca), 1, pBinario) == 1) {
+        fprintf(pCSV, "%d,%s,%s\n",
+            reg.getIdTipoMarca(),
+            reg.getDescripcion(),
+            reg.getEstado() ? "activo" : "inactivo");
+    }
+    return true;
+}
+

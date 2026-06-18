@@ -161,3 +161,22 @@ void ArchivoEquipo::vaciar() {
         fclose(pArchivo);
     }
 }
+
+bool ArchivoEquipo::exportarDatosCSV(FILE *pBinario, FILE *pCSV) {
+    // cabecera
+    fprintf(pCSV, "ID Equipo, ID Tipo Equipo, ID Tipo Marca, Descripcion, Stock, Precio Unitario, Estado\n");
+
+    Equipo reg;
+
+    while (fread(&reg, sizeof(Equipo), 1, pBinario) == 1) {
+        fprintf(pCSV, "%d,%d,%d,%s,%d,%f,%s\n",
+            reg.getIdEquipo(),
+            reg.getIdTipoEquipo(),
+            reg.getIdTipoMarca(),
+            reg.getDescripcion(),
+            reg.getStock(),
+            reg.getPrecioUnitario(),
+            reg.getEstado() ? "activo" : "inactivo");
+    }
+    return true;
+}

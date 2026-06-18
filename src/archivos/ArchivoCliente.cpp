@@ -3,78 +3,78 @@ using namespace std;
 #include "archivos/ArchivoCliente.h"
 
 ArchivoCliente::ArchivoCliente(){
-  ruta = "datos/clientes.dat";
+	ruta = "datos/clientes.dat";
 }
 
 ArchivoCliente::ArchivoCliente(std::string _ruta){
-  ruta = _ruta;
+	ruta = _ruta;
 }
 
 int ArchivoCliente::getCantidadRegistros(){
-  FILE *p = fopen(ruta.c_str(), "rb");
+	FILE *p = fopen(ruta.c_str(), "rb");
 
-  if (p == NULL){
-    return 0;
-  }
+	if (p == NULL){
+		return 0;
+	}
 
-  fseek(p, 0, SEEK_END);
-  int bytes = ftell(p);
-  fclose(p);
+	fseek(p, 0, SEEK_END);
+	int bytes = ftell(p);
+	fclose(p);
 
-  return bytes / sizeof(Cliente);
+	return bytes / sizeof(Cliente);
 }
 
 bool ArchivoCliente::guardar(Cliente reg){
-  FILE *p = fopen(ruta.c_str(), "ab");
+	FILE *p = fopen(ruta.c_str(), "ab");
 
-  if (p == NULL){
-    cout << "No se pudo abrir: " << ruta << endl;
-    return false;
-  }
+	if (p == NULL){
+		cout << "No se pudo abrir: " << ruta << endl;
+		return false;
+	}
 
-  bool pudoEscribir = fwrite(&reg, sizeof(Cliente), 1, p);
-  fclose(p);
-  return pudoEscribir;
+	bool pudoEscribir = fwrite(&reg, sizeof(Cliente), 1, p);
+	fclose(p);
+	return pudoEscribir;
 }
 
 int ArchivoCliente::buscar(int id){
-  FILE *p = fopen(ruta.c_str(), "rb");
-  if (p == NULL) return -1;
+	FILE *p = fopen(ruta.c_str(), "rb");
+	if (p == NULL) return -1;
 
-  Cliente aux;
-  int numReg = 0;
+	Cliente aux;
+	int numReg = 0;
 
-  while (fread(&aux, sizeof(Cliente), 1, p) == 1) {
-    if (aux.getIdCliente() == id && aux.getEstado() == true) {
-      fclose(p);
-      return numReg;
-    }
-    numReg++;
-  }
+	while (fread(&aux, sizeof(Cliente), 1, p) == 1) {
+		if (aux.getIdCliente() == id && aux.getEstado() == true) {
+			fclose(p);
+			return numReg;
+		}
+		numReg++;
+	}
 
-  fclose(p);
-  return -1;
+	fclose(p);
+	return -1;
 }
 
 Cliente ArchivoCliente::leer(int id){
-  Cliente aux;
+	Cliente aux;
 
-  int pos = buscar(id);
+	int pos = buscar(id);
 
-  if (pos == -1){
+	if (pos == -1){
         return aux;
-  }
+	}
 
-  FILE *p = fopen(ruta.c_str(), "rb");
-  if (p == NULL){
-    return aux;
-  }
+	FILE *p = fopen(ruta.c_str(), "rb");
+	if (p == NULL){
+		return aux;
+	}
 
-  fseek(p, pos * sizeof(Cliente), SEEK_SET);
-  fread(&aux, sizeof(Cliente), 1, p);
+	fseek(p, pos * sizeof(Cliente), SEEK_SET);
+	fread(&aux, sizeof(Cliente), 1, p);
 
-  fclose(p);
-  return aux;
+	fclose(p);
+	return aux;
 }
 
 Cliente ArchivoCliente::leerPorPosicion(int posicion){
@@ -116,36 +116,36 @@ bool ArchivoCliente::modificar(Cliente cliente){
 }
 
 bool ArchivoCliente::borrarRegistro(int id){
-  Cliente aux;
+    Cliente aux;
 
-  int pos = buscar(id);
+    int pos = buscar(id);
 
-  if (pos == -1){
-    return false;
-  }
+    if (pos == -1){
+		return false;
+	}
 
-  FILE *p = fopen(ruta.c_str(), "rb+");
-  if (p == NULL){
-    return false;
-  }
+	FILE *p = fopen(ruta.c_str(), "rb+");
+	if (p == NULL){
+		return false;
+	}
 
-  fseek(p, pos * sizeof(Cliente), SEEK_SET);
-  fread(&aux, sizeof(Cliente), 1, p);
-  aux.setEstado(false);
+	fseek(p, pos * sizeof(Cliente), SEEK_SET);
+	fread(&aux, sizeof(Cliente), 1, p);
+	aux.setEstado(false);
 
-  fseek(p, pos * sizeof(Cliente), SEEK_SET);
-  bool pudoEscribir = fwrite(&aux, sizeof(Cliente), 1, p);
+	fseek(p, pos * sizeof(Cliente), SEEK_SET);
+	bool pudoEscribir = fwrite(&aux, sizeof(Cliente), 1, p);
 
-  fclose(p);
-  return pudoEscribir;
+	fclose(p);
+	return pudoEscribir;
 }
 
 void ArchivoCliente::vaciar(){
-  FILE *p = fopen(ruta.c_str(), "wb");
-  if (p == NULL){
-    return ;
-  }
-  fclose(p);
+    FILE *p = fopen(ruta.c_str(), "wb");
+    if (p == NULL){
+      return ;
+    }
+    fclose(p);
 }
 
 int ArchivoCliente::buscarPorCuit(long long cuit){
@@ -173,4 +173,24 @@ int ArchivoCliente::buscarPorCuit(long long cuit){
 
     fclose(pFile);
     return -1;
+}
+
+bool ArchivoCliente::exportarDatosCSV(FILE *pBinario, FILE *pCSV) {
+	// cabecera
+	fprintf(pCSV, "ID Cliente, CUIT, Nombre, Apellido, Telefono, Email, Tipo Cliente, Estado\n");
+
+	Cliente reg;
+
+	while (fread(&reg, sizeof(Cliente), 1, pBinario) == 1) {
+		fprintf(pCSV, "%d,%lld,%s,%s,%s,%s,%s,%s\n",
+			reg.getIdCliente(),
+			reg.getCuit(),
+			reg.getNombre(),
+			reg.getApellido(),
+			reg.getTelefono(),
+			reg.getEmail(),
+			reg.getTipoCliente() == 1 ? "particular" : "empresa",
+			reg.getEstado() ? "activo" : "inactivo");
+	}
+	return true;
 }

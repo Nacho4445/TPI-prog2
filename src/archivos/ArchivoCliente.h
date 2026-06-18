@@ -5,6 +5,7 @@
 class ArchivoCliente{
 private:
     std::string ruta;
+
 public:
     ArchivoCliente();
     ArchivoCliente(std::string _ruta);
@@ -18,4 +19,5 @@ public:
     bool modificar(Cliente cliente);
     bool borrarRegistro(int id);
     void vaciar();
+    bool exportarDatosCSV(FILE *pBinario, FILE *pCSV);
 } ;

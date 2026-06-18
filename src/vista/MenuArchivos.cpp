@@ -1,8 +1,8 @@
 #include <iostream>
 #include "MenuArchivos.h"
-
 #include "MenuBackups.h"
 #include "MenuRestaurar.h"
+#include "MenuExports.h"
 
 using namespace std;
 
@@ -12,12 +12,14 @@ MenuArchivos::MenuArchivos() {
 
 void MenuArchivos::mostrarOpciones() {
 	consola.limpiar();
-	cout << "#### MENU ARCHIVOS ####" << endl;
+	cout << "---------------------------" << endl;
+	cout << "------ MENU ARCHIVOS ------" << endl;
 	cout << "1. Realizar un Backup" << endl;
 	cout << "2. Restaurar un Backup" << endl;
 	cout << "3. Exportar un archivo CSV" << endl;
-	cout << "- - - - - - - - - - -" << endl;
-	cout << "0. Volver al menu principal" << endl;
+	cout << "---------------------------" << endl;
+	cout << "0. Salir" << endl;
+	cout << "---------------------------" << endl;
 }
 
 void MenuArchivos::ejecutarOpcion(int opcion) {
@@ -26,24 +28,21 @@ void MenuArchivos::ejecutarOpcion(int opcion) {
 		    consola.limpiar();
 			MenuBackups menuBackups;
 			menuBackups.ejecutarMenu();
-			consola.pausar();
 			break;
 		}
 		case 2: {
 		    consola.limpiar();
 			MenuRestaurar menuRestaurar;
 			menuRestaurar.ejecutarMenu();
-			consola.pausar();
 			break;
 		}
-		case 3:
-		    consola.limpiar();
-			// Falta generar CSV
-			consola.pausar();
+		case 3: {
+			consola.limpiar();
+			MenuExports menuExports;
+			menuExports.ejecutarMenu();
 			break;
+		}
 		case 0:
-		    cout << "Volviendo al menu principal..." << endl;
-		    consola.pausar();
 			break;
 		default:
 			cout << "Opcion Incorrecta!\n";

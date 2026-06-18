@@ -14,6 +14,7 @@ public:
     TipoCliente leer(int id);
     bool borrarRegistro(int id);
     void vaciar();
+    bool exportarDatosCSV(FILE *pBinario, FILE *pCSV);
 
 private:
     std::string ruta;

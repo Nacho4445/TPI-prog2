@@ -4,13 +4,13 @@
 #include "negocio/ArchivosManager.h"
 #include "utils/Consola.h"
 
-class MenuArchivos : public Menu {
+class MenuExports : public Menu {
 private:
 	ArchivosManager archivosManager;
 	Consola consola;
 
 public:
-	MenuArchivos();
+	MenuExports();
 
 	void mostrarOpciones() override;
 	void ejecutarOpcion(int opcion) override;

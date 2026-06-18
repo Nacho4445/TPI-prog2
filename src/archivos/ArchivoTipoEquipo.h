@@ -15,6 +15,7 @@ public:
     int generarNuevoId();
     bool borrarRegistro(int idTipoEquipo);
     void vaciar();
+    bool exportarDatosCSV(FILE *pBinario, FILE *pCSV);
 
 private:
     std::string _ruta;

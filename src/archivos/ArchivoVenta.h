@@ -18,7 +18,7 @@ public:
     bool borrarRegistro(int id);
     bool cancelarVenta(int idVenta);
     void vaciar();
-
+    bool exportarDatosCSV(FILE *pBinario, FILE *pCSV);
 
 private:
     std::string ruta;

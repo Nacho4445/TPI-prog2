@@ -220,3 +220,20 @@ void ArchivoEmpleado::vaciar(){
   }
   fclose(p);
 }
+
+bool ArchivoEmpleado::exportarDatosCSV(FILE *pBinario, FILE *pCSV) {
+	Empleado reg;
+
+	while (fread(&reg, sizeof(Empleado), 1, pBinario) == 1) {
+		fprintf(pCSV, "%d,%lld,%s,%s,%s,%s,%s\n",
+			reg.getIdEmpleado(),
+			reg.getCuit(),
+			reg.getNombre(),
+			reg.getApellido(),
+			reg.getTelefono(),
+			reg.getEmail(),
+			reg.getEstado() ? "activo" : "inactivo");
+	}
+	return true;
+}
+

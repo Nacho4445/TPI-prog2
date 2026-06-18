@@ -211,3 +211,21 @@ void ArchivoVenta::vaciar(){
 
     fclose(p);
 }
+
+bool ArchivoVenta::exportarDatosCSV(FILE *pBinario, FILE *pCSV) {
+    // cabecera
+    fprintf(pCSV, "ID Venta, ID Cliente, ID Empleado, Importe Total, Estado\n");
+
+    Venta reg;
+
+    while (fread(&reg, sizeof(Venta), 1, pBinario) == 1) {
+        fprintf(pCSV, "%d,%d,%d,%lf,%s\n",
+            reg.getIdVenta(),
+            reg.getIdCliente(),
+            reg.getIdEmpleado(),
+            reg.getImporteTotal(),
+            reg.getEstado() ? "activo" : "inactivo");
+    }
+    return true;
+}
+
