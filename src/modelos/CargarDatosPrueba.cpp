@@ -45,8 +45,8 @@ void CargarDatosPrueba::cargarDatosPrueba(){
     archivoDetalleVenta.vaciar();
 
     // OJO: ArchivoVenta no tiene vaciar().
-    // Por ahora borr� manualmente datos/ventas.dat antes de ejecutar esto,
-    // o agregamos despu�s un vaciar() a ArchivoVenta.
+    // Por ahora borra manualmente datos/ventas.dat antes de ejecutar esto,
+    // o agregamos despues un vaciar() a ArchivoVenta.
 
     // ---------------- TIPOS CLIENTE ----------------
     archivoTipoCliente.guardar(TipoCliente(1, "Particular", true));

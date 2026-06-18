@@ -5,8 +5,8 @@
 using namespace std;
 
 int main() {
-    CargarDatosPrueba cargarDatos;
-    cargarDatos.cargarDatosPrueba();
+    //CargarDatosPrueba cargarDatos;
+    //cargarDatos.cargarDatosPrueba();
 
     MenuPrincipal menu;
     menu.ejecutarMenu();

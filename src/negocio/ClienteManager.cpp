@@ -32,15 +32,18 @@ Cliente ClienteManager::crearCliente(){
 
     cout<<"Ingrese los siguientes datos:"<<endl;
 
+    int pos;//buscamos el cuit en el archivo Clientes y guardamos la posicion en la variable
+
     do{
         cout << "CUIT: ";
         cin >> cuit;
 
-        if(_archivoClientes.buscarPorCuit(cuit) != -1){
+        pos = _archivoClientes.buscarPorCuit(cuit);//Si existe el cliente con ese cuit, se guarda su posicion en el archivo (>=0). Si no existe, guarda -1
+        if(pos != -1){
             cout << "Ya existe un cliente con ese CUIT. Ingrese otro." << endl;
         }
 
-    }while(_archivoClientes.buscarPorCuit(cuit) != -1);
+    }while(pos != -1);
 
     cin.ignore();
 
@@ -109,8 +112,6 @@ Cliente ClienteManager::crearCliente(){
 
     cliente.setDireccion(direccion);
 
-    consola.pausar();
-    //system("pause");
     return cliente;
 }
 
@@ -124,8 +125,6 @@ void ClienteManager::guardarCliente(){
     else{
         cout << "Error al guardar el cliente." << endl;
     }
-    consola.pausar();
-    //system("pause");
 }
 void ClienteManager::consultarPorId(){
 
@@ -145,13 +144,14 @@ void ClienteManager::consultarPorId(){
 
         if(cliente.getEstado()){
             mostrarCliente(cliente);
+            cout << endl;
+            cout << "Volviendo al menu clientes..." << endl;
+            cout << endl;
             return;
         }
 
         cout << "Cliente no encontrado. Intente nuevamente." << endl;
     }
-    consola.pausar();
-    //system("pause");
 }
 
 void ClienteManager::consultarPorCuit(){
@@ -174,13 +174,14 @@ void ClienteManager::consultarPorCuit(){
         if(pos != -1){
             cliente = _archivoClientes.leerPorPosicion(pos);
             mostrarCliente(cliente);
+            cout << endl;
+            cout << "Volviendo al menu clientes..." << endl;
+            cout << endl;
             return;
         }
 
         cout << "Cliente no encontrado. Intente nuevamente." << endl;
     }
-    consola.pausar();
-    //system("pause");
 }
 
 void ClienteManager::consultarPorApellido(){
@@ -209,8 +210,6 @@ void ClienteManager::consultarPorApellido(){
     if(!encontro){
         cout << "No se encontraron clientes con ese apellido." << endl;
     }
-    consola.pausar();
-    //system("pause");
 }
 
 void ClienteManager::consultarPorTipo(){
@@ -248,8 +247,6 @@ void ClienteManager::consultarPorTipo(){
     if(!encontro){
         cout << "No se encontraron clientes de ese tipo." << endl;
     }
-    consola.pausar();
-    //system("pause");
 }
 
 
@@ -273,8 +270,6 @@ void ClienteManager::listarClientes(){
     if(!hayClientes && cantidad > 0){
         cout << "No hay clientes activos." << endl;
         }
-    consola.pausar();
-    //system("pause");
 }
 
 void ClienteManager::mostrarCliente(Cliente &reg){
@@ -368,6 +363,7 @@ void ClienteManager::modificarCliente(){
         }while(posEncontrada != -1 && posEncontrada != pos);
 
         clienteActual.setCuit(cuit);
+        break;
         }
 
     case 2:{
@@ -450,14 +446,10 @@ void ClienteManager::modificarCliente(){
 
     case 0:
         cout << "Modificacion cancelada." << endl;
-        consola.pausar();
-        //system("pause");
         return;
 
     default:
         cout << "Opcion invalida." << endl;
-        consola.pausar();
-        //system("pause");
         return;
     }
 
@@ -469,7 +461,6 @@ void ClienteManager::modificarCliente(){
 
      if(confirmar != 'S' && confirmar != 's'){
         cout << "Modificacion cancelada." << endl;
-        system("pause");
         return;
      }
 
@@ -479,8 +470,7 @@ void ClienteManager::modificarCliente(){
     else{
         cout << "No se pudo modificar el cliente." << endl;
     }
-    consola.pausar();
-    //system("pause");
+
 }
 
 void ClienteManager::ordenarClientes(Cliente *vClientes, int cantidad){
@@ -528,6 +518,4 @@ void ClienteManager::mostrarClientesOrdenados(){
     }
 
     delete [] vClientes;
-    consola.pausar();
-    //system("pause");
 }

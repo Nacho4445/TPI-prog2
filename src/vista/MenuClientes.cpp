@@ -24,7 +24,9 @@ void MenuClientes::mostrarOpciones(){
 void MenuClientes::ejecutarOpcion(int opcion){
     switch(opcion){
 case 1:
+    consola.limpiar();
     managerClientes.guardarCliente();
+    consola.pausar();
     break;
 case 2:
     int opcionConsulta;
@@ -40,26 +42,31 @@ case 2:
         cout << "4. Consultar por Tipo de Cliente" << endl;
         cout << "------------------------" << endl;
         cout << "0. Volver" << endl;
+        cout<<endl;
         cout << "Opcion: ";
         cin >> opcionConsulta;
 
         switch(opcionConsulta){
         case 1:
+            consola.limpiar();
             managerClientes.consultarPorId();
             consola.pausar();
             //system("pause");
             break;
         case 2:
+            consola.limpiar();
             managerClientes.consultarPorCuit();
             consola.pausar();
             //system("pause");
             break;
         case 3:
+            consola.limpiar();
             managerClientes.consultarPorApellido();
             consola.pausar();
             //system("pause");
             break;
         case 4:
+            consola.limpiar();
             managerClientes.consultarPorTipo();
             consola.pausar();
             //system("pause");
@@ -77,10 +84,14 @@ case 2:
     break;
 
 case 3:
+    consola.limpiar();
     managerClientes.modificarCliente();
+    consola.pausar();
     break;
 case 4:
+    consola.limpiar();
      managerClientes.listarClientes();
+     consola.pausar();
     break;
 case 0:
     cout << "Regresando al menu principal..." << endl;
