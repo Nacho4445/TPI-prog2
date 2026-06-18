@@ -44,8 +44,8 @@ void MenuEquipos::ejecutarOpcion(int opcion){
             cout << "5. Consultar con Stock Disponible" << endl;
             cout << "------------------------" << endl;
             cout << "0. Volver" << endl;
-            cout << "Opcion: ";
-            cin >> opcionConsulta;
+
+            validador.leerEnteroConCero(opcionConsulta, "Opcion: ");
 
             switch(opcionConsulta){
 
@@ -64,8 +64,8 @@ void MenuEquipos::ejecutarOpcion(int opcion){
                     cout << "1. Buscar un tipo de equipo" << endl;
                     cout << "2. Listar ordenados por tipo" << endl;
                     cout << "0. Volver" << endl;
-                    cout << "Opcion: ";
-                    cin >> opcionTipo;
+
+                    validador.leerEnteroConCero(opcionTipo, "Opcion: ");
 
                     switch(opcionTipo){
 
@@ -103,8 +103,8 @@ void MenuEquipos::ejecutarOpcion(int opcion){
                     cout << "1. Buscar una marca" << endl;
                     cout << "2. Listar ordenados por marca" << endl;
                     cout << "0. Volver" << endl;
-                    cout << "Opcion: ";
-                    cin >> opcionMarca;
+
+                    validador.leerEnteroConCero(opcionMarca, "Opcion: ");
 
                     switch(opcionMarca){
 
@@ -143,8 +143,8 @@ void MenuEquipos::ejecutarOpcion(int opcion){
                     cout << "2. Ordenar de menor a mayor" << endl;
                     cout << "3. Ordenar de mayor a menor" << endl;
                     cout << "0. Volver" << endl;
-                    cout << "Opcion: ";
-                    cin >> opcionPrecio;
+
+                    validador.leerEnteroConCero(opcionPrecio, "Opcion: ");
 
                     switch(opcionPrecio){
 

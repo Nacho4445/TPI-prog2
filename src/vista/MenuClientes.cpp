@@ -9,7 +9,7 @@ MenuClientes::MenuClientes(){
 
 void MenuClientes::mostrarOpciones(){
     consola.limpiar();
-    // system("cls");
+
     cout << "------------------------" << endl;
     cout << "-----MENU CLIENTES-----" << endl;
     cout << "1. Registrar Cliente" << endl;
@@ -21,138 +21,151 @@ void MenuClientes::mostrarOpciones(){
 }
 
 void MenuClientes::ejecutarOpcion(int opcion){
+
     switch(opcion){
-case 1:
-    consola.limpiar();
-    managerClientes.guardarCliente();
-    consola.pausar();
-    break;
-case 2:
-    int opcionConsulta;
 
-    do{
+    case 1:
         consola.limpiar();
-        //system("cls");
-        cout << "------------------------" << endl;
-        cout << "--- CONSULTAS CLIENTES ---" << endl;
-        cout << "1. Consultar por ID" << endl;
-        cout << "2. Consultar por CUIT" << endl;
-        cout << "3. Consultar por Apellido" << endl;
-        cout << "4. Consultar por Tipo de Cliente" << endl;
-        cout << "------------------------" << endl;
-        cout << "0. Volver" << endl;
-        cout<<endl;
-        cout << "Opcion: ";
-        cin >> opcionConsulta;
+        managerClientes.guardarCliente();
+        consola.pausar();
+        break;
 
-        switch(opcionConsulta){
-        case 1:
+    case 2:{
+        int opcionConsulta;
+
+        do{
             consola.limpiar();
-            managerClientes.consultarPorId();
-            consola.pausar();
-            //system("pause");
-            break;
-        case 2:
-            consola.limpiar();
-            managerClientes.consultarPorCuit();
-            consola.pausar();
-            //system("pause");
-            break;
-        case 3:
-             int opcionApellido;
-             do{
-                 consola.limpiar();
-                 cout << "----------------------------" << endl;
-                 cout << "1. Buscar por un apellido" << endl;
-                 cout << "2. Ordenar alfabeticamente" << endl;
-                 cout << "----------------------------" << endl;
-                 cout << "0. Volver" << endl;
-                 cout << "Opcion: ";
-                 cin >> opcionApellido;
 
-                 switch(opcionApellido){
-                     case 1:
-                         consola.limpiar();
-                         managerClientes.consultarPorApellido();
-                     break;
+            cout << "------------------------" << endl;
+            cout << "--- CONSULTAS CLIENTES ---" << endl;
+            cout << "1. Consultar por ID" << endl;
+            cout << "2. Consultar por CUIT" << endl;
+            cout << "3. Consultar por Apellido" << endl;
+            cout << "4. Consultar por Tipo de Cliente" << endl;
+            cout << "------------------------" << endl;
+            cout << "0. Volver" << endl;
+            cout << endl;
 
-                     case 2:
-                         consola.limpiar();
-                         managerClientes.mostrarClientesOrdenados();
-                     break;
+            validador.leerEnteroConCero(opcionConsulta, "Opcion: ");
 
-                     case 0:
-                     break;
+            switch(opcionConsulta){
 
-                     default:
-                         cout << "Opcion invalida." << endl;
-                     break;
-                     }
+            case 1:
+                consola.limpiar();
+                managerClientes.consultarPorId();
                 consola.pausar();
-             }while(opcionApellido!=0);
+                break;
 
-             break;
+            case 2:
+                consola.limpiar();
+                managerClientes.consultarPorCuit();
+                consola.pausar();
+                break;
 
-        case 4:
-            int opcionTipo;
+            case 3:{
+                int opcionApellido;
 
-            do{
-             consola.limpiar();
-             cout << "---------------------------------" << endl;
-             cout << "1. Buscar por un tipo de cliente" << endl;
-             cout << "2. Listar todos ordenados" << endl;
-             cout << "---------------------------------" << endl;
-             cout << "0. Volver" << endl;
-             cout << "Opcion: ";
-             cin >> opcionTipo;
+                do{
+                    consola.limpiar();
 
-             switch(opcionTipo){
-                 case 1:
-                     consola.limpiar();
-                     managerClientes.consultarPorTipo();
-                 break;
+                    cout << "----------------------------" << endl;
+                    cout << "1. Buscar por un apellido" << endl;
+                    cout << "2. Ordenar alfabeticamente" << endl;
+                    cout << "----------------------------" << endl;
+                    cout << "0. Volver" << endl;
 
-                 case 2:
-                     consola.limpiar();
-                     managerClientes.mostrarClientesOrdenadosPorTipo();
-                 break;
+                    validador.leerEnteroConCero(opcionApellido, "Opcion: ");
 
-                 case 0:
-                 break;
+                    switch(opcionApellido){
 
-                 default:
-                     cout << "Opcion invalida." << endl;
-                 break;
-                 }
+                    case 1:
+                        consola.limpiar();
+                        managerClientes.consultarPorApellido();
+                        break;
 
-             consola.pausar();
+                    case 2:
+                        consola.limpiar();
+                        managerClientes.mostrarClientesOrdenados();
+                        break;
 
-            }while(opcionTipo != 0);
+                    case 0:
+                        break;
 
-            break;
+                    default:
+                        cout << "Opcion invalida." << endl;
+                        break;
+                    }
 
-        case 0:
-            cout << "Volviendo al menu clientes..." << endl;
-            break;
-        default:
-            cout << "Opcion invalida." << endl;
-            break;
-        }
+                    consola.pausar();
 
-    }while(opcionConsulta != 0);
+                }while(opcionApellido != 0);
 
-    break;
+                break;
+            }
 
-case 3:
-    consola.limpiar();
-    managerClientes.modificarCliente();
-    consola.pausar();
-    break;
+            case 4:{
+                int opcionTipo;
 
-case 0:
-    cout << "Regresando al menu principal..." << endl;
-    break;
+                do{
+                    consola.limpiar();
 
+                    cout << "---------------------------------" << endl;
+                    cout << "1. Buscar por un tipo de cliente" << endl;
+                    cout << "2. Listar todos ordenados" << endl;
+                    cout << "---------------------------------" << endl;
+                    cout << "0. Volver" << endl;
 
+                    validador.leerEnteroConCero(opcionTipo, "Opcion: ");
+
+                    switch(opcionTipo){
+
+                    case 1:
+                        consola.limpiar();
+                        managerClientes.consultarPorTipo();
+                        break;
+
+                    case 2:
+                        consola.limpiar();
+                        managerClientes.mostrarClientesOrdenadosPorTipo();
+                        break;
+
+                    case 0:
+                        break;
+
+                    default:
+                        cout << "Opcion invalida." << endl;
+                        break;
+                    }
+
+                    consola.pausar();
+
+                }while(opcionTipo != 0);
+
+                break;
+            }
+
+            case 0:
+                cout << "Volviendo al menu clientes..." << endl;
+                break;
+
+            default:
+                cout << "Opcion invalida." << endl;
+                break;
+            }
+
+        }while(opcionConsulta != 0);
+
+        break;
+    }
+
+    case 3:
+        consola.limpiar();
+        managerClientes.modificarCliente();
+        consola.pausar();
+        break;
+
+    case 0:
+        cout << "Regresando al menu principal..." << endl;
+        break;
     }
 }

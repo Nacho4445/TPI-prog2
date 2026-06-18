@@ -45,6 +45,9 @@ case 0:
     cout << "Saliendo del programa..." << endl;
     break;
 
+default:
+        cout << "Opcion invalida." << endl;
+        break;
 
     }
 }

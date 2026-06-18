@@ -23,52 +23,62 @@ void MenuRestaurar::mostrarOpciones() {
 }
 
 void MenuRestaurar::ejecutarOpcion(int opcion) {
-	switch (opcion) {
-		case 1: {
-			Empleado empleado;
-			archivosManager.restaurarBackup(empleado);
-			break;
-		}
-		case 2: {
-			Cliente cliente;
-			archivosManager.restaurarBackup(cliente);
-			break;
-		}
-		case 3: {
-			TipoCliente tipoCliente;
-			archivosManager.restaurarBackup(tipoCliente);
-			break;
-		}
-		case 4: {
-			Venta venta;
-			archivosManager.restaurarBackup(venta);
-			break;
-		}
-		case 5: {
-			DetalleVenta detalleVenta;
-			archivosManager.restaurarBackup(detalleVenta);
-			break;
-		}
-		case 6: {
-			Equipo equipo;
-			archivosManager.restaurarBackup(equipo);
-			break;
-		}
-		case 7: {
-			TipoEquipo tipoEquipo;
-			archivosManager.restaurarBackup(tipoEquipo);
-			break;
-		}
-		case 8: {
-			TipoMarca tipoMarca;
-			archivosManager.restaurarBackup(tipoMarca);
-			break;
-		}
-		case 0:
-			mostrarOpciones();
-			break;
-		default:
-			cout << "Opcion Incorrecta!\n";
-			break;
-	}
+
+    switch (opcion) {
+
+    case 1: {
+        Empleado empleado;
+        archivosManager.restaurarBackup(empleado);
+        break;
+    }
+
+    case 2: {
+        Cliente cliente;
+        archivosManager.restaurarBackup(cliente);
+        break;
+    }
+
+    case 3: {
+        TipoCliente tipoCliente;
+        archivosManager.restaurarBackup(tipoCliente);
+        break;
+    }
+
+    case 4: {
+        Venta venta;
+        archivosManager.restaurarBackup(venta);
+        break;
+    }
+
+    case 5: {
+        DetalleVenta detalleVenta;
+        archivosManager.restaurarBackup(detalleVenta);
+        break;
+    }
+
+    case 6: {
+        Equipo equipo;
+        archivosManager.restaurarBackup(equipo);
+        break;
+    }
+
+    case 7: {
+        TipoEquipo tipoEquipo;
+        archivosManager.restaurarBackup(tipoEquipo);
+        break;
+    }
+
+    case 8: {
+        TipoMarca tipoMarca;
+        archivosManager.restaurarBackup(tipoMarca);
+        break;
+    }
+
+    case 0:
+        break;
+
+    default:
+        cout << "Opcion incorrecta." << endl;
+        break;
+    }
 }

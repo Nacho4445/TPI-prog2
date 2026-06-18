@@ -2,11 +2,16 @@
 #include "modelos/Menu.h"
 #include "negocio/EmpleadoManager.h"
 #include "utils/Consola.h"
+#include "utils/Validador.h"
 
 class MenuEmpleados : public Menu{
 private:
-    EmpleadoManager managerEmpleados;
+
     Consola consola;
+    Validador validador;
+
+    EmpleadoManager managerEmpleados;
+
 public:
     MenuEmpleados();
 

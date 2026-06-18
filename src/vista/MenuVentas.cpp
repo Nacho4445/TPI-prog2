@@ -20,6 +20,7 @@ void MenuVentas::mostrarOpciones(){
 }
 
 void MenuVentas::ejecutarOpcion(int opcion){
+
     switch(opcion){
 
     case 1:
@@ -30,6 +31,8 @@ void MenuVentas::ejecutarOpcion(int opcion){
         int opcionConsulta;
 
         do{
+            consola.limpiar();
+
             cout << "------------------------" << endl;
             cout << "--- CONSULTAS VENTAS ---" << endl;
             cout << "1. Consultar por ID" << endl;
@@ -39,39 +42,34 @@ void MenuVentas::ejecutarOpcion(int opcion){
             cout << "5. Consultar por Equipo Vendido" << endl;
             cout << "------------------------" << endl;
             cout << "0. Volver" << endl;
-            cout << "Opcion: ";
-            cin >> opcionConsulta;
+
+            validador.leerEnteroConCero(opcionConsulta, "Opcion: ");
 
             switch(opcionConsulta){
 
             case 1:
                 managerVentas.consultarPorId();
                 consola.pausar();
-                //system("pause");
                 break;
 
             case 2:
                 managerVentas.consultarPorCliente();
                 consola.pausar();
-                //system("pause");
                 break;
 
             case 3:
                 managerVentas.consultarPorEmpleado();
                 consola.pausar();
-                //system("pause");
                 break;
 
             case 4:
                 managerVentas.consultarPorFecha();
                 consola.pausar();
-                //system("pause");
                 break;
 
             case 5:
                 managerVentas.consultarPorEquipo();
                 consola.pausar();
-                //system("pause");
                 break;
 
             case 0:
@@ -80,6 +78,7 @@ void MenuVentas::ejecutarOpcion(int opcion){
 
             default:
                 cout << "Opcion invalida." << endl;
+                consola.pausar();
                 break;
             }
 
@@ -98,6 +97,10 @@ void MenuVentas::ejecutarOpcion(int opcion){
 
     case 0:
         cout << "Regresando al menu principal..." << endl;
+        break;
+
+    default:
+        cout << "Opcion invalida." << endl;
         break;
     }
 }
