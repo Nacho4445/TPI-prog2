@@ -623,3 +623,58 @@ void ClienteManager::mostrarClientesOrdenadosPorTipo(){
 
     delete[] vClientes;
 }
+
+// Ordena los clientes por ID de menor a mayor.
+void ClienteManager::ordenarClientesPorId(Cliente vClientes[], int cantidad){
+
+    for(int i = 0; i < cantidad - 1; i++){
+
+        for(int j = 0; j < cantidad - i - 1; j++){
+
+            if(vClientes[j].getIdCliente() > vClientes[j + 1].getIdCliente()){
+
+                Cliente aux = vClientes[j];
+                vClientes[j] = vClientes[j + 1];
+                vClientes[j + 1] = aux;
+            }
+        }
+    }
+}
+
+// Muestra todos los clientes activos ordenados por ID.
+void ClienteManager::mostrarClientesOrdenadosPorId(){
+
+    int cantidadRegistros = _archivoClientes.getCantidadRegistros();
+
+    if(cantidadRegistros == 0){
+        cout << "No hay clientes cargados." << endl;
+        return;
+    }
+
+    Cliente *vClientes = new Cliente[cantidadRegistros];
+
+    if(vClientes == nullptr){
+        cout << "No se pudo reservar memoria." << endl;
+        return;
+    }
+
+    int cantidadActivos = 0;
+
+    for(int i = 0; i < cantidadRegistros; i++){
+
+        Cliente cliente = _archivoClientes.leerPorPosicion(i);
+
+        if(cliente.getEstado()){
+            vClientes[cantidadActivos] = cliente;
+            cantidadActivos++;
+        }
+    }
+
+    ordenarClientesPorId(vClientes, cantidadActivos);
+
+    for(int i = 0; i < cantidadActivos; i++){
+        mostrarCliente(vClientes[i]);
+    }
+
+    delete[] vClientes;
+}

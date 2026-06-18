@@ -14,6 +14,7 @@ private:
 
     void mostrarEmpleado(Empleado &reg);
     void ordenarEmpleados(Empleado vEmpleados[], int cantidad);
+    void ordenarEmpleadosPorId(Empleado vEmpleados[], int cantidad);
 
 
 public:
@@ -25,6 +26,7 @@ public:
    void consultarPorApellido();
    void modificarEmpleado();
    void mostrarEmpleadosOrdenados();
+   void mostrarEmpleadosOrdenadosPorId();
    void darDeBajaEmpleado();
 
 

@@ -491,6 +491,62 @@ void EmpleadoManager::mostrarEmpleadosOrdenados(){
     consola.pausar();
 }
 
+// Ordena los empleados por ID de menor a mayor.
+void EmpleadoManager::ordenarEmpleadosPorId(Empleado vEmpleados[], int cantidad){
+
+    for(int i = 0; i < cantidad - 1; i++){
+
+        for(int j = 0; j < cantidad - i - 1; j++){
+
+            if(vEmpleados[j].getIdEmpleado() > vEmpleados[j + 1].getIdEmpleado()){
+
+                Empleado aux = vEmpleados[j];
+                vEmpleados[j] = vEmpleados[j + 1];
+                vEmpleados[j + 1] = aux;
+            }
+        }
+    }
+}
+
+// Muestra todos los empleados activos ordenados por ID.
+void EmpleadoManager::mostrarEmpleadosOrdenadosPorId(){
+
+    int cantidadRegistros = _archivoEmpleados.getCantidadRegistros();
+
+    if(cantidadRegistros == 0){
+        cout << "No hay empleados cargados." << endl;
+        return;
+    }
+
+    Empleado *vEmpleados = new Empleado[cantidadRegistros];
+
+    if(vEmpleados == nullptr){
+        cout << "No se pudo reservar memoria." << endl;
+        return;
+    }
+
+    int cantidadActivos = 0;
+
+    for(int i = 0; i < cantidadRegistros; i++){
+
+        Empleado empleado = _archivoEmpleados.leerPorPosicion(i);
+
+        if(empleado.getEstado()){
+            vEmpleados[cantidadActivos] = empleado;
+            cantidadActivos++;
+        }
+    }
+
+    ordenarEmpleadosPorId(vEmpleados, cantidadActivos);
+
+    for(int i = 0; i < cantidadActivos; i++){
+        mostrarEmpleado(vEmpleados[i]);
+        cout << endl;
+    }
+
+    delete[] vEmpleados;
+}
+
 // Baja logica a un empleado existente: No elimina el registro del archivo, solo cambia su estado a false.
 // VALIDACIONES:
 // - Verifica que el ID ingresado sea valido.

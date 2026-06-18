@@ -15,6 +15,8 @@ private:
     void mostrarCliente(Cliente &reg);
     void ordenarClientes(Cliente vClientes[], int cantidad);
     void ordenarClientesPorTipo(Cliente *vClientes, int cantidad);
+    void ordenarClientesPorId(Cliente vClientes[], int cantidad);
+
 
 
 
@@ -30,6 +32,7 @@ public:
     void eliminarCliente();
     void mostrarClientesOrdenados();
     void mostrarClientesOrdenadosPorTipo();
+    void mostrarClientesOrdenadosPorId();
 
 
 
