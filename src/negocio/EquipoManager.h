@@ -23,7 +23,6 @@ private:
     Validador validador;
 
     void mostrarEquipo(Equipo &reg);
-    void ordenarEquipos(Equipo vEquipos[], int cantidad);
     void ordenarEquiposPorTipo(Equipo vEquipos[], int cantidad);
     void ordenarEquiposPorMarca(Equipo vEquipos[], int cantidad);
     void ordenarEquiposPorPrecioAsc(Equipo vEquipos[], int cantidad);
@@ -45,7 +44,6 @@ public:
 	void consultarPorPrecio();
 	void consultarPorStock();
 	void modificarEquipo();
-	void mostrarEquiposOrdenados();
 	void eliminarEquipo();
 	void mostrarEquiposOrdenadosPorTipo();
     void mostrarEquiposOrdenadosPorMarca();

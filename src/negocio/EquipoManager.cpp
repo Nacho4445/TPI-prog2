@@ -417,73 +417,7 @@ void EquipoManager::modificarEquipo(){
 
     consola.pausar();
 }
-// Ordena un vector de equipos por precio unitario de menor a mayor.
-// Se utiliza para generar los listados ordenados.
-void EquipoManager::ordenarEquipos(Equipo vEquipos[], int cantidad){
 
-    for(int i = 0; i < cantidad - 1; i++){
-
-        for(int j = 0; j < cantidad - i - 1; j++){
-
-            if(vEquipos[j].getPrecioUnitario() >
-               vEquipos[j + 1].getPrecioUnitario()){
-
-                Equipo aux = vEquipos[j];
-                vEquipos[j] = vEquipos[j + 1];
-                vEquipos[j + 1] = aux;
-            }
-        }
-    }
-}
-
-// Muestra todos los equipos activos ordenados según el criterio
-// definido en la función ordenarEquipos().
-//
-// VALIDACIONES:
-// - Verifica que existan equipos cargados.
-// - Comprueba que se haya podido reservar memoria dinámica.
-void EquipoManager::mostrarEquiposOrdenados(){
-
-    int cantidadEquipos = _archivoEquipos.getCantidadEquipos();
-
-    if(cantidadEquipos == 0){
-        cout << "No hay equipos cargados." << endl;
-        consola.pausar();
-        return;
-    }
-
-    Equipo *equipos = new Equipo[cantidadEquipos];
-
-    if(equipos == nullptr){
-        cout << "No se pudo reservar memoria." << endl;
-        consola.pausar();
-        return;
-    }
-
-    int cantidadActivos = 0;
-
-    // Carga únicamente los equipos activos.
-    for(int i = 1; i <= cantidadEquipos; i++){
-
-        Equipo equipo = _archivoEquipos.leer(i);
-
-        if(equipo.getEstado()){
-            equipos[cantidadActivos] = equipo;
-            cantidadActivos++;
-        }
-    }
-
-    // Ordena el vector de equipos.
-    ordenarEquipos(equipos, cantidadActivos);
-
-    // Muestra los equipos ordenados.
-    for(int i = 0; i < cantidadActivos; i++){
-        mostrarEquipo(equipos[i]);
-        cout << endl;
-    }
-
-    delete[] equipos;
-}
 // Da de baja un equipo del sistema.
 //
 // VALIDACIONES:
