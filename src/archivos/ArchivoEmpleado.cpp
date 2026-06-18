@@ -94,29 +94,6 @@ Empleado ArchivoEmpleado::leerPorPosicion(int posicion){
     return reg;
 }
 
-Empleado ArchivoEmpleado::leerIncluyendoBajas(int id){
-    Empleado aux;
-
-    int pos = buscarIncluyendoBajas(id);
-
-    if(pos == -1){
-        return aux;
-    }
-
-    FILE *p = fopen(ruta.c_str(), "rb");
-
-    if(p == NULL){
-        return aux;
-    }
-
-    fseek(p, pos * sizeof(Empleado), SEEK_SET);
-    fread(&aux, sizeof(Empleado), 1, p);
-
-    fclose(p);
-
-    return aux;
-}
-
 int ArchivoEmpleado::buscarPorCuit(long long cuit){
 
     Empleado reg;
@@ -139,29 +116,6 @@ int ArchivoEmpleado::buscarPorCuit(long long cuit){
     }
 
     fclose(pFile);
-    return -1;
-}
-
-int ArchivoEmpleado::buscarIncluyendoBajas(int id){
-    FILE *p = fopen(ruta.c_str(), "rb");
-
-    if(p == NULL){
-        return -1;
-    }
-
-    Empleado aux;
-    int pos = 0;
-
-    while(fread(&aux, sizeof(Empleado), 1, p) == 1){
-        if(aux.getIdEmpleado() == id){
-            fclose(p);
-            return pos;
-        }
-
-        pos++;
-    }
-
-    fclose(p);
     return -1;
 }
 
