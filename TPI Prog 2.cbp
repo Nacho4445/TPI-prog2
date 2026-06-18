@@ -83,6 +83,10 @@
 		<Unit filename="src/modelos/TipoMarca.h" />
 		<Unit filename="src/modelos/Venta.cpp" />
 		<Unit filename="src/modelos/Venta.h" />
+		<Unit filename="src/modelos/VentasXempleado.cpp" />
+		<Unit filename="src/modelos/VentasXempleado.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="src/negocio/ArchivosManager.cpp" />
 		<Unit filename="src/negocio/ArchivosManager.h" />
 		<Unit filename="src/negocio/ClienteManager.cpp" />

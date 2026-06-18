@@ -56,6 +56,7 @@ void MenuInformes::ejecutarOpcion(int opcion){
 
     case 0:
         cout << "Regresando al menu principal..." << endl;
+        consola.pausar();
         break;
     }
 }

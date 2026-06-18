@@ -43,9 +43,11 @@ void MenuArchivos::ejecutarOpcion(int opcion) {
 			break;
 		case 0:
 		    cout << "Volviendo al menu principal..." << endl;
+		    consola.pausar();
 			break;
 		default:
 			cout << "Opcion Incorrecta!\n";
+			consola.pausar();
 			break;
 	}
 }

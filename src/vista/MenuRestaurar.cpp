@@ -84,10 +84,12 @@ void MenuRestaurar::ejecutarOpcion(int opcion) {
     }
     case 0:
         cout << "Volviendo al menu archivos..." << endl;
+        consola.pausar();
         break;
 
     default:
         cout << "Opcion incorrecta." << endl;
+        consola.pausar();
         break;
     }
 }

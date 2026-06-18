@@ -93,6 +93,7 @@ void MenuClientes::ejecutarOpcion(int opcion){
 
                     default:
                         cout << "Opcion invalida." << endl;
+                        consola.pausar();
                         break;
                     }
 
@@ -134,6 +135,7 @@ void MenuClientes::ejecutarOpcion(int opcion){
 
                     default:
                         cout << "Opcion invalida." << endl;
+                        consola.pausar();
                         break;
                     }
 
@@ -146,10 +148,12 @@ void MenuClientes::ejecutarOpcion(int opcion){
 
             case 0:
                 cout << "Volviendo al menu clientes..." << endl;
+                consola.pausar();
                 break;
 
             default:
                 cout << "Opcion invalida." << endl;
+                consola.pausar();
                 break;
             }
 
@@ -166,6 +170,7 @@ void MenuClientes::ejecutarOpcion(int opcion){
 
     case 0:
         cout << "Regresando al menu principal..." << endl;
+        consola.pausar();
         break;
     }
 }

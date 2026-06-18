@@ -82,9 +82,11 @@ void MenuBackups::ejecutarOpcion(int opcion) {
 		}
 		case 0:
 			cout << "Volviendo al menu archivos..." << endl;
+			consola.pausar();
 			break;
 		default:
 			cout << "Opcion Incorrecta!\n";
+			consola.pausar();
 			break;
 	}
 }

@@ -171,6 +171,7 @@ void MenuEquipos::ejecutarOpcion(int opcion){
 
                     default:
                         cout << "Opcion invalida." << endl;
+                        consola.pausar();
                         break;
                     }
 
@@ -215,10 +216,12 @@ void MenuEquipos::ejecutarOpcion(int opcion){
 
     case 0:
         cout << "Regresando al menu principal..." << endl;
+        consola.pausar();
         break;
 
     default:
         cout << "Opcion invalida." << endl;
+        consola.pausar();
         break;
     }
 }

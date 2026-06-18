@@ -10,6 +10,7 @@
 #include "archivos/ArchivoDetalleVenta.h"
 #include "modelos/DetalleVenta.h"
 #include "modelos/EquiposMasVendidos.h"
+#include "modelos/VentasXempleado.h"
 
 using namespace std;
 
@@ -286,6 +287,7 @@ void InformeManager::equiposMasVendidos(){
 // VALIDACIONES:
 // - Verifica que existan empleados + Verifica que esten activos.
 // - Verifica que existan ventas + Verifica que esten activos.
+
 void InformeManager::ventasXempleado(){
 
     ArchivoEmpleado repoEmpleados;
@@ -309,6 +311,15 @@ void InformeManager::ventasXempleado(){
     cout << defaultfloat;
     cout.precision(10);
 
+
+    // Creo el puntero p con la ruta del archivo.
+    FILE *p = fopen("informes/ventasXempleado.dat", "wb");
+
+    if(p == nullptr){
+        cout << "Error de informe..." << endl;
+        return;
+    }
+
     // Recorre todos los empleados.
     for(int i = 0; i < cantidadEmpleados; i++){
 
@@ -323,10 +334,7 @@ void InformeManager::ventasXempleado(){
 
         cout << endl;
         cout << "Empleado ID: " << empleado.getIdEmpleado() << endl;
-        cout << "Empleado: "
-             << empleado.getNombre()
-             << " "
-             << empleado.getApellido() << endl;
+        cout << "Empleado: " << empleado.getNombre() << " " << empleado.getApellido() << endl;
         cout << "----------------------------------------" << endl;
 
         // Busca las ventas realizadas por el empleado actual.
@@ -334,8 +342,7 @@ void InformeManager::ventasXempleado(){
 
             Venta venta = repoVentas.leerPorPosicion(j);
 
-            if(venta.getEstado() &&
-               venta.getIdEmpleado() == empleado.getIdEmpleado()){
+            if(venta.getEstado() && venta.getIdEmpleado() == empleado.getIdEmpleado()){
 
                 Cliente cliente = repoClientes.leer(venta.getIdCliente());
 
@@ -370,7 +377,11 @@ void InformeManager::ventasXempleado(){
         cout << endl;
         cout << "Total vendido: $" << totalVendido << endl;
         cout << "========================================" << endl;
+
+        VentasXempleado regVentas(empleado, cantidadVentasEmpleado, totalVendido);
+        fwrite(&regVentas, sizeof(VentasXempleado), 1, p);
     }
+    fclose(p);
 }
 
 // Genera un informe con todos los equipos que tienen stock disponible.
