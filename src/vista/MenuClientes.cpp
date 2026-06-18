@@ -50,11 +50,40 @@ void MenuClientes::ejecutarOpcion(int opcion){
 
             switch(opcionConsulta){
 
-            case 1:
-                consola.limpiar();
-                managerClientes.consultarPorId();
-                consola.pausar();
+            case 1:{
+                 int opcionId;
+                 do{
+                     consola.limpiar();
+                 cout << "----------------------------" << endl;
+                 cout << "1. Buscar por ID" << endl;
+                 cout << "2. Ordenar por ID" << endl;
+                 cout << "----------------------------" << endl;
+                 cout << "0. Volver" << endl;
+                 validador.leerEnteroConCero(opcionId, "Opcion: ");
+
+                 switch(opcionId){
+                     case 1:
+                         consola.limpiar();
+                         managerClientes.consultarPorId();
+                         break;
+
+                     case 2:
+                         consola.limpiar();
+                         managerClientes.mostrarClientesOrdenadosPorId();
+                         break;
+
+                     case 0:
+                         break;
+
+                     default:
+                         cout << "Opcion invalida." << endl;
+                         consola.pausar();
+                         break;
+                         }
+                     consola.pausar();
+                }while(opcionId != 0);
                 break;
+            }
 
             case 2:
                 consola.limpiar();
@@ -78,45 +107,10 @@ void MenuClientes::ejecutarOpcion(int opcion){
 
                     switch(opcionApellido){
 
-                    case 1:{
-                         int opcionId;
-
-                         do{
-                             consola.limpiar();
-
-                             cout << "----------------------------" << endl;
-                             cout << "1. Buscar por ID" << endl;
-                             cout << "2. Ordenar por ID" << endl;
-                             cout << "----------------------------" << endl;
-                             cout << "0. Volver" << endl;
-
-                             validador.leerEnteroConCero(opcionId, "Opcion: ");
-
-                             switch(opcionId){
-                                 case 1:
-                                     consola.limpiar();
-                                     managerClientes.consultarPorId();
-                                     break;
-
-                                 case 2:
-                                     consola.limpiar();
-                                     managerClientes.mostrarClientesOrdenadosPorId();
-                                     break;
-
-                                 case 0:
-                                     break;
-
-                                 default:
-                                     cout << "Opcion invalida." << endl;
-                                     consola.pausar();
-                                     break;
-                                }
-
-                             consola.pausar();
-
-                        }while(opcionId != 0);
-                         break;
-                    }
+                    case 1:
+                        consola.limpiar();
+                        managerClientes.consultarPorApellido();
+                        break;
 
                     case 2:
                         consola.limpiar();
@@ -128,7 +122,6 @@ void MenuClientes::ejecutarOpcion(int opcion){
 
                     default:
                         cout << "Opcion invalida." << endl;
-                        consola.pausar();
                         break;
                     }
 
@@ -170,7 +163,6 @@ void MenuClientes::ejecutarOpcion(int opcion){
 
                     default:
                         cout << "Opcion invalida." << endl;
-                        consola.pausar();
                         break;
                     }
 
@@ -183,12 +175,10 @@ void MenuClientes::ejecutarOpcion(int opcion){
 
             case 0:
                 cout << "Volviendo al menu clientes..." << endl;
-                consola.pausar();
                 break;
 
             default:
                 cout << "Opcion invalida." << endl;
-                consola.pausar();
                 break;
             }
 
@@ -205,7 +195,6 @@ void MenuClientes::ejecutarOpcion(int opcion){
 
     case 0:
         cout << "Regresando al menu principal..." << endl;
-        consola.pausar();
         break;
     }
 }
