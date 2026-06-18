@@ -19,17 +19,12 @@ Equipo EquipoManager::crearEquipo(){
     float precioUnitario;
     char descripcion[30];
 
-   idEquipo = _archivoEquipos.getCantidadEquipos() + 1;
+    idEquipo = _archivoEquipos.getCantidadEquipos() + 1;
 
     cout << "Ingrese los siguientes datos:" << endl;
 
-    cout << "ID Tipo Equipo: ";
-    cin >> idTipoEquipo;
-
-    cout << "ID Tipo Marca: ";
-    cin >> idTipoMarca;
-
-    cin.ignore();
+    idTipoEquipo = seleccionarTipoEquipo();
+    idTipoMarca = seleccionarMarca();
 
     cout << "Descripcion: ";
     cin.getline(descripcion, 30);
@@ -73,7 +68,7 @@ void EquipoManager::consultarPorId(){
     while(true){
         cout << "Ingrese el ID del equipo: ";
         cin >> idEquipo;
-        }
+
 
         equipo = _archivoEquipos.leer(idEquipo);
 
@@ -84,20 +79,24 @@ void EquipoManager::consultarPorId(){
 
         cout << "Equipo no encontrado. Intente nuevamente." << endl;
         consola.pausar();
+    }
 }
-
 
 void EquipoManager::consultarPorTipo(){
 
-    int idTipoEquipo;
+    int idTipoEquipo = buscarTipoEquipo();
+
+    if(idTipoEquipo == 0){
+        cout << "No existe ese tipo de equipo." << endl;
+        return;
+    }
+
     Equipo equipo;
     bool encontro = false;
     int cantidad = _archivoEquipos.getCantidadEquipos();
 
-    cout << "Ingrese ID tipo de equipo: ";
-    cin >> idTipoEquipo;
-
     for(int i = 0; i < cantidad; i++){
+
         equipo = _archivoEquipos.leerPorPosicion(i);
 
         if(equipo.getEstado() && equipo.getIdTipoEquipo() == idTipoEquipo){
@@ -109,21 +108,24 @@ void EquipoManager::consultarPorTipo(){
 
     if(!encontro){
         cout << "No se encontraron equipos de ese tipo." << endl;
-        consola.pausar();
     }
 }
 
 void EquipoManager::consultarPorMarca(){
 
-    int idTipoMarca;
+    int idTipoMarca = buscarMarca();
+
+    if(idTipoMarca == 0){
+        cout << "No existe esa marca." << endl;
+        return;
+    }
+
     Equipo equipo;
     bool encontro = false;
     int cantidad = _archivoEquipos.getCantidadEquipos();
 
-    cout << "Ingrese ID marca: ";
-    cin >> idTipoMarca;
-
     for(int i = 0; i < cantidad; i++){
+
         equipo = _archivoEquipos.leerPorPosicion(i);
 
         if(equipo.getEstado() && equipo.getIdTipoMarca() == idTipoMarca){
@@ -135,7 +137,6 @@ void EquipoManager::consultarPorMarca(){
 
     if(!encontro){
         cout << "No se encontraron equipos de esa marca." << endl;
-        consola.pausar();
     }
 }
 
@@ -423,4 +424,134 @@ void EquipoManager::eliminarEquipo(){
         }
     }
     consola.pausar();
+}
+
+
+int EquipoManager::seleccionarTipoEquipo(){
+
+    char descripcion[30];
+
+    cout << "Tipo de equipo: ";
+    cin.ignore(1000, '\n');
+    cin.getline(descripcion, 30);
+
+    while(strlen(descripcion) == 0){
+        cout << "El tipo de equipo no puede estar vacio." << endl;
+        cout << "Tipo de equipo: ";
+        cin.getline(descripcion, 30);
+    }
+
+    int cantidad = _archivoTipoEquipos.getCantidadTipos();
+
+    for(int i = 0; i < cantidad; i++){
+
+        TipoEquipo tipo = _archivoTipoEquipos.leerPorPosicion(i);
+
+        if(tipo.getEstado() && strcmp(tipo.getDescripcion(), descripcion) == 0){
+            return tipo.getIdTipoEquipo();
+        }
+    }
+
+    int nuevoId = _archivoTipoEquipos.generarNuevoId();
+
+    TipoEquipo nuevoTipo(nuevoId, descripcion, true);
+
+    if(_archivoTipoEquipos.guardar(nuevoTipo)){
+        cout << "Tipo de equipo nuevo creado con ID " << nuevoId << endl;
+        return nuevoId;
+    }
+
+    return 0;
+}
+
+
+int EquipoManager::seleccionarMarca(){
+
+    char descripcion[30];
+
+    cout << "Marca: ";
+    cin.getline(descripcion, 30);
+
+    while(strlen(descripcion) == 0){
+        cout << "La marca no puede estar vacia." << endl;
+        cout << "Marca: ";
+        cin.getline(descripcion, 30);
+    }
+
+    int cantidad = _archivoTipoMarcas.getCantidadTipos();
+
+    for(int i = 0; i < cantidad; i++){
+
+        TipoMarca marca = _archivoTipoMarcas.leerPorPosicion(i);
+
+        if(marca.getEstado() && strcmp(marca.getDescripcion(), descripcion) == 0){
+            return marca.getIdTipoMarca();
+        }
+    }
+
+    int nuevoId = _archivoTipoMarcas.generarNuevoId();
+
+    TipoMarca nuevaMarca(nuevoId, descripcion, true);
+
+    if(_archivoTipoMarcas.guardar(nuevaMarca)){
+        cout << "Marca nueva creada con ID " << nuevoId << endl;
+        return nuevoId;
+    }
+
+    return 0;
+}
+
+int EquipoManager::buscarTipoEquipo(){
+
+    char descripcion[30];
+
+    cout << "Ingrese el tipo de equipo: ";
+    cin.ignore(1000, '\n');
+    cin.getline(descripcion, 30);
+
+    while(strlen(descripcion) == 0){
+        cout << "El tipo de equipo no puede estar vacio." << endl;
+        cout << "Ingrese el tipo de equipo: ";
+        cin.getline(descripcion, 30);
+    }
+
+    int cantidad = _archivoTipoEquipos.getCantidadTipos();
+
+    for(int i = 0; i < cantidad; i++){
+
+        TipoEquipo tipo = _archivoTipoEquipos.leerPorPosicion(i);
+
+        if(tipo.getEstado() && strcmp(tipo.getDescripcion(), descripcion) == 0){
+            return tipo.getIdTipoEquipo();
+        }
+    }
+
+    return 0;
+}
+int EquipoManager::buscarMarca(){
+
+    char descripcion[30];
+
+    cout << "Ingrese la marca: ";
+    cin.ignore(1000, '\n');
+    cin.getline(descripcion, 30);
+
+    while(strlen(descripcion) == 0){
+        cout << "La marca no puede estar vacia." << endl;
+        cout << "Ingrese la marca: ";
+        cin.getline(descripcion, 30);
+    }
+
+    int cantidad = _archivoTipoMarcas.getCantidadTipos();
+
+    for(int i = 0; i < cantidad; i++){
+
+        TipoMarca marca = _archivoTipoMarcas.leerPorPosicion(i);
+
+        if(marca.getEstado() && strcmp(marca.getDescripcion(), descripcion) == 0){
+            return marca.getIdTipoMarca();
+        }
+    }
+
+    return 0;
 }
