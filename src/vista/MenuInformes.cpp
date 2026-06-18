@@ -37,7 +37,7 @@ void MenuInformes::ejecutarOpcion(int opcion){
         break;
 
     case 4:
-        managerEquipos.ventasXempleado();
+         managerInformes.ventasXempleado();
         break;
 
     case 5:
