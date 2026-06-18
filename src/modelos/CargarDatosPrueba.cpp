@@ -43,105 +43,157 @@ void CargarDatosPrueba::cargarDatosPrueba(){
     archivoEmpleado.vaciar();
     archivoEquipo.vaciar();
     archivoDetalleVenta.vaciar();
-
-    // OJO: ArchivoVenta no tiene vaciar().
-    // Por ahora borra manualmente datos/ventas.dat antes de ejecutar esto,
-    // o agregamos despues un vaciar() a ArchivoVenta.
+    archivoVenta.vaciar();
 
     // ---------------- TIPOS CLIENTE ----------------
-    archivoTipoCliente.guardar(TipoCliente(1, "Particular", true));
-    archivoTipoCliente.guardar(TipoCliente(2, "Empresa", true));
+archivoTipoCliente.guardar(TipoCliente(1, "Particular", true));
+archivoTipoCliente.guardar(TipoCliente(2, "Empresa", true));
 
-    // ---------------- MARCAS ----------------
-    archivoTipoMarca.guardar(TipoMarca(1, "Samsung", true));
-    archivoTipoMarca.guardar(TipoMarca(2, "Apple", true));
-    archivoTipoMarca.guardar(TipoMarca(3, "Motorola", true));
-    archivoTipoMarca.guardar(TipoMarca(4, "Lenovo", true));
-    archivoTipoMarca.guardar(TipoMarca(5, "HP", true));
+// ---------------- MARCAS ----------------
+archivoTipoMarca.guardar(TipoMarca(1, "Samsung", true));
+archivoTipoMarca.guardar(TipoMarca(2, "Apple", true));
+archivoTipoMarca.guardar(TipoMarca(3, "Motorola", true));
+archivoTipoMarca.guardar(TipoMarca(4, "Lenovo", true));
+archivoTipoMarca.guardar(TipoMarca(5, "HP", true));
+archivoTipoMarca.guardar(TipoMarca(6, "Dell", true));
+archivoTipoMarca.guardar(TipoMarca(7, "Asus", true));
+archivoTipoMarca.guardar(TipoMarca(8, "Acer", true));
+archivoTipoMarca.guardar(TipoMarca(9, "Xiaomi", true));
+archivoTipoMarca.guardar(TipoMarca(10, "Alcatel", true));
+archivoTipoMarca.guardar(TipoMarca(11, "AMD", true));
+archivoTipoMarca.guardar(TipoMarca(12, "Intel", true));
+archivoTipoMarca.guardar(TipoMarca(13, "Sony", true));
+archivoTipoMarca.guardar(TipoMarca(14, "LG", true));
+archivoTipoMarca.guardar(TipoMarca(15, "Philips", true));
+archivoTipoMarca.guardar(TipoMarca(16, "Huawei", true));
+archivoTipoMarca.guardar(TipoMarca(17, "Noblex", true));
+archivoTipoMarca.guardar(TipoMarca(18, "TCL", true));
+archivoTipoMarca.guardar(TipoMarca(19, "JBL", true));
+archivoTipoMarca.guardar(TipoMarca(20, "Logitech", true));
+archivoTipoMarca.guardar(TipoMarca(21, "Epson", true));
+archivoTipoMarca.guardar(TipoMarca(22, "Canon", true));
+archivoTipoMarca.guardar(TipoMarca(23, "Brother", true));
+archivoTipoMarca.guardar(TipoMarca(24, "Kingston", true));
+archivoTipoMarca.guardar(TipoMarca(25, "Seagate", true));
+archivoTipoMarca.guardar(TipoMarca(26, "Western Digital", true));
+archivoTipoMarca.guardar(TipoMarca(27, "MSI", true));
+archivoTipoMarca.guardar(TipoMarca(28, "Gigabyte", true));
+archivoTipoMarca.guardar(TipoMarca(29, "Nvidia", true));
+archivoTipoMarca.guardar(TipoMarca(30, "Razer", true));
 
-    // ---------------- TIPOS EQUIPO ----------------
-    archivoTipoEquipo.guardar(TipoEquipo(1, "Celular", true));
-    archivoTipoEquipo.guardar(TipoEquipo(2, "Notebook", true));
-    archivoTipoEquipo.guardar(TipoEquipo(3, "Tablet", true));
-    archivoTipoEquipo.guardar(TipoEquipo(4, "Monitor", true));
+// ---------------- TIPOS EQUIPO ----------------
+archivoTipoEquipo.guardar(TipoEquipo(1, "Celular", true));
+archivoTipoEquipo.guardar(TipoEquipo(2, "Notebook", true));
+archivoTipoEquipo.guardar(TipoEquipo(3, "Tablet", true));
+archivoTipoEquipo.guardar(TipoEquipo(4, "Monitor", true));
+archivoTipoEquipo.guardar(TipoEquipo(5, "Impresora", true));
 
-    // ---------------- CLIENTES ----------------
-    Direccion d1("Cespedes", 123, "PB", "1", "General Pacheco", "1617", "Buenos Aires", true);
-    Cliente c1(1, 1);
-    c1.setCuit(20156497854);
-    c1.setNombre("Florencia");
-    c1.setApellido("Alvarez");
-    c1.setTelefono("1564978548");
-    c1.setEmail("prueba@prueba.com");
-    c1.setDireccion(d1);
-    c1.setEstado(true);
-    archivoCliente.guardar(c1);
 
-    Direccion d2("Avellaneda", 456, "1", "A", "Tigre", "1648", "Buenos Aires", true);
-    Cliente c2(2, 1);
-    c2.setCuit(20333444555);
-    c2.setNombre("Juan");
-    c2.setApellido("Perez");
-    c2.setTelefono("1122334455");
-    c2.setEmail("juan@mail.com");
-    c2.setDireccion(d2);
-    c2.setEstado(true);
-    archivoCliente.guardar(c2);
+// ---------------- CLIENTES ----------------
+const char* nombresClientes[30] = {
+    "Florencia", "Juan", "Maria", "Lucas", "Camila",
+    "Sofia", "Mateo", "Valentina", "Bruno", "Martina",
+    "Nicolas", "Agustina", "Federico", "Julieta", "Tomas",
+    "Carolina", "Gonzalo", "Rocio", "Martin", "Lucia",
+    "TecnoSur", "InfoRed", "CompuMax", "DigitalNet", "ElectroHouse",
+    "MegaTech", "ServiPC", "RedPoint", "HardStore", "NetSolutions"
+};
 
-    Direccion d3("San Martin", 800, "2", "B", "San Fernando", "1646", "Buenos Aires", true);
-    Cliente c3(3, 2);
-    c3.setCuit(30777111222);
-    c3.setNombre("TecnoSur");
-    c3.setApellido("SRL");
-    c3.setTelefono("1144556677");
-    c3.setEmail("contacto@tecnosur.com");
-    c3.setDireccion(d3);
-    c3.setEstado(true);
-    archivoCliente.guardar(c3);
+const char* apellidosClientes[30] = {
+    "Alvarez", "Perez", "Gonzalez", "Ramirez", "Fernandez",
+    "Lopez", "Diaz", "Sosa", "Romero", "Torres",
+    "Castro", "Medina", "Herrera", "Vega", "Morales",
+    "Rojas", "Silva", "Mendez", "Ruiz", "Acosta",
+    "SRL", "SA", "SRL", "SA", "SRL",
+    "SA", "SRL", "SA", "SRL", "SA"
+};
 
-    // ---------------- EMPLEADOS ----------------
-    Direccion de1("Mitre", 100, "PB", "1", "Benavidez", "1621", "Buenos Aires", true);
-    Empleado e1(1);
-    e1.setCuit(20222111333);
-    e1.setNombre("Carlos");
-    e1.setApellido("Gomez");
-    e1.setTelefono("1166667777");
-    e1.setEmail("carlos@empresa.com");
-    e1.setDireccion(de1);
-    e1.setEstado(true);
-    archivoEmpleado.guardar(e1);
+for(int i = 1; i <= 30; i++){
+    Direccion dir("Calle Cliente", 100 + i, "PB", "A", "General Pacheco", "1617", "Buenos Aires", true);
 
-    Direccion de2("Italia", 250, "1", "C", "Tigre", "1648", "Buenos Aires", true);
-    Empleado e2(2);
-    e2.setCuit(20299888777);
-    e2.setNombre("Ana");
-    e2.setApellido("Lopez");
-    e2.setTelefono("1155554444");
-    e2.setEmail("ana@empresa.com");
-    e2.setDireccion(de2);
-    e2.setEstado(true);
-    archivoEmpleado.guardar(e2);
+    int tipoCliente = (i <= 20) ? 1 : 2;
 
-    // ---------------- EQUIPOS ----------------
-    archivoEquipo.guardar(Equipo(1, 1, 1, "Galaxy A15", 20, 250000, true));      // Samsung Celular
-    archivoEquipo.guardar(Equipo(2, 1, 2, "iPhone 13", 10, 650000, true));       // Apple Celular
-    archivoEquipo.guardar(Equipo(3, 2, 4, "ThinkPad E14", 8, 850000, true));     // Lenovo Notebook
-    archivoEquipo.guardar(Equipo(4, 2, 5, "HP Pavilion", 6, 780000, true));      // HP Notebook
-    archivoEquipo.guardar(Equipo(5, 3, 1, "Galaxy Tab A9", 12, 320000, true));   // Samsung Tablet
-    archivoEquipo.guardar(Equipo(6, 4, 1, "Monitor Samsung 24", 15, 210000, true));
+    Cliente cliente(i, tipoCliente);
 
-    // ---------------- VENTAS ----------------
-    archivoVenta.guardar(Venta(1, 1, 1, Fecha(13, 6, 2026), 500000, true));
-    archivoVenta.guardar(Venta(2, 2, 1, Fecha(13, 6, 2026), 650000, true));
-    archivoVenta.guardar(Venta(3, 3, 2, Fecha(13, 6, 2026), 1060000, true));
+    cliente.setCuit(20000000000LL + i);
+    cliente.setNombre(nombresClientes[i - 1]);
+    cliente.setApellido(apellidosClientes[i - 1]);
+    cliente.setTelefono("1122334455");
+    cliente.setEmail("cliente@mail.com");
+    cliente.setDireccion(dir);
+    cliente.setEstado(true);
 
-    // ---------------- DETALLES DE VENTA ----------------
-    archivoDetalleVenta.guardar(DetalleVenta(1, 1, 1, 2, 250000, 500000, true));
+    archivoCliente.guardar(cliente);
+}
 
-    archivoDetalleVenta.guardar(DetalleVenta(2, 2, 2, 1, 650000, 650000, true));
 
-    archivoDetalleVenta.guardar(DetalleVenta(3, 3, 3, 1, 850000, 850000, true));
-    archivoDetalleVenta.guardar(DetalleVenta(4, 3, 6, 1, 210000, 210000, true));
+// ---------------- EMPLEADOS ----------------
+const char* nombresEmpleados[10] = {
+    "Carlos", "Ana", "Pablo", "Micaela", "Diego",
+    "Laura", "Santiago", "Daniela", "Mariano", "Valeria"
+};
 
-    cout << "Datos de prueba cargados correctamente." << endl;
+const char* apellidosEmpleados[10] = {
+    "Gomez", "Lopez", "Martinez", "Suarez", "Ramos",
+    "Benitez", "Arias", "Molina", "Paz", "Iglesias"
+};
+
+for(int i = 1; i <= 10; i++){
+    Direccion dir("Calle Empleado", 200 + i, "1", "B", "Tigre", "1648", "Buenos Aires", true);
+
+    Empleado empleado(i);
+
+    empleado.setCuit(27000000000LL + i);
+    empleado.setNombre(nombresEmpleados[i - 1]);
+    empleado.setApellido(apellidosEmpleados[i - 1]);
+    empleado.setTelefono("1166778899");
+    empleado.setEmail("empleado@mail.com");
+    empleado.setDireccion(dir);
+    empleado.setEstado(true);
+
+    archivoEmpleado.guardar(empleado);
+}
+
+// ---------------- EQUIPOS ----------------
+archivoEquipo.guardar(Equipo(1, 1, 1, "Galaxy A15", 50, 250000, true));
+archivoEquipo.guardar(Equipo(2, 1, 2, "iPhone 13", 45, 650000, true));
+archivoEquipo.guardar(Equipo(3, 2, 4, "ThinkPad E14", 40, 850000, true));
+archivoEquipo.guardar(Equipo(4, 2, 5, "HP Pavilion", 35, 780000, true));
+archivoEquipo.guardar(Equipo(5, 3, 1, "Galaxy Tab A9", 30, 320000, true));
+archivoEquipo.guardar(Equipo(6, 4, 1, "Monitor Samsung 24", 25, 210000, true));
+archivoEquipo.guardar(Equipo(7, 2, 6, "Dell Inspiron 15", 30, 790000, true));
+archivoEquipo.guardar(Equipo(8, 1, 9, "Xiaomi Redmi 13", 60, 220000, true));
+archivoEquipo.guardar(Equipo(9, 3, 4, "Lenovo Tab M10", 28, 300000, true));
+archivoEquipo.guardar(Equipo(10, 5, 21, "Epson L3250", 20, 280000, true));
+archivoEquipo.guardar(Equipo(11, 2, 7, "Asus Vivobook", 24, 740000, true));
+archivoEquipo.guardar(Equipo(12, 2, 8, "Acer Aspire 5", 22, 720000, true));
+archivoEquipo.guardar(Equipo(13, 1, 3, "Motorola G84", 55, 260000, true));
+archivoEquipo.guardar(Equipo(14, 4, 14, "Monitor LG 27", 18, 340000, true));
+archivoEquipo.guardar(Equipo(15, 5, 23, "Brother HL1200", 16, 230000, true));
+
+// ---------------- VENTAS Y DETALLES ----------------
+int idDetalle = 1;
+
+for(int i = 1; i <= 100; i++){
+
+    int idCliente = ((i - 1) % 30) + 1;
+    int idEmpleado = ((i - 1) % 10) + 1;
+    int idEquipo = ((i - 1) % 15) + 1;
+
+    Equipo equipo = archivoEquipo.leer(idEquipo);
+
+    int cantidad = (i % 3) + 1;
+    float precioUnitario = equipo.getPrecioUnitario();
+    float subtotal = precioUnitario * cantidad;
+
+    Fecha fecha((i % 28) + 1, ((i - 1) % 12) + 1, 2026);
+
+    archivoVenta.guardar(Venta(i, idCliente, idEmpleado, fecha, subtotal, true));
+
+    archivoDetalleVenta.guardar(
+        DetalleVenta(idDetalle, i, idEquipo, cantidad, precioUnitario, subtotal, true)
+    );
+
+    idDetalle++;
+  }
 }
