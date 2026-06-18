@@ -14,6 +14,7 @@ public:
     int getCantidadRegistros();
     bool guardar(DetalleVenta detalleVenta);
     DetalleVenta leer(int idDetalleVenta);
+    DetalleVenta leerPorPosicion(int posicion);
     void leerPorIdVenta(int idVenta, DetalleVenta *detalles, int &cantidad);
     bool borrarRegistro(int idDetalleVenta);
     void vaciar();
