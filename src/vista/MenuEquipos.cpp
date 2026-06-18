@@ -4,25 +4,25 @@ using namespace std;
 #include <cstdio>
 
 MenuEquipos::MenuEquipos(){
-    setCantidadOpciones(5);
+    setCantidadOpciones(4);
 }
 
 void MenuEquipos::mostrarOpciones(){
     consola.limpiar();
-    //system("cls");
+
     cout << "------------------------" << endl;
-    cout << "-----MENU EQUIPOS-----" << endl;
+    cout << "-----MENU EQUIPOS-------" << endl;
     cout << "1. Registrar Equipo" << endl;
-    cout << "2. Consultar Equipo" << endl;
+    cout << "2. Consultas" << endl;
     cout << "3. Modificar Equipo" << endl;
-    cout << "4. Eliminar Equipo" << endl;
-    cout << "5. Listar Equipos" << endl;
+    cout << "4. Dar de baja Equipo" << endl;
     cout << "------------------------" << endl;
     cout << "0. Salir" << endl;
     cout << "------------------------" << endl;
 }
 
 void MenuEquipos::ejecutarOpcion(int opcion){
+
     switch(opcion){
 
     case 1:
@@ -34,13 +34,13 @@ void MenuEquipos::ejecutarOpcion(int opcion){
 
         do{
             consola.limpiar();
-            //system("cls");
+
             cout << "------------------------" << endl;
             cout << "--- CONSULTAS EQUIPOS ---" << endl;
             cout << "1. Consultar por ID" << endl;
             cout << "2. Consultar por Tipo de Equipo" << endl;
             cout << "3. Consultar por Marca" << endl;
-            cout << "4. Consultar por Rango de Precio" << endl;
+            cout << "4. Consultar por Precio" << endl;
             cout << "5. Consultar con Stock Disponible" << endl;
             cout << "------------------------" << endl;
             cout << "0. Volver" << endl;
@@ -50,41 +50,146 @@ void MenuEquipos::ejecutarOpcion(int opcion){
             switch(opcionConsulta){
 
             case 1:
+                consola.limpiar();
                 managerEquipos.consultarPorId();
                 consola.pausar();
-                //system("pause");
                 break;
 
-            case 2:
-                managerEquipos.consultarPorTipo();
-                consola.pausar();
-                //system("pause");
-                break;
+            case 2:{
+                int opcionTipo;
 
-            case 3:
-                managerEquipos.consultarPorMarca();
-                consola.pausar();
-                //system("pause");
-                break;
+                do{
+                    consola.limpiar();
 
-            case 4:
-                managerEquipos.consultarPorPrecio();
-                consola.pausar();
-                //system("pause");
+                    cout << "1. Buscar un tipo de equipo" << endl;
+                    cout << "2. Listar ordenados por tipo" << endl;
+                    cout << "0. Volver" << endl;
+                    cout << "Opcion: ";
+                    cin >> opcionTipo;
+
+                    switch(opcionTipo){
+
+                    case 1:
+                        consola.limpiar();
+                        managerEquipos.consultarPorTipo();
+                        break;
+
+                    case 2:
+                        consola.limpiar();
+                        managerEquipos.mostrarEquiposOrdenadosPorTipo();
+                        break;
+
+                    case 0:
+                        break;
+
+                    default:
+                        cout << "Opcion invalida." << endl;
+                        break;
+                    }
+
+                    consola.pausar();
+
+                }while(opcionTipo != 0);
+
                 break;
+            }
+
+            case 3:{
+                int opcionMarca;
+
+                do{
+                    consola.limpiar();
+
+                    cout << "1. Buscar una marca" << endl;
+                    cout << "2. Listar ordenados por marca" << endl;
+                    cout << "0. Volver" << endl;
+                    cout << "Opcion: ";
+                    cin >> opcionMarca;
+
+                    switch(opcionMarca){
+
+                    case 1:
+                        consola.limpiar();
+                        managerEquipos.consultarPorMarca();
+                        break;
+
+                    case 2:
+                        consola.limpiar();
+                        managerEquipos.mostrarEquiposOrdenadosPorMarca();
+                        break;
+
+                    case 0:
+                        break;
+
+                    default:
+                        cout << "Opcion invalida." << endl;
+                        break;
+                    }
+
+                    consola.pausar();
+
+                }while(opcionMarca != 0);
+
+                break;
+            }
+
+            case 4:{
+                int opcionPrecio;
+
+                do{
+                    consola.limpiar();
+
+                    cout << "1. Buscar por rango de precio" << endl;
+                    cout << "2. Ordenar de menor a mayor" << endl;
+                    cout << "3. Ordenar de mayor a menor" << endl;
+                    cout << "0. Volver" << endl;
+                    cout << "Opcion: ";
+                    cin >> opcionPrecio;
+
+                    switch(opcionPrecio){
+
+                    case 1:
+                        consola.limpiar();
+                        managerEquipos.consultarPorPrecio();
+                        break;
+
+                    case 2:
+                        consola.limpiar();
+                        managerEquipos.mostrarEquiposOrdenadosPorPrecioAsc();
+                        break;
+
+                    case 3:
+                        consola.limpiar();
+                        managerEquipos.mostrarEquiposOrdenadosPorPrecioDesc();
+                        break;
+
+                    case 0:
+                        break;
+
+                    default:
+                        cout << "Opcion invalida." << endl;
+                        break;
+                    }
+
+                    consola.pausar();
+
+                }while(opcionPrecio != 0);
+
+                break;
+            }
 
             case 5:
+                consola.limpiar();
                 managerEquipos.consultarPorStock();
                 consola.pausar();
-                //system("pause");
                 break;
 
             case 0:
-                cout << "Volviendo al menu equipos..." << endl;
                 break;
 
             default:
                 cout << "Opcion invalida." << endl;
+                consola.pausar();
                 break;
             }
 
@@ -101,12 +206,12 @@ void MenuEquipos::ejecutarOpcion(int opcion){
         managerEquipos.eliminarEquipo();
         break;
 
-    case 5:
-        managerEquipos.listarEquipos();
-        break;
-
     case 0:
         cout << "Regresando al menu principal..." << endl;
+        break;
+
+    default:
+        cout << "Opcion invalida." << endl;
         break;
     }
 }

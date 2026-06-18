@@ -60,17 +60,78 @@ case 2:
             //system("pause");
             break;
         case 3:
-            consola.limpiar();
-            managerClientes.consultarPorApellido();
-            consola.pausar();
-            //system("pause");
-            break;
+             int opcionApellido;
+             do{
+                 consola.limpiar();
+                 cout << "----------------------------" << endl;
+                 cout << "1. Buscar por un apellido" << endl;
+                 cout << "2. Ordenar alfabeticamente" << endl;
+                 cout << "----------------------------" << endl;
+                 cout << "0. Volver" << endl;
+                 cout << "Opcion: ";
+                 cin >> opcionApellido;
+
+                 switch(opcionApellido){
+                     case 1:
+                         consola.limpiar();
+                         managerClientes.consultarPorApellido();
+                     break;
+
+                     case 2:
+                         consola.limpiar();
+                         managerClientes.mostrarClientesOrdenados();
+                     break;
+
+                     case 0:
+                     break;
+
+                     default:
+                         cout << "Opcion invalida." << endl;
+                     break;
+                     }
+                consola.pausar();
+             }while(opcionApellido!=0);
+
+             break;
+
         case 4:
-            consola.limpiar();
-            managerClientes.consultarPorTipo();
-            consola.pausar();
-            //system("pause");
+            int opcionTipo;
+
+            do{
+             consola.limpiar();
+             cout << "---------------------------------" << endl;
+             cout << "1. Buscar por un tipo de cliente" << endl;
+             cout << "2. Listar todos ordenados" << endl;
+             cout << "---------------------------------" << endl;
+             cout << "0. Volver" << endl;
+             cout << "Opcion: ";
+             cin >> opcionTipo;
+
+             switch(opcionTipo){
+                 case 1:
+                     consola.limpiar();
+                     managerClientes.consultarPorTipo();
+                 break;
+
+                 case 2:
+                     consola.limpiar();
+                     managerClientes.mostrarClientesOrdenadosPorTipo();
+                 break;
+
+                 case 0:
+                 break;
+
+                 default:
+                     cout << "Opcion invalida." << endl;
+                 break;
+                 }
+
+             consola.pausar();
+
+            }while(opcionTipo != 0);
+
             break;
+
         case 0:
             cout << "Volviendo al menu clientes..." << endl;
             break;

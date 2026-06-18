@@ -4,7 +4,7 @@ using namespace std;
 #include <cstdio>
 
 MenuEmpleados::MenuEmpleados(){
-    setCantidadOpciones(5);
+    setCantidadOpciones(4);
 }
 
 void MenuEmpleados::mostrarOpciones(){
@@ -16,7 +16,6 @@ void MenuEmpleados::mostrarOpciones(){
     cout << "2. Consultas de Empleados" << endl;
     cout << "3. Modificar Empleado" << endl;
     cout << "4. Dar de baja Empleado" << endl;
-    cout << "5. Listar Empleados" << endl;
     cout << "------------------------" << endl;
     cout << "0. Salir" << endl;
     cout << "------------------------" << endl;
@@ -58,10 +57,39 @@ case 2:{
             break;
 
         case 3:
-            managerEmpleados.consultarPorApellido();
-            consola.pausar();
-            //system("pause");
-            break;
+            int opcionApellido;
+            do{
+             consola.limpiar();
+              cout << "1. Buscar por un apellido" << endl;
+              cout << "2. Ordenar alfabeticamente" << endl;
+              cout << "0. Volver" << endl;
+              cout << "Opcion: ";
+              cin >> opcionApellido;
+
+             switch(opcionApellido){
+                 case 1:
+                     consola.limpiar();
+                     managerEmpleados.consultarPorApellido();
+                 break;
+
+                 case 2:
+                     consola.limpiar();
+                     managerEmpleados.mostrarEmpleadosOrdenados();
+                 break;
+
+                 case 0:
+                 break;
+
+                 default:
+                     cout << "Opcion invalida." << endl;
+                 break;
+                 }
+
+             consola.pausar();
+
+            }while(opcionApellido != 0);
+
+             break;
 
         case 0:
             cout << "Volviendo al menu empleados..." << endl;
@@ -89,9 +117,7 @@ case 4:
     managerEmpleados.darDeBajaEmpleado();
     break;
 
-case 5:
-    managerEmpleados.listarEmpleados();
-    break;
+
 
   }
 }
