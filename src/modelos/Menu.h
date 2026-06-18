@@ -1,10 +1,13 @@
 #pragma once
 
 #include "utils/Consola.h"
+#include "utils/Validador.h"
+
 
 class Menu{
 private:
     int cantidadOpciones;
+    Validador validador;
     Consola consola;
 protected:
     void setCantidadOpciones(int cantidad);

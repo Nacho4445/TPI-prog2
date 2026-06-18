@@ -21,17 +21,28 @@ void Menu::ejecutarMenu(){
 }
 
 int Menu::seleccionarOpcion(){
-    int opcion;
-    cout<<endl;
-    do{
+    char opcion[10];
+    int numero;
+    cout << endl;
+    do {
         cout << "Seleccione una opcion: ";
         cin >> opcion;
         cout << endl;
-        if(opcion<0 || opcion>getCantidadOpciones()){
-            cout << "Opcion incorrecta..." << endl;
+
+        // Si no es un numero colocamos el valor -1 para continuar el el loop while
+        if (!validador.esNumero(opcion)) {
+            cout << "Error ingrese un numero valido!" << endl;
+            numero = -1;
+        } else {
+            // Si es numero lo convertimos a entero
+            numero = validador.convertirEntero(opcion);
+
+            if(numero < 0 || numero > getCantidadOpciones()){
+                cout << "Opcion incorrecta..." << endl;
+            }
         }
-    }while(opcion<0 || opcion>getCantidadOpciones());
-    return opcion;
+    } while(numero < 0 || numero > getCantidadOpciones());
+    return numero;
 }
 
 void Menu::setCantidadOpciones(int cantidad){
