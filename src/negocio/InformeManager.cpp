@@ -7,6 +7,8 @@
 #include "modelos/RecaudacionAnual.h"
 #include "modelos/RecaudacionClientes.h"
 #include "modelos/StockEquipos.h"
+#include "archivos/ArchivoDetalleVenta.h"
+#include "modelos/DetalleVenta.h"
 
 using namespace std;
 
@@ -119,7 +121,100 @@ void InformeManager::recaudacionXcliente(){
 
 void InformeManager::equiposMasVendidos(){
 
-consola.pausar();
+    ArchivoEquipo repoEquipos;
+    ArchivoDetalleVenta repoDetalles;
+
+    int cantidadEquipos = repoEquipos.getCantidadEquipos();
+    int cantidadDetalles = repoDetalles.getCantidadRegistros();
+
+    if(cantidadEquipos == 0){
+        cout << "No hay equipos cargados." << endl;
+        consola.pausar();
+        return;
+    }
+
+    if(cantidadDetalles == 0){
+        cout << "No hay ventas cargadas." << endl;
+        consola.pausar();
+        return;
+    }
+
+    Equipo *equipos = new Equipo[cantidadEquipos];
+    int *cantidadesVendidas = new int[cantidadEquipos];
+
+    if(equipos == nullptr || cantidadesVendidas == nullptr){
+        cout << "No se pudo reservar memoria." << endl;
+        consola.pausar();
+        return;
+    }
+
+    for(int i = 0; i < cantidadEquipos; i++){
+        equipos[i] = repoEquipos.leerPorPosicion(i);
+        cantidadesVendidas[i] = 0;
+    }
+
+    for(int i = 0; i < cantidadDetalles; i++){
+
+        DetalleVenta detalle = repoDetalles.leerPorPosicion(i);
+
+        if(!detalle.getEstado()){
+            continue;
+        }
+
+        for(int j = 0; j < cantidadEquipos; j++){
+
+            if(equipos[j].getIdEquipo() == detalle.getIdEquipo()){
+                cantidadesVendidas[j] += detalle.getCantidad();
+                break;
+            }
+        }
+    }
+
+    for(int i = 0; i < cantidadEquipos - 1; i++){
+
+        for(int j = 0; j < cantidadEquipos - i - 1; j++){
+
+            if(cantidadesVendidas[j] < cantidadesVendidas[j + 1]){
+
+                int auxCantidad = cantidadesVendidas[j];
+                cantidadesVendidas[j] = cantidadesVendidas[j + 1];
+                cantidadesVendidas[j + 1] = auxCantidad;
+
+                Equipo auxEquipo = equipos[j];
+                equipos[j] = equipos[j + 1];
+                equipos[j + 1] = auxEquipo;
+            }
+        }
+    }
+
+    cout << "========================================" << endl;
+    cout << "        EQUIPOS MAS VENDIDOS" << endl;
+    cout << "========================================" << endl;
+
+    bool hayVentas = false;
+
+    for(int i = 0; i < cantidadEquipos; i++){
+
+        if(cantidadesVendidas[i] > 0){
+
+            cout << "Equipo ID: " << equipos[i].getIdEquipo() << endl;
+            cout << "Descripcion: " << equipos[i].getDescripcion() << endl;
+            cout << "Cantidad vendida: " << cantidadesVendidas[i] << endl;
+            cout << "Stock actual: " << equipos[i].getStock() << endl;
+            cout << "----------------------------------------" << endl;
+
+            hayVentas = true;
+        }
+    }
+
+    if(!hayVentas){
+        cout << "No hay equipos vendidos." << endl;
+    }
+
+    delete[] equipos;
+    delete[] cantidadesVendidas;
+
+    consola.pausar();
 }
 
 void InformeManager::ventasXempleado(){
@@ -153,6 +248,7 @@ void InformeManager::ventasXempleado(){
 
         int cantidadVentasEmpleado = 0;
         double totalVendido = 0;
+
 
         cout << "========================================" << endl;
         cout << "Empleado ID: " << empleado.getIdEmpleado() << endl;
@@ -201,7 +297,6 @@ void InformeManager::ventasXempleado(){
 
     consola.pausar();
 }
-
 
 void InformeManager::stockDisponible(){
     Equipo regEquipo;
