@@ -192,6 +192,8 @@ void VentaManager::mostrarVenta(Venta &reg, DetalleVenta *detalles){
     cout << "ID Cliente: " << reg.getIdCliente() << endl;
     cout << "ID Empleado: " << reg.getIdEmpleado() << endl;
     cout << "Fecha: " << reg.getFecha().toString() << endl;
+    cout << defaultfloat;
+    cout.precision(10);
     cout << "Importe Total: $" << reg.getImporteTotal() << endl;
     cout << "Estado: " << (reg.getEstado() ? "Activa" : "Cancelada") << endl;
 
@@ -211,6 +213,8 @@ void VentaManager::mostrarVenta(Venta &reg, DetalleVenta *detalles){
             cout << "  Equipo: ";
             mostrarEquipoDetalle(detalles[i].getIdEquipo());
 
+            cout << defaultfloat;
+            cout.precision(10);
             cout << " | Cantidad: " << detalles[i].getCantidad()
                  << " | Precio unit.: $" << detalles[i].getPrecioUnitario()
                  << " | Subtotal: $" << detalles[i].getSubtotal() << endl;
@@ -417,6 +421,8 @@ void VentaManager::mostrarVentasOrdenadas(){
     }
 
     // Muestra las ventas ordenadas.
+    cout << defaultfloat;
+    cout.precision(10);
     for(int i = 0; i < cantidadActivas; i++){
         mostrarVenta(ventas[i], detalles);
         cout << endl;

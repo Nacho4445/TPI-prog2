@@ -270,6 +270,8 @@ void EquipoManager::mostrarEquipo(Equipo &reg){
     cout << "ID Tipo Marca: " << reg.getIdTipoMarca() << endl;
     cout << "Descripcion: " << reg.getDescripcion() << endl;
     cout << "Stock: " << reg.getStock() << endl;
+    cout << defaultfloat;
+    cout.precision(10);
     cout << "Precio Unitario: $" << reg.getPrecioUnitario() << endl;
     cout << "==================================" << endl;
 }

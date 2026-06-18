@@ -78,9 +78,12 @@ void InformeManager::recaudacionXanio(){
                 recaudacion += venta.getImporteTotal();
             }
         }
-
+        cout << defaultfloat;
+        cout.precision(10);
         cout << "------------------------" << endl;
         cout << "Anio: " << anio << endl;
+        cout << defaultfloat;
+        cout.precision(10);
         cout << "Recaudacion: $" << recaudacion << endl;
         cout << "------------------------" << endl;
 
@@ -141,6 +144,9 @@ void InformeManager::recaudacionXcliente(){
         consola.pausar();
         return;
     }
+
+    cout << defaultfloat;
+    cout.precision(10);
 
     // Guarda y muestra la recaudación acumulada por cliente activo.
     for(int i = 0; i < cantidadClientes; i++){
@@ -312,6 +318,11 @@ void InformeManager::ventasXempleado(){
         return;
     }
 
+    // Evita que los valores monetarios se muestren en notación científica
+    // (por ejemplo, 1.58e+06) y aumenta la precisión de la salida.
+    cout << defaultfloat;
+    cout.precision(10);
+
     // Recorre todos los empleados.
     for(int i = 0; i < cantidadEmpleados; i++){
 
@@ -364,9 +375,12 @@ void InformeManager::ventasXempleado(){
                 totalVendido += venta.getImporteTotal();
             }
         }
-
+        cout << defaultfloat;
+        cout.precision(10);
         cout << "----------------------------------------" << endl;
         cout << "Cantidad de ventas: " << cantidadVentasEmpleado << endl;
+        cout << defaultfloat;
+        cout.precision(10);
         cout << "Total vendido: $" << totalVendido << endl;
         cout << "========================================" << endl << endl;
     }
