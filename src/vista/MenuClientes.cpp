@@ -54,36 +54,38 @@ void MenuClientes::ejecutarOpcion(int opcion){
                  int opcionId;
                  do{
                      consola.limpiar();
-                 cout << "----------------------------" << endl;
-                 cout << "1. Buscar por ID" << endl;
-                 cout << "2. Ordenar por ID" << endl;
-                 cout << "----------------------------" << endl;
-                 cout << "0. Volver" << endl;
-                 validador.leerEnteroConCero(opcionId, "Opcion: ");
+                     cout << "----------------------------" << endl;
+                     cout << "1. Buscar por ID" << endl;
+                     cout << "2. Ordenar por ID" << endl;
+                     cout << "----------------------------" << endl;
+                     cout << "0. Volver" << endl;
 
-                 switch(opcionId){
-                     case 1:
-                         consola.limpiar();
-                         managerClientes.consultarPorId();
-                         break;
+                     validador.leerEnteroConCero(opcionId, "Opcion: ");
 
-                     case 2:
-                         consola.limpiar();
-                         managerClientes.mostrarClientesOrdenadosPorId();
-                         break;
+                     switch(opcionId){
 
-                     case 0:
-                         break;
+                         case 1:
+                             consola.limpiar();
+                             managerClientes.consultarPorId();
+                             break;
 
-                     default:
-                         cout << "Opcion invalida." << endl;
+                         case 2:
+                             consola.limpiar();
+                             managerClientes.mostrarClientesOrdenadosPorId();
+                             break;
+
+                         case 0:
+                             break;
+
+                         default:
+                             cout << "Opcion invalida." << endl;
+                             consola.pausar();
+                             break;
+                            }
                          consola.pausar();
-                         break;
-                         }
-                     consola.pausar();
-                }while(opcionId != 0);
-                break;
-            }
+                 }while(opcionId != 0);
+                 break;
+             }
 
             case 2:
                 consola.limpiar();
