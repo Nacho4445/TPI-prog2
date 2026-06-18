@@ -16,7 +16,6 @@ void Menu::ejecutarMenu(){
         ejecutarOpcion(opcion);
         if(opcion != 0){
             consola.limpiar();
-            //system("pause");
         }
     }while (opcion !=0);
 }
