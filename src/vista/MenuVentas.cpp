@@ -4,7 +4,7 @@ using namespace std;
 #include <cstdio>
 
 MenuVentas::MenuVentas(){
-    setCantidadOpciones(4);
+    setCantidadOpciones(3);
 }
 
 void MenuVentas::mostrarOpciones(){
@@ -13,7 +13,6 @@ void MenuVentas::mostrarOpciones(){
     cout << "1. Registrar Venta" << endl;
     cout << "2. Consultar Venta" << endl;
     cout << "3. Cancelar Venta" << endl;
-    cout << "4. Listar Ventas" << endl;
     cout << "------------------------" << endl;
     cout << "0. Salir" << endl;
     cout << "------------------------" << endl;
@@ -33,14 +32,15 @@ void MenuVentas::ejecutarOpcion(int opcion){
         do{
             consola.limpiar();
 
-            cout << "------------------------" << endl;
-            cout << "--- CONSULTAS VENTAS ---" << endl;
+            cout << "------------------------------" << endl;
+            cout << "------ CONSULTAS VENTAS ------" << endl;
             cout << "1. Consultar por ID" << endl;
             cout << "2. Consultar por Cliente" << endl;
             cout << "3. Consultar por Empleado" << endl;
             cout << "4. Consultar por Fecha" << endl;
             cout << "5. Consultar por Equipo Vendido" << endl;
-            cout << "------------------------" << endl;
+            cout << "6. Listar todas las ventas" << endl;
+            cout << "-------------------------------" << endl;
             cout << "0. Volver" << endl;
 
             validador.leerEnteroConCero(opcionConsulta, "Opcion: ");
@@ -72,6 +72,11 @@ void MenuVentas::ejecutarOpcion(int opcion){
                 consola.pausar();
                 break;
 
+            case 6:
+                managerVentas.listarVentas();
+                consola.pausar();
+                break;
+
             case 0:
                 cout << "Volviendo al menu ventas..." << endl;
                 break;
@@ -89,10 +94,6 @@ void MenuVentas::ejecutarOpcion(int opcion){
 
     case 3:
         managerVentas.cancelarVenta();
-        break;
-
-    case 4:
-        managerVentas.listarVentas();
         break;
 
     case 0:
