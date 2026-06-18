@@ -555,3 +555,165 @@ int EquipoManager::buscarMarca(){
 
     return 0;
 }
+
+void EquipoManager::ordenarEquiposPorTipo(Equipo vEquipos[], int cantidad){
+
+    for(int i = 0; i < cantidad - 1; i++){
+        for(int j = 0; j < cantidad - i - 1; j++){
+
+            if(vEquipos[j].getIdTipoEquipo() >
+               vEquipos[j + 1].getIdTipoEquipo()){
+
+                Equipo aux = vEquipos[j];
+                vEquipos[j] = vEquipos[j + 1];
+                vEquipos[j + 1] = aux;
+            }
+        }
+    }
+}
+
+void EquipoManager::ordenarEquiposPorMarca(Equipo vEquipos[], int cantidad){
+
+    for(int i = 0; i < cantidad - 1; i++){
+        for(int j = 0; j < cantidad - i - 1; j++){
+
+            if(vEquipos[j].getIdTipoMarca() > vEquipos[j + 1].getIdTipoMarca()){
+
+                Equipo aux = vEquipos[j];
+                vEquipos[j] = vEquipos[j + 1];
+                vEquipos[j + 1] = aux;
+            }
+        }
+    }
+}
+
+void EquipoManager::ordenarEquiposPorPrecioAsc(Equipo vEquipos[], int cantidad){
+
+    for(int i = 0; i < cantidad - 1; i++){
+        for(int j = 0; j < cantidad - i - 1; j++){
+
+            if(vEquipos[j].getPrecioUnitario() > vEquipos[j + 1].getPrecioUnitario()){
+
+                Equipo aux = vEquipos[j];
+                vEquipos[j] = vEquipos[j + 1];
+                vEquipos[j + 1] = aux;
+            }
+        }
+    }
+}
+
+void EquipoManager::ordenarEquiposPorPrecioDesc(Equipo vEquipos[], int cantidad){
+
+    for(int i = 0; i < cantidad - 1; i++){
+        for(int j = 0; j < cantidad - i - 1; j++){
+
+            if(vEquipos[j].getPrecioUnitario() < vEquipos[j + 1].getPrecioUnitario()){
+
+                Equipo aux = vEquipos[j];
+                vEquipos[j] = vEquipos[j + 1];
+                vEquipos[j + 1] = aux;
+            }
+        }
+    }
+}
+
+void EquipoManager::mostrarEquiposOrdenadosPorTipo(){
+
+    int cantidad = _archivoEquipos.getCantidadEquipos();
+
+    Equipo *vEquipos = new Equipo[cantidad];
+    int cantidadActivos = 0;
+
+    for(int i = 0; i < cantidad; i++){
+        Equipo equipo = _archivoEquipos.leerPorPosicion(i);
+
+        if(equipo.getEstado()){
+            vEquipos[cantidadActivos] = equipo;
+            cantidadActivos++;
+        }
+    }
+
+    ordenarEquiposPorTipo(vEquipos, cantidadActivos);
+
+    for(int i = 0; i < cantidadActivos; i++){
+        mostrarEquipo(vEquipos[i]);
+        cout << endl;
+    }
+
+    delete[] vEquipos;
+}
+
+void EquipoManager::mostrarEquiposOrdenadosPorMarca(){
+    int cantidad = _archivoEquipos.getCantidadEquipos();
+
+    Equipo *vEquipos = new Equipo[cantidad];
+    int cantidadActivos = 0;
+
+    for(int i = 0; i < cantidad; i++){
+        Equipo equipo = _archivoEquipos.leerPorPosicion(i);
+
+        if(equipo.getEstado()){
+            vEquipos[cantidadActivos] = equipo;
+            cantidadActivos++;
+        }
+    }
+
+    ordenarEquiposPorMarca(vEquipos, cantidadActivos);
+
+    for(int i = 0; i < cantidadActivos; i++){
+        mostrarEquipo(vEquipos[i]);
+        cout << endl;
+    }
+
+    delete[] vEquipos;
+}
+
+void EquipoManager::mostrarEquiposOrdenadosPorPrecioAsc(){
+    int cantidad = _archivoEquipos.getCantidadEquipos();
+
+    Equipo *vEquipos = new Equipo[cantidad];
+    int cantidadActivos = 0;
+
+    for(int i = 0; i < cantidad; i++){
+        Equipo equipo = _archivoEquipos.leerPorPosicion(i);
+
+        if(equipo.getEstado()){
+            vEquipos[cantidadActivos] = equipo;
+            cantidadActivos++;
+        }
+    }
+
+    ordenarEquiposPorPrecioAsc(vEquipos, cantidadActivos);
+
+    for(int i = 0; i < cantidadActivos; i++){
+        mostrarEquipo(vEquipos[i]);
+        cout << endl;
+    }
+
+    delete[] vEquipos;
+}
+
+void EquipoManager::mostrarEquiposOrdenadosPorPrecioDesc(){
+    int cantidad = _archivoEquipos.getCantidadEquipos();
+
+    Equipo *vEquipos = new Equipo[cantidad];
+    int cantidadActivos = 0;
+
+    for(int i = 0; i < cantidad; i++){
+        Equipo equipo = _archivoEquipos.leerPorPosicion(i);
+
+        if(equipo.getEstado()){
+            vEquipos[cantidadActivos] = equipo;
+            cantidadActivos++;
+        }
+    }
+
+    ordenarEquiposPorPrecioDesc(vEquipos, cantidadActivos);
+
+    for(int i = 0; i < cantidadActivos; i++){
+        mostrarEquipo(vEquipos[i]);
+        cout << endl;
+    }
+
+    delete[] vEquipos;
+}

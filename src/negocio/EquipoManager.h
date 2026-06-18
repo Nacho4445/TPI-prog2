@@ -22,6 +22,10 @@ private:
 
     void mostrarEquipo(Equipo &reg);
     void ordenarEquipos(Equipo vEquipos[], int cantidad);
+    void ordenarEquiposPorTipo(Equipo vEquipos[], int cantidad);
+    void ordenarEquiposPorMarca(Equipo vEquipos[], int cantidad);
+    void ordenarEquiposPorPrecioAsc(Equipo vEquipos[], int cantidad);
+    void ordenarEquiposPorPrecioDesc(Equipo vEquipos[], int cantidad);
 
     int seleccionarTipoEquipo();
     int seleccionarMarca();
@@ -41,6 +45,10 @@ public:
 	void modificarEquipo();
 	void mostrarEquiposOrdenados();
 	void eliminarEquipo();
+	void mostrarEquiposOrdenadosPorTipo();
+    void mostrarEquiposOrdenadosPorMarca();
+    void mostrarEquiposOrdenadosPorPrecioAsc();
+    void mostrarEquiposOrdenadosPorPrecioDesc();
 
 
 };

@@ -207,28 +207,6 @@ void EmpleadoManager::consultarPorApellido(){
     consola.pausar();
 }
 
-void EmpleadoManager::listarEmpleados(){
-
-    int cantidadRegistros = _archivoEmpleados.getCantidadRegistros();
-
-    if(cantidadRegistros == 0){
-        cout << "No hay empleados cargados." << endl;
-        consola.pausar();
-        return;
-    }
-
-    for(int i = 0; i < cantidadRegistros; i++){
-
-        Empleado empleado = _archivoEmpleados.leer(i);
-
-        if(empleado.getEstado()){
-            mostrarEmpleado(empleado);
-            cout << endl;
-        }
-    }
-    consola.pausar();
-}
-
 void EmpleadoManager::mostrarEmpleado(Empleado &reg){
     Direccion direccion = reg.getDireccion();
 

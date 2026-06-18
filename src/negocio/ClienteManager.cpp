@@ -484,7 +484,30 @@ void ClienteManager::ordenarClientes(Cliente *vClientes, int cantidad){
         }
     }
 }
+void ClienteManager::ordenarClientesPorTipo(Cliente *vClientes, int cantidad){
 
+    for(int i = 0; i < cantidad - 1; i++){
+
+        for(int j = 0; j < cantidad - i - 1; j++){
+
+            if(
+                vClientes[j].getTipoCliente() > vClientes[j + 1].getTipoCliente()
+                ||
+                (
+                    vClientes[j].getTipoCliente() == vClientes[j + 1].getTipoCliente()
+                    &&
+                    strcmp(vClientes[j].getApellido(),
+                           vClientes[j + 1].getApellido()) > 0
+                )
+            ){
+
+                Cliente aux = vClientes[j];
+                vClientes[j] = vClientes[j + 1];
+                vClientes[j + 1] = aux;
+            }
+        }
+    }
+}
 void ClienteManager::mostrarClientesOrdenados(){
     int cantidadRegistros = _archivoClientes.getCantidadRegistros();
 
@@ -518,4 +541,41 @@ void ClienteManager::mostrarClientesOrdenados(){
     }
 
     delete [] vClientes;
+}
+
+void ClienteManager::mostrarClientesOrdenadosPorTipo(){
+
+    int cantidadRegistros = _archivoClientes.getCantidadRegistros();
+
+    if(cantidadRegistros == 0){
+        cout << "No hay clientes cargados." << endl;
+        return;
+    }
+
+    Cliente *vClientes = new Cliente[cantidadRegistros];
+
+    if(vClientes == nullptr){
+        cout << "No se pudo reservar memoria." << endl;
+        return;
+    }
+
+    int cantidadActivos = 0;
+
+    for(int i = 0; i < cantidadRegistros; i++){
+
+        Cliente cliente = _archivoClientes.leerPorPosicion(i);
+
+        if(cliente.getEstado()){
+            vClientes[cantidadActivos] = cliente;
+            cantidadActivos++;
+        }
+    }
+
+    ordenarClientesPorTipo(vClientes, cantidadActivos);
+
+    for(int i = 0; i < cantidadActivos; i++){
+        mostrarCliente(vClientes[i]);
+    }
+
+    delete[] vClientes;
 }

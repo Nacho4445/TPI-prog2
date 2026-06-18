@@ -8,19 +8,24 @@ private:
    Cliente crearCliente();
    void mostrarCliente(Cliente &reg);
    void ordenarClientes(Cliente vClientes[], int cantidad);
+   void ordenarClientesPorTipo(Cliente *vClientes, int cantidad);
+
    ArchivoCliente _archivoClientes;
-	Consola consola;
+   Consola consola;
+
 public:
 	ClienteManager();
 
-   void guardarCliente();
-   void consultarPorId();
-   void consultarPorCuit();
-   void consultarPorApellido();
-   void consultarPorTipo();
-   void listarClientes();
-   void modificarCliente();
-   void mostrarClientesOrdenados();
+    void guardarCliente();
+    void consultarPorId();
+    void consultarPorCuit();
+    void consultarPorApellido();
+    void consultarPorTipo();
+    void listarClientes();
+    void modificarCliente();
+    void eliminarCliente();
+    void mostrarClientesOrdenados();
+    void mostrarClientesOrdenadosPorTipo();
 
 
 
