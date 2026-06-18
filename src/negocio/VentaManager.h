@@ -5,10 +5,12 @@
 #include "archivos/ArchivoTipoMarca.h"
 #include "archivos/ArchivoTipoEquipo.h"
 #include "utils/Consola.h"
+#include "utils/Validador.h"
 
 class VentaManager {
 private:
    Venta crearVenta();
+   Validador validador;
    void mostrarVenta(Venta &reg, DetalleVenta *detalles);
    void ordenarVentas(Venta vVentas[], int cantidad);
 

@@ -12,6 +12,13 @@ using namespace std;
 VentaManager::VentaManager()
    : _archivoVentas(), _archivoEquipos(), _archivoDetalleVentas(){}
 
+// Crea una nueva venta solicitando los datos principales por teclado.
+
+// VALIDACIONES:
+// - Genera automáticamente el ID de venta.
+// - Valida que el ID del cliente sea numérico y positivo.
+// - Valida que el ID del empleado sea numérico y positivo.
+// - Valida que la fecha ingresada sea correcta.
 Venta VentaManager::crearVenta(){
 
     Venta venta;
@@ -21,27 +28,32 @@ Venta VentaManager::crearVenta(){
     int idEmpleado;
     int dia, mes, anio;
 
+    // Genera automáticamente el ID de la nueva venta.
     idVenta = _archivoVentas.getCantidadRegistros() + 1;
 
     cout << "Ingrese los siguientes datos:" << endl;
 
-    cout << "ID Cliente: ";
-    cin >> idCliente;
+    // VALIDACIÓN:
+    // Solicita IDs válidos para cliente y empleado.
+    validador.leerEnteroPositivo(idCliente, "ID Cliente: ");
+    validador.leerEnteroPositivo(idEmpleado, "ID Empleado: ");
 
-    cout << "ID Empleado: ";
-    cin >> idEmpleado;
+    // VALIDACIÓN:
+    // Solicita una fecha válida.
+    do{
+        validador.leerEnteroPositivo(dia, "Dia: ");
+        validador.leerEnteroPositivo(mes, "Mes: ");
+        validador.leerEnteroPositivo(anio, "Anio: ");
 
-    Fecha fecha;
-    do {
-        cout << "Dia: ";  cin >> dia;
-        cout << "Mes: ";  cin >> mes;
-        cout << "Anio: "; cin >> anio;
-        fecha = Fecha(dia, mes, anio);
-        if (fecha.getDia() == 1 && fecha.getMes() == 1 && fecha.getAnio() == 1900) {
+        if(dia <= 0 || dia > 31 || mes <= 0 || mes > 12 || anio <= 0){
             cout << "Fecha invalida. Ingrese nuevamente." << endl;
         }
-    } while (fecha.getDia() == 1 && fecha.getMes() == 1 && fecha.getAnio() == 1900);
 
+    }while(dia <= 0 || dia > 31 || mes <= 0 || mes > 12 || anio <= 0);
+
+    Fecha fecha(dia, mes, anio);
+
+    // Se cargan los datos principales de la venta.
     venta.setIdVenta(idVenta);
     venta.setIdCliente(idCliente);
     venta.setIdEmpleado(idEmpleado);
@@ -49,23 +61,31 @@ Venta VentaManager::crearVenta(){
     venta.setImporteTotal(0);
     venta.setEstado(true);
 
-    consola.pausar();
     return venta;
 }
 
+// Registra una venta completa.
+// Primero crea la venta principal y luego permite cargar uno o más equipos
+// como detalles de venta.
+
+// VALIDACIONES:
+// - Valida que la cantidad de equipos a vender sea positiva.
+// - Verifica que se pueda reservar memoria para los detalles.
+// - Valida que cada equipo exista.
+// - Valida que la cantidad vendida sea positiva.
+// - Verifica que haya stock suficiente.
+// - Actualiza el stock de cada equipo vendido.
+// - Guarda la venta y sus detalles.
 void VentaManager::guardarVenta(){
 
     Venta venta = crearVenta();
 
     int cantidadEquipos;
-    cout << "Cantidad de equipos a agregar a la venta: ";
-    cin >> cantidadEquipos;
 
-    if(cantidadEquipos <= 0){
-        cout << "La cantidad de equipos debe ser mayor a cero." << endl;
-        consola.pausar();
-        return;
-    }
+    // VALIDACIÓN:
+    // Solicita una cantidad válida de equipos a agregar.
+    validador.leerEnteroPositivo(cantidadEquipos,
+                                 "Cantidad de equipos a agregar a la venta: ");
 
     DetalleVenta *detalles = new DetalleVenta[cantidadEquipos];
 
@@ -78,6 +98,7 @@ void VentaManager::guardarVenta(){
     double importeTotal = 0;
     int cantidadCargados = 0;
 
+    // Carga cada equipo incluido en la venta.
     for(int i = 0; i < cantidadEquipos; i++){
 
         bool equipoValido = false;
@@ -88,23 +109,21 @@ void VentaManager::guardarVenta(){
             int cantidad;
 
             cout << "-- Equipo " << i + 1 << " --" << endl;
-            cout << "ID Equipo: ";
-            cin >> idEquipo;
+
+            // VALIDACIÓN:
+            // Solicita un ID de equipo válido.
+            validador.leerEnteroPositivo(idEquipo, "ID Equipo: ");
 
             Equipo equipo = _archivoEquipos.leer(idEquipo);
 
-            if(equipo.getIdEquipo() == 0){
+            if(equipo.getIdEquipo() == 0 || !equipo.getEstado()){
                 cout << "No existe un equipo activo con ese ID. Ingrese otro." << endl;
                 continue;
             }
 
-            cout << "Cantidad: ";
-            cin >> cantidad;
-
-            if(cantidad <= 0){
-                cout << "La cantidad debe ser mayor a cero. Ingrese nuevamente." << endl;
-                continue;
-            }
+            // VALIDACIÓN:
+            // Solicita una cantidad válida.
+            validador.leerEnteroPositivo(cantidad, "Cantidad: ");
 
             if(cantidad > equipo.getStock()){
                 cout << "Sin stock suficiente. Stock disponible: "
@@ -116,6 +135,7 @@ void VentaManager::guardarVenta(){
             float precioUnitario = equipo.getPrecioUnitario();
             float subtotal = precioUnitario * cantidad;
 
+            // Se cargan los datos del detalle de venta.
             detalles[cantidadCargados].setIdDetalleVenta(idDetalle);
             detalles[cantidadCargados].setIdVenta(venta.getIdVenta());
             detalles[cantidadCargados].setIdEquipo(idEquipo);
@@ -124,6 +144,7 @@ void VentaManager::guardarVenta(){
             detalles[cantidadCargados].setSubtotal(subtotal);
             detalles[cantidadCargados].setEstado(true);
 
+            // Se descuenta el stock del equipo vendido.
             equipo.setStock(equipo.getStock() - cantidad);
             _archivoEquipos.modificar(equipo);
 
@@ -136,13 +157,14 @@ void VentaManager::guardarVenta(){
 
     if(cantidadCargados == 0){
         cout << "No se pudo registrar ningun equipo. Venta cancelada." << endl;
-        consola.pausar();
         delete[] detalles;
+        consola.pausar();
         return;
     }
 
     venta.setImporteTotal(importeTotal);
 
+    // Guarda la venta principal y luego sus detalles.
     if(_archivoVentas.guardar(venta)){
 
         for(int i = 0; i < cantidadCargados; i++){
@@ -160,6 +182,9 @@ void VentaManager::guardarVenta(){
     consola.pausar();
 }
 
+/* Muestra por pantalla los datos completos de una venta,
+ incluyendo sus datos principales y el detalle de equipos vendidos.*/
+
 void VentaManager::mostrarVenta(Venta &reg, DetalleVenta *detalles){
 
     cout << "==================================" << endl;
@@ -171,12 +196,18 @@ void VentaManager::mostrarVenta(Venta &reg, DetalleVenta *detalles){
     cout << "Estado: " << (reg.getEstado() ? "Activa" : "Cancelada") << endl;
 
     int cantidadDetalles = 0;
+
+    // Busca los detalles asociados a la venta.
     _archivoDetalleVentas.leerPorIdVenta(reg.getIdVenta(), detalles, cantidadDetalles);
 
     if(cantidadDetalles > 0){
+
         cout << "----------------------------------" << endl;
         cout << "Detalle:" << endl;
+
+        // Muestra cada equipo vendido dentro de la venta.
         for(int i = 0; i < cantidadDetalles; i++){
+
             cout << "  Equipo: ";
             mostrarEquipoDetalle(detalles[i].getIdEquipo());
 
@@ -189,6 +220,12 @@ void VentaManager::mostrarVenta(Venta &reg, DetalleVenta *detalles){
     cout << "==================================" << endl;
 }
 
+// Muestra todas las ventas activas registradas en el sistema.
+
+// VALIDACIONES:
+// - Verifica que existan ventas cargadas.
+// - Comprueba que se pueda reservar memoria para los detalles.
+// - Solo muestra ventas activas.
 void VentaManager::listarVentas(){
 
     int cantidadRegistros = _archivoVentas.getCantidadRegistros();
@@ -209,6 +246,7 @@ void VentaManager::listarVentas(){
         return;
     }
 
+    // Recorre todas las ventas mostrando únicamente las activas.
     for(int i = 0; i < cantidadRegistros; i++){
 
         Venta venta = _archivoVentas.leerPorPosicion(i);
@@ -218,18 +256,35 @@ void VentaManager::listarVentas(){
             cout << endl;
         }
     }
-    consola.pausar();
+
     delete[] detalles;
+    consola.pausar();
 }
 
+// Cancela una venta existente.
+// Al cancelar la venta, devuelve al stock las cantidades vendidas de cada equipo incluido en el detalle.
+
+// VALIDACIONES:
+// - Verifica que el ID ingresado sea válido.
+// - Comprueba que la venta exista y esté activa.
+// - Verifica que se pueda reservar memoria para los detalles.
+// - Solicita confirmación antes de cancelar.
+// - Solo devuelve stock de equipos activos.
 void VentaManager::cancelarVenta(){
 
     int idVenta;
     char confirmar;
     Venta venta;
 
-    cout << "Ingrese el ID de la venta a cancelar: ";
-    cin >> idVenta;
+    // VALIDACIÓN:
+    // Solicita un ID válido o permite cancelar.
+    validador.leerEnteroConCero(idVenta,
+                                "Ingrese el ID de la venta a cancelar (0 para volver): ");
+
+    if(idVenta == 0){
+        cout << "Cancelacion anulada." << endl;
+        return;
+    }
 
     venta = _archivoVentas.leer(idVenta);
 
@@ -256,16 +311,18 @@ void VentaManager::cancelarVenta(){
     cout << "Venta encontrada:" << endl;
     mostrarVenta(venta, detalles);
 
-    cout << "Cancelar esta venta? (s/n): ";
-    cin >> confirmar;
+    // VALIDACIÓN:
+    // Solicita confirmación antes de cancelar.
+    validador.leerConfirmacion(confirmar);
 
-    if(confirmar != 's' && confirmar != 'S'){
+    if(confirmar == 'N' || confirmar == 'n'){
         cout << "Cancelacion anulada." << endl;
         delete[] detalles;
         consola.pausar();
         return;
     }
 
+    // Devuelve al stock las cantidades vendidas.
     for(int i = 0; i < cantidadDetalles; i++){
 
         Equipo equipo = _archivoEquipos.leer(detalles[i].getIdEquipo());
@@ -289,6 +346,8 @@ void VentaManager::cancelarVenta(){
     consola.pausar();
 }
 
+// Ordena un vector de ventas por ID de venta
+// utilizando el método de ordenamiento Burbuja.
 
 void VentaManager::ordenarVentas(Venta vVentas[], int cantidad){
 
@@ -306,6 +365,13 @@ void VentaManager::ordenarVentas(Venta vVentas[], int cantidad){
     }
 }
 
+// Muestra todas las ventas activas ordenadas por ID.
+
+// VALIDACIONES:
+// - Verifica que existan ventas cargadas.
+// - Comprueba que se pueda reservar memoria para las ventas.
+// - Comprueba que se pueda reservar memoria para los detalles.
+// - Solo muestra ventas activas.
 void VentaManager::mostrarVentasOrdenadas(){
 
     int cantidadRegistros = _archivoVentas.getCantidadRegistros();
@@ -326,6 +392,7 @@ void VentaManager::mostrarVentasOrdenadas(){
 
     int cantidadActivas = 0;
 
+    // Carga únicamente las ventas activas.
     for(int i = 0; i < cantidadRegistros; i++){
 
         Venta venta = _archivoVentas.leerPorPosicion(i);
@@ -336,6 +403,7 @@ void VentaManager::mostrarVentasOrdenadas(){
         }
     }
 
+    // Ordena las ventas por ID.
     ordenarVentas(ventas, cantidadActivas);
 
     int cantidadDetalles = _archivoDetalleVentas.getCantidadRegistros();
@@ -348,6 +416,7 @@ void VentaManager::mostrarVentasOrdenadas(){
         return;
     }
 
+    // Muestra las ventas ordenadas.
     for(int i = 0; i < cantidadActivas; i++){
         mostrarVenta(ventas[i], detalles);
         cout << endl;
@@ -357,13 +426,19 @@ void VentaManager::mostrarVentasOrdenadas(){
     delete[] detalles;
     consola.pausar();
 }
+// Busca y muestra una venta según su ID.
 
+// VALIDACIONES:
+// - Verifica que el ID ingresado sea válido.
+// - Comprueba que la venta exista.
+// - Verifica que se pueda reservar memoria para los detalles.
 void VentaManager::consultarPorId(){
 
     int idVenta;
 
-    cout << "Ingrese el ID de la venta: ";
-    cin >> idVenta;
+    // VALIDACIÓN:
+    // Solicita un ID de venta válido.
+    validador.leerEnteroPositivo(idVenta, "Ingrese el ID de la venta: ");
 
     Venta venta = _archivoVentas.leerIncluyendoCanceladas(idVenta);
 
@@ -374,6 +449,7 @@ void VentaManager::consultarPorId(){
     }
 
     int cantidadDetalles = _archivoDetalleVentas.getCantidadRegistros();
+
     DetalleVenta *detalles = new DetalleVenta[cantidadDetalles];
 
     if(detalles == nullptr){
@@ -384,6 +460,7 @@ void VentaManager::consultarPorId(){
 
     int cantidadEncontrada = 0;
 
+    // Obtiene el detalle correspondiente a la venta.
     _archivoDetalleVentas.leerPorIdVenta(idVenta, detalles, cantidadEncontrada);
 
     mostrarVenta(venta, detalles);
@@ -392,12 +469,20 @@ void VentaManager::consultarPorId(){
     consola.pausar();
 }
 
+// Busca y muestra todas las ventas asociadas a un cliente determinado.
+//
+// VALIDACIONES:
+// - Verifica que el ID del cliente ingresado sea válido.
+// - Verifica que existan ventas cargadas.
+// - Comprueba que se pueda reservar memoria para los detalles.
+// - Solo muestra ventas activas.
 void VentaManager::consultarPorCliente(){
 
     int idCliente;
 
-    cout << "Ingrese el ID del cliente: ";
-    cin >> idCliente;
+    // VALIDACIÓN:
+    // Solicita un ID de cliente válido.
+    validador.leerEnteroPositivo(idCliente, "Ingrese el ID del cliente: ");
 
     int cantidadRegistros = _archivoVentas.getCantidadRegistros();
 
@@ -418,16 +503,17 @@ void VentaManager::consultarPorCliente(){
 
     bool encontro = false;
 
+    // Recorre las ventas buscando las asociadas al cliente indicado.
     for(int i = 0; i < cantidadRegistros; i++){
 
-    Venta venta = _archivoVentas.leerPorPosicion(i);
+        Venta venta = _archivoVentas.leerPorPosicion(i);
 
-    if(venta.getEstado() && venta.getIdCliente() == idCliente){
-        mostrarVenta(venta, detalles);
-        cout << endl;
-        encontro = true;
+        if(venta.getEstado() && venta.getIdCliente() == idCliente){
+            mostrarVenta(venta, detalles);
+            cout << endl;
+            encontro = true;
+        }
     }
-}
 
     if(!encontro){
         cout << "No se encontraron ventas para ese cliente." << endl;
@@ -437,12 +523,20 @@ void VentaManager::consultarPorCliente(){
     consola.pausar();
 }
 
+// Busca y muestra todas las ventas realizadas por un empleado determinado.
+//
+// VALIDACIONES:
+// - Verifica que el ID del empleado ingresado sea válido.
+// - Verifica que existan ventas cargadas.
+// - Comprueba que se pueda reservar memoria para los detalles.
+// - Solo muestra ventas activas.
 void VentaManager::consultarPorEmpleado(){
 
     int idEmpleado;
 
-    cout << "Ingrese el ID del empleado: ";
-    cin >> idEmpleado;
+    // VALIDACIÓN:
+    // Solicita un ID de empleado válido.
+    validador.leerEnteroPositivo(idEmpleado, "Ingrese el ID del empleado: ");
 
     int cantidadRegistros = _archivoVentas.getCantidadRegistros();
 
@@ -463,6 +557,7 @@ void VentaManager::consultarPorEmpleado(){
 
     bool encontro = false;
 
+    // Recorre las ventas buscando las asociadas al empleado indicado.
     for(int i = 0; i < cantidadRegistros; i++){
 
         Venta venta = _archivoVentas.leerPorPosicion(i);
@@ -486,16 +581,21 @@ void VentaManager::consultarPorFecha(){
 
     int dia, mes, anio;
 
-     Fecha fecha;
-    do {
-        cout << "Dia: ";  cin >> dia;
-        cout << "Mes: ";  cin >> mes;
-        cout << "Anio: "; cin >> anio;
-        fecha = Fecha(dia, mes, anio);
-        if (fecha.getDia() == 1 && fecha.getMes() == 1 && fecha.getAnio() == 1900) {
+    do{
+        cout << "Dia: ";
+        cin >> dia;
+
+        cout << "Mes: ";
+        cin >> mes;
+
+        cout << "Anio: ";
+        cin >> anio;
+
+        if(dia <= 0 || mes <= 0 || mes > 12 || anio <= 0){
             cout << "Fecha invalida. Ingrese nuevamente." << endl;
         }
-    } while (fecha.getDia() == 1 && fecha.getMes() == 1 && fecha.getAnio() == 1900);
+
+    }while(dia <= 0 || mes <= 0 || mes > 12 || anio <= 0);
 
     int cantidadRegistros = _archivoVentas.getCantidadRegistros();
 
@@ -521,9 +621,9 @@ void VentaManager::consultarPorFecha(){
        Venta venta = _archivoVentas.leerPorPosicion(i);
 
         if(venta.getEstado() &&
-           venta.getFecha().getDia() == fecha.getDia() &&
-           venta.getFecha().getMes() == fecha.getMes() &&
-           venta.getFecha().getAnio() == fecha.getAnio()){
+           venta.getFecha().getDia() == dia &&
+           venta.getFecha().getMes() == mes &&
+           venta.getFecha().getAnio() == anio){
 
             mostrarVenta(venta, detalles);
             cout << endl;
@@ -539,12 +639,21 @@ void VentaManager::consultarPorFecha(){
     consola.pausar();
 }
 
+// Busca y muestra todas las ventas en las que se haya vendido
+// un equipo determinado.
+//
+// VALIDACIONES:
+// - Verifica que el ID del equipo ingresado sea válido.
+// - Verifica que existan ventas cargadas.
+// - Comprueba que se pueda reservar memoria para los detalles.
+// - Solo muestra ventas activas.
 void VentaManager::consultarPorEquipo(){
 
     int idEquipo;
 
-    cout << "Ingrese el ID del equipo: ";
-    cin >> idEquipo;
+    // VALIDACIÓN:
+    // Solicita un ID de equipo válido.
+    validador.leerEnteroPositivo(idEquipo, "Ingrese el ID del equipo: ");
 
     int cantidadRegistros = _archivoVentas.getCantidadRegistros();
 
@@ -565,6 +674,7 @@ void VentaManager::consultarPorEquipo(){
 
     bool encontro = false;
 
+    // Recorre todas las ventas activas.
     for(int i = 0; i < cantidadRegistros; i++){
 
         Venta venta = _archivoVentas.leerPorPosicion(i);
@@ -572,11 +682,17 @@ void VentaManager::consultarPorEquipo(){
         if(venta.getEstado()){
 
             int cantidadEncontrados = 0;
-            _archivoDetalleVentas.leerPorIdVenta(venta.getIdVenta(), detalles, cantidadEncontrados);
 
+            _archivoDetalleVentas.leerPorIdVenta(
+                venta.getIdVenta(),
+                detalles,
+                cantidadEncontrados);
+
+            // Busca el equipo dentro del detalle de la venta.
             for(int j = 0; j < cantidadEncontrados; j++){
 
                 if(detalles[j].getIdEquipo() == idEquipo){
+
                     mostrarVenta(venta, detalles);
                     cout << endl;
                     encontro = true;
@@ -593,8 +709,10 @@ void VentaManager::consultarPorEquipo(){
     delete[] detalles;
     consola.pausar();
 }
+// Devuelve la descripción correspondiente a una marca.
 
 const char* VentaManager::obtenerNombreMarca(int idMarca){
+
     TipoMarca marca = _archivoTipoMarcas.leer(idMarca);
 
     if(marca.getIdTipoMarca() == 0){
@@ -604,7 +722,10 @@ const char* VentaManager::obtenerNombreMarca(int idMarca){
     return marca.getDescripcion();
 }
 
+// Devuelve la descripción correspondiente a un tipo de equipo.
+
 const char* VentaManager::obtenerNombreTipoEquipo(int idTipoEquipo){
+
     TipoEquipo tipo = _archivoTipoEquipos.leer(idTipoEquipo);
 
     if(tipo.getIdTipoEquipo() == 0){
@@ -614,19 +735,20 @@ const char* VentaManager::obtenerNombreTipoEquipo(int idTipoEquipo){
     return tipo.getDescripcion();
 }
 
+// Muestra la información resumida de un equipo perteneciente al detalle de una venta.
+
+// VALIDACIONES:
+// - Verifica que el equipo exista.
 void VentaManager::mostrarEquipoDetalle(int idEquipo){
 
     Equipo equipo = _archivoEquipos.leer(idEquipo);
 
-
     if(equipo.getIdEquipo() == 0){
         cout << "Equipo no encontrado";
-        consola.pausar();
         return;
     }
 
     cout << equipo.getDescripcion()
          << " | Marca: " << obtenerNombreMarca(equipo.getIdTipoMarca())
          << " | Tipo: " << obtenerNombreTipoEquipo(equipo.getIdTipoEquipo());
-    //consola.pausar();
 }
