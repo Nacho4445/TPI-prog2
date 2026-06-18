@@ -33,11 +33,11 @@ void MenuInformes::ejecutarOpcion(int opcion){
         managerInformes.recaudacionXcliente();
         break;
     case 3:
-        ///managerInformes.equiposMasVendidos();
+        managerInformes.equiposMasVendidos();
         break;
 
     case 4:
-        ///managerEquipos.ventasXempleado();
+        managerEquipos.ventasXempleado();
         break;
 
     case 5:
